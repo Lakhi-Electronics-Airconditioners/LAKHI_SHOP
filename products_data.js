@@ -118,5 +118,20 @@
     "has_size_option": false,
     "available_sizes": null,
     "price_size": null
+  },
+  {
+    "serial_no": "D318PCCIBS",
+    "name": "Hitachi 1.5 Ton 3 Star 2025",
+    "price": "36990",
+    "rating_stars": 4,
+    "rating_source_icon": "img/OCOL/filpkart.png",
+    "type": "AC",
+    "AC-TR": 1.5,
+    "AC-Type": "Split",
+    "AC-STAR": 3,
+    "description": "Enjoy better airflow with 4-Way Swing (upgraded from 2024). Features ice Clean (FrostWash) for cleaner air and Penta Sensor for smart cooling. Benefit from convenient features like Filter Clean Indicator and Long Air Throw. Built for hot weather (up to 52°C) with a durable 100% Copper condenser.",
+    "has_size_option": false,
+    "available_sizes": null,
+    "price_size": null
   }
 ]

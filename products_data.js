@@ -120,9 +120,9 @@
     "price_size": null
   },
   {
-    "serial_no": "D318PCCIBS",
+    "serial_no": "G318PCCISS",
     "name": "Hitachi 1.5 Ton 3 Star 2025",
-    "price": "36990",
+    "price": "38990",
     "rating_stars": 4,
     "rating_source_icon": "img/OCOL/filpkart.png",
     "type": "AC",

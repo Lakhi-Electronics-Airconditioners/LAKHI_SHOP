@@ -663,7 +663,7 @@ select:focus{
 
 
 /* Adjust width for selected option in select */
-.product-item .size-selector option {
+.product-item .size-selector option {    
     padding: 5px;
 }
 

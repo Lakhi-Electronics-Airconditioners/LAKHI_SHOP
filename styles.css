@@ -341,9 +341,25 @@ ul{
     margin-left: 20px;
 }
 .row-2{
+    display: flex; /* Ensure flexbox is applied to row-2 */
+    align-items: center; /* Align items vertically */
     justify-content: space-between;
     margin: 100px auto 50px;
+    position: relative; /* Added for positioning back button */
+    padding-left: 25px; /* Added padding to align with container content */
+    padding-right: 25px; /* Added padding to align with container content */
+    box-sizing: border-box; /* Include padding in element's total width and height */
+    min-height: 50px; /* Ensure enough height for button and heading */
 }
+.row-2 h2 {
+    margin-left: 70px; /* Give space for the back button */
+    flex-grow: 1; /* Allow heading to take available space */
+    text-align: center; /* Center the heading if enough space */
+}
+.row-2 select {
+    margin-left: auto; /* Push select to the right */
+}
+
 select{
     border: 1px solid #ff523b;
     padding: 5px;
@@ -351,6 +367,42 @@ select{
 select:focus{
     outline: none;
 }
+
+/* --- Back Button Styling --- */
+.back-button {
+    display: inline-block;
+    padding: 8px 15px;
+    background-color: #ffffff; /* Light background */
+    color: #ff523b;
+    text-decoration: none;
+    border: 1px solid #ff523b;
+    border-radius: 5px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+    position: absolute; /* Position it absolutely within row-2 */
+    left: 25px; /* Align with container padding */
+    top: 50%;
+    transform: translateY(-50%); /* Center vertically */
+    z-index: 1; /* Ensure it's above other content if needed */
+}
+
+.back-button:hover {
+    background-color: #ff523b;
+    color: #fff;
+    border-color: #ff523b;
+}
+
+/* Specific placement for back button on single-product page */
+.single-product .back-button {
+    position: absolute;
+    left: 25px; /* Aligned with left padding of container */
+    top: 20px; /* Adjust as needed for desired vertical position */
+    margin-bottom: 0;
+    z-index: 10; /* Ensure it's above other content if needed */
+}
+/* --- End Back Button Styling --- */
+
 
 @media (max-width: 600px) {
     .bands .col-5 {
@@ -391,6 +443,29 @@ select:focus{
         display:  block;
         cursor: pointer;
     }
+
+    /* Adjust back button for mobile */
+    .row-2 .back-button,
+    .single-product .back-button {
+        position: static; /* Remove absolute positioning */
+        display: block; /* Make it take full width */
+        width: calc(100% - 50px); /* Full width minus padding */
+        margin: 10px auto; /* Center it */
+        text-align: center;
+    }
+
+    /* Adjust heading and select for mobile row-2 */
+    .row-2 h2 {
+        margin-left: 0; /* Reset left margin */
+        text-align: center; /* Ensure it's centered */
+        width: 100%; /* Take full width */
+        order: -1; /* Place it before the back button if needed */
+    }
+    .row-2 select {
+        width: 100%; /* Make select full width */
+        margin-left: 0; /* Reset margin */
+        margin-top: 10px; /* Add some space from heading */
+    }
 }
 @media only screen and (max-width: 600px) {
     .row{
@@ -408,6 +483,7 @@ select:focus{
     display: flex;
     flex-wrap: wrap;
     align-items: flex-start; /* Align items to the top */
+    position: relative; /* Added for positioning back button */
 }
 
 .single-product .col-2 {

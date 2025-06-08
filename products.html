@@ -19,7 +19,6 @@
                     <ul id="Menuitems">
                         <li><a href="index">Home</a></li>
                         <li><a href="about">About Us</a></li>
-                        <!-- 'All Products' link removed from here as requested -->
                         <li><a href="AC-only">AC Products</a></li>
                         <li><a href="contact">Contact Us</a></li>
                         <li><a href="account">Account</a></li>
@@ -34,14 +33,15 @@
 
     <div class="small-container">
        <div class="row row-2">
-       <h2>All Products</h2>
-       <select id="sortProducts">
-           <option value="default">sort by A-Z(default)</option>
-           <option value="za">sort by Z-A</option>
-           <option value="price_asc">sort by price (low to high)</option>
-           <option value="price_desc">sort by price (high to low)</option>
-           <option value="rating">sort by rating</option>
-       </select>
+           <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+           <h2>All Products</h2>
+           <select id="sortProducts">
+               <option value="default">sort by A-Z(default)</option>
+               <option value="za">sort by Z-A</option>
+               <option value="price_asc">sort by price (low to high)</option>
+               <option value="price_desc">sort by price (high to low)</option>
+               <option value="rating">sort by rating</option>
+           </select>
        </div>
        <div class="row" id="productListContainer">
            </div>

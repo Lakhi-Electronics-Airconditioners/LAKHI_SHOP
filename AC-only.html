@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | AC Products</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index">Home</a></li>
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="products">All Products</a></li>
+                        <!-- 'AC Products' link removed from here as requested -->
+                        <li><a href="contact">Contact Us</a></li>
+                        <li><a href="account">Account</a></li>
+                    </ul>
+                </nav>
+                <img src="img/NABR/SCI.png" width="30px">
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+
+    <div class="small-container">
+        <div class="small-container row row-2">
+            <h2>AC Products</h2>
+            <select id="sortProducts">
+                <option value="default">Default Sorting (A-Z)</option>
+                <option value="za">Sort Z-A</option>
+                <option value="price_asc">Sort by Price: Low to High</option>
+                <option value="price_desc">Sort by Price: High to Low</option>
+                <option value="rating">Sort by Rating</option>
+            </select>
+        </div>
+        
+        <div class="small-container row" style="margin-top: 20px;">
+            <div class="col-4">
+                <label for="filterAcType">AC Type:</label>
+                <select id="filterAcType">
+                    <option value="">All AC Types</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="filterAcTr">AC TR:</label>
+                <select id="filterAcTr">
+                    <option value="">All TR</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="filterAcStar">AC Star Rating:</label>
+                <select id="filterAcStar">
+                    <option value="">All Stars</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="row" id="productListContainer">
+            <!-- Product cards will be rendered here by JavaScript -->
+        </div>
+        <p id="totalProductsCount" style="margin-top: 20px; text-align: center;"></p>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250516%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250516T124428Z&X-Amz-Expires=14400&X-Amz-Signature=203fc53e1989a4bbe8fc8eb5e0451d05cbd205c5ea781318237539ae6db7b7cd&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+    <script>
+        var Menuitems = document.getElementById('Menuitems')
+
+        Menuitems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px"
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const productContainer = document.getElementById('productListContainer');
+            const sortSelect = document.getElementById('sortProducts');
+            let allProducts = [];
+            let displayedProducts = [];
+
+            const filterAcTypeSelect = document.getElementById('filterAcType');
+            const filterAcTrSelect = document.getElementById('filterAcTr');
+            const filterAcStarSelect = document.getElementById('filterAcStar');
+
+            function generateStars(rating) {
+                let starsHTML = '';
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 !== 0;
+                const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+                for (let i = 0; i < fullStars; i++) {
+                    starsHTML += '<i class="fa-solid fa-star"></i>';
+                }
+                if (hasHalfStar) {
+                    starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+                }
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHTML += '<i class="fa-regular fa-star"></i>';
+                }
+                return starsHTML;
+            }
+
+            // Function to calculate and update price based on selected size
+            function calculateAndDisplayPrice(product, selectedSize, priceElement) {
+                let calculatedPrice;
+                const basePrice = parseFloat(product.price);
+
+                if (product.has_size_option && product.price_size) {
+                    if (product.price_size === "AU") {
+                        calculatedPrice = basePrice * selectedSize;
+                    } else if (Array.isArray(product.price_size)) {
+                        const sizeIndex = product.available_sizes.indexOf(selectedSize);
+                        calculatedPrice = (sizeIndex !== -1 && product.price_size[sizeIndex] !== undefined) ?
+                                          parseFloat(product.price_size[sizeIndex]) : basePrice;
+                    } else {
+                        calculatedPrice = basePrice; // Fallback if price_size is malformed
+                    }
+                } else {
+                    calculatedPrice = basePrice; // No size option, use base price
+                }
+                priceElement.textContent = `₹${calculatedPrice.toLocaleString('en-IN')}`;
+            }
+
+            function renderProducts(productsToRender) {
+                productContainer.innerHTML = '';
+                if (productsToRender.length === 0) {
+                    productContainer.innerHTML = '<p style="text-align: center; width: 100%;">No AC products found matching your criteria.</p>';
+                    return;
+                }
+
+                const currentAcTypeFilter = filterAcTypeSelect.value;
+                const currentAcTrFilter = filterAcTrSelect.value;
+
+                productsToRender.forEach(product => {
+                    const productDiv = document.createElement('div');
+                    productDiv.classList.add('col-4', 'product-item');
+                    productDiv.dataset.serialNo = product.serial_no;
+
+                    const imagePath = `img/PROC/${product.serial_no.replace(/\//g, '!')}.jpg`;
+                    let ratingSourcePath = product.rating_source_icon ? product.rating_source_icon : '';
+                    
+                    let stars = product.rating_stars !== null && product.rating_stars !== undefined ? generateStars(product.rating_stars) : 'No rating';
+
+                    let acTypeDisplay = '';
+                    if (product['AC-Type'] && currentAcTypeFilter === '') {
+                        acTypeDisplay = `<p class="ac-spec-display">Type: ${product['AC-Type']}</p>`;
+                    }
+
+                    let acTrDisplay = '';
+                    if (product['AC-TR'] && currentAcTrFilter === '') {
+                        acTrDisplay = `<p class="ac-spec-display">TR: ${product['AC-TR']} Ton</p>`;
+                    }
+
+                    let initialDisplayedPrice;
+                    let sizeSelectorHtml = '';
+                    if (product.has_size_option && Array.isArray(product.available_sizes) && product.available_sizes.length > 0) {
+                        const firstSize = product.available_sizes[0];
+                        let calculatedInitialPrice;
+
+                        if (product.price_size === "AU") {
+                            calculatedInitialPrice = parseFloat(product.price) * firstSize;
+                        } else if (Array.isArray(product.price_size) && product.price_size[0] !== undefined) {
+                            calculatedInitialPrice = parseFloat(product.price_size[0]);
+                        } else {
+                            calculatedInitialPrice = parseFloat(product.price); // Fallback
+                        }
+                        initialDisplayedPrice = `₹${calculatedInitialPrice.toLocaleString('en-IN')}`;
+
+                        sizeSelectorHtml = `
+                            <div class="size-selector-container">
+                                <label for="size-${product.serial_no}" class="size-label">Size:</label>
+                                <select id="size-${product.serial_no}" class="size-selector">
+                                    ${product.available_sizes.map(size => `<option value="${size}">${size}ft</option>`).join('')}
+                                </select>
+                            </div>
+                        `;
+                    } else {
+                        initialDisplayedPrice = `₹${parseFloat(product.price).toLocaleString('en-IN')}`;
+                    }
+
+                    productDiv.innerHTML = `
+                        <a href="product_detail?serial_no=${product.serial_no}" style="text-decoration: none; color: inherit;">
+                            <img src="${imagePath}" alt="${product.name}">
+                            <h4>${product.name} (S/N: ${product.serial_no})</h4>
+                            <p class="dynamic-price">${initialDisplayedPrice}</p>
+                            ${sizeSelectorHtml}
+                            ${acTrDisplay}
+                            ${acTypeDisplay}
+                            <div class="rating">
+                                <span>
+                                    ${stars}
+                                </span>
+                                ${ratingSourcePath ? `<p class="rating-source">Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
+                            </div>
+                        </a>
+                    `;
+                    productContainer.appendChild(productDiv);
+
+                    if (product.has_size_option) {
+                        const sizeSelectElement = productDiv.querySelector(`.size-selector`);
+                        if (sizeSelectElement) {
+                            sizeSelectElement.addEventListener('change', (event) => {
+                                const selectedSize = parseInt(event.target.value);
+                                const priceElement = productDiv.querySelector('.dynamic-price');
+                                calculateAndDisplayPrice(product, selectedSize, priceElement);
+                            });
+                        }
+                    }
+                });
+                updateTotalProductCount(productsToRender.length);
+            }
+
+            function sortProducts(criteria) {
+                let productsToSort = [...displayedProducts];
+                switch (criteria) {
+                    case 'za':
+                        productsToSort.sort((a, b) => b.name.localeCompare(a.name));
+                        break;
+                    case 'price_asc':
+                        productsToSort.sort((a, b) => {
+                            const priceA = getSortablePrice(a);
+                            const priceB = getSortablePrice(b);
+                            return priceA - priceB;
+                        });
+                        break;
+                    case 'price_desc':
+                        productsToSort.sort((a, b) => {
+                            const priceA = getSortablePrice(a);
+                            const priceB = getSortablePrice(b);
+                            return priceB - priceA;
+                        });
+                        break;
+                    case 'rating':
+                        productsToSort.sort((a, b) => (b.rating_stars || 0) - (a.rating_stars || 0));
+                        break;
+                    case 'default':
+                    default:
+                        productsToSort.sort((a, b) => a.name.localeCompare(b.name));
+                        break;
+                }
+                displayedProducts = productsToSort;
+                renderProducts(displayedProducts);
+            }
+
+            function filterProducts() {
+                const selectedAcType = filterAcTypeSelect.value;
+                const selectedAcTr = filterAcTrSelect.value;
+                const selectedAcStar = filterAcStarSelect.value;
+
+                let filtered = allProducts.filter(product => {
+                    const acTypeMatch = !selectedAcType || (product["AC-Type"] && product["AC-Type"].toString() === selectedAcType);
+                    const acTrMatch = !selectedAcTr || (product["AC-TR"] && product["AC-TR"].toString() === selectedAcTr);
+                    const acStarMatch = !selectedAcStar || (product["AC-STAR"] && product["AC-STAR"].toString() === selectedAcStar);
+                    
+                    return acTypeMatch && acTrMatch && acStarMatch;
+                });
+                
+                displayedProducts = filtered;
+                sortProducts(sortSelect.value);
+            }
+
+            function populateFilterOptions(propertyName, selectElement) {
+                const uniqueValues = [...new Set(allProducts.map(product => product[propertyName]).filter(value => value !== null && value !== undefined))];
+                
+                selectElement.querySelectorAll('option:not([value=""])').forEach(option => option.remove());
+
+                uniqueValues.sort((a, b) => {
+                    if (typeof a === 'number' && typeof b === 'number') {
+                        return a - b;
+                    }
+                    return String(a).localeCompare(String(b));
+                }).forEach(value => {
+                    const option = document.createElement('option');
+                    option.value = value;
+                    option.textContent = (propertyName === 'AC-TR' && typeof value === 'number') ? `${value} Ton` : value;
+                    selectElement.appendChild(option);
+                });
+            }
+
+            function updateTotalProductCount(count) {
+                let totalProductsElement = document.getElementById('totalProductsCount');
+                if (!totalProductsElement) {
+                    totalProductsElement = document.createElement('p');
+                    totalProductsElement.id = 'totalProductsCount';
+                    totalProductsElement.style.marginTop = '20px';
+                    productContainer.parentElement.appendChild(totalProductsElement);
+                }
+                totalProductsElement.textContent = `Total AC Products: ${count}`;
+            }
+
+            function getSortablePrice(product) {
+                if (product.has_size_option && product.available_sizes && product.available_sizes.length > 0) {
+                    const firstSize = product.available_sizes[0];
+                    if (product.price_size === "AU") {
+                        return parseFloat(product.price) * firstSize;
+                    } else if (Array.isArray(product.price_size) && product.price_size[0] !== undefined) {
+                        return parseFloat(product.price_size[0]);
+                    }
+                }
+                return parseFloat(product.price || 0);
+            }
+
+            fetch('products_data.js')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    allProducts = data.filter(product => product.type === 'AC');
+                    displayedProducts = [...allProducts];
+
+                    renderProducts(displayedProducts);
+
+                    populateFilterOptions('AC-Type', filterAcTypeSelect);
+                    populateFilterOptions('AC-TR', filterAcTrSelect);
+                    populateFilterOptions('AC-STAR', filterAcStarSelect);
+                    
+                    sortSelect.addEventListener('change', () => {
+                        sortProducts(sortSelect.value);
+                    });
+                    filterAcTypeSelect.addEventListener('change', filterProducts);
+                    filterAcTrSelect.addEventListener('change', filterProducts);
+                    filterAcStarSelect.addEventListener('change', filterProducts);
+                })
+                .catch(error => console.error('Error loading product data:', error));
+        });
+    </script>
+</body>
+</html>

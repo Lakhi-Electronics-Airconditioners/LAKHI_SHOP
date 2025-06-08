@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Product Details</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="AC-only.html">AC Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <img src="img/NABR/SCI.png" width="30px">
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+
+    <div class="small-container single-product" id="productDetailContainer">
+        <!-- Product details will be loaded here by JavaScript -->
+        <p style="text-align: center; width: 100%;">Loading product details...</p>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="footer-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android and ios mobile phone.</p>
+                    <div class="app-logo">
+                        <img src="img/NABR/apk-down.jpeg">
+                    </div>
+                </div>
+                <div class="footer-col-2">
+                    <img src="img/log-w.png" width="200px">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li>TAC</Li>
+                        <Li>PP</Li>
+                        <li>INFO</li>
+                        <li>VID</li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li>Facebook</Li>
+                        <Li>instagram</Li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script>
+        var Menuitems = document.getElementById('Menuitems')
+
+        Menuitems.style.maxHeight = "0px";
+
+        function menutoggle() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px"
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const productDetailContainer = document.getElementById('productDetailContainer');
+            let currentProduct = null; // Store the current product object
+
+            // Function to parse URL parameters
+            function getUrlParameter(name) {
+                name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+                var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+                var results = regex.exec(location.search);
+                return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+            }
+
+            // Get the serial_no from the URL
+            const requestedSerialNo = getUrlParameter('serial_no');
+
+            // Function to generate star ratings HTML
+            function generateStars(rating) {
+                let starsHTML = '';
+                const fullStars = Math.floor(rating);
+                const hasHalfStar = rating % 1 !== 0;
+                const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+                for (let i = 0; i < fullStars; i++) {
+                    starsHTML += '<i class="fa-solid fa-star"></i>';
+                }
+                if (hasHalfStar) {
+                    starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+                }
+                for (let i = 0; i < emptyStars; i++) {
+                    starsHTML += '<i class="fa-regular fa-star"></i>';
+                }
+                return starsHTML;
+            }
+
+            // Function to calculate and update price based on selected size for the detail page
+            function updateDetailPagePrice(selectedSize) {
+                const priceElement = document.getElementById('productDynamicPrice');
+                if (priceElement && currentProduct) {
+                    let calculatedPrice;
+                    const basePrice = parseFloat(currentProduct.price);
+
+                    if (currentProduct.has_size_option && currentProduct.price_size) {
+                        if (currentProduct.price_size === "AU") {
+                            calculatedPrice = basePrice * selectedSize;
+                        } else if (Array.isArray(currentProduct.price_size)) {
+                            const sizeIndex = currentProduct.available_sizes.indexOf(selectedSize);
+                            calculatedPrice = (sizeIndex !== -1 && currentProduct.price_size[sizeIndex] !== undefined) ?
+                                              parseFloat(currentProduct.price_size[sizeIndex]) : basePrice;
+                        } else {
+                            calculatedPrice = basePrice; // Fallback if price_size is malformed
+                        }
+                    } else {
+                        calculatedPrice = basePrice; // No size option, use base price
+                    }
+                    priceElement.textContent = `₹${calculatedPrice.toLocaleString('en-IN')}`;
+                }
+            }
+
+            // Function to render product details
+            function renderProductDetails(product) {
+                if (!product) {
+                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found.</p>';
+                    return;
+                }
+                currentProduct = product; // Store the product globally for price updates
+
+                const imagePath = `img/PROC/${product.serial_no.replace(/\//g, '!')}.jpg`;
+                let ratingSourcePath = product.rating_source_icon ? product.rating_source_icon : '';
+                let formattedPrice; // Will be set based on size or base price
+                let stars = product.rating_stars !== null && product.rating_stars !== undefined ? generateStars(product.rating_stars) : 'No rating';
+
+                // Construct AC specific details if applicable
+                let acDetailsHtml = '';
+                if (product.type === 'AC') {
+                    if (product['AC-TR'] !== null) {
+                        acDetailsHtml += `<p><strong>Tonnage:</strong> ${product['AC-TR']} Ton</p>`;
+                    }
+                    if (product['AC-Type'] !== null) {
+                        acDetailsHtml += `<p><strong>AC Type:</strong> ${product['AC-Type']}</p>`;
+                    }
+                    if (product['AC-STAR'] !== null) {
+                        acDetailsHtml += `<p><strong>BEE Star Rating:</strong> ${product['AC-STAR']} Star</p>`;
+                    }
+                }
+
+                // Size selection dropdown for the detail page
+                let sizeSelectorHtml = '';
+                if (product.has_size_option && Array.isArray(product.available_sizes) && product.available_sizes.length > 0) {
+                    const firstSize = product.available_sizes[0]; // Default to the first available size
+                    let initialCalculatedPrice;
+
+                    if (product.price_size === "AU") {
+                        initialCalculatedPrice = parseFloat(product.price) * firstSize;
+                    } else if (Array.isArray(product.price_size) && product.price_size[0] !== undefined) {
+                        initialCalculatedPrice = parseFloat(product.price_size[0]);
+                    } else {
+                        initialCalculatedPrice = parseFloat(product.price); // Fallback
+                    }
+                    formattedPrice = `₹${initialCalculatedPrice.toLocaleString('en-IN')}`; // Update price for first size
+
+                    sizeSelectorHtml = `
+                        <div class="size-option-section">
+                            <label for="detail-size-selector">Select Size (ft):</label>
+                            <select id="detail-size-selector" class="large-size-selector">
+                                ${product.available_sizes.map(size => `<option value="${size}">${size}ft</option>`).join('')}
+                            </select>
+                        </div>
+                    `;
+                } else {
+                    formattedPrice = `₹${parseFloat(product.price).toLocaleString('en-IN')}`;
+                }
+
+                productDetailContainer.innerHTML = `
+                    <div class="col-2">
+                        <img src="${imagePath}" alt="${product.name}">
+                    </div>
+                    <div class="col-2">
+                        <p>${product.type ? product.type.toUpperCase() : 'Product'}</p>
+                        <h1>${product.name} (S/N: ${product.serial_no})</h1>
+                        <p class="dynamic-price" id="productDynamicPrice">${formattedPrice}</p>
+                        ${sizeSelectorHtml}
+                        <div class="rating">
+                            <span>
+                                ${stars}
+                            </span>
+                            ${ratingSourcePath ? `<p class="rating-source">Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
+                        </div>
+                        
+                        <h3>Product Details <i class="fa fa-indent"></i></h3>
+                        <p>${product.description || 'No detailed description available.'}</p>
+                        ${acDetailsHtml}
+                    </div>
+                `;
+
+                if (product.has_size_option) {
+                    const sizeSelectElement = document.getElementById('detail-size-selector');
+                    if (sizeSelectElement) {
+                        sizeSelectElement.addEventListener('change', (event) => {
+                            const selectedSize = parseInt(event.target.value);
+                            updateDetailPagePrice(selectedSize);
+                        });
+                    }
+                }
+            }
+
+            fetch('products_data.js')
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const foundProduct = data.find(product => product.serial_no === requestedSerialNo);
+                    renderProductDetails(foundProduct);
+                })
+                .catch(error => {
+                    console.error('Error loading product data:', error);
+                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Error loading product details. Please try again later.</p>';
+                });
+        });
+    </script>
+</body>
+</html>

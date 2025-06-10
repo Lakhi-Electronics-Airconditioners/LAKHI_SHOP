@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Your Cart</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>    
+    <Div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></Div>
+    <!--CART ITEMS DETAILS-->
+    <div class="small-container cart-page">
+        <!-- Product Code Checker Section -->
+        <div class="code-check-section" style="margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 8px; background-color: #f9f9f9;">
+            <h3 style="margin-bottom: 15px; color: #333;">Check Product Code (Custom Format)</h3>
+            <p style="font-size: 0.8em; margin-bottom: 15px; color: #777;"><a href="HTMACPC"><u>an 11-digit code (e.g., 01115103800 for Daikin AC 1.5 Ton Split, ₹38,000)</u></a></p>
+            <input type="text" id="productCodeInput" placeholder="Enter 11-digit code" style="width: calc(100% - 100px); padding: 10px; margin-right: 10px; border: 1px solid #ccc; border-radius: 5px;">
+            <button class="btn" onclick="checkProductCode()" style="padding: 10px 20px; border: none; border-radius: 5px; background-color: #ff523b; color: #fff; cursor: pointer;">Check Code</button>
+            <div id="codeCheckResult" style="margin-top: 15px; font-weight: bold; color: #555;"></div>
+        </div>
+        <!-- End Product Code Checker Section -->
+
+        <table id="cartTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th> 
+                    <th>Subtotal <u style="font-size: xx-small;">may not be rights</u></th>
+                    <th>Action</th> 
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Cart items will be loaded here by JavaScript -->
+            </tbody>
+        </table>
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="cartSubtotal">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td>*GET TOTAL BY CONTACTING US*</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="cartTotal">*GET TOTAL BY CONTACTING US*</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!--footer-->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script>
+        var Menuitems = document.getElementById('Menuitems')
+
+        Menuitems.style.maxHeight = "0px";
+
+        function menutoggle(){
+            if(Menuitems.style.maxHeight == "0px")
+                { 
+                    Menuitems.style.maxHeight= "200px"
+                }
+            else
+                {
+                    Menuitems.style.maxHeight ="0px";
+                }
+        }
+
+        // --- Custom Product Code Mappings ---
+        const companyMap = {
+            "01": "Daikin", "02": "Voltas", "03": "Samsung", "04": "Hitachi",
+            "05": "LG", "06": "Carrier", "07": "Blue Star", "08": "Godrej",
+            "09": "Whirlpool", "10": "Panasonic", "00": "Other/any" 
+        };
+
+        const acTypeMap = {
+            "1": "Split", "2": "Window", "3": "Inverter Split", "4": "Tower",
+            "5": "Cassette", "0": "Other AC Type"
+        };
+
+        const nonAcProductTypeMap = {
+            "000": "Unknown / Other Appliance", "001": "TV", "002": "Refrigerator", "003": "Washing Machine",
+            "004": "Microwave Oven", "005": "Stabilizer", "006": "Water Cooler",
+            "007": "Pump", "008": "Purifier", "009": "Dishwasher", "999": "Other Appliance"
+        };
+
+        // --- Product Code Checker Function ---
+        function checkProductCode() {
+            const inputCode = document.getElementById("productCodeInput").value.trim();
+            const resultDiv = document.getElementById("codeCheckResult");
+            resultDiv.style.color = "red"; // Default to red for errors
+
+            if (inputCode.length !== 11 || !/^\d+$/.test(inputCode)) {
+                resultDiv.textContent = "Please enter a valid 11-digit numerical code.";
+                return;
+            }
+
+            const companyCode = inputCode.substring(0, 2);
+            const isAcFlag = inputCode.substring(2, 3);
+            const priceSegment = inputCode.substring(6, 11);
+
+            let companyName = companyMap[companyCode] || "Unknown Company";
+            let productName = "N/A";
+            let productDetails = [];
+            let parsedPrice = "N/A";
+            let productType = "N/A";
+            let acTonnage = null;
+            let acProductType = null;
+            let productUnit = "unit"; // Default unit for custom products
+
+            try {
+                // Parse price
+                let priceValue = parseInt(priceSegment, 10);
+                if (!isNaN(priceValue)) {
+                    parsedPrice = `₹${(priceValue * 10).toLocaleString('en-IN')}`; // Multiply by 10
+                } else {
+                    throw new Error("Invalid price segment.");
+                }
+
+                if (isAcFlag === '1') { // It's an AC
+                    const tonnageCode = inputCode.substring(3, 5);
+                    const acTypeCode = inputCode.substring(5, 6);
+
+                    acTonnage = parseFloat(tonnageCode) / 10; 
+                    if (isNaN(acTonnage)) {
+                        throw new Error("Invalid AC tonnage code.");
+                    }
+                    
+                    acProductType = acTypeMap[acTypeCode] || "Other AC Type";
+                    productType = "AC";
+
+                    productName = `${companyName} AC (${acTonnage} Ton ${acProductType})`;
+                    productDetails.push(`Type: AC`);
+                    productDetails.push(`Tonnage: ${acTonnage} Ton`);
+                    productDetails.push(`AC Type: ${acProductType}`);
+                    productUnit = "unit"; // ACs are usually sold per unit
+
+                } else if (isAcFlag === '0') { // It's not an AC
+                    const nonAcTypeCode = inputCode.substring(3, 6);
+                    let nonAcMappedType = nonAcProductTypeMap[nonAcTypeCode] || "Other Appliance";
+                    productType = nonAcMappedType;
+
+                    productName = `${companyName} ${nonAcMappedType}`;
+                    productDetails.push(`Type: ${nonAcMappedType}`);
+                    // You might want to assign a specific unit here based on productType
+                    // For example, if nonAcMappedType is "Wire", set unit to "meter" or "ft"
+                    // For now, it will remain "unit"
+                } else {
+                    throw new Error("Invalid AC/Non-AC flag (digit 3).");
+                }
+
+                resultDiv.style.color = "green";
+                resultDiv.innerHTML = `
+                    <strong>Product Found:</strong><br>
+                    Name: ${productName}<br>
+                    Price: ${parsedPrice}<br>
+                    ${productDetails.join('<br>')}
+                    <button class="btn" style="margin-top: 15px;" onclick="addCustomProductToCart('${inputCode}', '${productName}', '${parsedPrice}', '${productType}', ${acTonnage}, '${acProductType}', '${productUnit}');">Add to Cart</button>
+                `;
+
+            } catch (error) {
+                resultDiv.style.color = "red";
+                resultDiv.textContent = `Error interpreting code: ${error.message}`;
+            }
+        }
+        // --- End Product Code Checker Function ---
+
+        // Function to add a product to the cart (now accepts a full product object)
+        function addToCart(productObj, quantity, size, unit) {
+            let cartItems = getCartItems();
+            // Create a unique identifier for the cart item based on serial_no and size (variant)
+            const uniqueCartItemId = `${productObj.serial_no}-${size}`;
+
+            // Check if an item with the same serial_no and size already exists in the cart
+            const existingItemIndex = cartItems.findIndex(item => `${item.serial_no}-${item.size}` === uniqueCartItemId);
+
+            if (existingItemIndex > -1) {
+                // If item exists, just increase its quantity
+                cartItems[existingItemIndex].quantity += quantity;
+            } else {
+                // If item does not exist, add it to the cart
+                // Store sufficient details directly in the cart item to allow re-rendering after refresh
+                const itemToSave = {
+                    serial_no: productObj.serial_no,
+                    name: productObj.name,
+                    price: productObj.price, // This is the formatted price (e.g., "₹38,000")
+                    type: productObj.type,
+                    unit: unit || 'unit', // Ensure unit is always present, default to 'unit'
+                    quantity: quantity,
+                    size: size,
+                    "AC-TR": productObj["AC-TR"] || null,
+                    "AC-Type": productObj["AC-Type"] || null,
+                    "AC-STAR": productObj["AC-STAR"] || null,
+                    description: productObj.description || '',
+                    rating_stars: productObj.rating_stars || null,
+                    rating_source_icon: productObj.rating_source_icon || null
+                };
+                cartItems.push(itemToSave);
+            }
+            saveCartItems(cartItems); // Save the updated cart to localStorage
+            alert(`Added ${quantity} ${unit} of ${productObj.name} (Size: ${size}) to cart!`);
+            console.log('Current cart:', cartItems);
+            renderCart(); // Re-render the cart display to show the new item
+        }
+
+        // Function to add a custom product to the cart (called from checkProductCode's button)
+        function addCustomProductToCart(inputCode, name, price, type, acTr, acType, unit) {
+            const serialNo = `CUSTOM-${inputCode}`; // Create a unique serial number for custom products
+            const quantity = 1; // Default quantity for adding from checker
+
+            let size = "N/A"; // Default size
+            if (type === "AC" && acTr !== null && acTr !== undefined) {
+                size = `${acTr} Ton`; // Set size for ACs
+            }
+
+            // Create a temporary product object representing the custom product's details
+            const customProductDetails = {
+                serial_no: serialNo,
+                name: name,
+                price: price, // This is already the formatted price string
+                type: type,
+                unit: unit || 'unit',
+                "AC-TR": acTr,
+                "AC-Type": acType,
+                "AC-STAR": null, // Custom codes don't have star rating
+                description: `Custom product generated from code: ${inputCode}`,
+                rating_stars: null,
+                rating_source_icon: null
+            };
+
+            // Call the generic addToCart function with the custom product's details
+            addToCart(customProductDetails, quantity, size, unit);
+            // No need to push to `allProductsData` here, as `addToCart` handles saving the full item to `localStorage`.
+        }
+
+        // --- Cart Logic (Existing, with updates for handling custom products) ---
+        let allProductsData = []; // Stores predefined products from products_data.js
+
+        function getCartItems() {
+            const cartItemsString = localStorage.getItem('cartItems');
+            return cartItemsString ? JSON.parse(cartItemsString) : [];
+        }
+
+        function saveCartItems(cartItems) {
+            localStorage.setItem('cartItems', JSON.stringify(cartItems));
+        }
+
+        function removeItemFromCart(serialNo, size) {
+            let cartItems = getCartItems();
+            cartItems = cartItems.filter(item => !(item.serial_no === serialNo && item.size === size));
+            saveCartItems(cartItems);
+            renderCart(); 
+        }
+
+        function updateCartItemQuantity(serialNo, size, newQuantity) {
+            let cartItems = getCartItems();
+            const itemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
+            if (itemIndex > -1) {
+                cartItems[itemIndex].quantity = parseInt(newQuantity, 10);
+                if (cartItems[itemIndex].quantity <= 0) {
+                    removeItemFromCart(serialNo, size); 
+                } else {
+                    saveCartItems(cartItems);
+                    renderCart();
+                }
+            }
+        }
+
+        // `getProductDetails` is now primarily for fetching details of *predefined* products.
+        // Custom product details are retrieved directly from the `item` in `renderCart`.
+        function getProductDetails(serialNo) {
+            return allProductsData.find(product => product.serial_no === serialNo);
+        }
+
+        function renderCart() {
+            const cartItems = getCartItems();
+            const cartTableBody = document.querySelector('#cartTable tbody');
+            cartTableBody.innerHTML = ''; 
+
+            let subtotal = 0;
+
+            if (cartItems.length === 0) {
+                cartTableBody.innerHTML = `<tr><td colspan="4" style="text-align: center; padding: 20px;">Your cart is empty.</td></tr>`;
+                document.getElementById('cartSubtotal').textContent = '₹0.00';
+                document.getElementById('cartTotal').textContent = '*GET TOTAL BY CONTACTING US*';
+                return;
+            }
+
+            cartItems.forEach(item => {
+                let imageUrl = '';
+                let productName = item.name; // Use name directly from item
+                let productPriceFormatted = item.price; // Use price directly from item (it's already formatted)
+                let productSize = item.size;
+                let productUnit = item.unit || 'unit';
+                const quantity = item.quantity;
+
+                // Determine image URL and calculate item total
+                if (item.serial_no.startsWith("CUSTOM-")) {
+                    imageUrl = 'https://placehold.co/80x80/cccccc/ffffff?text=Custom+Product'; // Placeholder for custom products
+                } else {
+                    // For predefined products, try to use the image path from 'img/PROC'
+                    // If the product is not found in allProductsData (e.g., deleted), or image doesn't exist, use fallback.
+                    const predefinedProduct = getProductDetails(item.serial_no);
+                    if (predefinedProduct) {
+                         imageUrl = `img/PROC/${item.serial_no.replace(/\//g, '!')}.jpg`;
+                    } else {
+                         imageUrl = 'https://placehold.co/80x80/cccccc/ffffff?text=Product+Removed';
+                    }
+                }
+                
+                // Calculate item total using the raw numeric price.
+                // Need to extract the numeric part from `productPriceFormatted` for calculation.
+                const numericPrice = parseFloat(String(productPriceFormatted).replace('₹', '').replace(/,/g, ''));
+                const itemTotal = numericPrice * quantity;
+                subtotal += itemTotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="cart-info">
+                            <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/cccccc/ffffff?text=Image+Not+Found';">
+                            <div>
+                                <p>${productName}</p>
+                                <small>Price: ${productPriceFormatted}</small>
+                                ${productSize && productSize !== 'N/A' ? `<br><small>Size: ${productSize}</small>` : ''}
+                                <br><a href="#" class="remove-item" data-serial-no="${item.serial_no}" data-size="${productSize}">remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="number" value="${quantity}" min="1" class="cart-quantity-input" 
+                            data-serial-no="${item.serial_no}" data-size="${productSize}">
+                        ${productUnit} <!-- Display the unit next to the quantity input -->
+                    </td>
+                    <td>₹${itemTotal.toLocaleString('en-IN')}</td>
+                    <td><a href="#" class="remove-item-btn" data-serial-no="${item.serial_no}" data-size="${productSize}">X</a></td>
+                `;
+                cartTableBody.appendChild(row);
+            });
+
+            // Re-attach event listeners for remove buttons and quantity inputs after rendering
+            document.querySelectorAll('.remove-item, .remove-item-btn').forEach(button => {
+                button.addEventListener('click', function(event) {
+                    event.preventDefault();
+                    const serialNo = this.dataset.serialNo;
+                    const size = this.dataset.size;
+                    removeItemFromCart(serialNo, size);
+                });
+            });
+
+            document.querySelectorAll('.cart-quantity-input').forEach(input => {
+                input.addEventListener('change', function() {
+                    const serialNo = this.dataset.serialNo;
+                    const size = this.dataset.size;
+                    const newQuantity = parseInt(this.value, 10);
+                    updateCartItemQuantity(serialNo, size, newQuantity);
+                });
+            });
+
+            document.getElementById('cartSubtotal').textContent = `₹${subtotal.toLocaleString('en-IN')}`;
+            document.getElementById('cartTotal').textContent = `*GET TOTAL BY CONTACTING US*`; 
+        }
+
+        // Fetch predefined product data once when the page loads
+        fetch('products_data.js')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                allProductsData = data; // Store predefined products in memory
+                renderCart(); // Render cart after predefined products are loaded
+            })
+            .catch(error => {
+                console.error('Error loading product data:', error);
+                // Still attempt to render the cart even if predefined data fails to load,
+                // as custom products might still be in localStorage.
+                renderCart(); 
+            });
+    </script>
+</body>
+</html>

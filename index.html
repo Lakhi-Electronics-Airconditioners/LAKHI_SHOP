@@ -6,11 +6,90 @@
     <title>Lakhi Airconditioners | HOME</title>
     <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap](https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap)" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
 </head>
 <body>
+    <!-- Terms and Conditions Modal (Initial Agreement) -->
+    <div id="tacpp" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Please Agree to Proceed</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <input type="checkbox" id="agree">
+                <label for="agree">
+                    I agree to the 
+                    <a href="https://main.lakhiairconditioners.com/tac">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://main.lakhiairconditioners.com/pp">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Disclaimer Section -->
+            <p style="font-size:14px; margin-bottom:20px;">
+                * Prices may not be accurate, and not all products are listed.
+            </p>
+            <!-- Continue Button -->
+            <div class="w3-center">
+                <button 
+                    class="btn-modal" 
+                    onclick="continueAction(event)">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Terms and Conditions Update Modal -->
+    <div id="updateTacppModal" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeUpdateModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Terms and Conditions Updated</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Update Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
+                <input type="checkbox" id="agreeUpdate">
+                <label for="agreeUpdate">
+                    I agree to the updated 
+                    <a href="https://main.lakhiairconditioners.com/tac">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://main.lakhiairconditioners.com/pp">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Continue Button for Update -->
+            <div class="w3-center">
+                <button 
+                    class="btn-modal" 
+                    onclick="continueUpdateAction(event)">
+                    Agree to Update
+                </button>
+            </div>
+        </form>
+    </div>
+
     <div class="header">
         <div class="container">
             <div class="navbar">
@@ -24,7 +103,7 @@
                         <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
-                <img src="img/NABR/SCI.png" width="30px">
+                <a href="cart"><img src="img/NABR/SCI.png" width="30px"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
             </div>
             <div class="row">
@@ -195,7 +274,7 @@
                         <p>Best Overall AirConditioners</p>
                         <h1>Hitachi 1.5 Ton 3 Star 2025</h1>
                         <small>Enjoy better airflow with <b>4-Way Swing</b> (upgraded from 2024). Features <b>ice Clean (FrostWash)</b> for cleaner air and <b>Penta Sensor</b> for smart cooling. Benefit from convenient features like <b>Filter Clean Indicator</b> and <b>Long Air Throw</b>. Built for hot weather (up to 52°C) with a durable <b>100% Copper condenser.</b></small>
-                        <br><a href="/product_detail?serial_no=G318PCCISS" class="btn">Buy Now &#8594</a>
+                        <br><a href="/product_detail?serial_no=D318PCCIBS" class="btn">Buy Now &#8594</a>
                     </div>
                 </div>
             </div>
@@ -210,10 +289,10 @@
                     <img src="img/OCOL/dakin.png" width="50px" height="50px">
                 </div>
                 <div class="col-5">
-                    <img src="img/OCOL/Golden tra.png"  width="80px" height="50px" >
+                    <img src="img/OCOL/Golden tra.png"  width="80px" height="50px" >
                 </div>
                 <div class="col-5">
-                    <img src="img/OCOL/Hitachi.png"  width="100px" height="50px" >
+                    <img src="img/OCOL/Hitachi.png"  width="100px" height="50px" >
                 </div>
                 <div class="col-5">
                     <img src="img/OCOL/samsung.png" width="100px" height="50px">
@@ -268,7 +347,7 @@
                     <h3>Download  Our App</h3>
                     <p>Download App for Android but not <u>iphone</u>for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250516%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250516T124428Z&X-Amz-Expires=14400&X-Amz-Signature=203fc53e1989a4bbe8fc8eb5e0451d05cbd205c5ea781318237539ae6db7b7cd&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
@@ -307,7 +386,7 @@
     </div>
     <!--js for menu 700px-->
     <script>
-        var Menuitems = document.getElementById('Menuitems')
+        var Menuitems = document.getElementById('Menuitems');
 
         Menuitems.style.maxHeight ="0px";
 
@@ -321,6 +400,83 @@
                     Menuitems.style.maxHeight ="0px";
                 }
         }
+
+        // --- Terms and Conditions Modal Logic ---
+        const currentTermsVersion = '1.0'; // Define the current version of your TAC/PP
+
+        // Function for Close Button of initial TACPP modal
+        function closeModal() {
+            // User did not agree to initial terms, redirect them
+            window.location.href = "/NOTAGR";
+        }
+    
+        // Function for Continue Button of initial TACPP modal
+        function continueAction(event) {
+            event.preventDefault(); // Prevent form submission
+            var isChecked = document.getElementById("agree").checked;
+            if (isChecked) {
+                localStorage.setItem('hasAgreedToTerms', 'true'); // Set initial agreement flag
+                localStorage.setItem('agreedTermsVersion', currentTermsVersion); // Store the version agreed to
+                document.getElementById("tacpp").style.display = "none";
+            } else {
+                alert("Please tick the checkbox to agree to the Terms and Conditions and Privacy Policy before proceeding.");
+            }
+        }
+
+        // Function for Close Button of the update TACPP modal
+        function closeUpdateModal() {
+            // If user closes update modal without agreeing, redirect them.
+            window.location.href = "https://shop.lakhiairconditioners.com/not.tac-pp.html";
+        }
+        
+        // Function for Agree to Update Button of the update TACPP modal
+        function continueUpdateAction(event) {
+            event.preventDefault();
+            var isChecked = document.getElementById("agreeUpdate").checked;
+            if (isChecked) {
+                localStorage.setItem('agreedTermsVersion', currentTermsVersion); // Update version in localStorage
+                document.getElementById("updateTacppModal").style.display = "none";
+            } else {
+                alert("Please tick the checkbox to agree to the updated Terms and Conditions and Privacy Policy before proceeding.");
+            }
+        }
+
+
+        // Check localStorage on page load for both initial agreement and version
+        document.addEventListener('DOMContentLoaded', function() {
+            const hasAgreed = localStorage.getItem('hasAgreedToTerms');
+            const agreedVersion = localStorage.getItem('agreedTermsVersion');
+            
+            const tacppModal = document.getElementById("tacpp");
+            const updateTacppModal = document.getElementById("updateTacppModal");
+
+            console.log('DOMContentLoaded: hasAgreed:', hasAgreed, 'agreedVersion:', agreedVersion, 'currentTermsVersion:', currentTermsVersion);
+
+            if (hasAgreed !== 'true') {
+                // User has NEVER agreed before, show initial modal
+                console.log('Showing initial TACPP modal.');
+                tacppModal.style.display = "block";
+                updateTacppModal.style.display = "none"; // Ensure update modal is hidden
+            } else {
+                // User HAS agreed before, now check version
+                // Use parseFloat for numerical comparison, provide fallback for invalid values
+                const parsedAgreedVersion = parseFloat(agreedVersion) || 0; // Treat invalid/missing as 0
+                const parsedCurrentTermsVersion = parseFloat(currentTermsVersion) || 0;
+
+                if (parsedAgreedVersion < parsedCurrentTermsVersion) {
+                    // Version is old or missing, show update modal
+                    console.log('Showing TACPP update modal.');
+                    updateTacppModal.style.display = "block";
+                    tacppModal.style.display = "none"; // Ensure initial modal is hidden
+                } else {
+                    // All good, user has agreed to current version
+                    console.log('User has agreed to current TACPP version. Hiding all modals.');
+                    tacppModal.style.display = "none";
+                    updateTacppModal.style.display = "none";
+                }
+            }
+        });
+        // --- End Terms and Conditions Modal Logic ---
     </script>
 </body>
 </html>

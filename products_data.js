@@ -120,9 +120,9 @@
     "price_size": null
   },
   {
-    "serial_no": "G318PCCISS",
+    "serial_no": "D318PCCIBS",
     "name": "Hitachi 1.5 Ton 3 Star 2025",
-    "price": "38990",
+    "price": "36990",
     "rating_stars": 4,
     "rating_source_icon": "img/OCOL/filpkart.png",
     "type": "AC",
@@ -133,5 +133,32 @@
     "has_size_option": false,
     "available_sizes": null,
     "price_size": null
+  },
+  {
+    "serial_no": "QA55QE1CAKLXL",
+    "name": "SAMSUNG 55INCH QLED Q60C",
+    "price": "65000",
+    "rating_stars": 4.5,
+    "rating_source_icon": "img/OCOL/filpkart.png",
+    "type": "TV",
+    "unit": "pcs",
+    "AC-TR": null,
+    "AC-Type": null,
+    "AC-STAR": null,
+    "description": "No description available."
+  },
+  {
+    "serial_no": "FTKL71UV",
+    "name": "SPLIT AC DAIKIN 2.0 TON 3 STAR - INVERTER AC",
+    "price": "50500",
+    "rating_stars": 0.0,
+    "rating_source_icon":
+      "img/OCOL/none.png",
+    "type": "AC",
+    "unit": "pcs",
+    "AC-TR": 2.0,
+    "AC-Type": "split",
+    "AC-STAR": 3,
+    "description": "No description available."
   }
 ]

@@ -30,31 +30,18 @@
             </div>
         </div>
     </div>
-    <!-- Adjusted color-NAV to provide proper spacing for the back button -->
     <div class="color-NAV">
         <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
     </div>
 
-    <!-- Account System Content (Dashboard) -->
     <div class="account-container">
-        <h1 class="title" style="font-size: xx-large;">Your Account</h1>
-        <br>
-
-        <div id="userDashboard" class="user-dashboard hidden">
+        <h1 class="title">Your Account</h1>
+        <div class="user-dashboard">
             <h2>Welcome!</h2>
-            <p><strong>User ID:</strong> <span id="displayUserId"></span></p>
-            <p><strong>Email:</strong> <span id="displayUserEmail"></span></p>
-            <p><strong>Customer Code:</strong> <span id="displayCustomerCode">N/A</span></p>
-
-            <div class="form-group" style="margin-top: 20px;">
-                <label for="updateCustomerCode">Update Customer Code:</label>
-                <input type="text" id="updateCustomerCode" placeholder="Enter new customer code">
-            </div>
-            <button onclick="saveCustomerCode()">Save Customer Code</button>
-            <p class="success-message" id="saveSuccess"></p>
-            <p class="error-message" id="saveError"></p>
-
-            <button onclick="handleLogout()">Logout</button>
+            <p><strong>User ID:</strong> <span id="userIdDisplay">Loading...</span></p>
+            <p><strong>Email:</strong> <span id="userEmailDisplay">Loading...</span></p>
+            <p><strong>Customer Code:</strong> <span id="customerCodeDisplay">Loading...</span></p>
+            <button id="logoutBtn" class="btn">Logout</button>
         </div>
     </div>
 
@@ -65,7 +52,7 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
@@ -106,21 +93,10 @@
     <script type="module">
         // Firebase SDK imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import {
-            getAuth,
-            signOut,
-            onAuthStateChanged,
-            signInAnonymously,
-            signInWithCustomToken
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import {
-            getFirestore,
-            doc,
-            setDoc,
-            onSnapshot
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Initialize Firebase
+        // IMPORTANT: Replace with your actual Firebase config for Live Server
         const firebaseConfig = {
             apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
             authDomain: "lakhi-airconditioners.firebaseapp.com",
@@ -130,14 +106,71 @@
             appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
             measurementId: "G-LB63B1FRYC"
           };
+
+        // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
 
-        let currentUserId = null;
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+        // UI Element References
+        const userIdDisplay = document.getElementById('userIdDisplay');
+        const userEmailDisplay = document.getElementById('userEmailDisplay');
+        const customerCodeDisplay = document.getElementById('customerCodeDisplay');
+        const logoutBtn = document.getElementById('logoutBtn');
 
-        // Menu toggle function from the template
+        // Function to display messages (optional, for debugging or user feedback)
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = type === 'success' ? 'success-message' : 'error-message';
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = '';
+            }, 5000);
+        }
+
+        // Authentication state observer
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                // User is signed in
+                const currentUserId = user.uid;
+                userIdDisplay.textContent = currentUserId;
+                userEmailDisplay.textContent = user.email || 'N/A'; // Display email
+
+                // Fetch customer code from Firestore
+                const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
+                const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+
+                try {
+                    const docSnap = await getDoc(userProfileDocRef);
+                    if (docSnap.exists()) {
+                        const userData = docSnap.data();
+                        customerCodeDisplay.textContent = userData.customerCode || 'N/A';
+                    } else {
+                        customerCodeDisplay.textContent = 'Not Set';
+                    }
+                } catch (error) {
+                    console.error("Error fetching user profile:", error);
+                    customerCodeDisplay.textContent = 'Error loading';
+                }
+
+            } else {
+                // User is signed out, redirect to account access page
+                window.location.href = 'ls.html';
+            }
+        });
+
+        // Logout functionality
+        logoutBtn.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                // The onAuthStateChanged listener will handle the redirect to ls.html
+            } catch (error) {
+                console.error("Logout Error:", error);
+                // Optionally show a message to the user if logout fails
+            }
+        });
+
+        // Menu toggle function from the template (keep existing)
         var Menuitems = document.getElementById('Menuitems');
         if (Menuitems) {
             Menuitems.style.maxHeight = "0px";
@@ -152,141 +185,6 @@
                 }
             }
         }
-
-        // UI Element References
-        const userDashboard = document.getElementById('userDashboard');
-        const displayUserIdSpan = document.getElementById('displayUserId');
-        const displayUserEmailSpan = document.getElementById('displayUserEmail');
-        const displayCustomerCodeSpan = document.getElementById('displayCustomerCode');
-        const updateCustomerCodeInput = document.getElementById('updateCustomerCode');
-        const saveSuccessMessage = document.getElementById('saveSuccess');
-        const saveErrorMessage = document.getElementById('saveError');
-
-        // Function to display messages
-        function showMessage(element, message, type = 'error') {
-            element.textContent = message;
-            element.className = type === 'success' ? 'success-message' : 'error-message';
-            // Clear message after 5 seconds
-            setTimeout(() => {
-                element.textContent = '';
-                element.className = '';
-            }, 5000);
-        }
-
-        // Firebase Authentication Handlers
-        async function handleLogout() {
-            try {
-                await signOut(auth);
-                // Redirect to ls.html after logout
-                window.location.href = 'ls.html';
-            } catch (error) {
-                console.error("Logout error:", error);
-                showMessage(saveErrorMessage, `Logout failed: ${error.message}`);
-            }
-        }
-
-        // Firestore Data Management (for user profiles)
-        async function loadUserProfile(userId) {
-            if (!userId) {
-                console.log("loadUserProfile: No userId provided.");
-                return;
-            }
-            const userProfileRef = doc(db, `artifacts/${appId}/users/${userId}/user_profiles`, "profile");
-
-            // Using onSnapshot for real-time updates
-            onSnapshot(userProfileRef, (docSnap) => {
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    displayCustomerCodeSpan.textContent = data.customerCode || 'N/A';
-                    updateCustomerCodeInput.value = data.customerCode || ''; // Pre-fill input with current code
-                    console.log("User profile loaded:", data);
-                } else {
-                    displayCustomerCodeSpan.textContent = 'N/A';
-                    updateCustomerCodeInput.value = ''; // Clear input if no profile
-                    console.log("No user profile found for ID:", userId);
-                }
-            }, (error) => {
-                console.error("Error loading user profile (onSnapshot):", error);
-                showMessage(saveErrorMessage, `Failed to load profile: ${error.message}`);
-                displayCustomerCodeSpan.textContent = 'N/A';
-                updateCustomerCodeInput.value = '';
-            });
-        }
-
-        async function saveCustomerCode() {
-            if (!currentUserId) {
-                showMessage(saveErrorMessage, 'Please log in to save your customer code.', 'error');
-                return;
-            }
-
-            const newCustomerCode = updateCustomerCodeInput.value.trim();
-            if (newCustomerCode === '') {
-                 showMessage(saveErrorMessage, 'Customer code cannot be empty.', 'error');
-                 return;
-            }
-
-            const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
-
-            try {
-                await setDoc(userProfileRef, {
-                    customerCode: newCustomerCode
-                }, { merge: true });
-                showMessage(saveSuccessMessage, 'Customer Code saved successfully!', 'success');
-                console.log("Customer code saved:", newCustomerCode);
-            } catch (error) {
-                console.error("Error saving customer code:", error);
-                showMessage(saveErrorMessage, `Failed to save customer code: ${error.message}. Please check Firestore rules.`);
-            }
-        }
-
-        // Initial Authentication and State Management
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUserId = user.uid;
-                userDashboard.classList.remove('hidden');
-                displayUserIdSpan.textContent = user.uid;
-                displayUserEmailSpan.textContent = user.email || 'N/A';
-                await loadUserProfile(user.uid);
-                console.log("User logged in:", user.uid, user.email);
-            } else {
-                currentUserId = null;
-                userDashboard.classList.add('hidden'); // Hide dashboard if not logged in
-                console.log("User not logged in, redirecting to ls.html");
-                // Redirect to ls.html if not logged in
-                window.location.href = 'ls.html';
-            }
-        });
-
-        // Handle initial anonymous/custom token sign-in (if any)
-        document.addEventListener('DOMContentLoaded', async () => {
-            // This block handles the initial sign-in for the Canvas environment.
-            // onAuthStateChanged will then pick up the user state and manage UI.
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                try {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                    console.log("Attempted sign-in with custom token.");
-                } catch (error) {
-                    console.error("Error signing in with custom token:", error);
-                    // Fallback to anonymous if custom token fails (e.g., expired)
-                    try {
-                        await signInAnonymously(auth);
-                        console.log("Attempted anonymous sign-in as fallback.");
-                    } catch (anonError) {
-                        console.error("Error signing in anonymously as fallback:", anonError);
-                    }
-                }
-            } else {
-                try {
-                    await signInAnonymously(auth);
-                    console.log("Attempted anonymous sign-in (no custom token).");
-                } catch (error) {
-                    console.error("Error signing in anonymously:", error);
-                }
-            }
-            if (Menuitems) {
-                Menuitems.style.maxHeight = "0px";
-            }
-        });
     </script>
 </body>
 </html>

@@ -440,7 +440,7 @@ select:focus{
     }
     /* Show the menu icon on small screens */
     .navbar .menu-icon {
-        display:  block; /* This should make it visible */
+        display:  flex; /* This should make it visible */
         cursor: pointer;
     }
 

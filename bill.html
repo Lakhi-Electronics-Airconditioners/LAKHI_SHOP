@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Bill Details</title>
+    <!-- Favicon from cart.html -->
+    <link rel="icon" href="img/1x1-logo.png">
+    <!-- Main stylesheet (styles.css) -->
+    <link rel="stylesheet" href="styles.css">
+    <!-- Poppins font from cart.html -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome from cart.html -->
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <!-- Header Navigation from cart.html -->
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+    <Div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></Div>
+
+    <!-- Main content area, mimicking cart.html's small-container -->
+    <div class="small-container cart-page">
+        <!-- Bill Title, styled like "Your Cart" -->
+        <h1 id="billTitle" class="title" style="font-size: xx-large;">Loading Bill...</h1>
+        <br>
+
+        <!-- Customer Details Section, styled similarly to the product code checker in cart.html -->
+        <div class="customer-info" style="margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 8px; background-color: #f9f9f9;">
+            <h3 style="margin-bottom: 15px; color: #333;">Customer Details</h3>
+            <p><span>Name:</span> <span id="customerName">N/A</span></p>
+            <p><span>Address:</span> <span id="customerAddr1">N/A</span></p>
+            <p><span>City:</span> <span id="customerCt">N/A</span></p>
+            <p><span>Pincode:</span> <span id="customerPincode">N/A</span></p>
+        </div>
+
+        <!-- Product Details Table -->
+        <table id="productTable">
+            <thead>
+                <tr>
+                    <th>Product</th>
+                    <th>Unit</th>
+                    <th>Subtotal</th>
+                    <th>Action</th> <!-- Placeholder for consistency with cart.html -->
+                </tr>
+            </thead>
+            <tbody id="productTableBody">
+                <!-- Product rows will be inserted here by JavaScript -->
+            </tbody>
+        </table>
+        <p id="noProductsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">No products found for this bill.</p>
+
+        <!-- Total Price section, directly copied from cart.html -->
+        <div class="total-price">
+            <table>
+                <tr>
+                    <td>Subtotal</td>
+                    <td id="billSubtotal">₹0.00</td>
+                </tr>
+                <tr>
+                    <td>Tax</td>
+                    <td id="billTax">*GET TOTAL BY CONTACTING US*</td>
+                </tr>
+                <tr>
+                    <td>Total</td>
+                    <td id="billGrandTotal">*GET TOTAL BY CONTACTING US*</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- Footer from cart.html -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script>
+        // Menu toggle function from cart.html
+        var Menuitems = document.getElementById('Menuitems');
+        Menuitems.style.maxHeight = "0px"; // Initialize closed
+
+        function menutoggle(){
+            if(Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px";
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
+        }
+
+        // For demonstration, window.billData is defined directly here.
+        window.billData = {
+            "MU401SSANAMD380015": {
+                "name": "Mitansh Udernani",
+                "addr1": "123, Main Street, Near Park",
+                "ct": "Ahmedabad, Gujarat",
+                "pincode": "380006",
+                "20003": { // Quotation
+                    "type": 2, // 2 = Quotation
+                    "products": [
+                        { "PN": 1, "SR": "LAPHP001", "name": "HP Laptop 15s", "price": 55000, "qty": 1 },
+                        { "PN": 2, "SR": "MONLG002", "name": "LG 27-inch Monitor", "price": 18000, "qty": 2 },
+                        { "PN": 3, "SR": "KEYLOG003", "name": "Logitech Wireless Keyboard", "price": 2500, "qty": 1 }
+                    ],
+                    "billSubtotal": 93500, // Pre-set subtotal for this quote
+                    "billTax": "₹8,415 (9% GST)", // Pre-set tax
+                    "billTotal": "₹1,01,915" // Pre-set total
+                },
+                "10001": { // Invoice
+                    "type": 1, // 1 = Invoice
+                    "products": [
+                        { "PN": 1, "SR": "PHNSAM001", "name": "Samsung Galaxy S24", "price": 80000, "qty": 1 },
+                        { "PN": 2, "SR": "HEADSONY001", "name": "Sony WH-1000XM5 Headphones", "price": 28000, "qty": 1 }
+                    ],
+                    "billSubtotal": 108000,
+                    "billTax": "₹9,720 (9% GST)",
+                    "billTotal": "₹1,17,720"
+                },
+                "MYCUSTOMBILL": { // Custom Title
+                    "title": "C",
+                    "Cname": "Project Alpha Summary",
+                    "products": [
+                        { "PN": 1, "SR": "SVCWEB001", "name": "Web Development (Phase 1)", "price": 150000, "qty": 1 },
+                        { "PN": 2, "SR": "SVCSEO001", "name": "SEO Optimization Package", "price": 25000, "qty": 1 }
+                    ],
+                    "billSubtotal": 175000,
+                    "billTax": "Included in Price",
+                    "billTotal": "₹1,75,000"
+                }
+            },
+            "ANOTHERCUST": {
+                "name": "Another Customer",
+                "addr1": "456, New Road, City Center",
+                "ct": "Mumbai, Maharashtra",
+                "pincode": "400001",
+                "00001": { // Quotation
+                    "type": 2,
+                    "products": [
+                        { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }
+                    ],
+                    // For this quote, we'll let subtotal be calculated dynamically, and tax/total use default text
+                    // No billSubtotal, billTax, billTotal fields means dynamic calculation/default text
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = new URLSearchParams(window.location.search);
+            let billTitle = "Bill Details";
+            let customer = { name: 'N/A', addr1: 'N/A', ct: 'N/A', pincode: 'N/A' };
+            let products = [];
+            let calculatedSubtotal = 0; // Renamed to avoid conflict with pre-set billSubtotal
+
+            // Default values for tax and total, can be overridden by Data.js
+            let displaySubtotal = '₹0.00';
+            let displayTax = '*GET TOTAL BY CONTACTING US*';
+            let displayTotal = '*GET TOTAL BY CONTACTING US*';
+
+            const dataParam = params.get('Data');
+            const billParam = params.get('Bill');
+            const infoParam = params.get('info');
+
+            if (dataParam) {
+                const dataParts = dataParam.split('?for?');
+                if (dataParts.length === 2) {
+                    const customerCode = dataParts[0];
+                    const quotationIdentifier = dataParts[1];
+
+                    const customerData = window.billData[customerCode];
+                    if (customerData) {
+                        customer.name = customerData.name || 'N/A';
+                        customer.addr1 = customerData.addr1 || 'N/A';
+                        customer.ct = customerData.ct || 'N/A';
+                        customer.pincode = customerData.pincode || 'N/A';
+
+                        const quotationData = customerData[quotationIdentifier];
+                        if (quotationData) {
+                            if (quotationData.type === 1) {
+                                billTitle = "Invoice";
+                            } else if (quotationData.type === 2) {
+                                billTitle = "Quotation";
+                            } else if (quotationData.title === "C" && quotationData.Cname) {
+                                billTitle = quotationData.Cname;
+                            } else {
+                                billTitle = infoParam || "Bill Details";
+                            }
+
+                            if (quotationData.products && Array.isArray(quotationData.products)) {
+                                products = quotationData.products;
+                            }
+
+                            // --- Check for pre-set subtotal, tax, and total from Data.js ---
+                            if (quotationData.billSubtotal !== undefined) {
+                                displaySubtotal = `₹${parseFloat(quotationData.billSubtotal).toLocaleString('en-IN')}`;
+                            }
+                            if (quotationData.billTax !== undefined) {
+                                displayTax = quotationData.billTax;
+                            }
+                            if (quotationData.billTotal !== undefined) {
+                                displayTotal = quotationData.billTotal;
+                            }
+
+                        } else {
+                            billTitle = infoParam || "Bill Details (Quotation Not Found)";
+                            document.getElementById('noProductsMessage').textContent = `Quotation '${quotationIdentifier}' not found for customer '${customerCode}'.`;
+                            document.getElementById('noProductsMessage').style.display = 'block';
+                        }
+                    } else {
+                        billTitle = infoParam || "Bill Details (Customer Not Found)";
+                        document.getElementById('noProductsMessage').textContent = `Customer '${customerCode}' not found in Data.js.`;
+                        document.getElementById('noProductsMessage').style.display = 'block';
+                    }
+                } else {
+                    billTitle = infoParam || "Bill Details (Invalid Data Parameter)";
+                    document.getElementById('noProductsMessage').textContent = `Invalid 'Data' parameter format. Expected 'CUSTOMERCODE?for?QUOTATION_IDENTIFIER'.`;
+                    document.getElementById('noProductsMessage').style.display = 'block';
+                }
+            } else if (billParam) {
+                // Scenario 2: Direct URL Product Mode (Bill parameter present)
+                billTitle = infoParam || "Dynamic Bill";
+
+                customer.name = params.get('customerName') || 'N/A';
+                customer.addr1 = params.get('customerAddr1') || 'N/A';
+                customer.ct = params.get('customerCt') || 'N/A';
+                customer.pincode = params.get('customerPincode') || 'N/A';
+
+                const productStrings = billParam.split('&');
+                let currentProduct = {};
+                productStrings.forEach(str => {
+                    const [key, value] = str.split('=');
+                    if (key && value) {
+                        const decodedValue = decodeURIComponent(value);
+                        if (key === 'PN') {
+                            if (Object.keys(currentProduct).length > 0) {
+                                products.push(currentProduct);
+                            }
+                            currentProduct = { PN: parseInt(decodedValue) };
+                        } else {
+                            // Convert key to lowercase to match expected object property names
+                            currentProduct[key.toLowerCase()] = decodedValue;
+                        }
+                    }
+                });
+                if (Object.keys(currentProduct).length > 0) {
+                    products.push(currentProduct);
+                }
+
+                products = products.map(p => ({ ...p, qty: p.qty ? parseInt(p.qty) : 1 })); // Use 'qty' here
+
+                // Calculate subtotal dynamically for direct URL bills
+                products.forEach(product => {
+                    const price = parseFloat(product.price) || 0;
+                    const qty = parseInt(product.qty) || 1;
+                    calculatedSubtotal += (price * qty);
+                });
+                displaySubtotal = `₹${calculatedSubtotal.toLocaleString('en-IN')}`;
+
+            } else {
+                billTitle = infoParam || "No Bill Data Provided";
+                document.getElementById('noProductsMessage').textContent = "Please provide 'Data' or 'Bill' parameters in the URL.";
+                document.getElementById('noProductsMessage').style.display = 'block';
+            }
+
+            document.getElementById('billTitle').textContent = billTitle;
+
+            document.getElementById('customerName').textContent = customer.name;
+            document.getElementById('customerAddr1').textContent = customer.addr1;
+            document.getElementById('customerCt').textContent = customer.ct;
+            document.getElementById('customerPincode').textContent = customer.pincode;
+
+            const productTableBody = document.getElementById('productTableBody');
+            productTableBody.innerHTML = '';
+            let currentProductsTotal = 0; // This will sum up product totals regardless of pre-set billSubtotal
+
+            if (products.length > 0) {
+                products.forEach(product => {
+                    const row = document.createElement('tr');
+                    const price = parseFloat(product.price) || 0;
+                    const qty = parseInt(product.qty) || 1; // Use 'qty' here
+                    const itemTotal = price * qty;
+                    currentProductsTotal += itemTotal; // Always calculate this for individual product rows
+
+                    row.innerHTML = `
+                        <td>
+                            <div class="cart-info">
+                                <img src="https://placehold.co/80x80/cccccc/ffffff?text=Product" alt="${product.name || 'Product'}">
+                                <div>
+                                    <small>PN: ${product.PN || 'N/A'}</small>
+                                    <p>${product.name || 'N/A'}</p>
+                                    <small>Price: ₹${price.toFixed(2)}</small>
+                                    <br><small>SR: ${product.sr || 'N/A'}</small> <!-- Use 'sr' here -->
+                                </div>
+                            </div>
+                        </td>
+                        <td>${qty} unit</td>
+                        <td>₹${itemTotal.toFixed(2)}</td>
+                        <td></td> <!-- Empty cell for Action column -->
+                    `;
+                    productTableBody.appendChild(row);
+                });
+                document.getElementById('noProductsMessage').style.display = 'none';
+            } else {
+                document.getElementById('noProductsMessage').style.display = 'block';
+            }
+
+            // Populate the total price section
+            document.getElementById('billSubtotal').textContent = displaySubtotal;
+            document.getElementById('billTax').textContent = displayTax;
+            document.getElementById('billGrandTotal').textContent = displayTotal;
+        });
+    </script>
+</body>
+</html>

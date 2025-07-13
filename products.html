@@ -170,7 +170,7 @@
                         <p>${formattedPrice}</p>
                     </a>
                     <div class="add-to-cart-container" style="text-align: center; margin-top: 10px;">
-                        <a href="#" class="btn-Cart add-to-cart-small" data-serial-no="${product.serial_no}" data-initial-size="${initialSelectedSizeForCart}" data-product-unit="${product.unit || 'unit'}">Add To Cart</a>
+                        <a href="#" class="btn-Cart add-to-cart-small" data-serial-no="${product.serial_no}"  data-initial-size="${initialSelectedSizeForCart}" data-product-unit="${product.unit || 'unit'}" data-name="${product.name}" data-price="${product.price}">Add To Cart</a>
                     </div>
                 `;
                 productContainer.appendChild(productDiv);
@@ -212,16 +212,16 @@
         }
 
         // Updated addToCart to accept 'unit'
-        function addToCart(serialNo, quantity, size, unit) {
+        function addToCart(serialNo, quantity, size, unit, wname, wprice) {
             let cartItems = getCartItems();
             // Find if item with same serialNo AND size (variant) already exists
-            const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
+            const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size)
 
             if (existingItemIndex > -1) {
                 cartItems[existingItemIndex].quantity += quantity;
             } else {
                 // Store the unit when adding a new item to cart
-                cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
+                cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit, name: wname, price: wprice});
             }
             saveCartItems(cartItems);
             alert(`Added ${quantity} ${unit} of ${serialNo} (Size: ${size}) to cart!`); // Updated alert
@@ -235,9 +235,11 @@
                     const serialNo = this.dataset.serialNo;
                     const initialSize = this.dataset.initialSize || 'N/A'; 
                     const productUnit = this.dataset.productUnit || 'unit'; // Get the unit from data attribute
+                    const productName = this.dataset.name;
+                    const ProductPrice = this.dataset.price
 
                     // For product listing, always add 1 quantity when clicking the button
-                    addToCart(serialNo, 1, initialSize, productUnit); // Pass unit to addToCart
+                    addToCart(serialNo, 1, initialSize, productUnit,productName,ProductPrice); // Pass unit to addToCart
                 });
             });
         }

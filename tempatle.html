@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lakhi Airconditioners | NOT AGREE</title>
+    <title>Lakhi Airconditioners | Account</title>
     <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -30,13 +30,8 @@
             </div>
         </div>
     </div>
-    <div class="color-NAV"><br><br></div>
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
 
-    <div class="small-container single-product" id="productDetailContainer">
-        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
-        <p style="text-align: center; width: 100%;">AGREE TO THE terms and Conditions</p>
-        <a href="/" class="btn" onclick="backtohome()" style="text-align: center;">agree and go back</a>
-    </div>
 
     <div class="footer">
         <div class="container">
@@ -83,10 +78,6 @@
         </div>
     </div>
     <script>
-        function backtohome() {
-            // User did not agree to initial terms, redirect them
-            window.location.href = "/";
-        }
         function menutoggle(){
             if(Menuitems.style.maxHeight == "0px")
                 { 

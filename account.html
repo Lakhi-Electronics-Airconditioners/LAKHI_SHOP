@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Account</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="AC-only.html">AC Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <!-- Adjusted color-NAV to provide proper spacing for the back button -->
+    <div class="color-NAV">
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    </div>
+
+    <!-- Account System Content (Dashboard) -->
+    <div class="account-container">
+        <h1 class="title" style="font-size: xx-large;">Your Account</h1>
+        <br>
+
+        <div id="userDashboard" class="user-dashboard hidden">
+            <h2>Welcome!</h2>
+            <p><strong>User ID:</strong> <span id="displayUserId"></span></p>
+            <p><strong>Email:</strong> <span id="displayUserEmail"></span></p>
+            <p><strong>Customer Code:</strong> <span id="displayCustomerCode">N/A</span></p>
+
+            <div class="form-group" style="margin-top: 20px;">
+                <label for="updateCustomerCode">Update Customer Code:</label>
+                <input type="text" id="updateCustomerCode" placeholder="Enter new customer code">
+            </div>
+            <button onclick="saveCustomerCode()">Save Customer Code</button>
+            <p class="success-message" id="saveSuccess"></p>
+            <p class="error-message" id="saveError"></p>
+
+            <button onclick="handleLogout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth,
+            signOut,
+            onAuthStateChanged,
+            signInAnonymously,
+            signInWithCustomToken
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import {
+            getFirestore,
+            doc,
+            setDoc,
+            onSnapshot
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUserId = null;
+        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
+
+        // Menu toggle function from the template
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+
+        // UI Element References
+        const userDashboard = document.getElementById('userDashboard');
+        const displayUserIdSpan = document.getElementById('displayUserId');
+        const displayUserEmailSpan = document.getElementById('displayUserEmail');
+        const displayCustomerCodeSpan = document.getElementById('displayCustomerCode');
+        const updateCustomerCodeInput = document.getElementById('updateCustomerCode');
+        const saveSuccessMessage = document.getElementById('saveSuccess');
+        const saveErrorMessage = document.getElementById('saveError');
+
+        // Function to display messages
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = type === 'success' ? 'success-message' : 'error-message';
+            // Clear message after 5 seconds
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = '';
+            }, 5000);
+        }
+
+        // Firebase Authentication Handlers
+        async function handleLogout() {
+            try {
+                await signOut(auth);
+                // Redirect to ls.html after logout
+                window.location.href = 'ls.html';
+            } catch (error) {
+                console.error("Logout error:", error);
+                showMessage(saveErrorMessage, `Logout failed: ${error.message}`);
+            }
+        }
+
+        // Firestore Data Management (for user profiles)
+        async function loadUserProfile(userId) {
+            if (!userId) {
+                console.log("loadUserProfile: No userId provided.");
+                return;
+            }
+            const userProfileRef = doc(db, `artifacts/${appId}/users/${userId}/user_profiles`, "profile");
+
+            // Using onSnapshot for real-time updates
+            onSnapshot(userProfileRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    displayCustomerCodeSpan.textContent = data.customerCode || 'N/A';
+                    updateCustomerCodeInput.value = data.customerCode || ''; // Pre-fill input with current code
+                    console.log("User profile loaded:", data);
+                } else {
+                    displayCustomerCodeSpan.textContent = 'N/A';
+                    updateCustomerCodeInput.value = ''; // Clear input if no profile
+                    console.log("No user profile found for ID:", userId);
+                }
+            }, (error) => {
+                console.error("Error loading user profile (onSnapshot):", error);
+                showMessage(saveErrorMessage, `Failed to load profile: ${error.message}`);
+                displayCustomerCodeSpan.textContent = 'N/A';
+                updateCustomerCodeInput.value = '';
+            });
+        }
+
+        async function saveCustomerCode() {
+            if (!currentUserId) {
+                showMessage(saveErrorMessage, 'Please log in to save your customer code.', 'error');
+                return;
+            }
+
+            const newCustomerCode = updateCustomerCodeInput.value.trim();
+            if (newCustomerCode === '') {
+                 showMessage(saveErrorMessage, 'Customer code cannot be empty.', 'error');
+                 return;
+            }
+
+            const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+
+            try {
+                await setDoc(userProfileRef, {
+                    customerCode: newCustomerCode
+                }, { merge: true });
+                showMessage(saveSuccessMessage, 'Customer Code saved successfully!', 'success');
+                console.log("Customer code saved:", newCustomerCode);
+            } catch (error) {
+                console.error("Error saving customer code:", error);
+                showMessage(saveErrorMessage, `Failed to save customer code: ${error.message}. Please check Firestore rules.`);
+            }
+        }
+
+        // Initial Authentication and State Management
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                userDashboard.classList.remove('hidden');
+                displayUserIdSpan.textContent = user.uid;
+                displayUserEmailSpan.textContent = user.email || 'N/A';
+                await loadUserProfile(user.uid);
+                console.log("User logged in:", user.uid, user.email);
+            } else {
+                currentUserId = null;
+                userDashboard.classList.add('hidden'); // Hide dashboard if not logged in
+                console.log("User not logged in, redirecting to ls.html");
+                // Redirect to ls.html if not logged in
+                window.location.href = 'ls.html';
+            }
+        });
+
+        // Handle initial anonymous/custom token sign-in (if any)
+        document.addEventListener('DOMContentLoaded', async () => {
+            // This block handles the initial sign-in for the Canvas environment.
+            // onAuthStateChanged will then pick up the user state and manage UI.
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                try {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                    console.log("Attempted sign-in with custom token.");
+                } catch (error) {
+                    console.error("Error signing in with custom token:", error);
+                    // Fallback to anonymous if custom token fails (e.g., expired)
+                    try {
+                        await signInAnonymously(auth);
+                        console.log("Attempted anonymous sign-in as fallback.");
+                    } catch (anonError) {
+                        console.error("Error signing in anonymously as fallback:", anonError);
+                    }
+                }
+            } else {
+                try {
+                    await signInAnonymously(auth);
+                    console.log("Attempted anonymous sign-in (no custom token).");
+                } catch (error) {
+                    console.error("Error signing in anonymously:", error);
+                }
+            }
+            if (Menuitems) {
+                Menuitems.style.maxHeight = "0px";
+            }
+        });
+    </script>
+</body>
+</html>

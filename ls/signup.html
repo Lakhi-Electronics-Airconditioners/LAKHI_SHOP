@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Sign Up</title>
+    <link rel="icon" href="../img/1x1-logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="../img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../products.html">All Products</a></li>
+                        <li><a href="../AC-only.html">AC Products</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="../account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="../cart.html"><img src="../img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV">
+        <a href="../ls.html" class="back-button">&larr; Back to Account Access</a>
+    </div>
+
+    <div class="account-container">
+        <h1 class="title">Create Your Account</h1>
+        <div class="form-box">
+            <form id="signUpForm">
+                <div class="form-group">
+                    <label for="signUpEmail">Email:</label>
+                    <input type="email" id="signUpEmail" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signUpPassword">Password:</label>
+                    <input type="password" id="signUpPassword" placeholder="Enter your password" required>
+                </div>
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password:</label>
+                    <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                </div>
+                <button type="submit" class="btn">Sign Up</button>
+                <p class="error-message" id="signUpError"></p>
+                <p class="success-message" id="signUpSuccess"></p>
+            </form>
+
+            <div class="social-login-options">
+                <p>Or sign up with:</p>
+                <button id="googleSignUpBtn" class="btn social-btn google-btn">
+                    <i class="fab fa-google"></i> Sign Up with Google
+                </button>
+            </div>
+
+            <p class="toggle-form-text">Already have an account? <a href="signin.html">Sign In here</a></p>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="../img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import {
+            getAuth,
+            createUserWithEmailAndPassword,
+            GoogleAuthProvider,
+            signInWithPopup,
+            onAuthStateChanged
+        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+        // Initialize Firebase
+       const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // UI Element References
+        const signUpForm = document.getElementById('signUpForm');
+        const signUpEmailInput = document.getElementById('signUpEmail');
+        const signUpPasswordInput = document.getElementById('signUpPassword');
+        const confirmPasswordInput = document.getElementById('confirmPassword');
+        const signUpError = document.getElementById('signUpError');
+        const signUpSuccess = document.getElementById('signUpSuccess');
+        const googleSignUpBtn = document.getElementById('googleSignUpBtn');
+
+        // Function to display messages
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = type === 'success' ? 'success-message' : 'error-message';
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = '';
+            }, 5000);
+        }
+
+        // Email/Password Sign Up
+        signUpForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = signUpEmailInput.value;
+            const password = signUpPasswordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+
+            if (password !== confirmPassword) {
+                showMessage(signUpError, 'Passwords do not match.');
+                return;
+            }
+
+            try {
+                await createUserWithEmailAndPassword(auth, email, password);
+                showMessage(signUpSuccess, 'Account created successfully!', 'success');
+                window.location.href = '../account.html'; // Redirect to account page
+            } catch (error) {
+                console.error("Sign Up Error:", error);
+                let errorMessage = 'Sign up failed.';
+                if (error.code === 'auth/email-already-in-use') {
+                    errorMessage = 'This email is already in use.';
+                } else if (error.code === 'auth/invalid-email') {
+                    errorMessage = 'Invalid email address.';
+                } else if (error.code === 'auth/weak-password') {
+                    errorMessage = 'Password is too weak (min 6 characters).';
+                }
+                showMessage(signUpError, errorMessage);
+            }
+        });
+
+        // Google Sign Up (same as sign-in, as Firebase handles creation if user doesn't exist)
+        googleSignUpBtn.addEventListener('click', async () => {
+            const provider = new GoogleAuthProvider();
+            try {
+                await signInWithPopup(auth, provider);
+                showMessage(signUpSuccess, 'Signed up with Google successfully!', 'success');
+                window.location.href = '../account.html'; // Redirect to account page
+            } catch (error) {
+                console.error("Google Sign Up Error:", error);
+                let errorMessage = 'Google sign-up failed.';
+                if (error.code === 'auth/popup-closed-by-user') {
+                    errorMessage = 'Google sign-up popup closed.';
+                } else if (error.code === 'auth/cancelled-popup-request') {
+                    errorMessage = 'Google sign-up already in progress.';
+                }
+                showMessage(signUpError, errorMessage);
+            }
+        });
+
+        // Redirect if already authenticated
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in, redirect to account page
+                window.location.href = '../account.html';
+            }
+        });
+
+        // Menu toggle function from the template
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+    </script>
+</body>
+</html>

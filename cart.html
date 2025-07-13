@@ -42,7 +42,8 @@
             <div id="codeCheckResult" style="margin-top: 15px; font-weight: bold; color: #555;"></div>
         </div>
         <!-- End Product Code Checker Section -->
-
+        <H1 style="font-size: xx-large;">Your Cart</H1>
+        <br>
         <table id="cartTable">
             <thead>
                 <tr>
@@ -275,7 +276,7 @@
 
         // Function to add a custom product to the cart (called from checkProductCode's button)
         function addCustomProductToCart(inputCode, name, price, type, acTr, acType, unit) {
-            const serialNo = `CUSTOM-${inputCode}`; // Create a unique serial number for custom products
+            const serialNo = `CPC-${inputCode}`; // Create a unique serial number for custom products
             const quantity = 1; // Default quantity for adding from checker
 
             let size = "N/A"; // Default size
@@ -365,7 +366,7 @@
                 const quantity = item.quantity;
 
                 // Determine image URL and calculate item total
-                if (item.serial_no.startsWith("CUSTOM-")) {
+                if (item.serial_no.startsWith("CPC-")) {
                     imageUrl = 'https://placehold.co/80x80/cccccc/ffffff?text=Custom+Product'; // Placeholder for custom products
                 } else {
                     // For predefined products, try to use the image path from 'img/PROC'
@@ -390,6 +391,7 @@
                         <div class="cart-info">
                             <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/cccccc/ffffff?text=Image+Not+Found';">
                             <div>
+                                <small>S/N: ${item.serial_no}</small>
                                 <p>${productName}</p>
                                 <small>Price: ${productPriceFormatted}</small>
                                 ${productSize && productSize !== 'N/A' ? `<br><small>Size: ${productSize}</small>` : ''}

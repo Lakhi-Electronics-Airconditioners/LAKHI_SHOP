@@ -1,3 +1,4 @@
+/* General styles from user's provided block */
 * {
     margin: 0;
     padding: 0;
@@ -6,6 +7,10 @@
 
 body {
     font-family: "Poppins", sans-serif;
+    display: flex; /* Added for centering and footer pushing */
+    flex-direction: column; /* Added for centering and footer pushing */
+    min-height: 100vh; /* Ensures body takes at least full viewport height */
+    background-color: #fff; /* Explicitly set body background to white */
 }
 
 .navbar {
@@ -61,7 +66,6 @@ p {
 .col-2 {
     flex-basis: 50%;
     min-width: 300px;
-
 }
 
 .col-2 img {
@@ -73,7 +77,6 @@ p {
     font-size: 40px;
     line-height: 50px;
     margin: 25px 0;
-
 }
 
 .btn {
@@ -100,9 +103,16 @@ p {
 .header-NAV{
     background: #ffd6d6;
 }
-.color-NAV{
-    background: linear-gradient(to bottom, #ffd6d6, #fff);
 
+/* Updated color-NAV for back button spacing and layout */
+.color-NAV {
+    background: linear-gradient(to bottom, #ffd6d6, #fff); /* Original gradient */
+    padding: 15px 25px; /* Add padding to give space for the button */
+    display: flex; /* Use flexbox for alignment */
+    align-items: center; /* Vertically center content */
+    justify-content: flex-start; /* Align content to the start */
+    min-height: 50px; /* Ensure a minimum height */
+    box-sizing: border-box; /* Include padding in height calculation */
 }
 
 .categories {
@@ -116,7 +126,6 @@ p {
 .col-3 img {
     width: 300px;
     height: 300px;
-
 }
 
 .small-container {
@@ -131,7 +140,7 @@ p {
     padding: 10px;
     min-width: 200px;
     margin-bottom: 50px;
-    transition: transform 0.5s, background-color 0.3s ease; /* Added background-color to transition */
+    transition: transform 0.5s, background-color 0.3s ease;
 }
 
 .col-4 img {
@@ -140,19 +149,18 @@ p {
 
 .col-4:hover {
     transform: translateY(-5px);
-    background-color: #ff523b; /* New: Fully red on hover */
+    background-color: #ff523b;
 }
-/* New styles for text within .col-4 on hover to ensure readability */
+
 .col-4:hover h4,
 .col-4:hover p,
 .col-4:hover a {
-    color: #fff; /* White text on red background */
+    color: #fff;
 }
 .col-4:hover .rating .fa-star-half-stroke,
 .col-4:hover .rating .fa-star {
-    color: #fff; /* White stars on red background */
+    color: #fff;
 }
-
 
 .title {
     text-align: center;
@@ -183,21 +191,18 @@ h4 {
     color: #ff523b;
 }
 
-/* --- Rating Source Icon Styles --- */
-.rating-source { /* Parent paragraph for "Based on" text */
+.rating-source {
     font-size: 10px;
     margin: 0;
-    display: inline-block; /* To contain the image properly */
-    vertical-align: middle; /* Align with stars/text */
+    display: inline-block;
+    vertical-align: middle;
 }
 
-.rating-source-icon { /* The image itself */
+.rating-source-icon {
     width: 30px;
     height: 10px;
-    vertical-align: middle; /* Align with text */
+    vertical-align: middle;
 }
-/* --- End Rating Source Icon Styles --- */
-
 
 .offer {
     margin-top: 80px;
@@ -246,15 +251,14 @@ h4 {
     padding: 20px;
     margin-top: 30px;
     margin-bottom: 30px;
-  }
-
+}
 
 .bands .row {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     align-items: center;
-  }
+}
 
 .bands .col-5 {
     display: flex;
@@ -263,7 +267,7 @@ h4 {
     justify-content: center;
     margin-bottom: 15px;
     text-align: center;
-  }
+}
 
 .bands .col-5 img {
     max-width: 100%;
@@ -271,7 +275,7 @@ h4 {
     margin-bottom: 8px;
     cursor: pointer;
     filter: grayscale(99%);
-  }
+}
 .bands .col-5 img:hover{
     filter: grayscale(1%);
 }
@@ -297,7 +301,6 @@ h4 {
 .foot-col-1, .foot-col-2, .foot-col-3 .foot-col-4{
     min-width: 250px;
     margin-bottom: 20px;
-
 }
 .foot-col-1{
     flex-basis: 30%;
@@ -341,23 +344,23 @@ ul{
     margin-left: 20px;
 }
 .row-2{
-    display: flex; /* Ensure flexbox is applied to row-2 */
-    align-items: center; /* Align items vertically */
+    display: flex;
+    align-items: center;
     justify-content: space-between;
     margin: 100px auto 50px;
-    position: relative; /* Added for positioning back button */
-    padding-left: 25px; /* Added padding to align with container content */
-    padding-right: 25px; /* Added padding to align with container content */
-    box-sizing: border-box; /* Include padding in element's total width and height */
-    min-height: 50px; /* Ensure enough height for button and heading */
+    position: relative;
+    padding-left: 25px;
+    padding-right: 25px;
+    box-sizing: border-box;
+    min-height: 50px;
 }
 .row-2 h2 {
-    margin-left: 70px; /* Give space for the back button */
-    flex-grow: 1; /* Allow heading to take available space */
-    text-align: center; /* Center the heading if enough space */
+    margin-left: 70px;
+    flex-grow: 1;
+    text-align: center;
 }
 .row-2 select {
-    margin-left: auto; /* Push select to the right */
+    margin-left: auto;
 }
 
 select{
@@ -370,21 +373,16 @@ select:focus{
 
 /* --- Back Button Styling --- */
 .back-button {
-    display: inline-block;
-    padding: 8px 15px;
-    background-color: #ffffff; /* Changed to #ffffff as per your request */
-    color: #ff523b;
     text-decoration: none;
+    color: #ff523b;
+    font-weight: 600;
+    font-size: 1rem;
+    padding: 8px 12px;
     border: 1px solid #ff523b;
     border-radius: 5px;
-    font-size: 14px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
-    position: absolute; /* Position it absolutely within row-2 */
-    left: 25px; /* Align with container padding */
-    top: 50%;
-    transform: translateY(-50%); /* Center vertically */
-    z-index: 1; /* Ensure it's above other content if needed */
+    transition: background-color 0.3s ease, color 0.3s ease;
+    display: inline-block;
+    /* Removed absolute positioning here as .color-NAV handles its placement with flexbox */
 }
 
 .back-button:hover {
@@ -394,6 +392,7 @@ select:focus{
 }
 
 /* Specific placement for back button on single-product page */
+/* This rule is kept as it might be for product_detail.html which has a different layout */
 .single-product .back-button {
     position: absolute;
     left: 25px; /* Aligned with left padding of container */
@@ -401,22 +400,19 @@ select:focus{
     margin-bottom: 0;
     z-index: 10; /* Ensure it's above other content if needed */
 }
-/* --- End Back Button Styling --- */
-
 
 @media (max-width: 600px) {
     .bands .col-5 {
       width: 100%;
-
     }
 }
 
 @media only screen and (max-width: 700px) {
     .bands .col-5 {
         width: 50%;
-      }
+    }
     .small-container .row {
-        justify-content: center; /* Center the items horizontally */
+        justify-content: center;
     }
     .footer .copyright a{
         display: block;
@@ -439,11 +435,12 @@ select:focus{
         color: #fff;
     }
     .navbar .menu-icon {
-        display:  block;
+        display:  block;
         cursor: pointer;
     }
 
     /* Adjust back button for mobile */
+    /* These rules are for .row-2 and .single-product, overriding the general .back-button if needed */
     .row-2 .back-button,
     .single-product .back-button {
         position: static; /* Remove absolute positioning */
@@ -481,25 +478,25 @@ select:focus{
     padding: 20px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start; /* Align items to the top */
-    position: relative; /* Added for positioning back button */
+    align-items: flex-start;
+    position: relative;
 }
 
 .single-product .col-2 {
-    flex-basis: 50%; /* Takes 50% width by default */
-    min-width: 300px; /* Minimum width to prevent squishing */
+    flex-basis: 50%;
+    min-width: 300px;
     padding: 20px;
     box-sizing: border-box;
 }
 
 .single-product .col-2 img {
     max-width: 100%;
-    padding: 0; /* Remove default padding for image */
-    display: block; /* Remove extra space below image */
+    padding: 0;
+    display: block;
 }
 
 .single-product .col-2 h1 {
-    font-size: 28px; /* Slightly smaller for detail page */
+    font-size: 28px;
     line-height: 1.2;
     margin-bottom: 10px;
 }
@@ -516,7 +513,7 @@ select:focus{
 
 .single-product .col-2 .rating i {
     color: #ff523b;
-    font-size: 18px; /* Larger stars for detail page */
+    font-size: 18px;
 }
 
 .single-product .col-2 select {
@@ -529,14 +526,13 @@ select:focus{
     cursor: pointer;
 }
 
-/* Style for the 'big rectangle button' size selector on detail page */
 .single-product .col-2 .large-size-selector {
-    width: 200px; /* Make it a larger rectangle */
+    width: 200px;
     padding: 12px 15px;
     font-size: 16px;
     margin-top: 15px;
     margin-bottom: 15px;
-    border: 2px solid #ff523b; /* Initial border */
+    border: 2px solid #ff523b;
     background-color: #fff;
     color: #333;
     box-shadow: 0 2px 5px rgba(0,0,0,0.2);
@@ -544,15 +540,15 @@ select:focus{
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff523b%22%20d%3D%22M287%2C114.7L146.2%2C255.5L5.4%2C114.7H287z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow for dropdown */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff523b%22%20d%3D%22M287%2C114.7L146.2%2C255.5L5.4%2C114.7H287z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 10px top 50%;
     background-size: 14px;
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 .single-product .col-2 .large-size-selector:hover {
-    background-color: #ff523b; /* Fully red on hover */
-    color: #fff; /* White text on hover */
+    background-color: #ff523b;
+    color: #fff;
 }
 .single-product .col-2 .large-size-selector:focus {
     border-color: #563434;
@@ -597,7 +593,7 @@ select:focus{
     margin-bottom: 10px;
 }
 
-.single-product .col-2 p.dynamic-price { /* Specific style for dynamic price on detail page */
+.single-product .col-2 p.dynamic-price {
     font-size: 24px;
     font-weight: bold;
     color: #333;
@@ -611,55 +607,49 @@ select:focus{
     margin-top: 10px;
 }
 
-/* Responsive design for smaller screens for product detail page */
 @media (max-width: 768px) {
     .single-product .col-2 {
-        flex-basis: 100%; /* Full width on smaller screens */
+        flex-basis: 100%;
         padding: 10px;
     }
     .single-product .col-2 img {
-        margin-bottom: 20px; /* Add space below image */
+        margin-bottom: 20px;
     }
     .single-product .col-2 .large-size-selector {
-        width: 100%; /* Full width on mobile */
+        width: 100%;
     }
 }
 
-
-/* New styles for size options (from products.html and AC-only.html) */
 .product-item .size-selector-container {
     margin-top: 5px;
     margin-bottom: 10px;
-    text-align: center; /* Center the dropdown in the card */
+    text-align: center;
 }
 
 .product-item .size-selector {
-    width: 80px; /* Small width */
+    width: 80px;
     padding: 5px;
-    border: 1px solid #ff523b; /* Initial border */
+    border: 1px solid #ff523b;
     border-radius: 5px;
     font-size: 14px;
     text-align: center;
     cursor: pointer;
-    /* Below lines attempt to style as a square button, may vary based on browser */
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
-    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff523b%22%20d%3D%22M287%2C114.7L146.2%2C255.5L5.4%2C114.7H287z%22%2F%3E%3C%2Fsvg%3E'); /* Custom arrow for dropdown */
+    background-image: url('data:image/svg+xml;charset=US-ASCII,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%22292.4%22%20height%3D%22292.4%22%3E%3Cpath%20fill%3D%22%23ff523b%22%20d%3D%22M287%2C114.7L146.2%2C255.5L5.4%2C114.7H287z%22%2F%3E%3C%2Fsvg%3E');
     background-repeat: no-repeat;
     background-position: right 5px top 50%;
     background-size: 10px;
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition for hover */
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .product-item .size-selector:hover {
-    background-color: #ff523b; /* Fully red on hover */
-    color: #fff; /* White text on hover */
+    background-color: #ff523b;
+    color: #fff;
 }
 
-
-/* Adjust width for selected option in select */
 .product-item .size-selector option {
     padding: 5px;
 }
@@ -671,32 +661,30 @@ select:focus{
     margin-bottom: 5px;
 }
 
-/* --- Terms and Conditions Modal Styling --- */
-/* Base for both TACPP and Update Modal */
 .w3-modal-content {
-    background: radial-gradient(#fff, #ffd6d6); /* Updated background */
-    color: #000000; /* Text color changed to black */
+    background: radial-gradient(#fff, #ffd6d6);
+    color: #000000;
     border-radius: 10px;
     padding: 20px;
-    box-shadow: 0 4px 15px #ffd6d6; /* Updated box-shadow color */
-    outline: #ff523b; /* Added outline */
+    box-shadow: 0 4px 15px #ffd6d6;
+    outline: #ff523b;
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     width: 90%;
-    max-width: 600px; /* Adjusted max-width for better fit */
+    max-width: 600px;
     height: auto;
     z-index: 9999;
     box-sizing: border-box;
-    display: none; /* Default to hidden, JavaScript will control display */
+    display: none;
 }
 
 .w3-modal-content h2 {
-    color: #000000; /* Heading color changed to black */
+    color: #000000;
     margin-top: 0;
     margin-bottom: 20px;
-    text-align: center; /* Center align headings */
+    text-align: center;
 }
 
 .w3-modal-content .w3-section label a {
@@ -706,7 +694,7 @@ select:focus{
 
 .w3-modal-content .close-button {
     background-color: transparent;
-    color: #000000; /* Close button color changed to black */
+    color: #000000;
     border: none;
     font-size: 20px;
     cursor: pointer;
@@ -720,7 +708,6 @@ select:focus{
     color: #fff;
 }
 
-/* Style for the 'Continue' and 'Agree to Update' buttons to match .btn class */
 .w3-modal-content .btn-modal {
     display: inline-block;
     background: #ff523b;
@@ -733,33 +720,31 @@ select:focus{
     font-size: 16px;
     cursor: pointer;
     text-align: center;
-    text-decoration: none; /* Ensure no underline */
-    line-height: normal; /* Ensure text fits */
+    text-decoration: none;
+    line-height: normal;
 }
 
 .w3-modal-content .btn-modal:hover {
     background: #563434;
 }
 
-/* Specific adjustments for input fields inside modals */
 .w3-modal-content input[type="checkbox"] {
-    width: auto; /* Allow checkbox to be its natural size */
+    width: auto;
     height: auto;
     margin-right: 10px;
     vertical-align: middle;
 }
 
 .w3-modal-content input[type="text"] {
-    width: calc(100% - 100px); /* Adjust width for input */
+    width: calc(100% - 100px);
     padding: 10px;
     margin-right: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; /* Include padding in width */
-    color: #333; /* Dark text on light background */
+    box-sizing: border-box;
+    color: #333;
 }
 
-/* Responsive adjustments for modals */
 @media (max-width: 480px) {
     .w3-modal-content {
         padding: 15px;
@@ -777,132 +762,124 @@ select:focus{
         font-size: 14px;
     }
     .w3-modal-content input[type="text"] {
-        width: 100%; /* Full width on smaller screens */
+        width: 100%;
         margin-right: 0;
         margin-bottom: 10px;
     }
     .w3-modal-content .w3-center button {
-        width: 100%; /* Make button full width */
+        width: 100%;
     }
 }
 
-/* --- New: Add to Cart Button Styling (for product listings) --- */
 .btn-Cart {
     display: inline-block;
-    background: #d12711; /* User specified red color */
+    background: #d12711;
     color: #fff;
-    padding: 8px 20px; /* Slightly less padding to fit better in card */
+    padding: 8px 20px;
     border-radius: 30px;
-    margin-top: 10px; /* Space from price/rating */
-    margin-bottom: 10px; /* Space from bottom of card */
-    text-decoration: none; /* Ensure no underline for link-styled button */
+    margin-top: 10px;
+    margin-bottom: 10px;
+    text-decoration: none;
     transition: background 0.3s;
-    font-size: 14px; /* Slightly smaller font size */
+    font-size: 14px;
     cursor: pointer;
-    border: none; /* Ensure no default button border */
+    border: none;
     text-align: center;
 }
 
 .btn-Cart:hover {
-    background: #563434; /* User specified hover color */
+    background: #563434;
 }
 
-/* Ensure the button is centered within its container in the product card */
 .product-item .add-to-cart-container {
     text-align: center;
-    margin-top: 10px; /* Space from the product details above it */
+    margin-top: 10px;
 }
 
-/* Adjustments for the small size selector */
 .product-item .size-selector {
-    margin-bottom: 5px; /* Adjust spacing if a size selector is present */
+    margin-bottom: 5px;
 }
 
-/* --- Cart Product Image Styling --- */
 .cart-info img {
-    width: 80px; /* Set image width to 80px */
-    height: 80px; /* Set image height to 80px */
-    object-fit:scale-down; /* Ensures the image covers the area without distortion */
-    margin-right: 10px; /* Adjusted margin to match original snippet */
-    border-radius: 5px; /* Slightly rounded corners for aesthetics */
+    width: 80px;
+    height: 80px;
+    object-fit:scale-down;
+    margin-right: 10px;
+    border-radius: 5px;
 }
 
+.cart-page {
+    margin: 80px auto;
+}
 
-/* --- START: Cart Page Table Styling (based on user's reference) --- */
-.cart-page { 
-    margin: 80px auto; /* Centering and vertical margin */
-} 
+.cart-page table {
+    width: 100%;
+    border-collapse: collapse;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
 
-.cart-page table { 
-    width: 100%; 
-    border-collapse: collapse; /* Collapse borders to get clean lines */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: subtle shadow for the table */
-} 
+.cart-page th {
+    text-align: left;
+    padding: 5px;
+    color: #fff;
+    background: #ff523b;
+    font-weight: normal;
+}
 
-.cart-page th { 
-    text-align: left; 
-    padding: 5px; 
-    color: #fff; 
-    background: #ff523b; /* Red background for headers */
-    font-weight: normal; 
-} 
+.cart-page td {
+    padding: 10px 5px;
+    border-bottom: 1px solid #ddd;
+}
 
-.cart-page td { 
-    padding: 10px 5px; /* Padding for table data cells */
-    border-bottom: 1px solid #ddd; /* Only bottom border for rows */
-} 
+.cart-page td:last-child {
+    text-align: right;
+    border-right: none;
+}
 
-.cart-page td:last-child { 
-    text-align: right; /* Align last column content to the right */
-    border-right: none; /* No right border for last cell */
-} 
-
-.cart-page th:last-child { 
-    text-align: right; /* Align last header to the right */
-    border-right: none; /* No right border for last header */
-}   
+.cart-page th:last-child {
+    text-align: right;
+    border-right: none;
+}
 
 .cart-page tr:first-child th {
-    border-top: none; /* No top border for first row's headers */
+    border-top: none;
 }
 
 .cart-page tr:last-child td {
-    border-bottom: none; /* No bottom border for the last row's cells */
+    border-bottom: none;
 }
 
-.cart-info{ 
-    display: flex; 
-    flex-wrap: wrap; /* Allows content to wrap on smaller screens */
-    align-items: center; /* Vertically center items */
-} 
+.cart-info{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+}
 
-/* Specific style for quantity input in cart table */
-.cart-page td input[type="number"] { /* More specific selector */
-    width: 40px; /* User specified width */
-    height: 30px; 
-    padding: 5px; 
-    border: 1px solid #ccc; /* Light border */
-    border-radius: 4px; /* Slight rounded corners */
+.cart-page td input[type="number"] {
+    width: 40px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
     text-align: center;
-} 
-
-.cart-page td a{ /* Style for the 'remove' link in the product info */
-    color: #ff523b; 
-    font-size: 12px; 
-    text-decoration: none; /* Remove underline */
-} 
-.cart-page td a:hover {
-    text-decoration: underline; /* Add underline on hover */
 }
 
-/* Style for the 'X' remove button in the last column */
+.cart-page td a{
+    color: #ff523b;
+    font-size: 12px;
+    text-decoration: none;
+}
+.cart-page td a:hover {
+    text-decoration: underline;
+}
+
 .cart-page .remove-item-btn {
     font-weight: bold;
     font-size: 16px;
     color: #ff523b;
     text-decoration: none;
-    display: inline-block; /* Ensure it behaves like a block for padding/margin if needed */
-    padding: 2px 5px; /* Small padding */
+    display: inline-block;
+    padding: 2px 5px;
     border-radius: 3px;
     transition: background-color 0.2s ease, color 0.2s ease;
 }
@@ -912,25 +889,23 @@ select:focus{
     text-decoration: none;
 }
 
+.total-price{
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
 
-.total-price{ 
-    display: flex; 
-    justify-content: flex-end; /* Pushes the total table to the right */
-    margin-top: 20px; /* Space from the main cart table */
-} 
-
-.total-price table{ 
-    border-top: 3px solid #ff523b; /* Prominent red top border */
-    width: 100%; 
-    max-width: 600px; /* Limit width */
-} 
+.total-price table{
+    border-top: 3px solid #ff523b;
+    width: 100%;
+    max-width: 600px;
+}
 
 .total-price td {
-    padding: 10px 15px; /* Adjust padding for total price cells */
+    padding: 10px 15px;
     text-align: right;
-    /* Optional: add light borders within total price table for structure */
-    border: 1px solid #eee; 
-    border-top: none; /* Remove top border if desired, as main table has one */
+    border: 1px solid #eee;
+    border-top: none;
 }
 
 .total-price tr:last-child td {
@@ -938,31 +913,26 @@ select:focus{
     color: #ff523b;
 }
 
-/* --- END: Cart Page Table Styling --- */
+@media (max-width: 768px) {
+    .single-product .col-2 {
+        flex-basis: 100%;
+        padding: 10px;
+    }
+    .single-product .col-2 img {
+        margin-bottom: 20px;
+    }
+    .single-product .col-2 .large-size-selector {
+        width: 100%;
+    }
+    .cart-info p{
+        display: none;
+    }
 
-
-/* Responsive design for smaller screens for product detail page */ 
-@media (max-width: 768px) { 
-    .single-product .col-2 { 
-        flex-basis: 100%; /* Full width on smaller screens */ 
-        padding: 10px; 
-    } 
-    .single-product .col-2 img { 
-        margin-bottom: 20px; /* Add space below image */ 
-    } 
-    .single-product .col-2 .large-size-selector { 
-        width: 100%; /* Full width on mobile */ 
-    } 
-    .cart-info p{ /* Specific rule from your snippet */
-        display: none; 
-    } 
-
-    /* Mobile specific adjustments for cart table */
     .cart-page table {
-        display: block; /* Make the table a block element */
+        display: block;
     }
     .cart-page thead {
-        display: none; /* Hide original headers */
+        display: none;
     }
     .cart-page tr {
         display: block;
@@ -973,30 +943,30 @@ select:focus{
     }
     .cart-page td {
         display: block;
-        text-align: right; /* Align content to the right */
-        border: none; /* Remove individual cell borders */
-        padding: 8px 0; /* Adjust padding for mobile */
+        text-align: right;
+        border: none;
+        padding: 8px 0;
     }
     .cart-page td:first-child {
-        text-align: left; /* Keep product info aligned left */
-        border-bottom: 1px solid #eee; /* Separator for product info */
+        text-align: left;
+        border-bottom: 1px solid #eee;
         padding-bottom: 10px;
         margin-bottom: 5px;
     }
     .cart-page td:first-child::before {
-        content: "Product:"; /* Label for product on mobile */
+        content: "Product:";
         font-weight: bold;
         float: left;
         margin-right: 5px;
     }
     .cart-page td:nth-child(2)::before {
-        content: "Unit:"; /* Label for unit on mobile */
+        content: "Unit:";
         font-weight: bold;
         float: left;
         margin-right: 5px;
     }
     .cart-page td:nth-child(3)::before {
-        content: "Subtotal:"; /* Label for subtotal on mobile */
+        content: "Subtotal:";
         font-weight: bold;
         float: left;
         margin-right: 5px;
@@ -1006,29 +976,251 @@ select:focus{
         padding-top: 10px;
     }
     .cart-info {
-        flex-direction: row; /* Keep image and text side-by-side if they fit */
+        flex-direction: row;
         align-items: center;
-        width: 100%; /* Ensure cart-info takes full width */
+        width: 100%;
     }
     .cart-info img {
-        margin-bottom: 0; /* Remove bottom margin on mobile */
+        margin-bottom: 0;
     }
     .cart-info div {
-        flex-grow: 1; /* Allow text to grow */
+        flex-grow: 1;
     }
     .cart-page td input[type="number"] {
-        display: inline-block; /* Keep input inline with unit */
+        display: inline-block;
         vertical-align: middle;
         margin-right: 5px;
     }
     .cart-page .total-price {
-        justify-content: center; /* Center the total price table */
+        justify-content: center;
     }
     .total-price table {
         width: 100%;
-        max-width: none; /* Remove max-width on mobile */
+        max-width: none;
     }
 }
 .text-center{
     text-align: center;
+}
+
+/* Account Page Custom Styles (merged and adjusted) */
+.account-container {
+    max-width: 1200px; /* Changed to match .container */
+    margin: 20px auto 50px; /* Adjusted top margin to reduce gap */
+    padding-left: 25px; /* Added to match .container */
+    padding-right: 25px; /* Added to match .container */
+    padding-top: 30px; /* Kept existing padding */
+    padding-bottom: 30px; /* Kept existing padding */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    flex-grow: 1; /* Allows container to grow and push footer down */
+}
+
+.user-dashboard {
+    margin-top: 30px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+}
+
+.user-dashboard h2 {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 20px;
+    border-bottom: 2px solid #ff523b;
+    padding-bottom: 10px;
+}
+
+.user-dashboard p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.user-dashboard button {
+    padding: 10px 20px;
+    background-color: #ff523b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 15px;
+    margin-right: 10px;
+}
+
+.user-dashboard button:hover {
+    background-color: #563434;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-group input[type="text"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.error-message {
+    color: #e53e3e;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.success-message {
+    color: #48bb78;
+    margin-top: 10px;
+    text-align: center;
+    font-weight: 500;
+}
+
+@media (max-width: 768px) {
+    .account-container {
+        margin: 20px auto;
+        padding: 20px; /* Adjusted padding for smaller screens */
+    }
+    .color-NAV {
+        padding: 10px 15px;
+        min-height: 40px;
+    }
+    .back-button {
+        font-size: 0.9rem;
+        padding: 6px 10px;
+    }
+}
+/* Styles for ls.html (Login/Signup Choice Page) */
+.ls-options {
+    text-align: center;
+    margin-top: 40px;
+    padding: 20px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.ls-options p {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.ls-options .btn {
+    margin: 10px auto; /* Center buttons and provide vertical spacing */
+    display: block; /* Make buttons take full width of their container */
+    max-width: 200px; /* Limit button width */
+    text-align: center;
+}
+/* Styles for Sign In/Sign Up Forms */
+.form-box {
+    text-align: center;
+    margin-top: 40px;
+    padding: 30px;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    max-width: 400px; /* Limit width of the form box */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.form-box .form-group {
+    margin-bottom: 20px;
+    text-align: left; /* Align labels and inputs to the left within the form group */
+}
+
+.form-box label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 600;
+    color: #333;
+}
+
+.form-box input[type="email"],
+.form-box input[type="password"],
+.form-box input[type="text"] { /* Added text type for signup username if needed */
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+}
+
+.form-box .btn {
+    width: 100%; /* Make sign-in button full width */
+    max-width: none; /* Remove max-width constraint from general .btn */
+    margin-top: 20px;
+    margin-bottom: 15px;
+}
+
+.social-login-options {
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    padding-top: 20px;
+}
+
+.social-login-options p {
+    margin-bottom: 15px;
+    color: #555;
+}
+
+.social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+}
+
+.social-btn i {
+    margin-right: 10px;
+    font-size: 1.2rem;
+}
+
+.google-btn {
+    background-color: #db4437; /* Google red */
+    color: #fff;
+    border: none;
+}
+
+.google-btn:hover {
+    background-color: #c0392b; /* Darker red on hover */
+}
+
+.toggle-form-text {
+    margin-top: 25px;
+    font-size: 0.95rem;
+    color: #555;
+}
+
+.toggle-form-text a {
+    color: #ff523b;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+/* Responsive adjustments for forms */
+@media (max-width: 480px) {
+    .form-box {
+        padding: 20px;
+    }
 }

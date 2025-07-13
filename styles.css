@@ -1221,5 +1221,12 @@ select:focus{
     .form-box { /* Added for consistency with other form styles */
         padding: 20px;
     }
+}, 
+.navbar .menu-icon{
+    display: none;
+    width: 28px;
+    margin-left: 20px;
+    background-color: blue; /* TEMPORARILY UNCOMMENT THIS */
 }
+
 

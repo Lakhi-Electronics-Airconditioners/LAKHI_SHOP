@@ -73,11 +73,11 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="../img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <img src="../img/log-w.png" width="200px" alt="Company Logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">
@@ -121,18 +121,18 @@
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Added getDoc
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // IMPORTANT: Replace with your actual Firebase config for Live Server
         const firebaseConfig = {
-          apiKey: "YOUR_API_KEY",
-          authDomain: "YOUR_AUTH_DOMAIN",
-          projectId: "YOUR_PROJECT_ID",
-          storageBucket: "YOUR_STORAGE_BUCKET",
-          messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
-          appId: "YOUR_APP_ID",
-          // measurementId: "G-XXXXXXXXXX" // Include if you have it
-        };
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
 
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
@@ -175,18 +175,18 @@
                 const user = userCredential.user;
                 const currentUserId = user.uid;
 
-                // Save user profile without a customer code initially
+                // Create a basic user profile in Firestore
                 const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
                 const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
 
                 await setDoc(userProfileDocRef, {
                     email: user.email,
-                    customerCode: null, // Customer code is null initially
                     createdAt: new Date().toISOString()
+                    // customerCode, name, phone, address will be added on ls/su2.html
                 });
 
-                showMessage(signUpSuccess, 'Account created successfully!', 'success');
-                window.location.href = '../account.html'; // Redirect to account page
+                showMessage(signUpSuccess, 'Account created successfully! Redirecting to profile setup...', 'success');
+                window.location.href = 'su2.html'; // Redirect to profile completion page
             } catch (error) {
                 console.error("Sign Up Error:", error);
                 let errorMessage = 'Sign up failed.';
@@ -212,19 +212,19 @@
                 // Check if profile already exists (e.g., if user signed up with email/password then linked Google)
                 const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
                 const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
-                const docSnap = await getDoc(userProfileDocRef);
+                const docSnap = await getDoc(userProfileDocRef); // Need to import getDoc for this
 
                 if (!docSnap.exists()) {
-                    // Only create new profile if it doesn't exist, and set customerCode to null
+                    // Only create new profile if it doesn't exist
                     await setDoc(userProfileDocRef, {
                         email: user.email,
-                        customerCode: null, // Customer code is null initially
                         createdAt: new Date().toISOString()
+                        // customerCode, name, phone, address will be added on ls/su2.html
                     });
                 }
 
-                showMessage(signUpSuccess, 'Signed up with Google successfully!', 'success');
-                window.location.href = '../account.html'; // Redirect to account page
+                showMessage(signUpSuccess, 'Signed up with Google successfully! Redirecting to profile setup...', 'success');
+                window.location.href = 'su2.html'; // Redirect to profile completion page
             } catch (error) {
                 console.error("Google Sign Up Error:", error);
                 let errorMessage = 'Google sign-up failed.';
@@ -237,11 +237,25 @@
             }
         });
 
-        // Redirect if already authenticated
-        onAuthStateChanged(auth, (user) => {
+        // Redirect if already authenticated (to profile completion if no name/phone, else to account)
+        onAuthStateChanged(auth, async (user) => {
             if (user) {
-                // User is signed in, redirect to account page
-                window.location.href = '../account.html';
+                const appId = firebaseConfig.projectId;
+                const userProfileDocRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, "profile");
+                try {
+                    const docSnap = await getDoc(userProfileDocRef);
+                    if (docSnap.exists() && docSnap.data().name && docSnap.data().phoneNumber) {
+                        // If profile exists and has name/phone, go to account
+                        window.location.href = '../account.html';
+                    } else {
+                        // Otherwise, go to profile completion
+                        window.location.href = 'su2.html';
+                    }
+                } catch (error) {
+                    console.error("Error checking user profile on signup page:", error);
+                    // Fallback to account.html if profile check fails
+                    window.location.href = '../account.html';
+                }
             }
         });
 

@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Complete Profile</title>
+    <link rel="icon" href="../img/1x1-logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <!-- ReCAPTCHA script -->
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+    <style>
+        /* Specific styles for su2.html to match existing form styles */
+        .profile-completion-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        .profile-completion-container h1 {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff523b;
+            padding-bottom: 15px;
+        }
+
+        .profile-completion-container h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .btn-save-profile {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+            font-size: 1rem;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn-save-profile:hover {
+            background: #563434;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        /* ReCAPTCHA container style */
+        #recaptcha-container {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="../img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../products.html">All Products</a></li>
+                        <li><a href="../AC-only.html">AC Products</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="../account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="../cart.html"><img src="../img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV">
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    </div>
+
+    <div class="profile-completion-container">
+        <h1>Complete Your Profile</h1>
+        <p style="text-align: center; margin-bottom: 20px; color: #555;">Please provide your details to complete your account setup.</p>
+
+        <div id="profileForm">
+            <div class="form-group">
+                <label for="profileName">Full Name:</label>
+                <input type="text" id="profileName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="profilePhoneNumber">Phone Number:</label>
+                <input type="tel" id="profilePhoneNumber" placeholder="+91-XXXXXXXXXX" required>
+                <small style="color:#777;">(Required if email is present)</small>
+            </div>
+            <div class="form-group">
+                <label for="profileCustomerCode">Customer Code (Optional):</label>
+                <input type="text" id="profileCustomerCode" placeholder="Enter your customer code if you have one">
+            </div>
+
+            <h3>Address Details</h3>
+            <div class="form-group">
+                <label for="profileHouseAndFlatNumber">House/Flat Number:</label>
+                <input type="text" id="profileHouseAndFlatNumber" placeholder="e.g., Flat 101, Bldg A-5">
+            </div>
+            <div class="form-group">
+                <label for="profileHousingAreaAndFlatName">Housing Area/Flat Name:</label>
+                <input type="text" id="profileHousingAreaAndFlatName" placeholder="e.g., Green Valley Society, Maple Apartments">
+            </div>
+            <div class="form-group">
+                <label for="profileAreaName">Area Name:</label>
+                <input type="text" id="profileAreaName" placeholder="e.g., Satellite">
+            </div>
+            <div class="form-group">
+                <label for="profileCity">City:</label>
+                <input type="text" id="profileCity" placeholder="e.g., Ahmedabad">
+            </div>
+            <div class="form-group">
+                <label for="profileState">State:</label>
+                <input type="text" id="profileState" placeholder="e.g., Gujarat">
+            </div>
+            <div class="form-group">
+                <label for="profilePincode">Pincode:</label>
+                <input type="text" id="profilePincode" placeholder="e.g., 380015">
+            </div>
+
+            <div id="recaptcha-container"></div> <!-- ReCAPTCHA container -->
+
+            <button id="saveProfileButton" class="btn-save-profile">Save Profile</button>
+            <div id="profileMessage" class="message-box"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="../img/log-w.png" width="200px" alt="Company Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // IMPORTANT: Replace with your actual Firebase config
+       const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        let currentUserId = null;
+        const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
+
+        // UI Element References
+        const profileNameInput = document.getElementById('profileName');
+        const profilePhoneNumberInput = document.getElementById('profilePhoneNumber');
+        const profileCustomerCodeInput = document.getElementById('profileCustomerCode');
+
+        // Updated input fields for combined address
+        const profileHouseAndFlatNumberInput = document.getElementById('profileHouseAndFlatNumber');
+        const profileHousingAreaAndFlatNameInput = document.getElementById('profileHousingAreaAndFlatName');
+        const profileAreaNameInput = document.getElementById('profileAreaName');
+        const profileCityInput = document.getElementById('profileCity');
+        const profileStateInput = document.getElementById('profileState');
+        const profilePincodeInput = document.getElementById('profilePincode');
+
+        const profileMessageDiv = document.getElementById('profileMessage');
+        const recaptchaContainer = document.getElementById('recaptcha-container');
+        const saveProfileButton = document.getElementById('saveProfileButton'); // Get the button element
+
+        // ReCAPTCHA Verifier (global for easy access)
+        window.recaptchaVerifier = null;
+
+        // Menu toggle function from the template
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+
+        // Message display helper
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = `message-box ${type}`;
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = 'message-box'; // Reset to default
+            }, 5000);
+        }
+
+        // Save Profile Details
+        async function saveProfileDetails() {
+            if (!currentUserId) {
+                showMessage(profileMessageDiv, 'No user logged in. Please sign up or log in first.', 'error');
+                return;
+            }
+
+            const name = profileNameInput.value.trim();
+            const phoneNumber = profilePhoneNumberInput.value.trim();
+            const customerCode = profileCustomerCodeInput.value.trim() || null;
+
+            // Get values from combined address fields
+            const houseAndFlatNumber = profileHouseAndFlatNumberInput.value.trim() || null;
+            const housingAreaAndFlatName = profileHousingAreaAndFlatNameInput.value.trim() || null;
+            const areaName = profileAreaNameInput.value.trim() || null;
+            const city = profileCityInput.value.trim() || null;
+            const state = profileStateInput.value.trim() || null;
+            const pincode = profilePincodeInput.value.trim() || null;
+
+            if (!name) {
+                showMessage(profileMessageDiv, 'Name is required.', 'error');
+                return;
+            }
+            if (!phoneNumber) {
+                showMessage(profileMessageDiv, 'Phone Number is required.', 'error');
+                return;
+            }
+            // Basic phone number format validation (can be enhanced)
+            if (!/^\+?\d{10,15}$/.test(phoneNumber)) {
+                showMessage(profileMessageDiv, 'Please enter a valid phone number (e.g., +91-XXXXXXXXXX).', 'error');
+                return;
+            }
+
+
+            const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+
+            try {
+                await setDoc(userProfileRef, {
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    customerCode: customerCode,
+                    address: {
+                        houseAndFlatNumber: houseAndFlatNumber,
+                        housingAreaAndFlatName: housingAreaAndFlatName,
+                        areaName: areaName,
+                        city: city,
+                        state: state,
+                        pincode: pincode
+                    }
+                }, { merge: true }); // Use merge: true to update existing fields
+
+                showMessage(profileMessageDiv, 'Profile saved successfully! Redirecting to account...', 'success');
+                setTimeout(() => {
+                    window.location.href = '../account.html'; // Redirect to account page
+                }, 1500);
+
+            } catch (error) {
+                console.error("Error saving profile details:", error);
+                showMessage(profileMessageDiv, `Failed to save profile: ${error.message}. Please check Firestore rules.`);
+            }
+        }
+
+        // Attach event listener to the save profile button
+        if (saveProfileButton) {
+            saveProfileButton.addEventListener('click', saveProfileDetails);
+        }
+
+        // Authentication state observer
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                // Try to load existing profile data to pre-fill the form
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+                try {
+                    const docSnap = await getDoc(userProfileRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        profileNameInput.value = data.name || '';
+                        profilePhoneNumberInput.value = data.phoneNumber || '';
+                        profileCustomerCodeInput.value = data.customerCode || '';
+
+                        // Pre-fill combined address fields
+                        profileHouseAndFlatNumberInput.value = data.address?.houseAndFlatNumber || '';
+                        profileHousingAreaAndFlatNameInput.value = data.address?.housingAreaAndFlatName || '';
+                        profileAreaNameInput.value = data.address?.areaName || '';
+                        profileCityInput.value = data.address?.city || '';
+                        profileStateInput.value = data.address?.state || '';
+                        profilePincodeInput.value = data.address?.pincode || '';
+
+                        // If name and phone number are already present, redirect to account page
+                        if (data.name && data.phoneNumber) {
+                            window.location.href = '../account.html';
+                        }
+                    }
+                } catch (error) {
+                    console.error("Error loading existing profile:", error);
+                    showMessage(profileMessageDiv, `Error loading existing profile: ${error.message}`);
+                }
+
+                // Initialize reCAPTCHA after user is authenticated
+                if (!window.recaptchaVerifier) {
+                    window.recaptchaVerifier = new RecaptchaVerifier(auth, recaptchaContainer, {
+                        'size': 'normal', // or 'invisible'
+                        'callback': (response) => {
+                            console.log("reCAPTCHA solved!");
+                        },
+                        'expired-callback': () => {
+                            console.log("reCAPTCHA expired!");
+                            window.recaptchaVerifier.render().then(function(widgetId) {
+                                grecaptcha.reset(widgetId);
+                            });
+                        }
+                    });
+                    window.recaptchaVerifier.render().then(function(widgetId) {
+                        console.log("reCAPTCHA rendered with widget ID:", widgetId);
+                    });
+                }
+
+            } else {
+                // User is not logged in, redirect to signup/login page
+                window.location.href = 'signin.html';
+            }
+        });
+    </script>
+</body>
+</html>

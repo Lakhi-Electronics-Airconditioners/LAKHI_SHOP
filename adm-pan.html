@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Admin Panel</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        /* Admin Panel Specific Styles */
+        .admin-container {
+            max-width: 1000px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        .admin-container h1 {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff523b;
+            padding-bottom: 15px;
+        }
+
+        .admin-section {
+            background-color: #f9f9f9;
+            border: 1px solid #eee;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+
+        .admin-section h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group input[type="password"] { /* Added password input type */
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .btn-admin {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+            font-size: 1rem;
+            margin-top: 15px;
+            margin-right: 10px;
+        }
+
+        .btn-admin:hover {
+            background: #563434;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .admin-container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+            .admin-container h1 {
+                font-size: 2rem;
+            }
+            .admin-section {
+                padding: 15px;
+            }
+            .admin-section h2 {
+                font-size: 1.5rem;
+            }
+            .btn-admin {
+                width: 100%;
+                margin-right: 0;
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV">
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    </div>
+
+    <div class="admin-container">
+        <h1>Admin Panel</h1>
+        <div id="loadingMessage" class="message-box">Loading...</div>
+        <div id="notAdminMessage" class="message-box error hidden">Access Denied: You must be an administrator to view this page.</div>
+
+        <!-- Password Protection Layer -->
+        <div id="passwordProtection" class="admin-section">
+            <h2>Admin Password Required</h2>
+            <div class="form-group">
+                <label for="adminPassword">Password:</label>
+                <input type="password" id="adminPassword" placeholder="Enter admin password">
+            </div>
+            <button class="btn-admin" onclick="checkAdminPassword()">Unlock Panel</button>
+            <div id="passwordMessage" class="message-box"></div>
+        </div>
+
+        <div id="adminContent" class="hidden">
+            <div class="admin-section">
+                <h2>Search User Profile</h2>
+                <div class="form-group">
+                    <label for="searchUserUid">User UID:</label>
+                    <input type="text" id="searchUserUid" placeholder="Enter user's UID">
+                    <small style="color:#777;">(Find UID in Firebase Authentication console)</small>
+                </div>
+                <button class="btn-admin" onclick="searchUserByUid()">Load User Profile</button>
+                <div id="searchMessage" class="message-box"></div>
+            </div>
+
+            <div class="admin-section" style="margin-top: 30px;">
+                <h2>Edit User Details</h2>
+                <p><strong>Editing User ID:</strong> <span id="editingUserIdDisplay">N/A</span></p>
+                <div class="form-group">
+                    <label for="editName">Name:</label>
+                    <input type="text" id="editName" placeholder="Full Name">
+                </div>
+                <div class="form-group">
+                    <label for="editPhoneNumber">Phone Number:</label>
+                    <input type="tel" id="editPhoneNumber" placeholder="+91-XXXXXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" placeholder="user@example.com" disabled>
+                    <small style="color:#777;">(Email cannot be changed here)</small>
+                </div>
+                <div class="form-group">
+                    <label for="editCustomerCode">Customer Code:</label>
+                    <input type="text" id="editCustomerCode" placeholder="Enter customer code">
+                </div>
+
+                <h3>Address Details</h3>
+                <div class="form-group">
+                    <label for="editHouseAndFlatNumber">House/Flat Number:</label>
+                    <input type="text" id="editHouseAndFlatNumber" placeholder="e.g., Flat 101, Bldg A-5">
+                </div>
+                <div class="form-group">
+                    <label for="editHousingAreaAndFlatName">Housing Area/Flat Name:</label>
+                    <input type="text" id="editHousingAreaAndFlatName" placeholder="e.g., Green Valley Society, Maple Apartments">
+                </div>
+                <div class="form-group">
+                    <label for="editAreaName">Area Name:</label>
+                    <input type="text" id="editAreaName" placeholder="e.g., Satellite">
+                </div>
+                <div class="form-group">
+                    <label for="editCity">City:</label>
+                    <input type="text" id="editCity" placeholder="e.g., Ahmedabad">
+                </div>
+                <div class="form-group">
+                    <label for="editState">State:</label>
+                    <input type="text" id="editState" placeholder="e.g., Gujarat">
+                </div>
+                <div class="form-group">
+                    <label for="editPincode">Pincode:</label>
+                    <input type="text" id="editPincode" placeholder="e.g., 380015">
+                </div>
+
+                <button class="btn-admin" onclick="saveUserDetails()">Save User Details</button>
+                <div id="saveMessage" class="message-box"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Initialize Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
+        let currentAdminUser = null; // The currently logged-in admin user (Firebase Auth)
+        let editingUserUid = null; // The UID of the user whose profile is currently being edited
+
+        // --- IMPORTANT: SET YOUR ADMIN PASSWORD HERE ---
+        // !!! WARNING: This is INSECURE for production. Use a backend for real security. !!!
+        const ADMIN_PANEL_PASSWORD = "your_secret_admin_password"; // <--- CHANGE THIS TO YOUR DESIRED PASSWORD
+
+        // UI Element References
+        const loadingMessage = document.getElementById('loadingMessage');
+        const notAdminMessage = document.getElementById('notAdminMessage');
+        const passwordProtectionDiv = document.getElementById('passwordProtection');
+        const adminPasswordInput = document.getElementById('adminPassword');
+        const passwordMessageDiv = document.getElementById('passwordMessage');
+        const adminContent = document.getElementById('adminContent');
+
+        const searchUserUidInput = document.getElementById('searchUserUid'); // Renamed from searchUserEmailInput
+        const searchMessageDiv = document.getElementById('searchMessage');
+
+        const editingUserIdDisplay = document.getElementById('editingUserIdDisplay');
+        const editNameInput = document.getElementById('editName');
+        const editPhoneNumberInput = document.getElementById('editPhoneNumber');
+        const editEmailInput = document.getElementById('editEmail'); // This will be disabled
+        const editCustomerCodeInput = document.getElementById('editCustomerCode');
+
+        // Updated input fields for combined address
+        const editHouseAndFlatNumberInput = document.getElementById('editHouseAndFlatNumber');
+        const editHousingAreaAndFlatNameInput = document.getElementById('editHousingAreaAndFlatName');
+        const editAreaNameInput = document.getElementById('editAreaName');
+        const editCityInput = document.getElementById('editCity');
+        const editStateInput = document.getElementById('editState');
+        const editPincodeInput = document.getElementById('editPincode');
+        const saveMessageDiv = document.getElementById('saveMessage');
+
+        // Menu toggle function (from your existing styles)
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+
+        // Message display helper
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = `message-box ${type}`;
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = 'message-box'; // Reset to default
+            }, 5000);
+        }
+
+        // Function to clear the edit form
+        function clearEditForm() {
+            editingUserUid = null;
+            editingUserIdDisplay.textContent = 'N/A';
+            editNameInput.value = '';
+            editPhoneNumberInput.value = '';
+            editEmailInput.value = '';
+            editCustomerCodeInput.value = '';
+
+            // Clear combined address fields
+            editHouseAndFlatNumberInput.value = '';
+            editHousingAreaAndFlatNameInput.value = '';
+            editAreaNameInput.value = '';
+            editCityInput.value = '';
+            editStateInput.value = '';
+            editPincodeInput.value = '';
+            saveMessageDiv.textContent = '';
+            saveMessageDiv.className = 'message-box';
+        }
+
+        // Check Admin Password
+        function checkAdminPassword() {
+            const enteredPassword = adminPasswordInput.value;
+            if (enteredPassword === ADMIN_PANEL_PASSWORD) {
+                passwordProtectionDiv.classList.add('hidden');
+                // If Firebase user is already an admin, show content. Otherwise, notAdminMessage will be visible.
+                if (currentAdminUser && currentAdminUser.isAdmin) {
+                    adminContent.classList.remove('hidden');
+                } else {
+                    notAdminMessage.classList.remove('hidden');
+                }
+                showMessage(passwordMessageDiv, 'Panel unlocked!', 'success');
+            } else {
+                showMessage(passwordMessageDiv, 'Incorrect password.', 'error');
+            }
+        }
+
+        // Search user by UID
+        async function searchUserByUid() {
+            const uidToSearch = searchUserUidInput.value.trim();
+            if (!uidToSearch) {
+                showMessage(searchMessageDiv, 'Please enter a User ID (UID).', 'error');
+                return;
+            }
+
+            showMessage(searchMessageDiv, 'Searching...', 'info');
+            clearEditForm(); // Clear previous data
+
+            try {
+                const userProfileDocRef = doc(db, `artifacts/${appId}/users/${uidToSearch}/user_profiles`, "profile");
+                const docSnap = await getDoc(userProfileDocRef);
+
+                if (docSnap.exists()) {
+                    const userData = docSnap.data();
+                    editingUserUid = uidToSearch;
+                    editingUserIdDisplay.textContent = uidToSearch;
+                    editNameInput.value = userData.name || '';
+                    editPhoneNumberInput.value = userData.phoneNumber || '';
+                    editEmailInput.value = userData.email || '';
+                    editCustomerCodeInput.value = userData.customerCode || '';
+
+                    // Populate combined address fields
+                    editHouseAndFlatNumberInput.value = userData.address?.houseAndFlatNumber || '';
+                    editHousingAreaAndFlatNameInput.value = userData.address?.housingAreaAndFlatName || '';
+                    editAreaNameInput.value = userData.address?.areaName || '';
+                    editCityInput.value = userData.address?.city || '';
+                    editStateInput.value = userData.address?.state || '';
+                    editPincodeInput.value = userData.address?.pincode || '';
+
+                    showMessage(searchMessageDiv, 'User profile loaded successfully!', 'success');
+                } else {
+                    showMessage(searchMessageDiv, `User profile not found for UID: ${uidToSearch}.`, 'error');
+                }
+            } catch (error) {
+                console.error("Error loading user profile:", error);
+                showMessage(searchMessageDiv, `Error loading profile: ${error.message}`, 'error');
+            }
+        }
+
+        // Save user details to Firestore
+        async function saveUserDetails() {
+            if (!editingUserUid) {
+                showMessage(saveMessageDiv, 'No user selected for editing. Please load a user first.', 'error');
+                return;
+            }
+
+            const updatedData = {
+                name: editNameInput.value.trim() || null,
+                phoneNumber: editPhoneNumberInput.value.trim() || null,
+                customerCode: editCustomerCodeInput.value.trim() || null,
+                address: {
+                    houseAndFlatNumber: editHouseAndFlatNumberInput.value.trim() || null,
+                    housingAreaAndFlatName: editHousingAreaAndFlatNameInput.value.trim() || null,
+                    areaName: editAreaNameInput.value.trim() || null,
+                    city: editCityInput.value.trim() || null,
+                    state: editStateInput.value.trim() || null,
+                    pincode: editPincodeInput.value.trim() || null
+                }
+            };
+
+            const existingEmail = editEmailInput.value.trim();
+            const newPhoneNumber = updatedData.phoneNumber;
+
+            if (existingEmail && !newPhoneNumber) {
+                showMessage(saveMessageDiv, 'If an email is associated with the account, a phone number is required.', 'error');
+                return;
+            }
+
+            const userProfileRef = doc(db, `artifacts/${appId}/users/${editingUserUid}/user_profiles`, "profile");
+
+            try {
+                await setDoc(userProfileRef, updatedData, { merge: true });
+                showMessage(saveMessageDiv, 'User details saved successfully!', 'success');
+                console.log("User details saved for UID:", editingUserUid, updatedData);
+            } catch (error) {
+                console.error("Error saving user details:", error);
+                showMessage(saveMessageDiv, `Failed to save details: ${error.message}. Check Firestore rules.`, 'error');
+            }
+        }
+
+
+        // Admin Access Check (Firebase Auth)
+        onAuthStateChanged(auth, async (user) => {
+            loadingMessage.classList.add('hidden');
+            if (user) {
+                const adminProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, "profile");
+                try {
+                    const adminDocSnap = await getDoc(adminProfileRef);
+                    if (adminDocSnap.exists() && adminDocSnap.data().isAdmin === true) {
+                        currentAdminUser = user;
+                        currentAdminUser.isAdmin = true;
+
+                        passwordProtectionDiv.classList.remove('hidden');
+                        notAdminMessage.classList.add('hidden');
+                        showMessage(passwordMessageDiv, 'Please enter the admin panel password.', 'info');
+
+                    } else {
+                        notAdminMessage.classList.remove('hidden');
+                        passwordProtectionDiv.classList.add('hidden');
+                        adminContent.classList.add('hidden');
+                        console.warn("Access Denied: User is not an admin in Firestore.");
+                    }
+                } catch (error) {
+                    console.error("Error checking admin status:", error);
+                    notAdminMessage.textContent = `Error checking admin status: ${error.message}`;
+                    notAdminMessage.classList.remove('hidden');
+                    passwordProtectionDiv.classList.add('hidden');
+                    adminContent.classList.add('hidden');
+                }
+            } else {
+                notAdminMessage.textContent = 'Access Denied: Please log in as an administrator.';
+                notAdminMessage.classList.remove('hidden');
+                passwordProtectionDiv.classList.add('hidden');
+                adminContent.classList.add('hidden');
+            }
+        });
+
+        // Initial sign-in attempt for Canvas environment
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
+                try {
+                    await signInWithCustomToken(auth, __initial_auth_token);
+                } catch (error) {
+                    console.error("Error signing in with custom token:", error);
+                    try {
+                        await signInAnonymously(auth);
+                    } catch (anonError) {
+                        console.error("Error signing in anonymously:", anonError);
+                    }
+                }
+            } else {
+                try {
+                    await signInAnonymously(auth);
+                } catch (error) {
+                    console.error("Error signing in anonymously:", error);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

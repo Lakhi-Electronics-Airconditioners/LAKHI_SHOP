@@ -1,1 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill URL Maker</title>
+    <style>
+        /* Ccode */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            background-color: #fff;
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 30px auto;
+        }
+        h1, h2 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+        input[type="text"],
+        input[type="number"] {
+            width: calc(100% - 22px);
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box; /* Ensures padding doesn't add to total width */
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #outputUrlContainer {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            word-wrap: break-word; /* Allows long URLs to wrap */
+        }
+        #outputUrl {
+            font-family: 'Courier New', monospace;
+            color: #004085;
+            font-size: 0.9em;
+        }
+        .item-input-group {
+            border: 1px solid #e0e0e0;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            background-color: #fcfcfc;
+        }
+        .item-input-group label {
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+        .add-item-btn, .remove-item-btn {
+            background-color: #28a745;
+            margin-top: 10px;
+            width: auto;
+            padding: 8px 15px;
+            font-size: 0.9em;
+            display: inline-block;
+        }
+        .remove-item-btn {
+            background-color: #dc3545;
+            margin-left: 10px;
+        }
+        .add-item-btn:hover {
+            background-color: #218838;
+        }
+        .remove-item-btn:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Bill URL Maker</h1>
+
+        <form id="billForm">
+            <h2>Bill Details</h2>
+            <label for="billId">Bill ID:</label>
+            <input type="text" id="billId" value="BILL-XYZ-123" required>
+
+            <label for="customerName">Customer Name:</label>
+            <input type="text" id="customerName" value="Alice Smith" required>
+
+            <label for="billDate">Bill Date:</label>
+            <input type="text" id="billDate" value="2025-07-14" placeholder="YYYY-MM-DD" required>
+
+            <label for="currency">Currency:</label>
+            <input type="text" id="currency" value="INR" required>
+
+            <h2>Items</h2>
+            <div id="itemsContainer">
+                <div class="item-input-group">
+                    <label for="itemName_0">Item Name:</label>
+                    <input type="text" id="itemName_0" value="Laptop" required>
+                    <label for="itemQty_0">Quantity:</label>
+                    <input type="number" id="itemQty_0" value="1" min="1" required>
+                    <label for="itemPrice_0">Unit Price:</label>
+                    <input type="number" id="itemPrice_0" value="75000" min="0.01" step="0.01" required>
+                </div>
+                <div class="item-input-group">
+                    <label for="itemName_1">Item Name:</label>
+                    <input type="text" id="itemName_1" value="Mouse" required>
+                    <label for="itemQty_1">Quantity:</label>
+                    <input type="number" id="itemQty_1" value="2" min="1" required>
+                    <label for="itemPrice_1">Unit Price:</label>
+                    <input type="number" id="itemPrice_1" value="800" min="0.01" step="0.01" required>
+                </div>
+            </div>
+            <button type="button" class="add-item-btn" onclick="addItemField()">Add Item</button>
+            <button type="button" class="remove-item-btn" onclick="removeItemField()">Remove Last Item</button>
+
+            <button type="submit">Generate Bill URL</button>
+        </form>
+
+        <div id="outputUrlContainer">
+            <p>Generated Bill URL:</p>
+            <p id="outputUrl"></p>
+            <button onclick="copyToClipboard()" style="margin-top: 10px;">Copy URL</button>
+        </div>
+    </div>
+
+    <script>
+        // JCode
+        let itemCount = 2; // Starting with two pre-filled items
+
+        document.getElementById('billForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            const baseUrl = window.location.origin + window.location.pathname.replace("url-maker.html", "bill-display.html"); // Assumes your display page is "bill-display.html" in the same directory
+
+            const billId = document.getElementById('billId').value;
+            const customerName = document.getElementById('customerName').value;
+            const billDate = document.getElementById('billDate').value;
+            const currency = document.getElementById('currency').value;
+
+            const items = [];
+            for (let i = 0; i < itemCount; i++) {
+                const itemName = document.getElementById(`itemName_${i}`);
+                const itemQty = document.getElementById(`itemQty_${i}`);
+                const itemPrice = document.getElementById(`itemPrice_${i}`);
+
+                if (itemName && itemQty && itemPrice) { // Ensure elements exist
+                    items.push({
+                        name: itemName.value,
+                        qty: parseFloat(itemQty.value),
+                        price: parseFloat(itemPrice.value)
+                    });
+                }
+            }
+
+            // Encode all data into an object
+            const billData = {
+                id: billId,
+                customer: customerName,
+                date: billDate,
+                currency: currency,
+                items: items
+            };
+
+            // Convert the object to a JSON string and then encode it for the URL
+            const encodedData = encodeURIComponent(JSON.stringify(billData));
+
+            // Construct the final URL
+            const fullUrl = `${baseUrl}?data=${encodedData}`;
+
+            document.getElementById('outputUrl').textContent = fullUrl;
+            document.getElementById('outputUrlContainer').style.display = 'block';
+        });
+
+        function addItemField() {
+            const itemsContainer = document.getElementById('itemsContainer');
+            const newItemDiv = document.createElement('div');
+            newItemDiv.classList.add('item-input-group');
+            newItemDiv.innerHTML = `
+                <label for="itemName_${itemCount}">Item Name:</label>
+                <input type="text" id="itemName_${itemCount}" required>
+                <label for="itemQty_${itemCount}">Quantity:</label>
+                <input type="number" id="itemQty_${itemCount}" value="1" min="1" required>
+                <label for="itemPrice_${itemCount}">Unit Price:</label>
+                <input type="number" id="itemPrice_${itemCount}" value="0.01" min="0.01" step="0.01" required>
+            `;
+            itemsContainer.appendChild(newItemDiv);
+            itemCount++;
+        }
+
+        function removeItemField() {
+            const itemsContainer = document.getElementById('itemsContainer');
+            if (itemCount > 1) { // Ensure at least one item remains
+                itemsContainer.removeChild(itemsContainer.lastChild);
+                itemCount--;
+            } else {
+                alert("Cannot remove the last item.");
+            }
+        }
+
+        function copyToClipboard() {
+            const urlText = document.getElementById('outputUrl').textContent;
+            navigator.clipboard.writeText(urlText).then(() => {
+                alert('URL copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy URL: ', err);
+            });
+        }
+    </script>
+</body>
+</html>
 

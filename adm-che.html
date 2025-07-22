@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Admin Check</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        .check-container {
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 300px; /* Ensure some height for centering */
+        }
+
+        .check-container h1 {
+            font-size: 2.2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .check-container p {
+            font-size: 1.1rem;
+            color: #555;
+            margin-bottom: 25px;
+        }
+
+        .btn-check {
+            background: #ff523b;
+            color: #fff;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+            font-size: 1rem;
+            margin: 10px;
+            text-decoration: none; /* For anchor tags styled as buttons */
+            display: inline-block;
+        }
+
+        .btn-check:hover {
+            background: #e04a36;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            width: 100%; /* Ensure it spans full width of container */
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .message-box.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+    <div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+
+    <div class="check-container">
+        <h1>Admin Status Check</h1>
+        <div id="statusMessage" class="message-box info">Checking admin status...</div>
+        <div id="actionButtons" class="hidden">
+            <a href="ls.html" class="btn-check" id="loginSignupBtn">Login / Sign Up</a>
+            <a href="adm-pan.html" class="btn-check hidden" id="goToAdminPanelBtn">Go to Admin Panel</a>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import * as FirebaseAuth from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // IMPORTANT: Replace with your actual Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
+        const app = initializeApp(firebaseConfig);
+        const auth = FirebaseAuth.getAuth(app);
+        const db = getFirestore(app);
+
+        const appId = firebaseConfig.projectId;
+
+        // UI Element References
+        const statusMessageDiv = document.getElementById('statusMessage');
+        const actionButtonsDiv = document.getElementById('actionButtons');
+        const loginSignupBtn = document.getElementById('loginSignupBtn');
+        const goToAdminPanelBtn = document.getElementById('goToAdminPanelBtn');
+
+        // Menu toggle function (from your existing styles)
+        const Menuitems = document.getElementById('Menuitems');
+        window.menutoggle = function(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+
+        // Message display helper
+        function showMessage(element, message, type = 'info') {
+            element.textContent = message;
+            element.className = `message-box ${type}`;
+        }
+
+        // Function to check admin status
+        async function checkAdminStatus(user) {
+            if (!user) {
+                showMessage(statusMessageDiv, 'You are not logged in.', 'error');
+                actionButtonsDiv.classList.remove('hidden');
+                loginSignupBtn.classList.remove('hidden');
+                goToAdminPanelBtn.classList.add('hidden');
+                return;
+            }
+
+            showMessage(statusMessageDiv, 'Checking admin status...', 'info');
+
+            try {
+                // Path to the admin user document: artifacts/{appId}/admin_users/{user.uid}
+                const adminDocRef = doc(db, 'artifacts', appId, 'admin_users', user.uid);
+                const adminDocSnap = await getDoc(adminDocRef);
+
+                if (adminDocSnap.exists()) {
+                    showMessage(statusMessageDiv, 'You are an administrator!', 'success');
+                    actionButtonsDiv.classList.remove('hidden');
+                    loginSignupBtn.classList.add('hidden');
+                    goToAdminPanelBtn.classList.remove('hidden');
+                } else {
+                    showMessage(statusMessageDiv, 'You are not an administrator.', 'error');
+                    actionButtonsDiv.classList.remove('hidden');
+                    loginSignupBtn.classList.add('hidden'); // Hide login if already logged in
+                    goToAdminPanelBtn.classList.add('hidden');
+                }
+            } catch (error) {
+                console.error("Error checking admin status:", error);
+                showMessage(statusMessageDiv, `Error checking status: ${error.message}`, 'error');
+                actionButtonsDiv.classList.remove('hidden');
+                loginSignupBtn.classList.remove('hidden'); // Show login if error occurred
+                goToAdminPanelBtn.classList.add('hidden');
+            }
+        }
+
+        // Listen for authentication state changes
+        FirebaseAuth.onAuthStateChanged(auth, (user) => {
+            checkAdminStatus(user);
+        });
+    </script>
+</body>
+</html>

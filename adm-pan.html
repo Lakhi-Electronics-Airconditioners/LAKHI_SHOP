@@ -30,6 +30,34 @@
             padding-bottom: 15px;
         }
 
+        .admin-nav {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        .admin-nav button {
+            background-color: #f0f0f0;
+            color: #555;
+            padding: 10px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .admin-nav button.active,
+        .admin-nav button:hover {
+            background-color: #ff523b;
+            color: #fff;
+            border-color: #ff523b;
+        }
+
         .admin-section {
             background-color: #f9f9f9;
             border: 1px solid #eee;
@@ -58,7 +86,9 @@
         .form-group input[type="text"],
         .form-group input[type="email"],
         .form-group input[type="tel"],
-        .form-group input[type="password"] { /* Added password input type */
+        .form-group input[type="password"],
+        .form-group input[type="number"],
+        .form-group select { /* Added number and select input types */
             width: 100%;
             padding: 10px;
             border: 1px solid #ccc;
@@ -66,6 +96,11 @@
             font-size: 1rem;
             box-sizing: border-box;
         }
+        .form-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 5px;
+        }
+
 
         .btn-admin {
             display: inline-block;
@@ -104,6 +139,11 @@
             color: #721c24;
             border: 1px solid #f5c6cb;
         }
+        .message-box.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
 
         .hidden {
             display: none;
@@ -117,6 +157,13 @@
             }
             .admin-container h1 {
                 font-size: 2rem;
+            }
+            .admin-nav {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .admin-nav button {
+                margin-bottom: 10px;
             }
             .admin-section {
                 padding: 15px;
@@ -167,24 +214,33 @@
                 <label for="adminPassword">Password:</label>
                 <input type="password" id="adminPassword" placeholder="Enter admin password">
             </div>
-            <button class="btn-admin" onclick="checkAdminPassword()">Unlock Panel</button>
+            <button class="btn-admin" id="unlockPanelButton">Unlock Panel</button>
             <div id="passwordMessage" class="message-box"></div>
         </div>
 
         <div id="adminContent" class="hidden">
-            <div class="admin-section">
-                <h2>Search User Profile</h2>
+            <!-- Admin Navigation -->
+            <div class="admin-nav">
+                <button class="nav-button active" data-target="userManagementSection">User Management</button>
+                <button class="nav-button" data-target="addProductSection">Add Product</button>
+                <button class="nav-button" data-target="editProductSection">Edit Product</button>
+                <button class="nav-button" data-target="makeBillSection">Make Bill</button>
+                <button class="nav-button" data-target="editBillSection">Edit Bill</button>
+                <button class="nav-button" data-target="accountsWithoutCustomerCodeSection">Accounts without Customer Code</button>
+            </div>
+
+            <!-- User Management Section (Existing) -->
+            <div id="userManagementSection" class="admin-section">
+                <h2>User Management (Read/Edit Account Info)</h2>
                 <div class="form-group">
                     <label for="searchUserUid">User UID:</label>
                     <input type="text" id="searchUserUid" placeholder="Enter user's UID">
                     <small style="color:#777;">(Find UID in Firebase Authentication console)</small>
                 </div>
-                <button class="btn-admin" onclick="searchUserByUid()">Load User Profile</button>
+                <button class="btn-admin" id="searchUserButton">Load User Profile</button>
                 <div id="searchMessage" class="message-box"></div>
-            </div>
 
-            <div class="admin-section" style="margin-top: 30px;">
-                <h2>Edit User Details</h2>
+                <h3 style="margin-top: 30px;">Edit User Details</h3>
                 <p><strong>Editing User ID:</strong> <span id="editingUserIdDisplay">N/A</span></p>
                 <div class="form-group">
                     <label for="editName">Name:</label>
@@ -230,8 +286,99 @@
                     <input type="text" id="editPincode" placeholder="e.g., 380015">
                 </div>
 
-                <button class="btn-admin" onclick="saveUserDetails()">Save User Details</button>
+                <button class="btn-admin" id="saveUserDetailsButton">Save User Details</button>
                 <div id="saveMessage" class="message-box"></div>
+            </div>
+
+            <!-- Add Product Section (New) -->
+            <div id="addProductSection" class="admin-section hidden">
+                <h2>Add New Product</h2>
+                <div class="form-group">
+                    <label for="addProductName">Product Name:</label>
+                    <input type="text" id="addProductName" placeholder="e.g., Voltas 1.5 Ton 3 Star Split AC" required>
+                </div>
+                <div class="form-group">
+                    <label for="addProductSerialNo">Serial Number (Unique ID):</label>
+                    <input type="text" id="addProductSerialNo" placeholder="e.g., 245V-EAZS" required>
+                    <small style="color:#777;">(This will be the document ID in Firestore)</small>
+                </div>
+                <div class="form-group">
+                    <label for="addProductPrice">Price (₹):</label>
+                    <input type="number" id="addProductPrice" step="0.01" placeholder="e.g., 55000.00" required>
+                </div>
+                <div class="form-group">
+                    <label for="addProductType">Product Type:</label>
+                    <select id="addProductType" required>
+                        <option value="">Select Type</option>
+                        <option value="AC">AC</option>
+                        <option value="Refrigerator">Refrigerator</option>
+                        <option value="Washing Machine">Washing Machine</option>
+                        <option value="Television">Television</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="addProductImgUrl">Image URL:</label>
+                    <input type="text" id="addProductImgUrl" placeholder="e.g., https://example.com/image.jpg">
+                    <small style="color:#777;">(Leave blank for placeholder image)</small>
+                </div>
+                <div class="form-group">
+                    <label for="addProductRatingStars">Rating (0-5):</label>
+                    <input type="number" id="addProductRatingStars" step="0.1" min="0" max="5" placeholder="e.g., 4.5">
+                </div>
+                <div class="form-group">
+                    <label for="addProductRatingSource">Rating Source:</label>
+                    <input type="text" id="addProductRatingSource" placeholder="e.g., Google Reviews">
+                </div>
+                <div class="form-group">
+                    <label for="addProductRatingSourceIcon">Rating Source Icon URL:</label>
+                    <input type="text" id="addProductRatingSourceIcon" placeholder="e.g., https://example.com/icon.png">
+                </div>
+                <div class="form-group">
+                    <input type="checkbox" id="addProductHasSizeOption">
+                    <label for="addProductHasSizeOption" style="display: inline;">Has Size Option (e.g., 1.5 Ton, 2 Ton)</label>
+                </div>
+                <div id="sizeOptionsContainer" class="hidden">
+                    <p style="margin-top: 10px; font-weight: bold;">Size Options (e.g., 1.5_Ton, 2_Ton):</p>
+                    <div id="sizeOptionInputs">
+                        <!-- Dynamic size inputs will be added here -->
+                        <div class="form-group">
+                            <label>Size Key:</label>
+                            <input type="text" class="size-key-input" placeholder="e.g., 1.5_Ton">
+                            <label>Price:</label>
+                            <input type="number" class="size-price-input" step="0.01" placeholder="e.g., 55000.00">
+                            <button class="btn-admin" onclick="removeSizeOption(this)" style="background-color: #dc3545; margin-top: 0;">Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn-admin" id="addSizeOptionButton" style="background-color: #007bff;">Add Size Option</button>
+                </div>
+
+                <button class="btn-admin" id="addProductButton">Add Product</button>
+                <div id="addProductMessage" class="message-box"></div>
+            </div>
+
+            <!-- Edit Product Section (Placeholder) -->
+            <div id="editProductSection" class="admin-section hidden">
+                <h2>Edit Existing Product</h2>
+                <p>Coming soon...</p>
+            </div>
+
+            <!-- Make Bill Section (Placeholder) -->
+            <div id="makeBillSection" class="admin-section hidden">
+                <h2>Make New Bill / Quotation</h2>
+                <p>Coming soon...</p>
+            </div>
+
+            <!-- Edit Bill Section (Placeholder) -->
+            <div id="editBillSection" class="admin-section hidden">
+                <h2>Edit Existing Bill / Quotation</h2>
+                <p>Coming soon...</p>
+            </div>
+
+            <!-- Accounts without Customer Code Section (Placeholder) -->
+            <div id="accountsWithoutCustomerCodeSection" class="admin-section hidden">
+                <h2>Accounts Without Customer Code</h2>
+                <p>Coming soon...</p>
             </div>
         </div>
     </div>
@@ -284,11 +431,11 @@
     <script type="module">
         // Firebase SDK imports
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signInAnonymously, signInWithCustomToken } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, getDoc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import * as FirebaseAuth from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"; // Import all auth functions
+        import { getFirestore, doc, getDoc, setDoc, collection, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // Initialize Firebase
-        const firebaseConfig = {
+        // IMPORTANT: Replace with your actual Firebase config
+const firebaseConfig = {
             apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
             authDomain: "lakhi-airconditioners.firebaseapp.com",
             projectId: "lakhi-airconditioners",
@@ -296,18 +443,18 @@
             messagingSenderId: "284430318185",
             appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
             measurementId: "G-LB63B1FRYC"
-          };
+          };        
         const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
+        const auth = FirebaseAuth.getAuth(app); // Get auth instance from FirebaseAuth namespace
         const db = getFirestore(app);
 
-        const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
-        let currentAdminUser = null; // The currently logged-in admin user (Firebase Auth)
-        let editingUserUid = null; // The UID of the user whose profile is currently being edited
+        const appId = firebaseConfig.projectId;
+        let currentAdminUser = null;
+        let editingUserUid = null;
 
         // --- IMPORTANT: SET YOUR ADMIN PASSWORD HERE ---
         // !!! WARNING: This is INSECURE for production. Use a backend for real security. !!!
-        const ADMIN_PANEL_PASSWORD = "admu"; // <--- CHANGE THIS TO YOUR DESIRED PASSWORD
+        const ADMIN_PANEL_PASSWORD = "admU"; // <--- CHANGE THIS TO YOUR DESIRED PASSWORD
 
         // UI Element References
         const loadingMessage = document.getElementById('loadingMessage');
@@ -316,31 +463,52 @@
         const adminPasswordInput = document.getElementById('adminPassword');
         const passwordMessageDiv = document.getElementById('passwordMessage');
         const adminContent = document.getElementById('adminContent');
+        const unlockPanelButton = document.getElementById('unlockPanelButton'); // Get unlock button
 
-        const searchUserUidInput = document.getElementById('searchUserUid'); // Renamed from searchUserEmailInput
+        // Navigation
+        const navButtons = document.querySelectorAll('.admin-nav .nav-button');
+        const adminSections = document.querySelectorAll('.admin-section');
+
+        // User Management Section
+        const userManagementSection = document.getElementById('userManagementSection');
+        const searchUserUidInput = document.getElementById('searchUserUid');
+        const searchUserButton = document.getElementById('searchUserButton');
         const searchMessageDiv = document.getElementById('searchMessage');
-
         const editingUserIdDisplay = document.getElementById('editingUserIdDisplay');
         const editNameInput = document.getElementById('editName');
         const editPhoneNumberInput = document.getElementById('editPhoneNumber');
-        const editEmailInput = document.getElementById('editEmail'); // This will be disabled
+        const editEmailInput = document.getElementById('editEmail');
         const editCustomerCodeInput = document.getElementById('editCustomerCode');
-
-        // Updated input fields for combined address
         const editHouseAndFlatNumberInput = document.getElementById('editHouseAndFlatNumber');
         const editHousingAreaAndFlatNameInput = document.getElementById('editHousingAreaAndFlatName');
         const editAreaNameInput = document.getElementById('editAreaName');
         const editCityInput = document.getElementById('editCity');
         const editStateInput = document.getElementById('editState');
         const editPincodeInput = document.getElementById('editPincode');
+        const saveUserDetailsButton = document.getElementById('saveUserDetailsButton');
         const saveMessageDiv = document.getElementById('saveMessage');
 
+        // Add Product Section
+        const addProductSection = document.getElementById('addProductSection');
+        const addProductNameInput = document.getElementById('addProductName');
+        const addProductSerialNoInput = document.getElementById('addProductSerialNo');
+        const addProductPriceInput = document.getElementById('addProductPrice');
+        const addProductTypeSelect = document.getElementById('addProductType');
+        const addProductImgUrlInput = document.getElementById('addProductImgUrl');
+        const addProductRatingStarsInput = document.getElementById('addProductRatingStars');
+        const addProductRatingSourceInput = document.getElementById('addProductRatingSource');
+        const addProductRatingSourceIconInput = document.getElementById('addProductRatingSourceIcon');
+        const addProductHasSizeOptionCheckbox = document.getElementById('addProductHasSizeOption');
+        const sizeOptionsContainer = document.getElementById('sizeOptionsContainer');
+        const sizeOptionInputsContainer = document.getElementById('sizeOptionInputs');
+        const addSizeOptionButton = document.getElementById('addSizeOptionButton'); // Get add size option button
+        const addProductButton = document.getElementById('addProductButton');
+        const addProductMessageDiv = document.getElementById('addProductMessage');
+
+
         // Menu toggle function (from your existing styles)
-        var Menuitems = document.getElementById('Menuitems');
-        if (Menuitems) {
-            Menuitems.style.maxHeight = "0px";
-        }
-        function menutoggle(){
+        const Menuitems = document.getElementById('Menuitems'); // Declared as const
+        window.menutoggle = function(){ // Made globally accessible
             if(Menuitems) {
                 if(Menuitems.style.maxHeight == "0px") {
                     Menuitems.style.maxHeight = "200px";
@@ -360,16 +528,15 @@
             }, 5000);
         }
 
-        // Function to clear the edit form
-        function clearEditForm() {
+        // Function to clear the edit user form
+        function clearEditUserForm() {
             editingUserUid = null;
             editingUserIdDisplay.textContent = 'N/A';
+            searchUserUidInput.value = ''; // Clear search input as well
             editNameInput.value = '';
             editPhoneNumberInput.value = '';
             editEmailInput.value = '';
             editCustomerCodeInput.value = '';
-
-            // Clear combined address fields
             editHouseAndFlatNumberInput.value = '';
             editHousingAreaAndFlatNameInput.value = '';
             editAreaNameInput.value = '';
@@ -378,24 +545,60 @@
             editPincodeInput.value = '';
             saveMessageDiv.textContent = '';
             saveMessageDiv.className = 'message-box';
+            searchMessageDiv.textContent = '';
+            searchMessageDiv.className = 'message-box';
         }
+
+        // --- Admin Panel Core Logic ---
 
         // Check Admin Password
         function checkAdminPassword() {
             const enteredPassword = adminPasswordInput.value;
             if (enteredPassword === ADMIN_PANEL_PASSWORD) {
                 passwordProtectionDiv.classList.add('hidden');
-                // If Firebase user is already an admin, show content. Otherwise, notAdminMessage will be visible.
-                if (currentAdminUser && currentAdminUser.isAdmin) {
-                    adminContent.classList.remove('hidden');
-                } else {
-                    notAdminMessage.classList.remove('hidden');
-                }
+                // The admin check is now done by onAuthStateChanged.
+                // If we reach here, it means the user is authenticated and recognized as admin by Firestore.
+                adminContent.classList.remove('hidden');
                 showMessage(passwordMessageDiv, 'Panel unlocked!', 'success');
+                // Show default section (User Management)
+                showSection('userManagementSection');
             } else {
                 showMessage(passwordMessageDiv, 'Incorrect password.', 'error');
             }
         }
+        // Attach event listener to unlock button
+        if (unlockPanelButton) {
+            unlockPanelButton.addEventListener('click', checkAdminPassword);
+        }
+
+
+        // Navigation Logic
+        navButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                navButtons.forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+                const targetId = button.dataset.target;
+                showSection(targetId);
+            });
+        });
+
+        function showSection(targetId) {
+            adminSections.forEach(section => {
+                if (section.id === targetId) {
+                    section.classList.remove('hidden');
+                } else {
+                    section.classList.add('hidden');
+                }
+            });
+            // Clear messages when switching sections
+            passwordMessageDiv.textContent = '';
+            searchMessageDiv.textContent = '';
+            saveMessageDiv.textContent = '';
+            addProductMessageDiv.textContent = '';
+        }
+
+
+        // --- User Management Functions ---
 
         // Search user by UID
         async function searchUserByUid() {
@@ -406,7 +609,7 @@
             }
 
             showMessage(searchMessageDiv, 'Searching...', 'info');
-            clearEditForm(); // Clear previous data
+            clearEditUserForm(); // Clear previous data
 
             try {
                 const userProfileDocRef = doc(db, `artifacts/${appId}/users/${uidToSearch}/user_profiles`, "profile");
@@ -421,7 +624,6 @@
                     editEmailInput.value = userData.email || '';
                     editCustomerCodeInput.value = userData.customerCode || '';
 
-                    // Populate combined address fields
                     editHouseAndFlatNumberInput.value = userData.address?.houseAndFlatNumber || '';
                     editHousingAreaAndFlatNameInput.value = userData.address?.housingAreaAndFlatName || '';
                     editAreaNameInput.value = userData.address?.areaName || '';
@@ -437,6 +639,10 @@
                 console.error("Error loading user profile:", error);
                 showMessage(searchMessageDiv, `Error loading profile: ${error.message}`, 'error');
             }
+        }
+        // Attach event listener to search button
+        if (searchUserButton) {
+            searchUserButton.addEventListener('click', searchUserByUid);
         }
 
         // Save user details to Firestore
@@ -479,28 +685,182 @@
                 showMessage(saveMessageDiv, `Failed to save details: ${error.message}. Check Firestore rules.`, 'error');
             }
         }
+        // Attach event listener to save button
+        if (saveUserDetailsButton) {
+            saveUserDetailsButton.addEventListener('click', saveUserDetails);
+        }
+
+        // --- Add Product Functions ---
+
+        // Toggle size options container visibility
+        addProductHasSizeOptionCheckbox.addEventListener('change', () => {
+            if (addProductHasSizeOptionCheckbox.checked) {
+                sizeOptionsContainer.classList.remove('hidden');
+            } else {
+                sizeOptionsContainer.classList.add('hidden');
+                sizeOptionInputsContainer.innerHTML = ''; // Clear dynamic inputs when unchecked
+                window.addSizeOption(); // Add one default empty option back using global function
+            }
+        });
+
+        // Add a new size option input row
+        window.addSizeOption = function() { // Made global for onclick in HTML
+            const newSizeOptionDiv = document.createElement('div');
+            newSizeOptionDiv.className = 'form-group';
+            newSizeOptionDiv.innerHTML = `
+                <label>Size Key:</label>
+                <input type="text" class="size-key-input" placeholder="e.g., 1.5_Ton">
+                <label>Price:</label>
+                <input type="number" class="size-price-input" step="0.01" placeholder="e.g., 55000.00">
+                <button class="btn-admin" onclick="removeSizeOption(this)" style="background-color: #dc3545; margin-top: 0;">Remove</button>
+            `;
+            sizeOptionInputsContainer.appendChild(newSizeOptionDiv);
+        };
+        // Attach event listener to add size option button
+        if (addSizeOptionButton) {
+            addSizeOptionButton.addEventListener('click', window.addSizeOption);
+        }
+
+        // Remove a size option input row
+        window.removeSizeOption = function(buttonElement) { // Made global for onclick in HTML
+            buttonElement.closest('.form-group').remove();
+        };
+
+        // Add Product to Firestore
+        async function addNewProduct() {
+            const productName = addProductNameInput.value.trim();
+            const productSerialNo = addProductSerialNoInput.value.trim();
+            const productPrice = parseFloat(addProductPriceInput.value);
+            const productType = addProductTypeSelect.value;
+            const productImgUrl = addProductImgUrlInput.value.trim() || 'https://placehold.co/300x300/cccccc/ffffff?text=Product';
+            const productRatingStars = parseFloat(addProductRatingStarsInput.value) || 0;
+            const productRatingSource = addProductRatingSourceInput.value.trim() || null;
+            const productRatingSourceIcon = addProductRatingSourceIconInput.value.trim() || null;
+            const hasSizeOption = addProductHasSizeOptionCheckbox.checked;
+
+            if (!productName || !productSerialNo || isNaN(productPrice) || productPrice <= 0 || !productType) {
+                showMessage(addProductMessageDiv, 'Please fill in all required product fields (Name, Serial No, Price, Type).', 'error');
+                return;
+            }
+
+            // Check for existing serial number (Firestore document ID)
+            try {
+                // Correct path for products: artifacts/{appId}/public_data/products/{serial_no}
+                const productDocRef = doc(db, 'artifacts', appId, 'public_data', 'products', productSerialNo);
+                const docSnap = await getDoc(productDocRef);
+                if (docSnap.exists()) {
+                    showMessage(addProductMessageDiv, `Product with Serial Number '${productSerialNo}' already exists. Please use a unique Serial Number.`, 'error');
+                    return;
+                }
+            } catch (error) {
+                console.error("Error checking existing product:", error);
+                showMessage(addProductMessageDiv, `Error checking existing product: ${error.message}`, 'error');
+                return;
+            }
 
 
-        // Admin Access Check (Firebase Auth)
-        onAuthStateChanged(auth, async (user) => {
+            let priceSize = {};
+            let availableSizes = [];
+
+            if (hasSizeOption) {
+                const sizeKeys = document.querySelectorAll('#sizeOptionInputs .size-key-input');
+                const sizePrices = document.querySelectorAll('#sizeOptionInputs .size-price-input');
+
+                for (let i = 0; i < sizeKeys.length; i++) {
+                    const key = sizeKeys[i].value.trim();
+                    const price = parseFloat(sizePrices[i].value);
+
+                    if (key && !isNaN(price) && price > 0) {
+                        priceSize[key] = price;
+                        availableSizes.push(key);
+                    } else if (key || !isNaN(price)) { // If one part is filled, but not valid
+                        showMessage(addProductMessageDiv, 'Please ensure all size options have a valid key and price.', 'error');
+                        return;
+                    }
+                }
+                if (Object.keys(priceSize).length === 0) {
+                    showMessage(addProductMessageDiv, 'You selected "Has Size Option" but did not provide any valid size options.', 'error');
+                    return;
+                }
+            }
+
+            const newProductData = {
+                name: productName,
+                serial_no: productSerialNo, // Store as a field as well
+                price: productPrice, // Base price
+                type: productType,
+                img_url: productImgUrl,
+                rating_stars: productRatingStars,
+                rating_source: productRatingSource,
+                rating_source_icon: productRatingSourceIcon,
+                has_size_option: hasSizeOption,
+                price_size: hasSizeOption ? priceSize : null,
+                available_sizes: hasSizeOption ? availableSizes : null,
+                createdAt: new Date().toISOString()
+            };
+
+            try {
+                // Set the document with the serial_no as its ID
+                // Correct path for products: artifacts/{appId}/public_data/products
+                await setDoc(doc(db, 'artifacts', appId, 'public_data', 'products', productSerialNo), newProductData);
+                showMessage(addProductMessageDiv, `Product '${productName}' added successfully!`, 'success');
+                // Clear form
+                addProductNameInput.value = '';
+                addProductSerialNoInput.value = '';
+                addProductPriceInput.value = '';
+                addProductTypeSelect.value = '';
+                addProductImgUrlInput.value = '';
+                addProductRatingStarsInput.value = '';
+                addProductRatingSourceInput.value = '';
+                addProductRatingSourceIconInput.value = '';
+                addProductHasSizeOptionCheckbox.checked = false;
+                sizeOptionsContainer.classList.add('hidden');
+                sizeOptionInputsContainer.innerHTML = '';
+                window.addSizeOption(); // Add one default empty option back
+            } catch (error) {
+                console.error("Error adding product:", error);
+                showMessage(addProductMessageDiv, `Failed to add product: ${error.message}. Check Firestore rules and network.`, 'error');
+            }
+        }
+        // Attach event listener to add product button
+        if (addProductButton) {
+            addProductButton.addEventListener('click', addNewProduct);
+        }
+        // Initialize with one size option input if has_size_option is checked by default (or after reset)
+        document.addEventListener('DOMContentLoaded', () => {
+            if (addProductHasSizeOptionCheckbox.checked) {
+                window.addSizeOption();
+            } else {
+                // Ensure at least one empty size option is present if checkbox is unchecked by default
+                if (sizeOptionInputsContainer.children.length === 0) {
+                    window.addSizeOption();
+                }
+            }
+        });
+
+
+        // --- Admin Access Check ---
+        FirebaseAuth.onAuthStateChanged(auth, async (user) => { // Corrected usage
             loadingMessage.classList.add('hidden');
             if (user) {
-                const adminProfileRef = doc(db, `artifacts/${appId}/users/${user.uid}/user_profiles`, "profile");
+                // Check if the user's UID exists as a document in the admin_users collection
+                // Correct path: artifacts/{appId}/admin_users/{user.uid}
+                const adminDocRef = doc(db, 'artifacts', appId, 'admin_users', user.uid);
                 try {
-                    const adminDocSnap = await getDoc(adminProfileRef);
-                    if (adminDocSnap.exists() && adminDocSnap.data().isAdmin === true) {
+                    const adminDocSnap = await getDoc(adminDocRef);
+                    if (adminDocSnap.exists()) { // If the document exists, the user is an admin
                         currentAdminUser = user;
-                        currentAdminUser.isAdmin = true;
-
+                        currentAdminUser.isAdmin = true; // Set a flag
                         passwordProtectionDiv.classList.remove('hidden');
                         notAdminMessage.classList.add('hidden');
                         showMessage(passwordMessageDiv, 'Please enter the admin panel password.', 'info');
 
                     } else {
+                        notAdminMessage.textContent = 'Access Denied: Your account is not authorized as an administrator.';
                         notAdminMessage.classList.remove('hidden');
                         passwordProtectionDiv.classList.add('hidden');
                         adminContent.classList.add('hidden');
-                        console.warn("Access Denied: User is not an admin in Firestore.");
+                        console.warn("Access Denied: User is not an admin in Firestore (document not found).");
                     }
                 } catch (error) {
                     console.error("Error checking admin status:", error);
@@ -510,32 +870,10 @@
                     adminContent.classList.add('hidden');
                 }
             } else {
-                notAdminMessage.textContent = 'Access Denied: Please log in as an administrator.';
+                notAdminMessage.textContent = 'Access Denied: Please log in to an account with administrator privileges.';
                 notAdminMessage.classList.remove('hidden');
                 passwordProtectionDiv.classList.add('hidden');
                 adminContent.classList.add('hidden');
-            }
-        });
-
-        // Initial sign-in attempt for Canvas environment
-        document.addEventListener('DOMContentLoaded', async () => {
-            if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                try {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } catch (error) {
-                    console.error("Error signing in with custom token:", error);
-                    try {
-                        await signInAnonymously(auth);
-                    } catch (anonError) {
-                        console.error("Error signing in anonymously:", anonError);
-                    }
-                }
-            } else {
-                try {
-                    await signInAnonymously(auth);
-                } catch (error) {
-                    console.error("Error signing in anonymously:", error);
-                }
             }
         });
     </script>

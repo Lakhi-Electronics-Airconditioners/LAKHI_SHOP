@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Firestore Uploader</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        .uploader-container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .uploader-container h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .uploader-container p {
+            margin-bottom: 20px;
+            color: #666;
+        }
+
+        .btn-upload {
+            background: #4CAF50;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            margin: 10px;
+            transition: background 0.3s ease;
+        }
+
+        .btn-upload:hover {
+            background: #45a049;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .message-box.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="AC-only.html">AC Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+    <div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+
+    <div class="uploader-container">
+        <h1>Firestore Data Uploader</h1>
+        <p>Use these buttons to upload your product and bill data from local JS files to Firestore.</p>
+        <p><strong>Note:</strong> This will overwrite existing data with the same IDs in Firestore.</p>
+        
+        <button id="uploadProductsBtn" class="btn-upload">Upload Products Data</button>
+        <button id="uploadBillsBtn" class="btn-upload">Upload Bills Data</button>
+
+        <div id="messageBox" class="message-box" style="display: none;"></div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact Info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import * as FirebaseAuth from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js"; // Import all auth functions
+        import { getFirestore, doc, setDoc, collection } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // IMPORTANT: These variables are provided by the Canvas environment.
+        // If running outside Canvas, replace with your actual Firebase config.
+        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {
+            // Placeholder config if not in Canvas environment
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const appId = typeof __app_id !== 'undefined' ? __app_id : firebaseConfig.projectId; // Use Canvas app ID or Firebase project ID
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = FirebaseAuth.getAuth(app); // Get auth instance from FirebaseAuth namespace
+        const db = getFirestore(app);
+
+        // Menu toggle function (globally accessible for consistency)
+        const Menuitems = document.getElementById('Menuitems');
+        window.menutoggle = function() {
+            if (Menuitems) {
+                if (Menuitems.style.maxHeight === "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        };
+
+        // Data from your products_data.js (embedded for upload)
+        const productsData = [
+            {
+                "serial_no": "245V-EAZS",
+                "name": "Voltas 1.5 Ton 3 Star Split AC",
+                "price": "55000",
+                "rating_stars": 4.5,
+                "rating_source_icon": "img/OCOL/amazon.png",
+                "type": "AC",
+                "AC-TR": 1.5,
+                "AC-Type": "Split",
+                "AC-STAR": 3,
+                "description": "A high-performance split AC from Voltas, perfect for medium-sized rooms, featuring a 3-star energy rating for efficient cooling. Includes a 1-year comprehensive warranty on the product and 5-year warranty on the compressor.",
+                "has_size_option": false,
+                "available_sizes": null,
+                "price_size": null
+            },
+            {
+                "serial_no": "987H-INV5",
+                "name": "Hitachi 2.0 Ton 5 Star Inverter AC",
+                "price": "72000",
+                "rating_stars": 4.8,
+                "rating_source_icon": "img/OCOL/indiamart.png",
+                "type": "AC",
+                "AC-TR": 2.0,
+                "AC-Type": "Inverter Split",
+                "AC-STAR": 5,
+                "description": "Experience superior cooling and energy savings with Hitachi's 5-star...",
+                "has_size_option": false,
+                "available_sizes": null,
+                "price_size": null
+            },
+            {
+                "serial_no": "D318PCCIBS",
+                "name": "Hitachi 1.5 Ton 3 Star 2025",
+                "price": "36990",
+                "rating_stars": 4,
+                "rating_source_icon": "img/OCOL/filpkart.png",
+                "type": "AC",
+                "AC-TR": 1.5,
+                "AC-Type": "Split",
+                "AC-STAR": 3,
+                "description": "Enjoy better airflow with 4-Way Swing (upgraded from 2024). Features ice Clean (FrostWash) for cleaner air and Penta Sensor for smart cooling. Benefit from convenient features like Filter Clean Indicator and Long Air Throw. Built for hot weather (up to 52°C) with a durable 100% Copper condenser.",
+                "has_size_option": false,
+                "available_sizes": null,
+                "price_size": null
+            },
+            {
+                "serial_no": "QA55QE1CAKLXL",
+                "name": "SAMSUNG 55INCH QLED Q60C",
+                "price": "65000",
+                "rating_stars": 4.5,
+                "rating_source_icon": "img/OCOL/filpkart.png",
+                "type": "TV",
+                "description": "A 55-inch QLED TV from Samsung, offering vibrant colors and smart features for an immersive viewing experience.",
+                "has_size_option": false,
+                "available_sizes": null,
+                "price_size": null
+            }
+        ];
+
+        // Data from your data.js (embedded for upload)
+        const billData = {
+            "MU401SSANAMD380015": {
+                "name": "Mitansh Udernani",
+                "addr1": "123, Main Street, Near Park",
+                "ct": "Ahmedabad, Gujarat",
+                "pincode": "380006",
+                "20003": { // Quotation
+                    "type": 2, // 2 = Quotation
+                    "products": [
+                        { "PN": 1, "SR": "LAPHP001", "name": "HP Laptop 15s", "price": 55000, "qty": 1 },
+                        { "PN": 2, "SR": "MONLG002", "name": "LG 27-inch Monitor", "price": 18000, "qty": 2 },
+                        { "PN": 3, "SR": "KEYLOG003", "name": "Logitech Wireless Keyboard", "price": 2500, "qty": 1 }
+                    ],
+                    "billSubtotal": 93500, // Pre-set subtotal for this quote
+                    "billTax": "₹8,415 (9% GST)", // Pre-set tax
+                    "billTotal": "₹1,01,915" // Pre-set total
+                },
+                "10001": { // Invoice
+                    "type": 1, // 1 = Invoice
+                    "products": [
+                        { "PN": 1, "SR": "PHNSAM001", "name": "Samsung Galaxy S24", "price": 80000, "qty": 1 },
+                        { "PN": 2, "SR": "HEADSONY001", "name": "Sony WH-1000XM5 Headphones", "price": 28000, "qty": 1 }
+                    ],
+                    "billSubtotal": 108000,
+                    "billTax": "₹9,720 (9% GST)",
+                    "billTotal": "₹1,17,720"
+                },
+                "MYCUSTOMBILL": { // Custom Title
+                    "title": "C",
+                    "Cname": "Project Alpha Summary",
+                    "products": [
+                        { "PN": 1, "SR": "SVCWEB001", "name": "Web Development (Phase 1)", "price": 150000, "qty": 1 },
+                        { "PN": 2, "SR": "SVCSEO001", "name": "SEO Optimization Package", "price": 25000, "qty": 1 }
+                    ],
+                    "billSubtotal": 175000,
+                    "billTax": "Included in Price",
+                    "billTotal": "₹1,75,000"
+                }
+            },
+            "ANOTHERCUST": {
+                "name": "Another Customer",
+                "addr1": "456, New Road, City Center",
+                "ct": "Mumbai, Maharashtra",
+                "pincode": "400001",
+                "00001": { // Quotation
+                    "type": 2,
+                    "products": [
+                        { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }
+                    ],
+                    // For this quote, we'll let subtotal be calculated dynamically, and tax/total use default text
+                    // No billSubtotal, billTax, billTotal fields means dynamic calculation/default text
+                }
+            }
+        };
+
+        const uploadProductsBtn = document.getElementById('uploadProductsBtn');
+        const uploadBillsBtn = document.getElementById('uploadBillsBtn');
+        const messageBox = document.getElementById('messageBox');
+
+        function showMessage(message, type = 'error') {
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type}`;
+            messageBox.style.display = 'block';
+            setTimeout(() => {
+                messageBox.style.display = 'none';
+            }, 5000);
+        }
+
+        // Authenticate anonymously on page load
+        async function authenticateAndInitialize() {
+            try {
+                // Use __initial_auth_token if available (Canvas environment)
+                // Otherwise, sign in anonymously
+                if (typeof __initial_auth_token !== 'undefined') {
+                    await FirebaseAuth.signInWithCustomToken(auth, __initial_auth_token); // Corrected usage
+                    console.log("Signed in with custom token.");
+                } else {
+                    await FirebaseAuth.signInAnonymously(auth); // Corrected usage
+                    console.log("Signed in anonymously.");
+                }
+                showMessage('Firebase initialized and authenticated.', 'info');
+            } catch (error) {
+                console.error("Firebase authentication error:", error);
+                showMessage(`Firebase auth error: ${error.message}`, 'error');
+            }
+        }
+
+        async function uploadProductsData() {
+            if (!auth.currentUser) {
+                showMessage('Not authenticated. Please refresh or check Firebase setup.', 'error');
+                return;
+            }
+            showMessage('Uploading products data...', 'info');
+            let successCount = 0;
+            let errorCount = 0;
+
+            for (const product of productsData) {
+                try {
+                    // Use serial_no as document ID
+                    const productDocRef = doc(db, `artifacts/${appId}/public/products`, product.serial_no);
+                    await setDoc(productDocRef, product);
+                    successCount++;
+                } catch (error) {
+                    console.error(`Error uploading product ${product.serial_no}:`, error);
+                    errorCount++;
+                }
+            }
+            showMessage(`Products upload complete: ${successCount} successful, ${errorCount} failed.`, errorCount > 0 ? 'error' : 'success');
+        }
+
+        async function uploadBillData() {
+            if (!auth.currentUser) {
+                showMessage('Not authenticated. Please refresh or check Firebase setup.', 'error');
+                return;
+            }
+            showMessage('Uploading bill data...', 'info');
+            let customerSuccessCount = 0;
+            let customerErrorCount = 0;
+            let billSuccessCount = 0;
+            let billErrorCount = 0;
+
+            for (const customerCode in billData) {
+                if (billData.hasOwnProperty(customerCode)) {
+                    const customerInfo = billData[customerCode];
+                    const customerDocRef = doc(db, `artifacts/${appId}/public/customers`, customerCode);
+
+                    try {
+                        // Extract customer's direct properties and exclude bill objects
+                        const customerDetails = {
+                            name: customerInfo.name,
+                            addr1: customerInfo.addr1,
+                            ct: customerInfo.ct,
+                            pincode: customerInfo.pincode
+                        };
+                        await setDoc(customerDocRef, customerDetails);
+                        customerSuccessCount++;
+
+                        // Upload individual bills as subcollections
+                        for (const billId in customerInfo) {
+                            // Skip direct customer info properties
+                            if (customerInfo.hasOwnProperty(billId) &&
+                                billId !== "name" && billId !== "addr1" && billId !== "ct" && billId !== "pincode") {
+                                
+                                const bill = customerInfo[billId];
+                                const billDocRef = doc(db, `artifacts/${appId}/public/customers/${customerCode}/bills`, billId);
+                                
+                                // Ensure all data is Firestore-compatible. If 'products' array contains complex objects
+                                // that Firestore doesn't like directly, you might need to stringify them.
+                                // However, the current structure of products seems fine for direct storage.
+                                await setDoc(billDocRef, bill);
+                                billSuccessCount++;
+                            }
+                        }
+                    } catch (error) {
+                        console.error(`Error uploading customer ${customerCode} or their bills:`, error);
+                        customerErrorCount++;
+                        // If customer fails, all their bills are considered failed for this count
+                        for (const billId in customerInfo) {
+                            if (customerInfo.hasOwnProperty(billId) &&
+                                billId !== "name" && billId !== "addr1" && billId !== "ct" && billId !== "pincode") {
+                                billErrorCount++;
+                            }
+                        }
+                    }
+                }
+            }
+            showMessage(`Bills upload complete: ${customerSuccessCount} customers, ${billSuccessCount} bills successful. ${customerErrorCount} customers, ${billErrorCount} bills failed.`, (customerErrorCount + billErrorCount) > 0 ? 'error' : 'success');
+        }
+
+        // Event Listeners
+        uploadProductsBtn.addEventListener('click', uploadProductsData);
+        uploadBillsBtn.addEventListener('click', uploadBillData);
+
+        // Initialize Firebase on page load
+        authenticateAndInitialize();
+    </script>
+</body>
+</html>

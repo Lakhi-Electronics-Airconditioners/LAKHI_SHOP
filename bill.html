@@ -4,18 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lakhi Airconditioners | Bill Details</title>
-    <!-- Favicon from cart.html -->
+    <!-- Favicon -->
     <link rel="icon" href="img/1x1-logo.png">
-    <!-- Main stylesheet (styles.css) -->
+    <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Poppins font from cart.html -->
+    <!-- Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome from cart.html -->
+    <!-- Font Awesome -->
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
 </head>
 <body>
-    <!-- Header Navigation from cart.html -->
+    <!-- Header Navigation -->
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
@@ -27,23 +27,23 @@
                         <li><a href="products.html">All Products</a></li>
                         <li><a href="contact.html">Contact Us</a></li>
                         <li><a href="account.html">Account</a></li>
+                        <li><a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
                     </ul>
                 </nav>
-                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
             </div>
         </div>
     </div>
     <div class="color-NAV"><br><br></div>
-    <Div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></Div>
+    <div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
 
-    <!-- Main content area, mimicking cart.html's small-container -->
+    <!-- Main content area -->
     <div class="small-container cart-page">
-        <!-- Bill Title, styled like "Your Cart" -->
+        <!-- Bill Title -->
         <h1 id="billTitle" class="title" style="font-size: xx-large;">Loading Bill...</h1>
         <br>
 
-        <!-- Customer Details Section, styled similarly to the product code checker in cart.html -->
+        <!-- Customer Details Section -->
         <div class="customer-info" style="margin-bottom: 30px; padding: 20px; border: 1px solid #eee; border-radius: 8px; background-color: #f9f9f9;">
             <h3 style="margin-bottom: 15px; color: #333;">Customer Details</h3>
             <p><span>Name:</span> <span id="customerName">N/A</span></p>
@@ -68,7 +68,7 @@
         </table>
         <p id="noProductsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">No products found for this bill.</p>
 
-        <!-- Total Price section, directly copied from cart.html -->
+        <!-- Total Price section -->
         <div class="total-price">
             <table>
                 <tr>
@@ -87,7 +87,7 @@
         </div>
     </div>
 
-    <!-- Footer from cart.html -->
+    <!-- Footer -->
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -117,7 +117,7 @@
                         <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
                         <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
                     </ul>
-                    <h3 style="margin-top: 20px">Contact info</h3>
+                    <h3 style="margin-top: 20px">Contact Info</h3>
                     <ul>
                         <li><a href="tel:+919825513000">+919825513000</a></li>
                         <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
@@ -133,210 +133,215 @@
         </div>
     </div>
 
+    <!-- IMPORTANT: Ensure data.js and products_data.js are loaded before this script -->
+    <script src="data.js"></script>
+    <script src="products_data.js"></script>
+    
     <script>
-        // Menu toggle function from cart.html
+        // Menu toggle function from the template
         var Menuitems = document.getElementById('Menuitems');
-        Menuitems.style.maxHeight = "0px"; // Initialize closed
-
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px";
-            } else {
-                Menuitems.style.maxHeight = "0px";
-            }
+        // Ensure Menuitems exists before setting style
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px"; // Initialize closed
         }
 
-        // For demonstration, window.billData is defined directly here.
-        window.billData = {
-            "MU401SSANAMD380015": {
-                "name": "Mitansh Udernani",
-                "addr1": "123, Main Street, Near Park",
-                "ct": "Ahmedabad, Gujarat",
-                "pincode": "380006",
-                "20003": { // Quotation
-                    "type": 2, // 2 = Quotation
-                    "products": [
-                        { "PN": 1, "SR": "LAPHP001", "name": "HP Laptop 15s", "price": 55000, "qty": 1 },
-                        { "PN": 2, "SR": "MONLG002", "name": "LG 27-inch Monitor", "price": 18000, "qty": 2 },
-                        { "PN": 3, "SR": "KEYLOG003", "name": "Logitech Wireless Keyboard", "price": 2500, "qty": 1 }
-                    ],
-                    "billSubtotal": 93500, // Pre-set subtotal for this quote
-                    "billTax": "₹8,415 (9% GST)", // Pre-set tax
-                    "billTotal": "₹1,01,915" // Pre-set total
-                },
-                "10001": { // Invoice
-                    "type": 1, // 1 = Invoice
-                    "products": [
-                        { "PN": 1, "SR": "PHNSAM001", "name": "Samsung Galaxy S24", "price": 80000, "qty": 1 },
-                        { "PN": 2, "SR": "HEADSONY001", "name": "Sony WH-1000XM5 Headphones", "price": 28000, "qty": 1 }
-                    ],
-                    "billSubtotal": 108000,
-                    "billTax": "₹9,720 (9% GST)",
-                    "billTotal": "₹1,17,720"
-                },
-                "MYCUSTOMBILL": { // Custom Title
-                    "title": "C",
-                    "Cname": "Project Alpha Summary",
-                    "products": [
-                        { "PN": 1, "SR": "SVCWEB001", "name": "Web Development (Phase 1)", "price": 150000, "qty": 1 },
-                        { "PN": 2, "SR": "SVCSEO001", "name": "SEO Optimization Package", "price": 25000, "qty": 1 }
-                    ],
-                    "billSubtotal": 175000,
-                    "billTax": "Included in Price",
-                    "billTotal": "₹1,75,000"
-                }
-            },
-            "ANOTHERCUST": {
-                "name": "Another Customer",
-                "addr1": "456, New Road, City Center",
-                "ct": "Mumbai, Maharashtra",
-                "pincode": "400001",
-                "00001": { // Quotation
-                    "type": 2,
-                    "products": [
-                        { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }
-                    ],
-                    // For this quote, we'll let subtotal be calculated dynamically, and tax/total use default text
-                    // No billSubtotal, billTax, billTotal fields means dynamic calculation/default text
+        function menutoggle(){
+            if(Menuitems) { // Check again if Menuitems exists
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
                 }
             }
-        };
+        }
 
         document.addEventListener('DOMContentLoaded', () => {
             const params = new URLSearchParams(window.location.search);
             let billTitle = "Bill Details";
             let customer = { name: 'N/A', addr1: 'N/A', ct: 'N/A', pincode: 'N/A' };
             let products = [];
-            let calculatedSubtotal = 0; // Renamed to avoid conflict with pre-set billSubtotal
+            let calculatedSubtotal = 0;
 
-            // Default values for tax and total, can be overridden by Data.js
+            // Default values for tax and total, can be overridden by Data.js or URL params
             let displaySubtotal = '₹0.00';
             let displayTax = '*GET TOTAL BY CONTACTING US*';
             let displayTotal = '*GET TOTAL BY CONTACTING US*';
+            
+            const customerCodeParam = params.get('ccode'); // New parameter for customer code lookup
+            const productsListParam = params.get('products'); // New parameter for product list
+            const infoParam = params.get('info'); // General info/title override
 
-            const dataParam = params.get('Data');
-            const billParam = params.get('Bill');
-            const infoParam = params.get('info');
-
-            if (dataParam) {
-                const dataParts = dataParam.split('?for?');
-                if (dataParts.length === 2) {
-                    const customerCode = dataParts[0];
-                    const quotationIdentifier = dataParts[1];
-
-                    const customerData = window.billData[customerCode];
-                    if (customerData) {
-                        customer.name = customerData.name || 'N/A';
-                        customer.addr1 = customerData.addr1 || 'N/A';
-                        customer.ct = customerData.ct || 'N/A';
-                        customer.pincode = customerData.pincode || 'N/A';
-
-                        const quotationData = customerData[quotationIdentifier];
-                        if (quotationData) {
-                            if (quotationData.type === 1) {
-                                billTitle = "Invoice";
-                            } else if (quotationData.type === 2) {
-                                billTitle = "Quotation";
-                            } else if (quotationData.title === "C" && quotationData.Cname) {
-                                billTitle = quotationData.Cname;
-                            } else {
-                                billTitle = infoParam || "Bill Details";
-                            }
-
-                            if (quotationData.products && Array.isArray(quotationData.products)) {
-                                products = quotationData.products;
-                            }
-
-                            // --- Check for pre-set subtotal, tax, and total from Data.js ---
-                            if (quotationData.billSubtotal !== undefined) {
-                                displaySubtotal = `₹${parseFloat(quotationData.billSubtotal).toLocaleString('en-IN')}`;
-                            }
-                            if (quotationData.billTax !== undefined) {
-                                displayTax = quotationData.billTax;
-                            }
-                            if (quotationData.billTotal !== undefined) {
-                                displayTotal = quotationData.billTotal;
-                            }
-
-                        } else {
-                            billTitle = infoParam || "Bill Details (Quotation Not Found)";
-                            document.getElementById('noProductsMessage').textContent = `Quotation '${quotationIdentifier}' not found for customer '${customerCode}'.`;
-                            document.getElementById('noProductsMessage').style.display = 'block';
-                        }
-                    } else {
-                        billTitle = infoParam || "Bill Details (Customer Not Found)";
-                        document.getElementById('noProductsMessage').textContent = `Customer '${customerCode}' not found in Data.js.`;
-                        document.getElementById('noProductsMessage').style.display = 'block';
-                    }
+            // --- 1. Determine Customer Details ---
+            if (customerCodeParam) {
+                // Attempt to load customer from data.js
+                const customerData = window.billData ? window.billData[customerCodeParam] : null;
+                if (customerData) {
+                    customer.name = customerData.name || 'N/A';
+                    customer.addr1 = customerData.addr1 || 'N/A';
+                    customer.ct = customerData.ct || 'N/A';
+                    customer.pincode = customerData.pincode || 'N/A';
+                    // If a specific bill ID is also needed from data.js, it would be handled here
+                    // For now, 'ccode' only pulls customer details, not a specific bill's products.
+                    // If you need a specific bill's products from data.js, you'd need another parameter
+                    // like 'billId' and logic to fetch products from customerData[billId].products
                 } else {
-                    billTitle = infoParam || "Bill Details (Invalid Data Parameter)";
-                    document.getElementById('noProductsMessage').textContent = `Invalid 'Data' parameter format. Expected 'CUSTOMERCODE?for?QUOTATION_IDENTIFIER'.`;
-                    document.getElementById('noProductsMessage').style.display = 'block';
+                    console.warn(`Customer with code '${customerCodeParam}' not found in data.js. Checking URL parameters for customer info.`);
+                    // Fallback to URL parameters if customer code not found
+                    customer.name = params.get('customerName') || 'N/A';
+                    customer.addr1 = params.get('customerAddr1') || 'N/A';
+                    customer.ct = params.get('customerCt') || 'N/A';
+                    customer.pincode = params.get('customerPincode') || 'N/A';
                 }
-            } else if (billParam) {
-                // Scenario 2: Direct URL Product Mode (Bill parameter present)
-                billTitle = infoParam || "Dynamic Bill";
-
+            } else {
+                // If no customer code, get customer details directly from URL parameters
                 customer.name = params.get('customerName') || 'N/A';
                 customer.addr1 = params.get('customerAddr1') || 'N/A';
                 customer.ct = params.get('customerCt') || 'N/A';
                 customer.pincode = params.get('customerPincode') || 'N/A';
+            }
 
-                const productStrings = billParam.split('&');
-                let currentProduct = {};
-                productStrings.forEach(str => {
-                    const [key, value] = str.split('=');
-                    if (key && value) {
-                        const decodedValue = decodeURIComponent(value);
-                        if (key === 'PN') {
-                            if (Object.keys(currentProduct).length > 0) {
-                                products.push(currentProduct);
+            // --- 2. Determine Products ---
+            if (productsListParam) {
+                const productDefinitions = productsListParam.split('||'); // Split by double pipe for each product
+                let tempProducts = [];
+
+                productDefinitions.forEach(productDefString => {
+                    const productParams = new URLSearchParams(productDefString);
+                    const type = productParams.get('type');
+
+                    if (type === 'SR') {
+                        // Product lookup from products_data.js
+                        const serialNo = productParams.get('sr');
+                        const quantity = parseInt(productParams.get('qty'), 10) || 1;
+
+                        if (serialNo && window.allProductsData && Array.isArray(window.allProductsData)) {
+                            const fullProduct = window.allProductsData.find(p => p.serial_no === serialNo);
+                            if (fullProduct) {
+                                tempProducts.push({
+                                    PN: fullProduct.serial_no, // Using serial_no as PN for consistency with table
+                                    SR: fullProduct.serial_no,
+                                    name: fullProduct.name,
+                                    price: fullProduct.price,
+                                    qty: quantity
+                                });
+                            } else {
+                                console.warn(`Product with Serial No: ${serialNo} not found in products_data.js.`);
                             }
-                            currentProduct = { PN: parseInt(decodedValue) };
                         } else {
-                            // Convert key to lowercase to match expected object property names
-                            currentProduct[key.toLowerCase()] = decodedValue;
+                            console.warn(`Missing serial number or products_data.js not loaded for SR type product: ${productDefString}`);
                         }
+                    } else if (type === 'DIRECT') {
+                        // Product defined directly in URL
+                        const name = productParams.get('name');
+                        const price = parseFloat(productParams.get('price'));
+                        const quantity = parseInt(productParams.get('qty'), 10) || 1;
+                        const sr_opt = productParams.get('sr_opt'); // Optional serial number for direct products
+
+                        if (name && !isNaN(price)) {
+                            tempProducts.push({
+                                PN: sr_opt || 'N/A', // Use optional SR as PN or N/A
+                                SR: sr_opt || 'N/A',
+                                name: name,
+                                price: price,
+                                qty: quantity
+                            });
+                        } else {
+                            console.warn(`Invalid or incomplete DIRECT type product: ${productDefString}`);
+                        }
+                    } else {
+                        console.warn(`Unknown product type or malformed product definition: ${productDefString}`);
                     }
                 });
-                if (Object.keys(currentProduct).length > 0) {
-                    products.push(currentProduct);
-                }
-
-                products = products.map(p => ({ ...p, qty: p.qty ? parseInt(p.qty) : 1 })); // Use 'qty' here
-
-                // Calculate subtotal dynamically for direct URL bills
-                products.forEach(product => {
-                    const price = parseFloat(product.price) || 0;
-                    const qty = parseInt(product.qty) || 1;
-                    calculatedSubtotal += (price * qty);
-                });
-                displaySubtotal = `₹${calculatedSubtotal.toLocaleString('en-IN')}`;
-
+                products = tempProducts; // Assign parsed products
             } else {
-                billTitle = infoParam || "No Bill Data Provided";
-                document.getElementById('noProductsMessage').textContent = "Please provide 'Data' or 'Bill' parameters in the URL.";
+                console.info("No 'products' parameter found in URL for dynamic product list.");
+            }
+
+            // --- 3. Handle Legacy 'Data' and 'Bill' parameters if 'products' is not used ---
+            // This section is kept for backward compatibility with your previous URL structures.
+            // If 'products' parameter is used, this block will be skipped.
+            if (!productsListParam) {
+                const dataParam = params.get('Data'); // Original parameter for data.js lookup
+                const billParam = params.get('Bill'); // Original parameter for dynamic products
+
+                if (dataParam) {
+                    // Original Scenario 1: Data lookup from data.js (for customer AND products)
+                    const dataParts = dataParam.split('?for?');
+                    if (dataParts.length === 2) {
+                        const customerCode = dataParts[0];
+                        const quotationIdentifier = dataParts[1];
+
+                        const customerData = window.billData ? window.billData[customerCode] : null;
+
+                        if (customerData) {
+                            // Overwrite customer details if found via dataParam
+                            customer.name = customerData.name || 'N/A';
+                            customer.addr1 = customerData.addr1 || 'N/A';
+                            customer.ct = customerData.ct || 'N/A';
+                            customer.pincode = customerData.pincode || 'N/A';
+
+                            const quotationData = customerData[quotationIdentifier];
+                            if (quotationData) {
+                                if (quotationData.products && Array.isArray(quotationData.products)) {
+                                    products = quotationData.products;
+                                }
+
+                                // Check for pre-set subtotal, tax, and total from Data.js
+                                if (quotationData.billSubtotal !== undefined) {
+                                    displaySubtotal = `₹${parseFloat(quotationData.billSubtotal).toLocaleString('en-IN')}`;
+                                }
+                                if (quotationData.billTax !== undefined) {
+                                    displayTax = quotationData.billTax;
+                                }
+                                if (quotationData.billTotal !== undefined) {
+                                    displayTotal = quotationData.billTotal;
+                                }
+                            }
+                        }
+                    }
+                } else if (billParam) {
+                    // Original Scenario 2: Dynamic Bill from 'Bill' parameter (for customer AND products)
+                    // This logic is simplified as the new 'products' parameter handles this more robustly.
+                    // If you still need the old 'PN=X&name=Y' parsing, it would go here.
+                    // For now, if 'products' is not used, and 'billParam' is, it will just show default messages.
+                    billTitle = infoParam || "Dynamic Bill (Legacy)";
+                    document.getElementById('noProductsMessage').textContent = "Legacy 'Bill' parameter detected. Please use the new 'products' parameter for dynamic bills.";
+                    document.getElementById('noProductsMessage').style.display = 'block';
+                }
+            }
+
+
+            // --- 4. Finalize Bill Title ---
+            if (infoParam) {
+                billTitle = infoParam;
+            } else if (customerCodeParam) {
+                billTitle = `Bill for ${customer.name}`;
+            } else if (products.length > 0) {
+                billTitle = "Dynamic Bill";
+            } else {
+                billTitle = "No Bill Data Provided";
+                document.getElementById('noProductsMessage').textContent = "Please provide 'ccode' or 'products' parameters in the URL, or use legacy 'Data' parameter.";
                 document.getElementById('noProductsMessage').style.display = 'block';
             }
 
-            document.getElementById('billTitle').textContent = billTitle;
 
+            // --- 5. Update HTML Elements ---
+            document.getElementById('billTitle').textContent = billTitle;
             document.getElementById('customerName').textContent = customer.name;
             document.getElementById('customerAddr1').textContent = customer.addr1;
             document.getElementById('customerCt').textContent = customer.ct;
             document.getElementById('customerPincode').textContent = customer.pincode;
 
             const productTableBody = document.getElementById('productTableBody');
-            productTableBody.innerHTML = '';
-            let currentProductsTotal = 0; // This will sum up product totals regardless of pre-set billSubtotal
-
+            productTableBody.innerHTML = ''; // Clear existing rows
+            
             if (products.length > 0) {
                 products.forEach(product => {
                     const row = document.createElement('tr');
                     const price = parseFloat(product.price) || 0;
-                    const qty = parseInt(product.qty) || 1; // Use 'qty' here
+                    const qty = parseInt(product.qty) || 1;
                     const itemTotal = price * qty;
-                    currentProductsTotal += itemTotal; // Always calculate this for individual product rows
+                    calculatedSubtotal += itemTotal; // Sum up for dynamically calculated subtotal
 
                     row.innerHTML = `
                         <td>
@@ -346,7 +351,7 @@
                                     <small>PN: ${product.PN || 'N/A'}</small>
                                     <p>${product.name || 'N/A'}</p>
                                     <small>Price: ₹${price.toFixed(2)}</small>
-                                    <br><small>SR: ${product.sr || 'N/A'}</small> <!-- Use 'sr' here -->
+                                    <br><small>SR: ${product.SR || 'N/A'}</small>
                                 </div>
                             </div>
                         </td>
@@ -358,11 +363,17 @@
                 });
                 document.getElementById('noProductsMessage').style.display = 'none';
             } else {
+                // If no products are found after all parsing attempts
                 document.getElementById('noProductsMessage').style.display = 'block';
             }
 
-            // Populate the total price section
-            document.getElementById('billSubtotal').textContent = displaySubtotal;
+            // Populate the total price section, prioritizing pre-set values from data.js if applicable
+            // Otherwise, use dynamically calculated subtotal. Tax and Total remain as contact us.
+            if (displaySubtotal === '₹0.00' && calculatedSubtotal > 0) {
+                 document.getElementById('billSubtotal').textContent = `₹${calculatedSubtotal.toLocaleString('en-IN')}`;
+            } else {
+                 document.getElementById('billSubtotal').textContent = displaySubtotal;
+            }
             document.getElementById('billTax').textContent = displayTax;
             document.getElementById('billGrandTotal').textContent = displayTotal;
         });

@@ -95,7 +95,7 @@
                         <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
                         <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
                     </ul>
-                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <h3 style="margin-top: 20px">Contact info</h3>
                     <ul>
                         <li><a href="tel:+919825513000">+919825513000</a></li>
                         <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
@@ -121,7 +121,7 @@
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Added getDoc
 
         // IMPORTANT: Replace with your actual Firebase config for Live Server
         const firebaseConfig = {
@@ -260,20 +260,19 @@
         });
 
         // Menu toggle function from the template
-        var Menuitems = document.getElementById('Menuitems');
-        if (Menuitems) {
-            Menuitems.style.maxHeight = "0px";
-        }
+        // Declare Menuitems in a scope accessible by window.menutoggle
+        const Menuitems = document.getElementById('Menuitems');
 
-        function menutoggle(){
-            if(Menuitems) {
-                if(Menuitems.style.maxHeight == "0px") {
+        // Make menutoggle globally accessible
+        window.menutoggle = function() {
+            if (Menuitems) {
+                if (Menuitems.style.maxHeight == "0px") {
                     Menuitems.style.maxHeight = "200px";
                 } else {
                     Menuitems.style.maxHeight = "0px";
                 }
             }
-        }
+        };
     </script>
 </body>
 </html>

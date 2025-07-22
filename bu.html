@@ -3,232 +3,721 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bill URL Maker</title>
+    <title>Lakhi Airconditioners | Bill URL Generator</title>
+    <link rel="icon" href="img/1x1-logo.png">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
     <style>
-        /* Ccode */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f4;
+        /* Specific styles for the Bill Generator */
+        .generator-container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        .generator-container h1 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .section-title {
+            font-size: 1.8rem;
+            color: #555;
+            margin-top: 30px;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #555;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="number"],
+        .form-group textarea {
+            width: calc(100% - 22px); /* Account for padding and border */
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box; /* Include padding and border in the element's total width and height */
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .radio-group {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .radio-group label {
+            margin-bottom: 0;
+            display: flex;
+            align-items: center;
+            font-weight: normal;
             color: #333;
         }
-        .container {
-            background-color: #fff;
-            padding: 25px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 30px auto;
+
+        .radio-group input[type="radio"] {
+            margin-right: 8px;
         }
-        h1, h2 {
-            color: #0056b3;
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-        input[type="text"],
-        input[type="number"] {
-            width: calc(100% - 22px);
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            box-sizing: border-box; /* Ensures padding doesn't add to total width */
-        }
-        button {
-            background-color: #007bff;
-            color: white;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            width: 100%;
-            transition: background-color 0.3s ease;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #outputUrlContainer {
-            margin-top: 25px;
+
+        .customer-input-fields,
+        .product-input-fields,
+        .datajs-bill-fields,
+        .bill-title-fields { /* New style for bill title section */
+            border: 1px solid #f0f0f0;
             padding: 15px;
-            background-color: #e9ecef;
-            border-radius: 5px;
-            word-wrap: break-word; /* Allows long URLs to wrap */
-        }
-        #outputUrl {
-            font-family: 'Courier New', monospace;
-            color: #004085;
-            font-size: 0.9em;
-        }
-        .item-input-group {
-            border: 1px solid #e0e0e0;
-            padding: 10px;
-            margin-bottom: 15px;
-            border-radius: 5px;
+            border-radius: 8px;
             background-color: #fcfcfc;
-        }
-        .item-input-group label {
-            font-size: 0.9em;
-            margin-bottom: 5px;
-        }
-        .add-item-btn, .remove-item-btn {
-            background-color: #28a745;
             margin-top: 10px;
-            width: auto;
-            padding: 8px 15px;
-            font-size: 0.9em;
-            display: inline-block;
         }
-        .remove-item-btn {
-            background-color: #dc3545;
-            margin-left: 10px;
+
+        .product-row {
+            border: 1px solid #e0e0e0;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            background-color: #f5f5f5;
+            position: relative; /* For the remove button */
         }
-        .add-item-btn:hover {
-            background-color: #218838;
+
+        .product-row .remove-product-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff523b;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: background 0.3s;
         }
-        .remove-item-btn:hover {
-            background-color: #c82333;
+
+        .product-row .remove-product-btn:hover {
+            background: #e04a36;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .btn-group .btn {
+            padding: 12px 25px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            text-decoration: none; /* For anchor tags styled as buttons */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .btn-primary {
+            background: #ff523b;
+            color: white;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            background: #e04a36;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+            border: none;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+            transform: translateY(-2px);
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .generator-container {
+                margin: 20px auto;
+                padding: 20px;
+            }
+
+            .generator-container h1 {
+                font-size: 2rem;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Bill URL Maker</h1>
+    <!-- Header Navigation -->
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="products.html">All Products</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="account.html">Account</a></li>
+                        <li><a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
+                    </ul>
+                </nav>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br></div>
+    <div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
 
-        <form id="billForm">
-            <h2>Bill Details</h2>
-            <label for="billId">Bill ID:</label>
-            <input type="text" id="billId" value="BILL-XYZ-123" required>
+    <div class="generator-container">
+        <h1>Bill URL Generator</h1>
 
-            <label for="customerName">Customer Name:</label>
-            <input type="text" id="customerName" value="Alice Smith" required>
+        <div class="section-title">Bill Source</div>
+        <div class="form-group radio-group">
+            <label>
+                <input type="radio" name="billSource" value="dataJsBill" checked> Load Full Bill from Data.js
+            </label>
+            <label>
+                <input type="radio" name="billSource" value="dynamicBillWithCode"> Use Customer Code + Dynamic Products
+            </label>
+            <label>
+                <input type="radio" name="billSource" value="dynamicBillDirect"> Enter Customer Details Directly + Dynamic Products
+            </label>
+        </div>
 
-            <label for="billDate">Bill Date:</label>
-            <input type="text" id="billDate" value="2025-07-14" placeholder="YYYY-MM-DD" required>
+        <div id="dataJsBillFields" class="datajs-bill-fields">
+            <div class="form-group">
+                <label for="dataJsCustomerCode">Customer Code (from data.js):</label>
+                <input type="text" id="dataJsCustomerCode" placeholder="e.g., MU401SSANAMD380015">
+            </div>
+            <div class="form-group">
+                <label for="dataJsBillIdentifier">Bill/Quotation Identifier (from data.js):</label>
+                <input type="text" id="dataJsBillIdentifier" placeholder="e.g., 10002 or 20003 or MYCUSTOMBILL">
+            </div>
+        </div>
 
-            <label for="currency">Currency:</label>
-            <input type="text" id="currency" value="INR" required>
-
-            <h2>Items</h2>
-            <div id="itemsContainer">
-                <div class="item-input-group">
-                    <label for="itemName_0">Item Name:</label>
-                    <input type="text" id="itemName_0" value="Laptop" required>
-                    <label for="itemQty_0">Quantity:</label>
-                    <input type="number" id="itemQty_0" value="1" min="1" required>
-                    <label for="itemPrice_0">Unit Price:</label>
-                    <input type="number" id="itemPrice_0" value="75000" min="0.01" step="0.01" required>
+        <div id="dynamicCustomerFields" class="customer-input-fields hidden">
+            <div id="customerCodeForDynamicFields" class="form-group">
+                <label for="customerCodeDynamic">Customer Code (from data.js):</label>
+                <input type="text" id="customerCodeDynamic" placeholder="e.g., MU401SSANAMD380015">
+            </div>
+            <div id="customerDirectForDynamicFields" class="hidden">
+                <div class="form-group">
+                    <label for="directCustomerName">Name:</label>
+                    <input type="text" id="directCustomerName" placeholder="e.g., John Doe">
                 </div>
-                <div class="item-input-group">
-                    <label for="itemName_1">Item Name:</label>
-                    <input type="text" id="itemName_1" value="Mouse" required>
-                    <label for="itemQty_1">Quantity:</label>
-                    <input type="number" id="itemQty_1" value="2" min="1" required>
-                    <label for="itemPrice_1">Unit Price:</label>
-                    <input type="number" id="itemPrice_1" value="800" min="0.01" step="0.01" required>
+                <div class="form-group">
+                    <label for="directCustomerAddr1">Address Line 1:</label>
+                    <input type="text" id="directCustomerAddr1" placeholder="e.g., 123 Main St">
+                </div>
+                <div class="form-group">
+                    <label for="directCustomerCt">City:</label>
+                    <input type="text" id="directCustomerCt" placeholder="e.g., Ahmedabad, Gujarat">
+                </div>
+                <div class="form-group">
+                    <label for="directCustomerPincode">Pincode:</label>
+                    <input type="text" id="directCustomerPincode" placeholder="e.g., 380006">
                 </div>
             </div>
-            <button type="button" class="add-item-btn" onclick="addItemField()">Add Item</button>
-            <button type="button" class="remove-item-btn" onclick="removeItemField()">Remove Last Item</button>
+        </div>
 
-            <button type="submit">Generate Bill URL</button>
-        </form>
+        <div id="dynamicProductsSection" class="section-title hidden">Product Details</div>
+        <div id="productsContainer" class="hidden">
+            <!-- Product rows will be dynamically added here -->
+        </div>
+        <button id="addProductBtn" class="btn btn-primary hidden" style="margin-top: 15px;">Add Product</button>
 
-        <div id="outputUrlContainer">
-            <p>Generated Bill URL:</p>
-            <p id="outputUrl"></p>
-            <button onclick="copyToClipboard()" style="margin-top: 10px;">Copy URL</button>
+        <div id="billTitleSection" class="bill-title-fields hidden">
+            <div class="section-title">Bill Title (Optional)</div>
+            <div class="form-group">
+                <label for="customBillTitle">Custom Title:</label>
+                <input type="text" id="customBillTitle" placeholder="e.g., My Special Order">
+            </div>
+        </div>
+
+        <div class="section-title">Generated URL</div>
+        <div class="form-group">
+            <label for="generatedUrl">Generated URL:</label>
+            <textarea id="generatedUrl" readonly></textarea>
+        </div>
+
+        <div class="btn-group">
+            <button id="generateUrlBtn" class="btn btn-primary">Generate URL</button>
+            <button id="copyUrlBtn" class="btn btn-secondary">Copy URL</button>
+            <a id="goToBillPageBtn" href="#" target="_blank" class="btn btn-primary">Go to Bill Page</a>
+        </div>
+
+        <div id="messageBox" class="message-box hidden"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
+                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact Info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">copyright 2025 lakhiairconditioners<br>
+               all right given to fontawesome for their icons
+               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
         </div>
     </div>
 
+    <!-- Load data.js and products_data.js -->
+    <script src="data.js"></script>
+    <script src="products_data.js"></script>
+
     <script>
-        // JCode
-        let itemCount = 2; // Starting with two pre-filled items
+        // Menu toggle function from the template
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
 
-        document.getElementById('billForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent default form submission
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
 
-            const baseUrl = window.location.origin + window.location.pathname.replace("url-maker.html", "bill-display.html"); // Assumes your display page is "bill-display.html" in the same directory
+        document.addEventListener('DOMContentLoaded', () => {
+            const billSourceRadios = document.querySelectorAll('input[name="billSource"]');
+            const dataJsBillFields = document.getElementById('dataJsBillFields');
+            const dynamicCustomerFields = document.getElementById('dynamicCustomerFields');
+            const customerCodeForDynamicFields = document.getElementById('customerCodeForDynamicFields');
+            const customerDirectForDynamicFields = document.getElementById('customerDirectForDynamicFields');
+            const dynamicProductsSection = document.getElementById('dynamicProductsSection');
+            const productsContainer = document.getElementById('productsContainer');
+            const addProductBtn = document.getElementById('addProductBtn');
+            const generateUrlBtn = document.getElementById('generateUrlBtn');
+            const generatedUrlTextarea = document.getElementById('generatedUrl');
+            const copyUrlBtn = document.getElementById('copyUrlBtn');
+            const goToBillPageBtn = document.getElementById('goToBillPageBtn');
+            const messageBox = document.getElementById('messageBox');
+            const billTitleSection = document.getElementById('billTitleSection');
+            const customBillTitleInput = document.getElementById('customBillTitle');
 
-            const billId = document.getElementById('billId').value;
-            const customerName = document.getElementById('customerName').value;
-            const billDate = document.getElementById('billDate').value;
-            const currency = document.getElementById('currency').value;
 
-            const items = [];
-            for (let i = 0; i < itemCount; i++) {
-                const itemName = document.getElementById(`itemName_${i}`);
-                const itemQty = document.getElementById(`itemQty_${i}`);
-                const itemPrice = document.getElementById(`itemPrice_${i}`);
+            let productCounter = 0; // To give unique IDs to product rows, not for display numbering
 
-                if (itemName && itemQty && itemPrice) { // Ensure elements exist
-                    items.push({
-                        name: itemName.value,
-                        qty: parseFloat(itemQty.value),
-                        price: parseFloat(itemPrice.value)
-                    });
+            // --- Helper Functions ---
+            function showMessage(message, type = 'error') {
+                messageBox.textContent = message;
+                messageBox.className = `message-box ${type}`;
+                messageBox.classList.remove('hidden');
+                setTimeout(() => {
+                    messageBox.classList.add('hidden');
+                }, 5000);
+            }
+
+            function updateProductRowTitles() {
+                const rows = productsContainer.querySelectorAll('.product-row');
+                rows.forEach((row, index) => {
+                    const titleElement = row.querySelector('h4');
+                    if (titleElement) {
+                        titleElement.textContent = `Product ${index + 1}`;
+                    }
+                });
+            }
+
+            function addProductRow() {
+                productCounter++; // Use for unique internal ID
+                const productRow = document.createElement('div');
+                productRow.className = 'product-row';
+                productRow.dataset.id = productCounter; // Store unique ID
+
+                productRow.innerHTML = `
+                    <button type="button" class="remove-product-btn" data-id="${productCounter}">&times;</button>
+                    <h4 style="margin-bottom: 10px; color: #666;">Product ${productsContainer.children.length + 1}</h4>
+                    <div class="form-group radio-group">
+                        <label>
+                            <input type="radio" name="productType_${productCounter}" value="sr" checked> Lookup by Serial No (from products_data.js)
+                        </label>
+                        <label>
+                            <input type="radio" name="productType_${productCounter}" value="direct"> Enter Product Details Directly
+                        </label>
+                    </div>
+
+                    <div id="productSrFields_${productCounter}" class="product-input-fields">
+                        <div class="form-group">
+                            <label for="productSr_${productCounter}">Serial No (SR):</label>
+                            <input type="text" id="productSr_${productCounter}" placeholder="e.g., LAPHP001">
+                        </div>
+                        <div class="form-group">
+                            <label for="productQtySr_${productCounter}">Quantity:</label>
+                            <input type="number" id="productQtySr_${productCounter}" value="1" min="1">
+                        </div>
+                    </div>
+
+                    <div id="productDirectFields_${productCounter}" class="product-input-fields hidden">
+                        <div class="form-group">
+                            <label for="productName_${productCounter}">Product Name:</label>
+                            <input type="text" id="productName_${productCounter}" placeholder="e.g., Custom Service">
+                        </div>
+                        <div class="form-group">
+                            <label for="productPrice_${productCounter}">Price:</label>
+                            <input type="number" id="productPrice_${productCounter}" placeholder="e.g., 5000" min="0">
+                        </div>
+                        <div class="form-group">
+                            <label for="productQtyDirect_${productCounter}">Quantity:</label>
+                            <input type="number" id="productQtyDirect_${productCounter}" value="1" min="1">
+                        </div>
+                        <div class="form-group">
+                            <label for="productSrOpt_${productCounter}">Optional Serial No (SR):</label>
+                            <input type="text" id="productSrOpt_${productCounter}" placeholder="Optional, e.g., SVC001">
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productRow);
+
+                // Add event listeners for the new product row's radio buttons
+                const newProductTypeRadios = productRow.querySelectorAll(`input[name="productType_${productCounter}"]`);
+                newProductTypeRadios.forEach(radio => {
+                    radio.addEventListener('change', () => toggleProductInputFields(productRow));
+                });
+
+                // Add event listener for the remove button
+                productRow.querySelector('.remove-product-btn').addEventListener('click', (event) => {
+                    event.target.closest('.product-row').remove();
+                    updateProductRowTitles(); // Re-index titles after removal
+                });
+
+                toggleProductInputFields(productRow); // Initialize visibility
+                updateProductRowTitles(); // Update titles after adding
+            }
+
+            function toggleProductInputFields(productRow) {
+                const productId = productRow.dataset.id;
+                const productType = productRow.querySelector(`input[name="productType_${productId}"]:checked`).value;
+                const srFields = productRow.querySelector(`#productSrFields_${productId}`);
+                const directFields = productRow.querySelector(`#productDirectFields_${productId}`);
+
+                if (productType === 'sr') {
+                    srFields.classList.remove('hidden');
+                    directFields.classList.add('hidden');
+                } else {
+                    srFields.classList.add('hidden');
+                    directFields.classList.remove('hidden');
                 }
             }
 
-            // Encode all data into an object
-            const billData = {
-                id: billId,
-                customer: customerName,
-                date: billDate,
-                currency: currency,
-                items: items
-            };
+            function toggleBillSourceFields() {
+                const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
 
-            // Convert the object to a JSON string and then encode it for the URL
-            const encodedData = encodeURIComponent(JSON.stringify(billData));
+                // Hide all sections initially
+                dataJsBillFields.classList.add('hidden');
+                dynamicCustomerFields.classList.add('hidden');
+                customerCodeForDynamicFields.classList.add('hidden'); // Ensure hidden by default
+                customerDirectForDynamicFields.classList.add('hidden'); // Ensure hidden by default
+                dynamicProductsSection.classList.add('hidden');
+                productsContainer.classList.add('hidden');
+                addProductBtn.classList.add('hidden');
+                billTitleSection.classList.add('hidden'); // Hide custom title section
 
-            // Construct the final URL
-            const fullUrl = `${baseUrl}?data=${encodedData}`;
-
-            document.getElementById('outputUrl').textContent = fullUrl;
-            document.getElementById('outputUrlContainer').style.display = 'block';
-        });
-
-        function addItemField() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            const newItemDiv = document.createElement('div');
-            newItemDiv.classList.add('item-input-group');
-            newItemDiv.innerHTML = `
-                <label for="itemName_${itemCount}">Item Name:</label>
-                <input type="text" id="itemName_${itemCount}" required>
-                <label for="itemQty_${itemCount}">Quantity:</label>
-                <input type="number" id="itemQty_${itemCount}" value="1" min="1" required>
-                <label for="itemPrice_${itemCount}">Unit Price:</label>
-                <input type="number" id="itemPrice_${itemCount}" value="0.01" min="0.01" step="0.01" required>
-            `;
-            itemsContainer.appendChild(newItemDiv);
-            itemCount++;
-        }
-
-        function removeItemField() {
-            const itemsContainer = document.getElementById('itemsContainer');
-            if (itemCount > 1) { // Ensure at least one item remains
-                itemsContainer.removeChild(itemsContainer.lastChild);
-                itemCount--;
-            } else {
-                alert("Cannot remove the last item.");
+                // Show relevant sections based on selection
+                if (selectedSource === 'dataJsBill') {
+                    dataJsBillFields.classList.remove('hidden');
+                } else if (selectedSource === 'dynamicBillWithCode') {
+                    dynamicCustomerFields.classList.remove('hidden');
+                    customerCodeForDynamicFields.classList.remove('hidden');
+                    dynamicProductsSection.classList.remove('hidden');
+                    productsContainer.classList.remove('hidden');
+                    addProductBtn.classList.remove('hidden');
+                    billTitleSection.classList.remove('hidden'); // Show custom title for dynamic bills
+                    // Ensure at least one product row exists if switching to dynamic
+                    if (productsContainer.children.length === 0) {
+                        addProductRow();
+                    }
+                } else if (selectedSource === 'dynamicBillDirect') {
+                    dynamicCustomerFields.classList.remove('hidden');
+                    customerDirectForDynamicFields.classList.remove('hidden');
+                    dynamicProductsSection.classList.remove('hidden');
+                    productsContainer.classList.remove('hidden');
+                    addProductBtn.classList.remove('hidden');
+                    billTitleSection.classList.remove('hidden'); // Show custom title for dynamic bills
+                    // Ensure at least one product row exists if switching to dynamic
+                    if (productsContainer.children.length === 0) {
+                        addProductRow();
+                    }
+                }
             }
-        }
 
-        function copyToClipboard() {
-            const urlText = document.getElementById('outputUrl').textContent;
-            navigator.clipboard.writeText(urlText).then(() => {
-                alert('URL copied to clipboard!');
-            }).catch(err => {
-                console.error('Failed to copy URL: ', err);
+            function generateUrl() {
+                let baseUrl = window.location.origin + '/bill.html?'; // Adjust if bill.html is in a different path
+                let params = [];
+                const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
+                
+                // Clear previous messages
+                showMessage('', 'hidden');
+
+                if (selectedSource === 'dataJsBill') {
+                    const customerCode = document.getElementById('dataJsCustomerCode').value.trim();
+                    const billIdentifier = document.getElementById('dataJsBillIdentifier').value.trim();
+
+                    if (!customerCode || !billIdentifier) {
+                        showMessage('Please enter both Customer Code and Bill/Quotation Identifier for Data.js lookup.', 'error');
+                        return;
+                    }
+
+                    // Attempt to get bill title from data.js
+                    let billTitleFromDataJs = '';
+                    if (window.billData && window.billData[customerCode]) {
+                        const customerData = window.billData[customerCode];
+                        const quotationData = customerData[billIdentifier];
+                        if (quotationData) {
+                            if (quotationData.type === 1) {
+                                billTitleFromDataJs = "Invoice";
+                            } else if (quotationData.type === 2) {
+                                billTitleFromDataJs = "Quotation";
+                            } else if (quotationData.title === "C" && quotationData.Cname) {
+                                billTitleFromDataJs = quotationData.Cname;
+                            } else {
+                                billTitleFromDataJs = "Bill Details"; // Default if type/title not clear
+                            }
+                        } else {
+                            showMessage(`Bill/Quotation '${billIdentifier}' not found for customer '${customerCode}' in data.js.`, 'error');
+                            return;
+                        }
+                    } else {
+                        showMessage(`Customer '${customerCode}' not found in data.js.`, 'error');
+                        return;
+                    }
+
+                    params.push(`Data=${encodeURIComponent(customerCode)}?for?${encodeURIComponent(billIdentifier)}`);
+                    // Add the fetched title as info parameter
+                    if (billTitleFromDataJs) {
+                        params.push(`info=${encodeURIComponent(billTitleFromDataJs)}`);
+                    }
+
+                } else { // dynamicBillWithCode or dynamicBillDirect
+                    // --- Customer Parameters for Dynamic Bills ---
+                    if (selectedSource === 'dynamicBillWithCode') {
+                        const customerCode = document.getElementById('customerCodeDynamic').value.trim();
+                        if (customerCode) {
+                            params.push(`ccode=${encodeURIComponent(customerCode)}`);
+                        } else {
+                            showMessage('Please enter a Customer Code for dynamic bill with code.', 'error');
+                            return;
+                        }
+                    } else { // dynamicBillDirect
+                        const name = document.getElementById('directCustomerName').value.trim();
+                        const addr1 = document.getElementById('directCustomerAddr1').value.trim();
+                        const ct = document.getElementById('directCustomerCt').value.trim();
+                        const pincode = document.getElementById('directCustomerPincode').value.trim();
+
+                        if (name) params.push(`customerName=${encodeURIComponent(name)}`);
+                        if (addr1) params.push(`customerAddr1=${encodeURIComponent(addr1)}`);
+                        if (ct) params.push(`customerCt=${encodeURIComponent(ct)}`);
+                        if (pincode) params.push(`customerPincode=${encodeURIComponent(pincode)}`);
+                        
+                        if (!name && !addr1 && !ct && !pincode) {
+                            showMessage('Please enter customer details for direct dynamic bill.', 'error');
+                            return;
+                        }
+                    }
+
+                    // --- Product Parameters for Dynamic Bills ---
+                    let productDefinitions = [];
+                    const productRows = productsContainer.querySelectorAll('.product-row');
+                    if (productRows.length === 0) {
+                        showMessage('Please add at least one product for dynamic bill.', 'error');
+                        return;
+                    }
+
+                    let allProductsValid = true;
+                    productRows.forEach(row => {
+                        const productId = row.dataset.id;
+                        const productType = row.querySelector(`input[name="productType_${productId}"]:checked`).value;
+                        let productDef = '';
+
+                        if (productType === 'sr') {
+                            const sr = row.querySelector(`#productSr_${productId}`).value.trim();
+                            const qty = row.querySelector(`#productQtySr_${productId}`).value.trim();
+                            if (sr && qty) {
+                                productDef = `type=SR&sr=${encodeURIComponent(sr)}&qty=${encodeURIComponent(qty)}`;
+                            } else {
+                                showMessage(`Missing Serial No or Quantity for Product ${productId}.`, 'error');
+                                allProductsValid = false;
+                                return;
+                            }
+                        } else { // direct
+                            const name = row.querySelector(`#productName_${productId}`).value.trim();
+                            const price = row.querySelector(`#productPrice_${productId}`).value.trim();
+                            const qty = row.querySelector(`#productQtyDirect_${productId}`).value.trim();
+                            const sr_opt = row.querySelector(`#productSrOpt_${productId}`).value.trim();
+
+                            if (name && price && qty) {
+                                productDef = `type=DIRECT&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&qty=${encodeURIComponent(qty)}`;
+                                if (sr_opt) {
+                                    productDef += `&sr_opt=${encodeURIComponent(sr_opt)}`;
+                                }
+                            } else {
+                                showMessage(`Missing Name, Price, or Quantity for Direct Product ${productId}.`, 'error');
+                                allProductsValid = false;
+                                return;
+                            }
+                        }
+                        if (productDef) {
+                            productDefinitions.push(productDef);
+                        }
+                    });
+
+                    if (!allProductsValid) {
+                        return; // Stop if any product was invalid
+                    }
+
+                    if (productDefinitions.length > 0) {
+                        params.push(`products=${encodeURIComponent(productDefinitions.join('||'))}`);
+                    } else {
+                        showMessage('No valid products defined for dynamic bill.', 'error');
+                        return;
+                    }
+
+                    // Add custom title for dynamic bills ONLY if provided
+                    const customTitle = customBillTitleInput.value.trim();
+                    if (customTitle) {
+                        params.push(`info=${encodeURIComponent(customTitle)}`);
+                    }
+                }
+                
+                const finalUrl = baseUrl + params.join('&');
+                generatedUrlTextarea.value = finalUrl;
+                goToBillPageBtn.href = finalUrl;
+                showMessage('URL generated successfully!', 'success');
+            }
+
+            function copyUrl() {
+                if (generatedUrlTextarea.value) {
+                    generatedUrlTextarea.select();
+                    document.execCommand('copy');
+                    showMessage('URL copied to clipboard!', 'success');
+                } else {
+                    showMessage('No URL to copy. Please generate one first.', 'error');
+                }
+            }
+
+            // --- Event Listeners ---
+            billSourceRadios.forEach(radio => {
+                radio.addEventListener('change', toggleBillSourceFields);
             });
-        }
+
+            addProductBtn.addEventListener('click', addProductRow);
+            generateUrlBtn.addEventListener('click', generateUrl);
+            copyUrlBtn.addEventListener('click', copyUrl);
+
+            // Initial setup
+            toggleBillSourceFields(); // Set initial visibility based on default radio
+            // No initial addProductRow here, as it depends on the selected source.
+            // addProductRow() is called within toggleBillSourceFields if dynamic option is selected.
+        });
     </script>
 </body>
 </html>
-

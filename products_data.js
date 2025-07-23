@@ -160,5 +160,18 @@
     "AC-Type": "split",
     "AC-STAR": 3,
     "description": "No description available."
+  },
+  {
+    "serial_no": "RAS.B312PCAIBA1",
+    "name": "HITACHI 1.0 TR SPLIT AC NON INVERTER 3 STAR",
+    "price": "32500",
+    "rating_stars": 3.0,
+    "rating_source_icon": "img/OCOL/amazon.png",
+    "type": "AC",
+    "unit": "pcs",
+    "AC-TR": 1.0,
+    "AC-Type": "split ac",
+    "AC-STAR": 3,
+    "description": "Hitachi 1 Ton 3 Star Split AC: Ideal for small rooms, this AC features a 4-way swing and long air throw for efficient cooling. With a durable 100% copper condenser coil and a special ECO mode, it provides reliable and energy-efficient performance"
   }
 ]

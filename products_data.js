@@ -127,7 +127,7 @@
     "rating_source_icon": "img/OCOL/filpkart.png",
     "type": "AC",
     "AC-TR": 1.5,
-    "AC-Type": "Split",
+    "AC-Type": "split",
     "AC-STAR": 3,
     "description": "Enjoy better airflow with 4-Way Swing (upgraded from 2024). Features ice Clean (FrostWash) for cleaner air and Penta Sensor for smart cooling. Benefit from convenient features like Filter Clean Indicator and Long Air Throw. Built for hot weather (up to 52°C) with a durable 100% Copper condenser.",
     "has_size_option": false,
@@ -170,7 +170,7 @@
     "type": "AC",
     "unit": "pcs",
     "AC-TR": 1.0,
-    "AC-Type": "split ac",
+    "AC-Type": "split",
     "AC-STAR": 3,
     "description": "Hitachi 1 Ton 3 Star Split AC: Ideal for small rooms, this AC features a 4-way swing and long air throw for efficient cooling. With a durable 100% copper condenser coil and a special ECO mode, it provides reliable and energy-efficient performance"
   }

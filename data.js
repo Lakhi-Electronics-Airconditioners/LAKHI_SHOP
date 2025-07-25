@@ -51,8 +51,20 @@ window.billData = {
             "products": [
                 { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }
             ],
-            // For this quote, we'll let subtotal be calculated dynamically, and tax/total use default text
-            // No billSubtotal, billTax, billTotal fields means dynamic calculation/default text
+            
         }
-    }
+    },
+    "SU401SSANAMD380015": {
+        "name": "Sanjana",
+        "addr1": "401, sepal solitaire near Anand nager cross road",
+        "ct": "Ahemdabad, Gujarat",
+        "pincode": "380015",
+        "00001": { // Quotation
+            "type": 2,
+            "products": [
+                { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }],
+      "billSubtotal": 175000,
+            "billTax": "Included in Price",
+            "billTotal": "₹1,75,000"
+    
 };

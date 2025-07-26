@@ -55,16 +55,19 @@ window.billData = {
         }
     },
     "SU401SSANAMD380015": {
-        "name": "Sanjana",
-        "addr1": "401, sepal solitaire near Anand nager cross road",
-        "ct": "Ahemdabad, Gujarat",
+        "name": "Sanjana Udernani",
+        "addr1": "401, Sepal Solitaire, Anand Nager",
+        "ct": "Ahmedabad, Gujarat",
         "pincode": "380015",
-        "00001": { // Quotation
-            "type": 2,
+        "00001": { // Invoice
+            "type": 1, // 1 = Invoice
             "products": [
-                { "PN": 1, "SR": "CAMCAN001", "name": "Canon DSLR Camera", "price": 70000, "qty": 1 }],
-      "billSubtotal": 175000,
-            "billTax": "Included in Price",
-            "billTotal": "₹1,75,000"
-    
+                { "PN": 1, "SR": "PHNSAM001", "name": "Samsung Galaxy S24", "price": 80000, "qty": 1 },
+                { "PN": 2, "SR": "HEADSONY001", "name": "Sony WH-1000XM5 Headphones", "price": 28000, "qty": 1 }
+            ],
+            "billSubtotal": 108000,
+            "billTax": "₹9,720 (9% GST)",
+            "billTotal": "₹1,15,720 (-2000 discount)"
+        },
+    }
 };

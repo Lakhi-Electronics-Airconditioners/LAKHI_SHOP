@@ -9,6 +9,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
 </head>
 <body>
     <div class="header-NAV">
@@ -50,8 +51,8 @@
                     <label for="confirmPassword">Confirm Password:</label>
                     <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
                 </div>
-                <button type="submit" class="btn">Sign Up</button>
-                <p class="error-message" id="signUpError"></p>
+                <div id="recaptcha-container-signup" style="margin-top: 15px;"></div>
+                <button type="submit" class="btn" id="signupBtn">Sign Up</button> <p class="error-message" id="signUpError"></p>
                 <p class="success-message" id="signUpSuccess"></p>
             </form>
 
@@ -121,9 +122,11 @@
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Added getDoc
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        // Ensure consistent Firebase SDK version for RecaptchaVerifier
+        import { RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
 
-        // IMPORTANT: Replace with your actual Firebase config for Live Server
+        // IMPORTANT: Replace with your actual Firebase config
         const firebaseConfig = {
             apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
             authDomain: "lakhi-airconditioners.firebaseapp.com",
@@ -137,9 +140,9 @@
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
-        const db = getFirestore(app); // Initialize Firestore
+        const db = getFirestore(app);
 
-        // UI Element References
+        // UI Element References - Declared at the top for accessibility
         const signUpForm = document.getElementById('signUpForm');
         const signUpEmailInput = document.getElementById('signUpEmail');
         const signUpPasswordInput = document.getElementById('signUpPassword');
@@ -147,20 +150,55 @@
         const signUpError = document.getElementById('signUpError');
         const signUpSuccess = document.getElementById('signUpSuccess');
         const googleSignUpBtn = document.getElementById('googleSignUpBtn');
+        const signupBtn = document.getElementById('signupBtn'); // Reference to the submit button
+
+        // ReCAPTCHA initialization
+        let recaptchaVerifier;
+        const recaptchaContainer = document.getElementById('recaptcha-container-signup'); // Use specific ID for signup
+
+        // Initialize reCAPTCHA on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            if (recaptchaContainer) {
+                // Pass the DOM element directly to RecaptchaVerifier
+                recaptchaVerifier = new RecaptchaVerifier(auth, recaptchaContainer, {
+                    'size': 'normal', // or 'invisible'
+                    'callback': (response) => {
+                        console.log("reCAPTCHA solved!");
+                        if (signupBtn) signupBtn.disabled = false; // Enable button if reCAPTCHA solved
+                    },
+                    'expired-callback': () => {
+                        console.log("reCAPTCHA expired!");
+                        if (signupBtn) signupBtn.disabled = true; // Disable button if reCAPTCHA expires
+                        recaptchaVerifier.render().then(function(widgetId) {
+                            grecaptcha.reset(widgetId);
+                        });
+                    }
+                });
+                recaptchaVerifier.render().then(function(widgetId) {
+                    console.log("reCAPTCHA rendered with widget ID:", widgetId);
+                    // You might want to disable signupBtn until reCAPTCHA is solved:
+                    // if (signupBtn) signupBtn.disabled = true;
+                });
+            }
+        });
 
         // Function to display messages
         function showMessage(element, message, type = 'error') {
-            element.textContent = message;
-            element.className = type === 'success' ? 'success-message' : 'error-message';
-            setTimeout(() => {
-                element.textContent = '';
-                element.className = '';
-            }, 5000);
+            if (element) { // Safety check
+                element.textContent = message;
+                element.className = type === 'success' ? 'success-message' : 'error-message';
+                setTimeout(() => {
+                    element.textContent = '';
+                    element.className = '';
+                }, 5000);
+            }
         }
 
-        // Email/Password Sign Up
+        // Email/Password Sign Up Form Submission
         signUpForm.addEventListener('submit', async (e) => {
             e.preventDefault();
+            if (signUpError) signUpError.textContent = ''; // Clear previous errors, safety check
+
             const email = signUpEmailInput.value;
             const password = signUpPasswordInput.value;
             const confirmPassword = confirmPasswordInput.value;
@@ -170,7 +208,24 @@
                 return;
             }
 
+            // ReCAPTCHA verification before proceeding with Firebase signup
+            if (recaptchaVerifier && recaptchaVerifier.size !== 'invisible' && !grecaptcha.getResponse(recaptchaVerifier.widgetId)) {
+                showMessage(signUpError, 'Please complete the reCAPTCHA.');
+                return;
+            }
+
             try {
+                // If using invisible reCAPTCHA, execute it programmatically before createUserWithEmailAndPassword
+                if (recaptchaVerifier && recaptchaVerifier.size === 'invisible') {
+                     await recaptchaVerifier.execute();
+                     // After execute(), the callback function will update grecaptcha.getResponse()
+                     // This line ensures the reCAPTCHA token is obtained for invisible mode.
+                     if (!grecaptcha.getResponse(recaptchaVerifier.widgetId)) {
+                        showMessage(signUpError, 'reCAPTCHA verification failed. Please try again.');
+                        return;
+                    }
+                }
+
                 const userCredential = await createUserWithEmailAndPassword(auth, email, password);
                 const user = userCredential.user;
                 const currentUserId = user.uid;
@@ -196,15 +251,26 @@
                     errorMessage = 'Invalid email address.';
                 } else if (error.code === 'auth/weak-password') {
                     errorMessage = 'Password is too weak (min 6 characters).';
+                } else if (error.code === 'auth/user-disabled') {
+                    errorMessage = 'This user account has been disabled.';
                 }
                 showMessage(signUpError, errorMessage);
+            } finally {
+                // Reset reCAPTCHA after submission (success or failure)
+                if (recaptchaVerifier && recaptchaVerifier.widgetId) {
+                    grecaptcha.reset(recaptchaVerifier.widgetId);
+                }
             }
         });
 
         // Google Sign Up (same as sign-in, as Firebase handles creation if user doesn't exist)
         googleSignUpBtn.addEventListener('click', async () => {
             const provider = new GoogleAuthProvider();
+            if (signUpError) signUpError.textContent = ''; // Clear previous errors
+
             try {
+                // For Google Sign-Up, reCAPTCHA is often handled implicitly by Firebase or not required for some flows.
+                // If it is required, you'd need to integrate it here as well.
                 const userCredential = await signInWithPopup(auth, provider);
                 const user = userCredential.user;
                 const currentUserId = user.uid;
@@ -212,14 +278,13 @@
                 // Check if profile already exists (e.g., if user signed up with email/password then linked Google)
                 const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
                 const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
-                const docSnap = await getDoc(userProfileDocRef); // Need to import getDoc for this
+                const docSnap = await getDoc(userProfileDocRef);
 
                 if (!docSnap.exists()) {
                     // Only create new profile if it doesn't exist
                     await setDoc(userProfileDocRef, {
                         email: user.email,
                         createdAt: new Date().toISOString()
-                        // customerCode, name, phone, address will be added on ls/su2.html
                     });
                 }
 
@@ -232,6 +297,8 @@
                     errorMessage = 'Google sign-up popup closed.';
                 } else if (error.code === 'auth/cancelled-popup-request') {
                     errorMessage = 'Google sign-up already in progress.';
+                } else if (error.code === 'auth/account-exists-with-different-credential') {
+                    errorMessage = 'An account with this email already exists using different credentials.';
                 }
                 showMessage(signUpError, errorMessage);
             }
@@ -260,10 +327,8 @@
         });
 
         // Menu toggle function from the template
-        // Declare Menuitems in a scope accessible by window.menutoggle
         const Menuitems = document.getElementById('Menuitems');
 
-        // Make menutoggle globally accessible
         window.menutoggle = function() {
             if (Menuitems) {
                 if (Menuitems.style.maxHeight == "0px") {

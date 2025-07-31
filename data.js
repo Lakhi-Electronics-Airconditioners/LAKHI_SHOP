@@ -56,7 +56,7 @@ window.billData = {
     },
     "SU401SSANAMD380015": {
         "name": "Sanjana Udernani",
-        "addr1": "401, Sepal Solitaire, Anand Nager",
+        "addr1": "N/A",
         "ct": "Ahmedabad, Gujarat",
         "pincode": "380015",
         "00001": { // Invoice

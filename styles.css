@@ -1188,6 +1188,17 @@ select:focus{
     text-decoration: underline;
 }
 
+
+.product-img-view {
+    display: block; /* Essential: Allows setting width/height and other block-level properties */
+    width: 100%; /* Makes the link take up the full width of its parent */
+    height: 0; /* Set height to 0 to use padding-bottom for aspect ratio */
+    padding-bottom: 100%; /* Creates a perfect square (1:1 aspect ratio) based on the width */
+    position: relative; /* Needed for absolute positioning of the image inside */
+    overflow: hidden; /* Hides any parts of the image that extend beyond the square */
+    text-decoration: none; /* Optional: Remove underline from the link */
+}
+
 /* Responsive adjustments for forms */
 @media (max-width: 480px) {
     .w3-modal-content {
@@ -1336,3 +1347,83 @@ select:focus{
                 margin-bottom: 10px;
             }
         }
+/* --- Social Login Button Styles --- */
+
+.social-login-options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.social-login-options p {
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.social-btn {
+    display: flex; /* Use flexbox for icon and text alignment */
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Adjust as needed, or set max-width */
+    max-width: 300px; /* Example max-width for better appearance */
+    padding: 10px 15px;
+    margin-bottom: 10px; /* Space between buttons */
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease; /* Smooth transition for hover effects */
+}
+
+.social-btn i {
+    margin-right: 10px; /* Space between icon and text */
+    font-size: 20px;
+}
+
+/* Google Button (existing, with slight adjustments for consistency) */
+.google-btn {
+    background-color: #fff;
+    color: #ff523b; /* Google blue */
+    border-color: #ccc;
+}
+
+.google-btn:hover {
+    background-color: #f0f0f0; /* Light gray on hover */
+    color: #c00; /* Red text on hover for Google, as requested */
+}
+
+/* Apple Button */
+.apple-btn {
+    background-color: #333; /* Dark grey for Apple */
+    color: #fff; /* White logo */
+    border-color: #333;
+}
+
+.apple-btn:hover {
+    background-color: #f0f0f0; /* Light grey/white on hover */
+    color: #c00; /* Red text on hover */
+}
+
+/* GitHub Button */
+.github-btn {
+    background-color: #24292e; /* Black for GitHub */
+    color: #fff; /* White logo */
+    border-color: #24292e;
+}
+
+.github-btn:hover {
+    background-color: #f0f0f0; /* Light grey/white on hover */
+    color: #c00; /* Red text on hover */
+}
+
+/* Facebook Button */
+.facebook-btn {
+    
+    background-color: #1877F2; /* Standard Facebook blue */
+    color: #fff; /* White logo */
+    border-color: #1877F2;
+}
+
+.facebook-btn:hover {
+    background-color: #f0f0f0; /* Light grey/white on hover */
+    color: #c00; /* Red text on hover */
+}

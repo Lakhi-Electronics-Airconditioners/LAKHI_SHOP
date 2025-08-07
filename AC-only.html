@@ -17,11 +17,11 @@
                 <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
                 <nav>
                     <ul id="Menuitems">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">All Products</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="https://shop.lakhiairconditioners">Home</a></li>
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="products">All Products</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                        <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px"></a>
@@ -34,11 +34,11 @@
     <div class="small-container">
         <div class="small-container row row-2">
             <h2>AC Products</h2>
-            <select id="sortProducts">
-                <option value="default">Default Sorting (A-Z)</option>
-                <option value="za">Sort Z-A</option>
-                <option value="price_asc">Sort by Price: Low to High</option>
-                <option value="price_desc">Sort by Price: High to Low</option>
+            <select id="sortSelect">
+                <option value="name-asc">Default Sorting (A-Z)</option>
+                <option value="name-desc">Sort Z-A</option>
+                <option value="price-asc">Sort by Price: Low to High</option>
+                <option value="price-desc">Sort by Price: High to Low</option>
                 <option value="rating">Sort by Rating</option>
             </select>
         </div>
@@ -47,26 +47,31 @@
             <div class="col-4">
                 <label for="filterAcType">AC Type:</label>
                 <select id="filterAcType">
-                    <option value="">All AC Types</option>
+                    <option value="All">All AC Types</option>
                 </select>
             </div>
             <div class="col-4">
                 <label for="filterAcTr">AC TR:</label>
                 <select id="filterAcTr">
-                    <option value="">All TR</option>
+                    <option value="All">All TR</option>
                 </select>
             </div>
             <div class="col-4">
                 <label for="filterAcStar">AC Star Rating:</label>
                 <select id="filterAcStar">
-                    <option value="">All Stars</option>
+                    <option value="All">All Stars</option>
+                </select>
+            </div>
+            <div class="col-4">
+                <label for="filterInv">INV / NON-INV:</label>
+                <select id="filterInv">
+                    <option value="All">BOTH</option>
                 </select>
             </div>
         </div>
         
         <div class="row" id="productListContainer">
-            <!-- Product cards will be rendered here by JavaScript -->
-        </div>
+            </div>
     </div>
 
     <div class="footer">
@@ -76,7 +81,7 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250516%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250516T124428Z&X-Amz-Expires=14400&X-Amz-Signature=203fc53e1989a4bbe8fc8eb5e0451d05cbd205c5ea781318237539ae6db7b7cd&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
@@ -86,17 +91,17 @@
                 <div class="foot-col-3">
                     <h3>Useful links</h3>
                     <ul>
-                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
-                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></li>
+                        <li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></li>
                         <li><a href="https://lakhiairconditioners.com">INFO</a></li>
-                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
                     </ul>
                 </div>
                 <div class="foot-col-4">
                     <h3>Follow us</h3>
                     <ul>
-                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
-                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                        <Li><a href="https://insta.lakhiairconditioners.com/">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com/">Facebook</a></Li>
                     </ul>
                     <h3 style="margin-top: 20px">Contact info</h3>
                     <ul>
@@ -107,272 +112,307 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">copyright 2025 lakhiairconditioners<br>
-               all right given to fontawesome for their icons
-               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
 
         </div>
     </div>
+    
     <script>
-        var Menuitems = document.getElementById('Menuitems')
-
+        var Menuitems = document.getElementById("Menuitems");
         Menuitems.style.maxHeight = "0px";
-
         function menutoggle() {
             if (Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px"
+                Menuitems.style.maxHeight = "200px";
             } else {
                 Menuitems.style.maxHeight = "0px";
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
-            const productContainer = document.getElementById('productListContainer');
-            const sortSelect = document.getElementById('sortProducts');
-            let allProducts = []; // Stores all AC products fetched
-            let displayedProducts = []; // Stores products currently displayed after filters/sorts
+        // New function for handling image loading errors with fallbacks
+        function handleImageError(imgElement, serialNo) {
+            // Check if we've already tried the serial number fallback
+            if (!imgElement.dataset.serialFallbackAttempted) {
+                imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
+                imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
+                console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
+            } else {
+                // If serial number fallback was already attempted and failed, use final default
+                imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
+                imgElement.src = 'img/PROC/DP.png';
+                console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+            }
+        }
+    </script>
 
-            // Get references to the filter elements
-            const filterAcTypeSelect = document.getElementById('filterAcType');
-            const filterAcTrSelect = document.getElementById('filterAcTr');
-            const filterAcStarSelect = document.getElementById('filterAcStar');
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-            // Function to generate star ratings HTML based on a numeric rating
-            function generateStars(rating) {
-                let starsHTML = '';
-                const fullStars = Math.floor(rating);
-                const hasHalfStar = rating % 1 !== 0;
-                const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
 
-                for (let i = 0; i < fullStars; i++) {
-                    starsHTML += '<i class="fa-solid fa-star"></i>';
-                }
-                if (hasHalfStar) {
-                    starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
-                }
-                for (let i = 0; i < emptyStars; i++) {
-                    starsHTML += '<i class="fa-regular fa-star"></i>';
-                }
-                return starsHTML;
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Ensure this APP_ID matches the projectId in your firebaseConfig and your Python backend's APP_ID
+        const FIRESTORE_APP_ID = "lakhi-airconditioners"; // This must match your Firebase project ID and APP_ID in Python scripts
+
+        // Common reference to the products collection for consistency
+        const productsCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "products");
+
+        // --- Cart Functions ---
+        function addToCart(serialNo, quantity, selectedSize, productUnit, productName, productPrice) {
+            console.log('addToCart function entered.'); // Debugging log
+            // *** CHANGED FROM 'cart' TO 'cartitems' ***
+            let cart = JSON.parse(localStorage.getItem('cartitems')) || [];
+
+            const existingItemIndex = cart.findIndex(item => item.serial_no === serialNo);
+
+            if (existingItemIndex > -1) {
+                cart[existingItemIndex].qty = (cart[existingItemIndex].qty || 1) + quantity;
+            } else {
+                cart.push({
+                    serial_no: serialNo,
+                    quantity: quantity,
+                    size: selectedSize,
+                    unit: productUnit,
+                    name: productName,
+                    price: productPrice
+                });
             }
 
-            // Function to render products into the container
-            function renderProducts(productsToRender) {
-                productContainer.innerHTML = ''; // Clear existing products
-                if (productsToRender.length === 0) {
-                    productContainer.innerHTML = '<p style="text-align: center; width: 100%;">No AC products found matching your criteria.</p>';
-                    return;
-                }
+            // *** CHANGED FROM 'cart' TO 'cartitems' ***
+            localStorage.setItem('cartitems', JSON.stringify(cart));
+            alert(`${productName} added to cart! Quantity: ${quantity}`);
+            console.log('Current cartitems:', JSON.parse(localStorage.getItem('cartitems'))); // Debugging log
+            // You might want to update a cart count display here
+        }
+        // --- End Cart Functions ---
 
-                // Get current filter selections to determine if TR/Type should be displayed
-                const currentAcTypeFilter = filterAcTypeSelect.value;
-                const currentAcTrFilter = filterAcTrSelect.value;
+        // Function to generate star rating HTML
+        function generateStars(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-                productsToRender.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.classList.add('col-4', 'product-item');
-                    productDiv.dataset.serialNo = product.serial_no; // Store serial_no as data attribute
-
-                    // Standardize image path by replacing '/' with '!'
-                    const imagePath = `img/PROC/${product.serial_no.replace(/\//g, '!')}.jpg`;
-                    let ratingSourcePath = product.rating_source_icon ? product.rating_source_icon : '';
-                    // Format price with Indian Rupee symbol and locale-specific numbering
-                    let formattedPrice = product.price ? `₹${parseFloat(product.price).toLocaleString('en-IN')}` : 'Price not available';
-
-                    // Determine the stars HTML or 'No rating' text
-                    let stars = product.rating_stars !== null && product.rating_stars !== undefined ? generateStars(product.rating_stars) : 'No rating';
-
-                    // Conditional display of AC Type and TR
-                    let acTypeDisplay = '';
-                    // Only show AC Type if product has one AND the AC Type filter is NOT active
-                    if (product['AC-Type'] && currentAcTypeFilter === '') {
-                        acTypeDisplay = `<p style="font-size: 14px; margin: 5px 0;">Type: ${product['AC-Type']}</p>`;
-                    }
-
-                    let acTrDisplay = '';
-                    // Only show AC TR if product has one AND the AC TR filter is NOT active
-                    if (product['AC-TR'] && currentAcTrFilter === '') {
-                        acTrDisplay = `<p style="font-size: 14px; margin: 5px 0;">TR: ${product['AC-TR']} Ton</p>`;
-                    }
-
-                    // Initial size for Add to Cart for AC products
-                    const initialSelectedSizeForCart = product['AC-TR'] ? `${product['AC-TR']} Ton` : 'N/A';
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            }
+            if (hasHalfStar) {
+                starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+            return starsHTML;
+        }
 
 
-                    productDiv.innerHTML = `
-                        <a href="product_detail.html?serial_no=${product.serial_no}" style="text-decoration: none; color: inherit;">
-                            <img src="${imagePath}" alt="${product.name}">
-                            <h4>${product.name} (S/N: ${product.serial_no})</h4>
-                            <p>${formattedPrice}</p>
-                            ${acTrDisplay} <!-- TR between price and type (or rating if type not shown) -->
-                            ${acTypeDisplay} <!-- Type between TR and rating -->
-                            <div class="rating">
-                                <span>
-                                    ${stars}
-                                </span>
-                                ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">Based on <img src="${ratingSourcePath}" style="width: 30px; height: 10px; vertical-align: middle;"></p>` : ''}
-                            </div>
-                        </a>
-                        <div class="add-to-cart-container" style="text-align: center; margin-top: 10px;">
-                            <a href="#" class="btn-Cart add-to-cart-small" data-serial-no="${product.serial_no}" data-initial-size="${initialSelectedSizeForCart}" data-product-unit="${product.unit || 'unit'}">Add To Cart</a>
+        const productContainer = document.getElementById('productListContainer');
+        const sortSelect = document.getElementById('sortSelect');
+        const filterAcTypeSelect = document.getElementById('filterAcType');
+        const filterAcTrSelect = document.getElementById('filterAcTr');
+        const filterAcStarSelect = document.getElementById('filterAcStar');
+        const filterAcinvSelect = document.getElementById('filterInv')
+
+        let allProducts = [];
+        let displayedProducts = [];
+
+        // Function to render products
+        function renderProducts(productsToRender) {
+            productContainer.innerHTML = '';
+            if (productsToRender.length === 0) {
+                productContainer.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px;">No AC products found matching your criteria.</p>';
+                return;
+            }
+            productsToRender.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.classList.add('col-4');
+
+                // Prepare variables for display
+                const formattedPrice = product.price ? `₹${product.price.toLocaleString('en-IN')}` : 'Price on Request';
+                const acTrDisplay = product['ac_tr'] ? `<p>TR: ${product['ac_tr']}</p>` : '';
+                const acTypeDisplay = product['ac_type'] ? `<p>Type: ${product['ac_type']}</p>` : '';
+                const acStarDisplay = product['ac_stars'] ? `<p>AC stars: ${product['ac_stars']}</p>` : '';
+                const acInvDisplay = product['ac_inv'] ? `<p>INV / NON-INV: ${product['ac_inv']}</p>` : '';
+                const stars = generateStars(product['rating'] || 0);
+                const ratingSourcePath = product.rating_icon || '';
+                const initialSelectedSizeForCart = product.size || '';
+                
+                productCard.innerHTML = `
+                    <a href="product_detail?serial_no=${product.serial_no}" style="text-decoration: none; color: inherit;">
+                        <img src="${product.image_url}" 
+                             alt="${product.name}" 
+                             onerror="handleImageError(this, '${product.serial_no}');"> 
+                        <h4>${product.name} (S/N: ${product.serial_no})</h4>
+                        <p>${formattedPrice}</p>
+                        ${acTrDisplay}
+                        ${acTypeDisplay}
+                        ${acStarDisplay}
+                        ${acInvDisplay}
+                        <div class="rating">
+                            <span>
+                                ${generateStars(product['rating'] || 0)} 
+                            </span>
+                            ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">Based on <img src="${ratingSourcePath}" style="width: 30px; height: 10px; vertical-align: middle;"></p>` : ''}
                         </div>
-                    `;
-                    productContainer.appendChild(productDiv);
-                });
-                updateTotalProductCount(productsToRender.length); // Update count after rendering
-                addAddToCartEventListeners(); // Add event listeners after rendering
-            }
+                    </a>
+                    <div class="add-to-cart-container" style="text-align: center; margin-top: 10px;">
+                        <a href="#" class="btn-Cart add-to-cart-btn" 
+                           data-serial-no="${product.serial_no}" 
+                           data-size="${initialSelectedSizeForCart}" 
+                           data-unit="${product.unit || 'unit'}" 
+                           data-name="${product.name}" 
+                           data-price="${product.price || 0}">
+                           Add To Cart
+                        </a>
+                    </div>
+                `;
 
-            // Function to sort the currently displayed products
-            function sortProducts(criteria) {
-                let productsToSort = [...displayedProducts]; // Sort the currently displayed products
-                switch (criteria) {
-                    case 'za':
-                        productsToSort.sort((a, b) => b.name.localeCompare(a.name));
-                        break;
-                    case 'price_asc':
-                        productsToSort.sort((a, b) => parseFloat(a.price.replace('₹', '').replace(/,/g, '')) - parseFloat(b.price.replace('₹', '').replace(/,/g, '')));
-                        break;
-                    case 'price_desc':
-                        productsToSort.sort((a, b) => parseFloat(b.price.replace('₹', '').replace(/,/g, '')) - parseFloat(a.price.replace('₹', '').replace(/,/g, '')));
-                        break;
-                    case 'rating':
-                        // Ensure valid numbers for sorting by rating, treating null/undefined as 0
-                        productsToSort.sort((a, b) => (b.rating_stars || 0) - (a.rating_stars || 0));
-                        break;
-                    case 'default':
-                    default:
-                        productsToSort.sort((a, b) => a.name.localeCompare(b.name)); // Sort A-Z by default
-                        break;
+                productContainer.appendChild(productCard);
+            });
+            attachAddToCartListeners();
+        }
+
+        // Function to sort products
+        function sortProducts(sortBy) {
+            let sortedProducts = [...displayedProducts];
+            if (sortBy === 'price-asc') {
+                sortedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
+            } else if (sortBy === 'price-desc') {
+                sortedProducts.sort((a, b) => (b.price || 0) - (a.price || 0));
+            } else if (sortBy === 'name-asc') {
+                sortedProducts.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+            } else if (sortBy === 'name-desc') {
+                sortedProducts.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
+            } else if (sortBy === 'rating') {
+                sortedProducts.sort((a, b) => (b['rating'] || 0) - (a['rating'] || 0));
+            }
+            renderProducts(sortedProducts);
+        }
+
+        // Function to attach event listeners to 'Add to Cart' buttons
+        function attachAddToCartListeners() {
+            document.querySelectorAll('.add-to-cart-btn').forEach(button => {
+                button.removeEventListener('click', handleAddToCartClick);
+                button.addEventListener('click', handleAddToCartClick);
+            });
+        }
+
+        function handleAddToCartClick(event) {
+            event.preventDefault();
+            const serialNo = this.dataset.serialNo;
+            const initialSize = this.dataset.size || 'N/A';
+            const productUnit = this.dataset.unit;
+            const productName = this.dataset.name;
+            const priceString = this.dataset.price;
+            const ProductPrice = parseFloat(priceString);
+
+            console.log('--- Add to Cart Click Debug ---');
+            console.log('Button Data:', this.dataset);
+            console.log('Parsed ProductPrice:', ProductPrice);
+
+            if (!isNaN(ProductPrice)) {
+                console.log('Calling addToCart with:', { serialNo, quantity: 1, initialSize, productUnit, productName, ProductPrice });
+                addToCart(serialNo, 1, initialSize, productUnit, productName, ProductPrice);
+            } else {
+                console.error("Invalid product price for Add to Cart. Received:", priceString);
+                alert("Error: Could not add product to cart due to invalid price. Check console for details.");
+            }
+            console.log('--- End Add to Cart Click Debug ---');
+        }
+        
+        // Function to filter products
+        function filterProducts() {
+            const selectedAcType = filterAcTypeSelect.value;
+            const selectedAcTr = filterAcTrSelect.value;
+            const selectedAcStar = filterAcStarSelect.value;
+            const selectedAcInv = filterAcinvSelect.value;
+            displayedProducts = allProducts.filter(product => {
+                const matchesType = (selectedAcType === 'All' || product['ac_type'] === selectedAcType);
+                const matchesTr = (selectedAcTr === 'All' || String(product['ac_tr']) === selectedAcTr);
+                const matchesStar = (selectedAcStar === 'All' || String(product['ac_stars']) === selectedAcStar);
+                const matchesInv = (selectedAcInv === 'All' || product['ac_inv'] === selectedAcInv);
+
+                return matchesType && matchesTr && matchesStar && matchesInv;
+            });
+
+            sortProducts(sortSelect.value);
+        }
+
+        // Function to populate filter dropdowns
+        function populateFilterOptions(property, selectElement) {
+            const options = new Set();
+            
+            allProducts.forEach(product => {
+                if (product[property] !== undefined && product[property] !== null) {
+                    options.add(product[property]);
                 }
-                displayedProducts = productsToSort; // Update displayedProducts after sorting
-                renderProducts(displayedProducts); // Re-render with sorted products
-            }
+            });
 
-            // Function to filter products based on selected dropdown values
-            function filterProducts() {
-                const selectedAcType = filterAcTypeSelect.value;
-                const selectedAcTr = filterAcTrSelect.value;
-                const selectedAcStar = filterAcStarSelect.value;
+            selectElement.innerHTML = '';
+            const allOption = document.createElement('option');
+            allOption.value = 'All';
+            allOption.textContent = 'All ' + property.replace('ac_', '').replace('-', ' ');
+            selectElement.appendChild(allOption);
 
-                let filtered = allProducts.filter(product => {
-                    const acTypeMatch = !selectedAcType || (product["AC-Type"] && product["AC-Type"].toString() === selectedAcType);
-                    const acTrMatch = !selectedAcTr || (product["AC-TR"] && product["AC-TR"].toString() === selectedAcTr);
-                    const acStarMatch = !selectedAcStar || (product["AC-STAR"] && product["AC-STAR"].toString() === selectedAcStar);
-                    
-                    return acTypeMatch && acTrMatch && acStarMatch;
-                });
-                
-                displayedProducts = filtered; // Update displayedProducts with filtered results
-                sortProducts(sortSelect.value); // Apply current sort order to filtered results
-            }
+            Array.from(options).filter(opt => opt !== 'All').sort().forEach(optionValue => {
+                const option = document.createElement('option');
+                option.value = optionValue;
+                option.textContent = optionValue;
+                selectElement.appendChild(option);
+            });
+        }
 
-            // Helper function to populate filter dropdowns with unique values
-            function populateFilterOptions(propertyName, selectElement) {
-                const uniqueValues = [...new Set(allProducts.map(product => product[propertyName]).filter(value => value !== null && value !== undefined))];
-                
-                selectElement.querySelectorAll('option:not([value=""])').forEach(option => option.remove());
-
-                uniqueValues.sort((a, b) => {
-                    // Custom sort for numbers (like TR and STAR), otherwise localeCompare for strings
-                    if (typeof a === 'number' && typeof b === 'number') {
-                        return a - b;
+        // --- Load products from Firebase Firestore ---
+        document.addEventListener('DOMContentLoaded', async () => {
+            productContainer.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px;">Loading products...</p>';
+            try {
+                const querySnapshot = await getDocs(productsCollectionRef);
+                querySnapshot.forEach((doc) => {
+                    const productData = doc.data();
+                    if (productData.type === 'AC') {
+                        allProducts.push(productData);
                     }
-                    return String(a).localeCompare(String(b));
-                }).forEach(value => {
-                    const option = document.createElement('option');
-                    option.value = value;
-                    // Special handling for AC-TR to add " Ton" suffix if it's a number
-                    option.textContent = (propertyName === 'AC-TR' && typeof value === 'number') ? `${value} Ton` : value;
-                    selectElement.appendChild(option);
                 });
-            }
 
-            // Function to add/update the total product count display
-            function updateTotalProductCount(count) {
-                let totalProductsElement = document.getElementById('totalProductsCount');
-                if (!totalProductsElement) {
-                    totalProductsElement = document.createElement('p');
-                    totalProductsElement.id = 'totalProductsCount';
-                    totalProductsElement.style.marginTop = '20px';
-                    productContainer.parentElement.appendChild(totalProductsElement);
-                }
-                totalProductsElement.textContent = `Total AC Products: ${count}`;
-            }
+                displayedProducts = [...allProducts];
 
-            // --- Cart Functions (modified to accept and store 'unit') ---
-            function getCartItems() {
-                const cartItemsString = localStorage.getItem('cartItems');
-                return cartItemsString ? JSON.parse(cartItemsString) : [];
-            }
+                sortProducts(sortSelect.value);
 
-            function saveCartItems(cartItems) {
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            }
-
-            // Updated addToCart to accept 'unit'
-            function addToCart(serialNo, quantity, size, unit) {
-                let cartItems = getCartItems();
-                // Find if item with same serialNo AND size (variant) already exists
-                const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
-
-                if (existingItemIndex > -1) {
-                    cartItems[existingItemIndex].quantity += quantity;
-                } else {
-                    // Store the unit when adding a new item to cart
-                    cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
-                }
-                saveCartItems(cartItems);
-                alert(`Added ${quantity} ${unit} of ${serialNo} (Size: ${size}) to cart!`); // Updated alert
-                console.log('Current cart:', cartItems);
-            }
-
-            function addAddToCartEventListeners() {
-                document.querySelectorAll('.add-to-cart-small').forEach(button => {
-                    button.addEventListener('click', function(event) {
-                        event.preventDefault(); // Prevent default link behavior
-                        const serialNo = this.dataset.serialNo;
-                        const initialSize = this.dataset.initialSize || 'N/A'; 
-                        const productUnit = this.dataset.productUnit || 'unit'; // Get the unit from data attribute
-
-                        // For product listing, always add 1 quantity when clicking the button
-                        addToCart(serialNo, 1, initialSize, productUnit); // Pass unit to addToCart
-                    });
+                populateFilterOptions('ac_type', filterAcTypeSelect);
+                populateFilterOptions('ac_tr', filterAcTrSelect);
+                populateFilterOptions('ac_stars', filterAcStarSelect);
+                populateFilterOptions('ac_inv', filterAcinvSelect);
+                
+                sortSelect.addEventListener('change', () => {
+                    sortProducts(sortSelect.value);
                 });
+                filterAcTypeSelect.addEventListener('change', filterProducts);
+                filterAcTrSelect.addEventListener('change', filterProducts);
+                filterAcStarSelect.addEventListener('change', filterProducts);
+                filterAcinvSelect.addEventListener('change', filterProducts)
+
+            } catch (error) {
+                console.error("Error loading AC product data from Firestore:", error);
+                const errorMessageElement = document.createElement('p');
+                errorMessageElement.textContent = "Failed to load AC products. Please check your internet connection or Firebase permissions.";
+                errorMessageElement.style.color = "red";
+                errorMessageElement.style.textAlign = "center";
+                productContainer.appendChild(errorMessageElement);
             }
-            // --- End Cart Functions ---
-
-
-            // Fetch product data when the DOM is fully loaded
-            fetch('products_data.js') // Ensure this path is correct relative to AC-only.html
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error(`HTTP error! status: ${response.status}`);
-                    }
-                    return response.json(); // Parse response as JSON
-                })
-                .then(data => {
-                    // Filter for only 'AC' type products for this page
-                    allProducts = data.filter(product => product.type === 'AC');
-                    displayedProducts = [...allProducts]; // Initialize displayed products
-
-                    // Initial render of all AC products
-                    renderProducts(displayedProducts);
-
-                    // Populate filter dropdowns with AC-specific data
-                    populateFilterOptions('AC-Type', filterAcTypeSelect);
-                    populateFilterOptions('AC-TR', filterAcTrSelect);
-                    populateFilterOptions('AC-STAR', filterAcStarSelect);
-                    
-                    // Add event listeners for sorting and filtering
-                    sortSelect.addEventListener('change', () => {
-                        sortProducts(sortSelect.value);
-                    });
-                    filterAcTypeSelect.addEventListener('change', filterProducts);
-                    filterAcTrSelect.addEventListener('change', filterProducts);
-                    filterAcStarSelect.addEventListener('change', filterProducts);
-                })
-                .catch(error => console.error('Error loading product data:', error));
         });
     </script>
 </body>

@@ -9,108 +9,262 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
-    <!-- Link to data.js - IMPORTANT: Ensure this file is loaded for bill data -->
-    <script src="data.js"></script>
+
+    <style>
+        /* Basic styling for the new sections and buttons */
+        .data-section {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .data-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .data-section p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .data-section strong {
+            color: #000;
+        }
+        .toggle-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .toggle-buttons button {
+            background-color: #ff523b; /* Red/Orange when inactive */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-buttons button:hover {
+            background-color: #563434; /* Darker red on hover */
+        }
+        .toggle-buttons button.active {
+            background-color: #841d1d; /* Green for active */
+        }
+        .toggle-buttons button.active:hover {
+            background-color: #470f0f; /* Darker green for active */
+        }
+        .loading-message, .error-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #777;
+        }
+        .error-message {
+            color: red;
+        }
+        /* Ensure hidden class works */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Specific styling for bill items in account.html */
+        .bill-item-wrapper {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 15px;
+        }
+
+        .bill-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .bill-item-wrapper:hover .bill-item {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .bill-item h5 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+
+        .bill-item p {
+            margin-bottom: 5px;
+        }
+
+        .bill-item ul {
+            list-style-type: disc;
+            padding-left: 25px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .bill-item ul li {
+            margin-bottom: 3px;
+        }
+
+        #customerDetails {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        /* Ensure account.html titles are red or black, not blue */
+        .account-container h1.title {
+            color: #f44336;
+        }
+
+        #customerProfileContent h4, #customerBillsContent h4, .user-bills-section h2 {
+            color: #f44336;
+        }
+
+        .user-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .user-actions .btn {
+            width: 100%;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
                 <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
                 <nav>
                     <ul id="Menuitems">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">All Products</a></li>
-                        <li><a href="AC-only.html">AC Products</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="products">All Products</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                        <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
-                <a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
-                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <a href="cart"><img src="img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
+                <img src="/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
             </div>
         </div>
     </div>
-    <div class="color-NAV">
+    <!-- End Header -->
+     <div class="color-NAV">
+        <br><br>
         <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
     </div>
 
-    <!-- Account System Content (Dashboard) -->
     <div class="account-container">
         <h1 class="title" style="font-size: xx-large;">Your Account</h1>
-        <br>
 
-        <div id="userDashboard" class="user-dashboard hidden">
-            <h2>Welcome!</h2>
-            <p><strong>User ID:</strong> <span id="displayUserId"></span></p>
-            <p><strong>Email:</strong> <span id="displayUserEmail"></span></p>
-            <p><strong>Name:</strong> <span id="displayName">N/A</span></p>
-            <p><strong>Phone Number:</strong> <span id="displayPhoneNumber">N/A</span></p>
-            <p><strong>Customer Code:</strong> <span id="displayCustomerCode">N/A</span></p>
+        <div class="toggle-buttons">
+            <button id="showUserProfileBtn" class="active">My Profile</button>
+            <button id="showCustomerDataBtn">My Customer Data</button>
+        </div>
 
-            <h3>Address:</h3>
-            <p>House/Flat Number: <span id="displayHouseAndFlatNumber">N/A</span></p>
-            <p>Housing Area/Flat Name: <span id="displayHousingAreaAndFlatName">N/A</span></p>
-            <p>Area Name: <span id="displayAreaName">N/A</span></p>
-            <p>City: <span id="displayCity">N/A</span></p>
-            <p>State: <span id="displayState">N/A</span></p>
-            <p>Pincode: <span id="displayPincode">N/A</span></p>
+        <div id="notLoggedInMessage" class="data-section hidden" style="text-align: center;">
+            <h2>Please Log In</h2>
+            <p>You need to be logged in to view your account details.</p>
+            <button class="btn" onclick="window.location.href='ls'">Go to Login/Signup</button>
+        </div>
 
-            <button id="logoutButton" class="btn">Logout</button>
+        <div id="profileIncompleteMessage" class="data-section hidden" style="text-align: center;">
+            <h2>Profile Incomplete</h2>
+            <p>Please complete your profile details to view your account information and linked bills, or ensure you have the necessary permissions.</p>
+            <button class="btn" onclick="window.location.href='ls/su2'">Complete Profile</button>
+        </div>
+
+        <div id="userProfileContent" class="data-section">
+            <div id="userDashboard">
+                <h2>Welcome!</h2>
+                <p><strong>User ID:</strong> <span id="displayUserId">Loading...</span></p>
+                <p><strong>Email:</strong> <span id="displayUserEmail">Loading...</span></p>
+                <p><strong>Email Status:</strong> <span id="displayEmailStatus">Loading...</span></p>
+                <p><strong>Name:</strong> <span id="displayName">N/A</span></p>
+                <p><strong>Phone Number:</strong> <span id="displayPhoneNumber">N/A</span></p>
+                <p><strong>Customer Code:</strong> <span id="displayCustomerCode">N/A</span></p>
+
+                <h3>Address:</h3>
+                <p>House/Flat Number: <span id="displayHouseAndFlatNumber">N/A</span></p>
+                <p>Housing Area/Flat Name: <span id="displayHousingAreaAndFlatName">N/A</span></p>
+                <p>Area Name: <span id="displayAreaName">N/A</span></p>
+                <p>City: <span id="displayCity">N/A</span></p>
+                <p>State: <span id="displayState">N/A</span></p>
+                <p>Pincode: <span id="displayPincode">N/A</span></p>
+                
+                <div class="user-actions">
+                    <button id="logoutButton" class="btn">Logout</button>
+                    <button class="btn" onclick="window.location.href='ls/del'">Delete Account</button>
+                    <button class="btn" onclick="window.location.href='ls/change_password'">Change Password</button>
+                    <button id="verifyEmailBtn" class="btn hidden">Verify Email</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="customerDataSection" class="data-section hidden">
+            <h3>Customer Data</h3>
+            <div id="customerDetails">
+                <p class="loading-message">Loading customer profile details...</p>
+                <p><strong>Customer Name:</strong> <span id="customerName"></span></p>
+                <p><strong>Customer Address:</strong> <span id="customerAddress"></span></p>
+                <p><strong>Customer City:</strong> <span id="customerCity"></span></p>
+                <p><strong>Customer Pincode:</strong> <span id="customerPincode"></span></p>
+            </div>
 
             <div class="user-bills-section" style="margin-top: 40px;">
                 <h2>Your Bills / Quotations</h2>
                 <div id="billsList">
-                    <p>Loading bills...</p>
+                    <p class="loading-message">Loading bills...</p>
                 </div>
                 <p id="noBillsMessage" class="hidden" style="color: #777;">No bills found for your customer code.</p>
             </div>
         </div>
-
-        <div id="notLoggedInMessage" class="user-dashboard hidden" style="text-align: center;">
-            <h2>Please Log In</h2>
-            <p>You need to be logged in to view your account details.</p>
-            <button class="btn" onclick="window.location.href='ls.html'">Go to Login/Signup</button>
-        </div>
-
-        <div id="profileIncompleteMessage" class="user-dashboard hidden" style="text-align: center;">
-            <h2>Profile Incomplete</h2>
-            <p>Please complete your profile details to view your account information and linked bills.</p>
-            <button class="btn" onclick="window.location.href='ls/su2.html'">Complete Profile</button>
-        </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <div class="container">
             <div class="row">
                 <div class="foot-col-1">
                     <h3>Download Our App</h3>
-                    <p>Download App for Android but not <u>iphone</u> for now</p>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Expires=14400&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <img src="../img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">
                     <h3>Useful links</h3>
                     <ul>
-                        <Li><a href="https://main.lakhiairconditioners.com/tac">Terms and Conditions</a></Li>
-                        <Li><a href="https://main.lakhiairconditioners.com/pp">Privacy Policy</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
                         <li><a href="https://lakhiairconditioners.com">INFO</a></li>
-                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
                     </ul>
                 </div>
                 <div class="foot-col-4">
                     <h3>Follow us</h3>
                     <ul>
-                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
-                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                        <Li><a href="https://insta.lakhiairconditioners.com/">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com/">Facebook</a></Li>
                     </ul>
-                    <h3 style="margin-top: 20px">Contact info</h3>
+                    <h3 style="margin-top: 20px">Contact Info</h3>
                     <ul>
                         <li><a href="tel:+919825513000">+919825513000</a></li>
                         <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
@@ -119,243 +273,315 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">copyright 2025 lakhiairconditioners<br>
-               all right given to fontawesome for their icons
-               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
 
         </div>
     </div>
+    <!-- End Footer -->
 
-    <script type="module">
-        // Firebase SDK imports
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import {
-            getAuth,
-            signOut,
-            onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import {
-            getFirestore,
-            doc,
-            onSnapshot
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+<script type="module">
+    // Firebase SDK imports - UNIFIED TO 11.6.1 FOR ALL FIRESTORE FUNCTIONS
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+        getAuth,
+        signOut,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+        getFirestore,
+        doc,
+        getDoc, // Explicitly import getDoc
+        onSnapshot,
+        getDocs,
+        collection,
+        query
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // IMPORTANT: Replace with your actual Firebase config
-        const firebaseConfig = {
-            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
-            authDomain: "lakhi-airconditioners.firebaseapp.com",
-            projectId: "lakhi-airconditioners",
-            storageBucket: "lakhi-airconditioners.firebasestorage.app",
-            messagingSenderId: "284430318185",
-            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
-            measurementId: "G-LB63B1FRYC"
-          };
+    // IMPORTANT: Replace with your actual Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+        authDomain: "lakhi-airconditioners.firebaseapp.com",
+        projectId: "lakhi-airconditioners",
+        storageBucket: "lakhi-airconditioners.firebasestorage.app",
+        messagingSenderId: "284430318185",
+        appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+        measurementId: "G-LB63B1FRYC"
+    };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
 
-        let currentUserId = null;
-        const appId = firebaseConfig.projectId; // Using projectId as appId for Firestore path
+    let userId = null; // Variable to store the current user's UID
+    const appIdFromConfig = firebaseConfig.projectId; // Get projectId for consistent use in Firestore paths
 
-        // Menu toggle function from the template
-        // Declare Menuitems in a scope accessible by window.menutoggle
-        const Menuitems = document.getElementById('Menuitems');
+    // Helper function to show/hide sections
+    function showSection(sectionId) {
+        const allSections = ['notLoggedInMessage', 'profileIncompleteMessage', 'userProfileContent', 'customerDataSection'];
+        allSections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        });
 
-        // Make menutoggle globally accessible
-        window.menutoggle = function() {
-            if (Menuitems) {
-                if (Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            }
-        };
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+        } else {
+            console.error(`Section with ID '${sectionId}' not found.`);
+        }
+    }
 
-        // UI Element References
-        const userDashboard = document.getElementById('userDashboard');
-        const notLoggedInMessage = document.getElementById('notLoggedInMessage');
-        const profileIncompleteMessage = document.getElementById('profileIncompleteMessage');
+    // Function to load and display customer data and all bills
+    async function loadCustomerDataAndBills(customerCode) {
+        console.log("Attempting to load customer data and bills for:", customerCode);
 
-        const displayUserIdSpan = document.getElementById('displayUserId');
-        const displayUserEmailSpan = document.getElementById('displayUserEmail');
-        const displayNameSpan = document.getElementById('displayName');
-        const displayPhoneNumberSpan = document.getElementById('displayPhoneNumber');
-        const displayCustomerCodeSpan = document.getElementById('displayCustomerCode');
-
-        // Updated display spans for combined address fields
-        const displayHouseAndFlatNumberSpan = document.getElementById('displayHouseAndFlatNumber');
-        const displayHousingAreaAndFlatNameSpan = document.getElementById('displayHousingAreaAndFlatName');
-        const displayAreaNameSpan = document.getElementById('displayAreaName');
-        const displayCitySpan = document.getElementById('displayCity');
-        const displayStateSpan = document.getElementById('displayState');
-        const displayPincodeSpan = document.getElementById('displayPincode');
-
+        const customerNameSpan = document.getElementById('customerName');
+        const customerAddressSpan = document.getElementById('customerAddress');
+        const customerCitySpan = document.getElementById('customerCity');
+        const customerPincodeSpan = document.getElementById('customerPincode');
         const billsListDiv = document.getElementById('billsList');
         const noBillsMessage = document.getElementById('noBillsMessage');
-        const logoutButton = document.getElementById('logoutButton');
+        const customerDetailsDiv = document.getElementById('customerDetails');
 
-        // Function to display messages (not used directly in this version, but good to keep)
-        function showMessage(element, message, type = 'error') {
-            element.textContent = message;
-            element.className = type === 'success' ? 'success-message' : 'error-message';
-            setTimeout(() => {
-                element.textContent = '';
-                element.className = '';
-            }, 5000);
-        }
+        if (customerDetailsDiv) customerDetailsDiv.innerHTML = '<p class="loading-message">Loading customer profile details...</p>';
+        if (billsListDiv) billsListDiv.innerHTML = '<p class="loading-message">Loading bills...</p>';
+        if (noBillsMessage) noBillsMessage.classList.add('hidden');
 
-        // Firebase Authentication Handlers
-        async function handleLogout() {
-            try {
-                await signOut(auth);
-                // Redirect to ls.html after logout
-                window.location.href = 'ls.html';
-            } catch (error) {
-                console.error("Logout error:", error);
-                // In a real app, you might show a persistent error message here
+        try {
+            const customerDocRef = doc(db, "artifacts", appIdFromConfig, "customers", customerCode);
+            const customerDocSnap = await getDoc(customerDocRef);
+
+            if (customerDocSnap.exists()) {
+                const customerData = customerDocSnap.data();
+                console.log("Customer profile loaded:", customerData);
+
+                if (customerDetailsDiv) {
+                    customerDetailsDiv.innerHTML = `
+                        <p><strong>Customer Name:</strong> <span id="customerName">${customerData.NAME || 'N/A'}</span></p>
+                        <p><strong>Customer Address:</strong> <span id="customerAddress">${customerData.addr || 'N/A'}</span></p>
+                        <p><strong>Customer City:</strong> <span id="customerCity">${customerData.city || 'N/A'}</span></p>
+                        <p><strong>Customer Pincode:</strong> <span id="customerPincode">${customerData.pincode || 'N/A'}</span></p>
+                    `;
+                }
+
+                let billsHtml = '';
+                const billsCollectionRef = collection(db, "artifacts", appIdFromConfig, "customers", customerCode, "bills");
+                const q = query(billsCollectionRef);
+                const querySnapshot = await getDocs(q);
+
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((billDoc) => {
+                        const billId = billDoc.id;
+                        const billData = billDoc.data();
+                        console.log(`Bill ${billId} data:`, billData);
+
+                        let productsSummary = billData.products && billData.products.length > 0 ?
+                            billData.products.map(p => p.name || 'Product').join(', ') : 'No products listed';
+
+                        billsHtml += `
+                            <a href="bill?customerCode=${encodeURIComponent(customerCode)}&billId=${encodeURIComponent(billId)}" target="_blank" class="bill-item-wrapper">
+                                <div class="bill-item">
+                                    <h5>Bill ID: ${billId}</h5>
+                                    ${billData.title ? `<p><strong>Title:</strong> ${billData.title}</p>` : ''}
+                                    ${billData.Cname ? `<p><strong>Project Name:</strong> ${billData.Cname}</p>` : ''}
+                                    <p><strong>Subtotal:</strong> ${billData.billSubtotal || 'N/A'}</p>
+                                    <p><strong>Tax:</strong> ${billData.billTax || 'N/A'}</p>
+                                    <p><strong>Total:</strong> ${billData.billTotal || 'N/A'}</p>
+                                    <p><strong>Products:</strong> ${productsSummary}</p>
+                                    <small style="color: #666; display: block; margin-top: 10px;">Click to view full details</small>
+                                </div>
+                            </a>
+                        `;
+                    });
+                    if (billsListDiv) billsListDiv.innerHTML = billsHtml;
+                } else {
+                    if (billsListDiv) billsListDiv.innerHTML = '';
+                    if (noBillsMessage) noBillsMessage.classList.remove('hidden');
+                    console.log("No bills found for this customer.");
+                }
+
+            } else {
+                if (customerDetailsDiv) customerDetailsDiv.innerHTML = `<p class="error-message">No customer data found for code: ${customerCode}</p>`;
+                if (billsListDiv) billsListDiv.innerHTML = '';
+                console.log("No such customer document!");
             }
+        } catch (error) {
+            console.error("Error loading customer data or bills:", error);
+            if (customerDetailsDiv) customerDetailsDiv.innerHTML = `<p class="error-message">Error loading customer data. Please try again.</p>`;
+            if (billsListDiv) billsListDiv.innerHTML = '';
         }
-        // Attach event listener to the logout button
-        if (logoutButton) {
-            logoutButton.addEventListener('click', handleLogout);
-        }
+    }
 
 
-        // Firestore Data Management (for user profiles and linked bills)
-        async function loadUserProfileAndBills(userId) {
-            if (!userId) {
-                console.log("loadUserProfileAndBills: No userId provided.");
-                return;
+    // --- Authentication and Initial Data Load ---
+    onAuthStateChanged(auth, (user) => {
+        const notLoggedInMessage = document.getElementById('notLoggedInMessage');
+        const profileIncompleteMessage = document.getElementById('profileIncompleteMessage');
+        const userProfileContent = document.getElementById('userProfileContent');
+        const customerDataSection = document.getElementById('customerDataSection');
+        const verifyEmailBtn = document.getElementById('verifyEmailBtn');
+        const displayEmailStatus = document.getElementById('displayEmailStatus');
+
+        if (user) {
+            userId = user.uid;
+            console.log("User logged in:", userId);
+
+            // Display email verification status
+            if (user.emailVerified) {
+                if (displayEmailStatus) displayEmailStatus.textContent = "Verified";
+                if (verifyEmailBtn) verifyEmailBtn.classList.add('hidden');
+            } else {
+                if (displayEmailStatus) displayEmailStatus.textContent = "Not Verified";
+                if (verifyEmailBtn) verifyEmailBtn.classList.remove('hidden');
+                if (verifyEmailBtn) verifyEmailBtn.onclick = () => window.location.href = 'ls/email_verf';
             }
 
-            const userProfileRef = doc(db, `artifacts/${appId}/users/${userId}/user_profiles`, "profile");
-
-            // Use onSnapshot for real-time updates to the dashboard
+            // Fetch user_profiles data using onSnapshot for real-time updates
+            const userProfileRef = doc(db, "artifacts", appIdFromConfig, "users", userId, "user_profiles", "profile");
             onSnapshot(userProfileRef, (docSnap) => {
                 if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    // Check if name and phoneNumber are present, indicating profile completion
-                    if (data.name && data.phoneNumber) {
-                        userDashboard.classList.remove('hidden');
-                        notLoggedInMessage.classList.add('hidden');
-                        profileIncompleteMessage.classList.add('hidden');
+                    const profileData = docSnap.data();
+                    console.log("User profile loaded:", profileData);
 
-                        displayNameSpan.textContent = data.name || 'N/A';
-                        displayPhoneNumberSpan.textContent = data.phoneNumber || 'N/A';
-                        displayCustomerCodeSpan.textContent = data.customerCode || 'N/A';
+                    const customerCode = profileData.customerCode || userId;
+                    window.currentUserCustomerCode = customerCode;
 
-                        // Populate combined address fields
-                        displayHouseAndFlatNumberSpan.textContent = data.address?.houseAndFlatNumber || 'N/A';
-                        displayHousingAreaAndFlatNameSpan.textContent = data.address?.housingAreaAndFlatName || 'N/A';
-                        displayAreaNameSpan.textContent = data.address?.areaName || 'N/A';
-                        displayCitySpan.textContent = data.address?.city || 'N/A';
-                        displayStateSpan.textContent = data.address?.state || 'N/A';
-                        displayPincodeSpan.textContent = data.address?.pincode || 'N/A';
+                    if (document.getElementById('displayUserId')) document.getElementById('displayUserId').textContent = userId;
+                    if (document.getElementById('displayUserEmail')) document.getElementById('displayUserEmail').textContent = profileData.email || user.email || 'N/A';
+                    if (document.getElementById('displayName')) document.getElementById('displayName').textContent = profileData.name || 'N/A';
+                    if (document.getElementById('displayPhoneNumber')) document.getElementById('displayPhoneNumber').textContent = profileData.phoneNumber || 'N/A';
+                    if (document.getElementById('displayCustomerCode')) document.getElementById('displayCustomerCode').textContent = profileData.customerCode || 'N/A';
 
-                        console.log("User profile loaded:", data);
+                    if (document.getElementById('displayHouseAndFlatNumber')) document.getElementById('displayHouseAndFlatNumber').textContent = profileData.address?.houseAndFlatNumber || 'N/A';
+                    if (document.getElementById('displayHousingAreaAndFlatName')) document.getElementById('displayHousingAreaAndFlatName').textContent = profileData.address?.housingAreaAndFlatName || 'N/A';
+                    if (document.getElementById('displayAreaName')) document.getElementById('displayAreaName').textContent = profileData.address?.areaName || 'N/A';
+                    if (document.getElementById('displayCity')) document.getElementById('displayCity').textContent = profileData.address?.city || 'N/A';
+                    if (document.getElementById('displayState')) document.getElementById('displayState').textContent = profileData.address?.state || 'N/A';
+                    if (document.getElementById('displayPincode')) document.getElementById('displayPincode').textContent = profileData.address?.pincode || 'N/A';
 
-                        // Now, try to load bills based on customerCode
-                        loadUserBills(data.customerCode);
-                    } else {
-                        // Profile exists but is incomplete
-                        userDashboard.classList.add('hidden');
-                        notLoggedInMessage.classList.add('hidden');
-                        profileIncompleteMessage.classList.remove('hidden');
-                        console.log("User profile incomplete for ID:", userId);
-                    }
+                    showSection('userProfileContent');
 
                 } else {
-                    // Profile document doesn't exist (e.g., brand new user before su2.html)
-                    userDashboard.classList.add('hidden');
-                    notLoggedInMessage.classList.add('hidden');
-                    profileIncompleteMessage.classList.remove('hidden');
-                    console.log("No user profile found for ID:", userId);
-                }
-            }, (error) => {
-                console.error("Error loading user profile (onSnapshot):", error);
-                userDashboard.classList.add('hidden');
-                notLoggedInMessage.classList.add('hidden');
-                profileIncompleteMessage.classList.remove('hidden'); // Show incomplete message on error
-                // In a real app, you might show a more specific error message here
-            });
-        }
-
-        function loadUserBills(customerCode) {
-            billsListDiv.innerHTML = ''; // Clear previous bills
-            noBillsMessage.classList.add('hidden'); // Hide no bills message initially
-
-            if (!customerCode || typeof window.billData === 'undefined') {
-                billsListDiv.innerHTML = '<p style="color: #777;">No customer code linked or bill data not available.</p>';
-                return;
-            }
-
-            const customerBills = window.billData[customerCode];
-
-            if (customerBills) {
-                let foundBills = false;
-                for (const billId in customerBills) {
-                    // Exclude customer info fields like name, addr1, etc.
-                    if (customerBills.hasOwnProperty(billId) &&
-                        billId !== "name" && billId !== "addr1" && billId !== "ct" && billId !== "pincode") {
-
-                        const bill = customerBills[billId];
-                        const billType = bill.type === 1 ? "Invoice" : (bill.type === 2 ? "Quotation" : (bill.title === "C" ? bill.Cname : "Bill"));
-                        // Use a fixed date or add a 'date' field to your data.js bill objects
-                        const billDate = bill.date || new Date().toLocaleDateString();
-                        const billTotal = bill.billTotal || (bill.products ? `₹${bill.products.reduce((sum, p) => sum + (parseFloat(p.price) * parseInt(p.qty)), 0).toLocaleString('en-IN')}` : '*Contact Us*');
-
-                        const billItem = document.createElement('div');
-                        billItem.className = 'bill-item'
-                        billItem.style.cssText = `
-                            border: 1px solid #ddd;
-                            border-radius: 8px;
-                            padding: 15px;
-                            margin-bottom: 10px;
-                            background-color: #fff;
-                            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+                    console.log("No user profile document found for UID:", userId);
+                    showSection('profileIncompleteMessage');
+                    if (profileIncompleteMessage) {
+                        profileIncompleteMessage.innerHTML = `
+                            <h2>Profile Access Denied</h2>
+                            <p>It seems you're logged in but don't have permission to view your profile or it's incomplete.</p>
+                            <p>Please ensure your profile is fully set up and your Firebase Security Rules allow read access to your profile document.</p>
+                            <button class="btn" onclick="window.location.href='ls/su2'">Complete Profile</button>
                         `;
-                        billItem.innerHTML = `
-                            <p><strong>Type:</strong> ${billType}</p>
-                            <p><strong>ID:</strong> ${billId}</p>
-                            <p><strong>Date:</strong> ${billDate}</p>
-                            <p><strong>Total:</strong> ${billTotal}</p>
-                            <a href="bill.html?Data=${customerCode}?for?${billId}" class="btn" style="padding: 5px 10px; margin-top: 10px; font-size: 0.9em;">View Details</a>
-                        `;
-                        billsListDiv.appendChild(billItem);
-                        foundBills = true;
                     }
                 }
-                if (!foundBills) {
-                    noBillsMessage.classList.remove('hidden');
-                    billsListDiv.innerHTML = ''; // Ensure list is empty if no bills found
+            }, (error) => {
+                console.error("Error fetching user profile:", error);
+                if (error.code === 'permission-denied') {
+                    showSection('profileIncompleteMessage');
+                    if (profileIncompleteMessage) {
+                        profileIncompleteMessage.innerHTML = `
+                            <h2>Profile Access Denied</h2>
+                            <p>It seems you're logged in but don't have permission to view your profile or it's incomplete.</p>
+                            <p>Please ensure your profile is fully set up and your Firebase Security Rules allow read access to your profile document.</p>
+                            <button class="btn" onclick="window.location.href='ls/su2'">Complete Profile</button>
+                        `;
+                    }
+                } else {
+                    if (userProfileContent) userProfileContent.innerHTML = `<p class="error-message">Error loading user profile: ${error.message}</p>`;
+                    showSection('userProfileContent');
                 }
-            } else {
-                noBillsMessage.classList.remove('hidden');
-            }
+            });
+
+        } else {
+            userId = null;
+            console.log("User not logged in.");
+            showSection('notLoggedInMessage');
+            if (document.getElementById('displayUserId')) document.getElementById('displayUserId').textContent = '';
+            if (document.getElementById('displayUserEmail')) document.getElementById('displayUserEmail').textContent = '';
+            if (document.getElementById('displayEmailStatus')) document.getElementById('displayEmailStatus').textContent = '';
+            if (document.getElementById('displayName')) document.getElementById('displayName').textContent = '';
+            if (document.getElementById('displayPhoneNumber')) document.getElementById('displayPhoneNumber').textContent = '';
+            if (document.getElementById('displayCustomerCode')) document.getElementById('displayCustomerCode').textContent = '';
+            if (document.getElementById('displayHouseAndFlatNumber')) document.getElementById('displayHouseAndFlatNumber').textContent = '';
+            if (document.getElementById('displayHousingAreaAndFlatName')) document.getElementById('displayHousingAreaAndFlatName').textContent = '';
+            if (document.getElementById('displayAreaName')) document.getElementById('displayAreaName').textContent = '';
+            if (document.getElementById('displayCity')) document.getElementById('displayCity').textContent = '';
+            if (document.getElementById('displayState')) document.getElementById('displayState').textContent = '';
+            if (document.getElementById('displayPincode')) document.getElementById('displayPincode').textContent = '';
+            const customerDetailsDiv = document.getElementById('customerDetails');
+            const billsListDiv = document.getElementById('billsList');
+            if (customerDetailsDiv) customerDetailsDiv.innerHTML = '';
+            if (billsListDiv) billsListDiv.innerHTML = '';
         }
+    });
 
-
-        // Initial Authentication and State Management
-        onAuthStateChanged(auth, async (user) => {
-            if (user) {
-                currentUserId = user.uid;
-                displayUserIdSpan.textContent = user.uid;
-                displayUserEmailSpan.textContent = user.email || 'N/A';
-                // Load profile and bills. The visibility of userDashboard/profileIncompleteMessage
-                // will be handled inside loadUserProfileAndBills based on profile completeness.
-                await loadUserProfileAndBills(user.uid);
-                console.log("User logged in:", user.uid, user.email);
-            } else {
-                currentUserId = null;
-                userDashboard.classList.add('hidden'); // Hide dashboard
-                profileIncompleteMessage.classList.add('hidden'); // Hide incomplete message
-                notLoggedInMessage.classList.remove('hidden'); // Show not logged in message
-                console.log("User not logged in.");
+    const logoutButton = document.getElementById('logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            try {
+                await signOut(auth);
+                console.log("User signed out.");
+                window.location.href = "/";
+            } catch (error) {
+                console.error("Error signing out:", error);
+                // Using a simple alert for now, consider a custom modal in production
+                alert("Error signing out. Please try again.");
             }
         });
-    </script>
+    } else {
+        console.warn("Logout button not found.");
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const showUserProfileBtn = document.getElementById('showUserProfileBtn');
+        const showCustomerDataBtn = document.getElementById('showCustomerDataBtn');
+        const userProfileContent = document.getElementById('userProfileContent');
+        const customerDataSection = document.getElementById('customerDataSection');
+
+        if (showUserProfileBtn && showCustomerDataBtn && userProfileContent && customerDataSection) {
+            showUserProfileBtn.addEventListener('click', () => {
+                showUserProfileBtn.classList.add('active');
+                showCustomerDataBtn.classList.remove('active');
+                userProfileContent.classList.remove('hidden');
+                customerDataSection.classList.add('hidden');
+            });
+
+            showCustomerDataBtn.addEventListener('click', () => {
+                showCustomerDataBtn.classList.add('active');
+                showUserProfileBtn.classList.remove('active');
+                userProfileContent.classList.add('hidden');
+                customerDataSection.classList.remove('hidden');
+
+                if (window.currentUserCustomerCode) {
+                    loadCustomerDataAndBills(window.currentUserCustomerCode);
+                } else {
+                    console.warn("Customer code not available to load customer data.");
+                    const customerDetailsDiv = document.getElementById('customerDetails');
+                    const billsListDiv = document.getElementById('billsList');
+                    if (customerDetailsDiv) customerDetailsDiv.innerHTML = "<p class='error-message'>Please log in or ensure your profile has a customer code.</p>";
+                    if (billsListDiv) billsListDiv.innerHTML = "";
+                }
+            });
+        } else {
+            console.error("One or more toggle buttons or content sections not found in HTML for event listeners.");
+        }
+    });
+
+    var Menuitems = document.getElementById("Menuitems");
+    if (Menuitems) {
+        Menuitems.style.maxHeight = "0px";
+        window.menutoggle = function() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px";
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
+        };
+    } else {
+        console.warn("Menuitems element not found for mobile toggle.");
+    }
+</script>
 </body>
 </html>

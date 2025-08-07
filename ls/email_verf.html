@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | Verify Email</title>
+    <link rel="icon" href="../img/1x1-logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script src="../data.js"></script>
+    <style>
+        .verification-container {
+            max-width: 600px;
+            margin: 80px auto;
+            padding: 40px;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        .verification-container h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .verification-container p {
+            color: #666;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 25px;
+        }
+
+        .btn {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .btn:hover {
+            background: #563434;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            font-size: 1em;
+            display: none; /* Hidden by default */
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .message-box.loading {
+            background-color: #e2e3e5;
+            color: #383d41;
+            border: 1px solid #d6d8db;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="../img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
+                        <li><a href="../about">About Us</a></li>
+                        <li><a href="../AC-only">AC Products</a></li>
+                        <li><a href="../contact">Contact Us</a></li>
+                        <li><a href="../account">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="../cart"><img src="../img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
+                <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+            </div>
+        </div>
+    </div>
+    <!-- End Header -->
+     <div class="color-NAV">
+        <br><br>
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    </div>
+
+    <div class="verification-container">
+        <h1>Verify Your Email Address</h1>
+        <p id="verificationMessage">
+            We have sent a verification link to your email address. Please click the link to confirm your account.
+        </p>
+        <p>
+            If you haven't received the email, you can resend it below.
+        </p>
+        <div class="btn-group">
+            <button id="resendVerificationBtn" class="btn">Resend Verification Email</button>
+            <button id="checkStatusBtn" class="btn">I've Verified My Email</button>
+        </div>
+        <div id="messageBox" class="message-box"></div>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="../img/NABR/apk-down.jpeg" alt="Download App"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="../img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://insta.lakhiairconditioners.com/">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com/">Facebook</a></Li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contact Info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+    <!-- End Footer -->
+
+<script type="module">
+    // Firebase SDK imports
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged, sendEmailVerification } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+
+    // IMPORTANT: Replace with your actual Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+        authDomain: "lakhi-airconditioners.firebaseapp.com",
+        projectId: "lakhi-airconditioners",
+        storageBucket: "lakhi-airconditioners.firebasestorage.app",
+        messagingSenderId: "284430318185",
+        appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+        measurementId: "G-LB63B1FRYC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    const resendVerificationBtn = document.getElementById('resendVerificationBtn');
+    const checkStatusBtn = document.getElementById('checkStatusBtn');
+    const messageBox = document.getElementById('messageBox');
+    const verificationMessage = document.getElementById('verificationMessage');
+
+    // Function to show messages
+    function showMessage(type, message) {
+        messageBox.textContent = message;
+        messageBox.className = `message-box ${type}`;
+        messageBox.style.display = 'block';
+    }
+
+    onAuthStateChanged(auth, (user) => {
+        if (user) {
+            if (user.emailVerified) {
+                // If user is already verified, redirect them
+                showMessage('success', 'Your email is already verified. Redirecting to your account page...');
+                setTimeout(() => {
+                    window.location.href = '../account';
+                }, 3000);
+            } else {
+                verificationMessage.innerHTML = `We have sent a verification link to <strong>${user.email}</strong>. Please click the link to confirm your account.`;
+            }
+        } else {
+            // User is not logged in, redirect to login page
+            showMessage('error', 'You must be logged in to verify your email. Redirecting to login page...');
+            setTimeout(() => {
+                window.location.href = 'ls';
+            }, 3000);
+        }
+    });
+
+    resendVerificationBtn.addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (user) {
+            showMessage('loading', 'Resending verification email...');
+            try {
+                await sendEmailVerification(user);
+                showMessage('success', 'A new verification link has been sent. Please check your inbox.');
+            } catch (error) {
+                console.error("Error resending email verification:", error);
+                showMessage('error', 'Failed to resend verification email. Please try again.');
+            }
+        }
+    });
+
+    checkStatusBtn.addEventListener('click', async () => {
+        const user = auth.currentUser;
+        if (user) {
+            showMessage('loading', 'Checking verification status...');
+            await user.reload(); // Reload the user object to get the latest status
+            if (user.emailVerified) {
+                showMessage('success', 'Your email is now verified! Redirecting to your account page...');
+                setTimeout(() => {
+                    window.location.href = '../account';
+                }, 3000);
+            } else {
+                showMessage('error', 'Your email is not yet verified. Please check your email for the link.');
+            }
+        }
+    });
+
+    // Mobile menu toggle (from your original HTML)
+    var Menuitems = document.getElementById("Menuitems");
+    if (Menuitems) {
+        Menuitems.style.maxHeight = "0px";
+        window.menutoggle = function() {
+            if (Menuitems.style.maxHeight == "0px") {
+                Menuitems.style.maxHeight = "200px";
+            } else {
+                Menuitems.style.maxHeight = "0px";
+            }
+        };
+    } else {
+        console.warn("Menuitems element not found for mobile toggle.");
+    }
+</script>
+</body>
+</html>

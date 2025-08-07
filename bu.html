@@ -10,6 +10,30 @@
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
     <style>
+        /* General styling for containers */
+        .small-container {
+            max-width: 1080px;
+            margin: auto;
+            padding-left: 25px;
+            padding-right: 25px;
+        }
+
+        .cart-page {
+            margin: 80px auto;
+            padding: 20px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .title {
+            text-align: center;
+            margin: 0 auto 30px;
+            position: relative;
+            line-height: 60px;
+            color: #f44336; /* Red for main titles */
+        }
+
         /* Specific styles for the Bill Generator */
         .generator-container {
             max-width: 900px;
@@ -87,6 +111,7 @@
         .customer-input-fields,
         .product-input-fields,
         .datajs-bill-fields,
+        .bill-details-section, /* New style for bill details section */
         .bill-title-fields { /* New style for bill title section */
             border: 1px solid #f0f0f0;
             padding: 15px;
@@ -111,6 +136,7 @@
             background: #ff523b;
             color: white;
             border: none;
+            padding: 8px; /* Adjusted padding for better look */
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -225,14 +251,14 @@
                 <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
                 <nav>
                     <ul id="Menuitems">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">All Products</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="account.html">Account</a></li>
-                        <li><a href="cart.html"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="products">All Products</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                        <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
+                <li><a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
             </div>
         </div>
@@ -246,7 +272,7 @@
         <div class="section-title">Bill Source</div>
         <div class="form-group radio-group">
             <label>
-                <input type="radio" name="billSource" value="dataJsBill" checked> Load Full Bill from Data.js
+                <input type="radio" name="billSource" value="dataJsBill" checked> Load Full Bill from Firebase
             </label>
             <label>
                 <input type="radio" name="billSource" value="dynamicBillWithCode"> Use Customer Code + Dynamic Products
@@ -258,18 +284,18 @@
 
         <div id="dataJsBillFields" class="datajs-bill-fields">
             <div class="form-group">
-                <label for="dataJsCustomerCode">Customer Code (from data.js):</label>
+                <label for="dataJsCustomerCode">Customer Code (from Firebase):</label>
                 <input type="text" id="dataJsCustomerCode" placeholder="e.g., MU401SSANAMD380015">
             </div>
             <div class="form-group">
-                <label for="dataJsBillIdentifier">Bill/Quotation Identifier (from data.js):</label>
+                <label for="dataJsBillIdentifier">Bill/Quotation Identifier (from Firebase):</label>
                 <input type="text" id="dataJsBillIdentifier" placeholder="e.g., 10002 or 20003 or MYCUSTOMBILL">
             </div>
         </div>
 
         <div id="dynamicCustomerFields" class="customer-input-fields hidden">
             <div id="customerCodeForDynamicFields" class="form-group">
-                <label for="customerCodeDynamic">Customer Code (from data.js):</label>
+                <label for="customerCodeDynamic">Customer Code (from Firebase):</label>
                 <input type="text" id="customerCodeDynamic" placeholder="e.g., MU401SSANAMD380015">
             </div>
             <div id="customerDirectForDynamicFields" class="hidden">
@@ -298,11 +324,28 @@
         </div>
         <button id="addProductBtn" class="btn btn-primary hidden" style="margin-top: 15px;">Add Product</button>
 
-        <div id="billTitleSection" class="bill-title-fields hidden">
-            <div class="section-title">Bill Title (Optional)</div>
+        <!-- New section for Bill Details (Subtotal, Tax, Total, Type, Custom Title) -->
+        <div id="billDetailsSection" class="bill-details-section hidden">
+            <div class="section-title">Bill Financial Details</div>
             <div class="form-group">
-                <label for="customBillTitle">Custom Title:</label>
-                <input type="text" id="customBillTitle" placeholder="e.g., My Special Order">
+                <label for="billSubtotal">Subtotal:</label>
+                <input type="number" id="billSubtotal" placeholder="e.g., 10000.00" step="0.01">
+            </div>
+            <div class="form-group">
+                <label for="billTax">Tax:</label>
+                <input type="text" id="billTax" placeholder="e.g., ₹1800 (18% GST)">
+            </div>
+            <div class="form-group">
+                <label for="billTotal">Total:</label>
+                <input type="text" id="billTotal" placeholder="e.g., ₹11800">
+            </div>
+            <div class="form-group">
+                <label for="billType">Bill Type (1=Invoice, 2=Quotation):</label>
+                <input type="number" id="billType" min="1" max="2" placeholder="e.g., 1">
+            </div>
+            <div class="form-group">
+                <label for="customBillTitle">Custom Title (Optional):</label>
+                <input type="text" id="customBillTitle" placeholder="e.g., Project Proposal">
             </div>
         </div>
 
@@ -329,7 +372,7 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u>for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250608%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250608T094512Z&X-Amz-Signature=b177f0359c9c7f7578365dcad89de43d06f42223b02b150ae4bb01df6fb00985&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg" alt="Download App"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
@@ -342,14 +385,14 @@
                         <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
                         <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
                         <li><a href="https://lakhiairconditioners.com">INFO</a></li>
-                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
                     </ul>
                 </div>
                 <div class="foot-col-4">
                     <h3>Follow us</h3>
                     <ul>
-                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
-                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                        <Li><a href="https://insta.lakhiairconditioners.com/">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com/">Facebook</a></Li>
                     </ul>
                     <h3 style="margin-top: 20px">Contact Info</h3>
                     <ul>
@@ -360,363 +403,428 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">copyright 2025 lakhiairconditioners<br>
-               all right given to fontawesome for their icons
-               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.</a>s<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
 
         </div>
     </div>
 
-    <!-- Load data.js and products_data.js -->
-    <script src="data.js"></script>
-    <script src="products_data.js"></script>
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, signInAnonymously } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, getDoc, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    <script>
-        // Menu toggle function from the template
-        var Menuitems = document.getElementById('Menuitems');
-        if (Menuitems) {
-            Menuitems.style.maxHeight = "0px";
+        // IMPORTANT: Replace with your actual Firebase config
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const appIdFromConfig = firebaseConfig.projectId;
+
+        // DOM elements
+        const billSourceRadios = document.querySelectorAll('input[name="billSource"]');
+        const dataJsBillFields = document.getElementById('dataJsBillFields');
+        const dynamicCustomerFields = document.getElementById('dynamicCustomerFields');
+        const customerCodeForDynamicFields = document.getElementById('customerCodeForDynamicFields');
+        const customerDirectForDynamicFields = document.getElementById('customerDirectForDynamicFields');
+        const dynamicProductsSection = document.getElementById('dynamicProductsSection');
+        const productsContainer = document.getElementById('productsContainer');
+        const addProductBtn = document.getElementById('addProductBtn');
+        const billDetailsSection = document.getElementById('billDetailsSection');
+        const billSubtotalInput = document.getElementById('billSubtotal');
+        const billTaxInput = document.getElementById('billTax');
+        const billTotalInput = document.getElementById('billTotal');
+        const billTypeInput = document.getElementById('billType');
+        const customBillTitleInput = document.getElementById('customBillTitle');
+        const generateUrlBtn = document.getElementById('generateUrlBtn');
+        const generatedUrlTextarea = document.getElementById('generatedUrl');
+        const copyUrlBtn = document.getElementById('copyUrlBtn');
+        const goToBillPageBtn = document.getElementById('goToBillPageBtn');
+        const messageBox = document.getElementById('messageBox');
+        
+        let productCounter = 0;
+
+        // --- Helper Functions ---
+        function showMessage(message, type = 'error') {
+            messageBox.textContent = message;
+            messageBox.className = `message-box ${type}`;
+            messageBox.classList.remove('hidden');
+            setTimeout(() => {
+                messageBox.classList.add('hidden');
+            }, 5000);
         }
 
-        function menutoggle(){
-            if(Menuitems) {
-                if(Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
+        function updateProductRowTitles() {
+            const rows = productsContainer.querySelectorAll('.product-row');
+            rows.forEach((row, index) => {
+                const titleElement = row.querySelector('h4');
+                if (titleElement) {
+                    titleElement.textContent = `Product ${index + 1}`;
                 }
-            }
+            });
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const billSourceRadios = document.querySelectorAll('input[name="billSource"]');
-            const dataJsBillFields = document.getElementById('dataJsBillFields');
-            const dynamicCustomerFields = document.getElementById('dynamicCustomerFields');
-            const customerCodeForDynamicFields = document.getElementById('customerCodeForDynamicFields');
-            const customerDirectForDynamicFields = document.getElementById('customerDirectForDynamicFields');
-            const dynamicProductsSection = document.getElementById('dynamicProductsSection');
-            const productsContainer = document.getElementById('productsContainer');
-            const addProductBtn = document.getElementById('addProductBtn');
-            const generateUrlBtn = document.getElementById('generateUrlBtn');
-            const generatedUrlTextarea = document.getElementById('generatedUrl');
-            const copyUrlBtn = document.getElementById('copyUrlBtn');
-            const goToBillPageBtn = document.getElementById('goToBillPageBtn');
-            const messageBox = document.getElementById('messageBox');
-            const billTitleSection = document.getElementById('billTitleSection');
-            const customBillTitleInput = document.getElementById('customBillTitle');
+        function addProductRow() {
+            productCounter++;
+            const productRow = document.createElement('div');
+            productRow.className = 'product-row';
+            productRow.dataset.id = productCounter;
 
+            productRow.innerHTML = `
+                <button type="button" class="remove-product-btn" data-id="${productCounter}">&times;</button>
+                <h4 style="margin-bottom: 10px; color: #666;">Product ${productsContainer.children.length + 1}</h4>
+                <div class="form-group radio-group">
+                    <label>
+                        <input type="radio" name="productType_${productCounter}" value="sr" checked> Lookup by Serial No (from products_data.js)
+                    </label>
+                    <label>
+                        <input type="radio" name="productType_${productCounter}" value="direct"> Enter Product Details Directly
+                    </label>
+                </div>
 
-            let productCounter = 0; // To give unique IDs to product rows, not for display numbering
-
-            // --- Helper Functions ---
-            function showMessage(message, type = 'error') {
-                messageBox.textContent = message;
-                messageBox.className = `message-box ${type}`;
-                messageBox.classList.remove('hidden');
-                setTimeout(() => {
-                    messageBox.classList.add('hidden');
-                }, 5000);
-            }
-
-            function updateProductRowTitles() {
-                const rows = productsContainer.querySelectorAll('.product-row');
-                rows.forEach((row, index) => {
-                    const titleElement = row.querySelector('h4');
-                    if (titleElement) {
-                        titleElement.textContent = `Product ${index + 1}`;
-                    }
-                });
-            }
-
-            function addProductRow() {
-                productCounter++; // Use for unique internal ID
-                const productRow = document.createElement('div');
-                productRow.className = 'product-row';
-                productRow.dataset.id = productCounter; // Store unique ID
-
-                productRow.innerHTML = `
-                    <button type="button" class="remove-product-btn" data-id="${productCounter}">&times;</button>
-                    <h4 style="margin-bottom: 10px; color: #666;">Product ${productsContainer.children.length + 1}</h4>
-                    <div class="form-group radio-group">
-                        <label>
-                            <input type="radio" name="productType_${productCounter}" value="sr" checked> Lookup by Serial No (from products_data.js)
-                        </label>
-                        <label>
-                            <input type="radio" name="productType_${productCounter}" value="direct"> Enter Product Details Directly
-                        </label>
+                <div id="productSrFields_${productCounter}" class="product-input-fields">
+                    <div class="form-group">
+                        <label for="productSr_${productCounter}">Serial No (SR):</label>
+                        <input type="text" id="productSr_${productCounter}" placeholder="e.g., LAPHP001">
                     </div>
-
-                    <div id="productSrFields_${productCounter}" class="product-input-fields">
-                        <div class="form-group">
-                            <label for="productSr_${productCounter}">Serial No (SR):</label>
-                            <input type="text" id="productSr_${productCounter}" placeholder="e.g., LAPHP001">
-                        </div>
-                        <div class="form-group">
-                            <label for="productQtySr_${productCounter}">Quantity:</label>
-                            <input type="number" id="productQtySr_${productCounter}" value="1" min="1">
-                        </div>
+                    <div class="form-group">
+                        <label for="productQtySr_${productCounter}">Quantity:</label>
+                        <input type="number" id="productQtySr_${productCounter}" value="1" min="1">
                     </div>
-
-                    <div id="productDirectFields_${productCounter}" class="product-input-fields hidden">
-                        <div class="form-group">
-                            <label for="productName_${productCounter}">Product Name:</label>
-                            <input type="text" id="productName_${productCounter}" placeholder="e.g., Custom Service">
-                        </div>
-                        <div class="form-group">
-                            <label for="productPrice_${productCounter}">Price:</label>
-                            <input type="number" id="productPrice_${productCounter}" placeholder="e.g., 5000" min="0">
-                        </div>
-                        <div class="form-group">
-                            <label for="productQtyDirect_${productCounter}">Quantity:</label>
-                            <input type="number" id="productQtyDirect_${productCounter}" value="1" min="1">
-                        </div>
-                        <div class="form-group">
-                            <label for="productSrOpt_${productCounter}">Optional Serial No (SR):</label>
-                            <input type="text" id="productSrOpt_${productCounter}" placeholder="Optional, e.g., SVC001">
-                        </div>
+                    <div class="form-group">
+                        <label for="productPriceSrOpt_${productCounter}">Optional Price (Overrides fetched price):</label>
+                        <input type="number" id="productPriceSrOpt_${productCounter}" placeholder="e.g., 15000" min="0" step="0.01">
                     </div>
-                `;
-                productsContainer.appendChild(productRow);
+                </div>
 
-                // Add event listeners for the new product row's radio buttons
-                const newProductTypeRadios = productRow.querySelectorAll(`input[name="productType_${productCounter}"]`);
-                newProductTypeRadios.forEach(radio => {
-                    radio.addEventListener('change', () => toggleProductInputFields(productRow));
-                });
+                <div id="productDirectFields_${productCounter}" class="product-input-fields hidden">
+                    <div class="form-group">
+                        <label for="productName_${productCounter}">Product Name:</label>
+                        <input type="text" id="productName_${productCounter}" placeholder="e.g., Custom Service">
+                    </div>
+                    <div class="form-group">
+                        <label for="productPrice_${productCounter}">Price:</label>
+                        <input type="number" id="productPrice_${productCounter}" placeholder="e.g., 5000" min="0" step="0.01">
+                    </div>
+                    <div class="form-group">
+                        <label for="productQtyDirect_${productCounter}">Quantity:</label>
+                        <input type="number" id="productQtyDirect_${productCounter}" value="1" min="1">
+                    </div>
+                    <div class="form-group">
+                        <label for="productSrOpt_${productCounter}">Optional Serial No (SR):</label>
+                        <input type="text" id="productSrOpt_${productCounter}" placeholder="Optional, e.g., SVC001">
+                    </div>
+                </div>
+            `;
+            productsContainer.appendChild(productRow);
 
-                // Add event listener for the remove button
-                productRow.querySelector('.remove-product-btn').addEventListener('click', (event) => {
-                    event.target.closest('.product-row').remove();
-                    updateProductRowTitles(); // Re-index titles after removal
-                });
-
-                toggleProductInputFields(productRow); // Initialize visibility
-                updateProductRowTitles(); // Update titles after adding
-            }
-
-            function toggleProductInputFields(productRow) {
-                const productId = productRow.dataset.id;
-                const productType = productRow.querySelector(`input[name="productType_${productId}"]:checked`).value;
-                const srFields = productRow.querySelector(`#productSrFields_${productId}`);
-                const directFields = productRow.querySelector(`#productDirectFields_${productId}`);
-
-                if (productType === 'sr') {
-                    srFields.classList.remove('hidden');
-                    directFields.classList.add('hidden');
-                } else {
-                    srFields.classList.add('hidden');
-                    directFields.classList.remove('hidden');
-                }
-            }
-
-            function toggleBillSourceFields() {
-                const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
-
-                // Hide all sections initially
-                dataJsBillFields.classList.add('hidden');
-                dynamicCustomerFields.classList.add('hidden');
-                customerCodeForDynamicFields.classList.add('hidden'); // Ensure hidden by default
-                customerDirectForDynamicFields.classList.add('hidden'); // Ensure hidden by default
-                dynamicProductsSection.classList.add('hidden');
-                productsContainer.classList.add('hidden');
-                addProductBtn.classList.add('hidden');
-                billTitleSection.classList.add('hidden'); // Hide custom title section
-
-                // Show relevant sections based on selection
-                if (selectedSource === 'dataJsBill') {
-                    dataJsBillFields.classList.remove('hidden');
-                } else if (selectedSource === 'dynamicBillWithCode') {
-                    dynamicCustomerFields.classList.remove('hidden');
-                    customerCodeForDynamicFields.classList.remove('hidden');
-                    dynamicProductsSection.classList.remove('hidden');
-                    productsContainer.classList.remove('hidden');
-                    addProductBtn.classList.remove('hidden');
-                    billTitleSection.classList.remove('hidden'); // Show custom title for dynamic bills
-                    // Ensure at least one product row exists if switching to dynamic
-                    if (productsContainer.children.length === 0) {
-                        addProductRow();
-                    }
-                } else if (selectedSource === 'dynamicBillDirect') {
-                    dynamicCustomerFields.classList.remove('hidden');
-                    customerDirectForDynamicFields.classList.remove('hidden');
-                    dynamicProductsSection.classList.remove('hidden');
-                    productsContainer.classList.remove('hidden');
-                    addProductBtn.classList.remove('hidden');
-                    billTitleSection.classList.remove('hidden'); // Show custom title for dynamic bills
-                    // Ensure at least one product row exists if switching to dynamic
-                    if (productsContainer.children.length === 0) {
-                        addProductRow();
-                    }
-                }
-            }
-
-            function generateUrl() {
-                let baseUrl = window.location.origin + '/bill.html?'; // Adjust if bill.html is in a different path
-                let params = [];
-                const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
-                
-                // Clear previous messages
-                showMessage('', 'hidden');
-
-                if (selectedSource === 'dataJsBill') {
-                    const customerCode = document.getElementById('dataJsCustomerCode').value.trim();
-                    const billIdentifier = document.getElementById('dataJsBillIdentifier').value.trim();
-
-                    if (!customerCode || !billIdentifier) {
-                        showMessage('Please enter both Customer Code and Bill/Quotation Identifier for Data.js lookup.', 'error');
-                        return;
-                    }
-
-                    // Attempt to get bill title from data.js
-                    let billTitleFromDataJs = '';
-                    if (window.billData && window.billData[customerCode]) {
-                        const customerData = window.billData[customerCode];
-                        const quotationData = customerData[billIdentifier];
-                        if (quotationData) {
-                            if (quotationData.type === 1) {
-                                billTitleFromDataJs = "Invoice";
-                            } else if (quotationData.type === 2) {
-                                billTitleFromDataJs = "Quotation";
-                            } else if (quotationData.title === "C" && quotationData.Cname) {
-                                billTitleFromDataJs = quotationData.Cname;
-                            } else {
-                                billTitleFromDataJs = "Bill Details"; // Default if type/title not clear
-                            }
-                        } else {
-                            showMessage(`Bill/Quotation '${billIdentifier}' not found for customer '${customerCode}' in data.js.`, 'error');
-                            return;
-                        }
-                    } else {
-                        showMessage(`Customer '${customerCode}' not found in data.js.`, 'error');
-                        return;
-                    }
-
-                    params.push(`Data=${encodeURIComponent(customerCode)}?for?${encodeURIComponent(billIdentifier)}`);
-                    // Add the fetched title as info parameter
-                    if (billTitleFromDataJs) {
-                        params.push(`info=${encodeURIComponent(billTitleFromDataJs)}`);
-                    }
-
-                } else { // dynamicBillWithCode or dynamicBillDirect
-                    // --- Customer Parameters for Dynamic Bills ---
-                    if (selectedSource === 'dynamicBillWithCode') {
-                        const customerCode = document.getElementById('customerCodeDynamic').value.trim();
-                        if (customerCode) {
-                            params.push(`ccode=${encodeURIComponent(customerCode)}`);
-                        } else {
-                            showMessage('Please enter a Customer Code for dynamic bill with code.', 'error');
-                            return;
-                        }
-                    } else { // dynamicBillDirect
-                        const name = document.getElementById('directCustomerName').value.trim();
-                        const addr1 = document.getElementById('directCustomerAddr1').value.trim();
-                        const ct = document.getElementById('directCustomerCt').value.trim();
-                        const pincode = document.getElementById('directCustomerPincode').value.trim();
-
-                        if (name) params.push(`customerName=${encodeURIComponent(name)}`);
-                        if (addr1) params.push(`customerAddr1=${encodeURIComponent(addr1)}`);
-                        if (ct) params.push(`customerCt=${encodeURIComponent(ct)}`);
-                        if (pincode) params.push(`customerPincode=${encodeURIComponent(pincode)}`);
-                        
-                        if (!name && !addr1 && !ct && !pincode) {
-                            showMessage('Please enter customer details for direct dynamic bill.', 'error');
-                            return;
-                        }
-                    }
-
-                    // --- Product Parameters for Dynamic Bills ---
-                    let productDefinitions = [];
-                    const productRows = productsContainer.querySelectorAll('.product-row');
-                    if (productRows.length === 0) {
-                        showMessage('Please add at least one product for dynamic bill.', 'error');
-                        return;
-                    }
-
-                    let allProductsValid = true;
-                    productRows.forEach(row => {
-                        const productId = row.dataset.id;
-                        const productType = row.querySelector(`input[name="productType_${productId}"]:checked`).value;
-                        let productDef = '';
-
-                        if (productType === 'sr') {
-                            const sr = row.querySelector(`#productSr_${productId}`).value.trim();
-                            const qty = row.querySelector(`#productQtySr_${productId}`).value.trim();
-                            if (sr && qty) {
-                                productDef = `type=SR&sr=${encodeURIComponent(sr)}&qty=${encodeURIComponent(qty)}`;
-                            } else {
-                                showMessage(`Missing Serial No or Quantity for Product ${productId}.`, 'error');
-                                allProductsValid = false;
-                                return;
-                            }
-                        } else { // direct
-                            const name = row.querySelector(`#productName_${productId}`).value.trim();
-                            const price = row.querySelector(`#productPrice_${productId}`).value.trim();
-                            const qty = row.querySelector(`#productQtyDirect_${productId}`).value.trim();
-                            const sr_opt = row.querySelector(`#productSrOpt_${productId}`).value.trim();
-
-                            if (name && price && qty) {
-                                productDef = `type=DIRECT&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&qty=${encodeURIComponent(qty)}`;
-                                if (sr_opt) {
-                                    productDef += `&sr_opt=${encodeURIComponent(sr_opt)}`;
-                                }
-                            } else {
-                                showMessage(`Missing Name, Price, or Quantity for Direct Product ${productId}.`, 'error');
-                                allProductsValid = false;
-                                return;
-                            }
-                        }
-                        if (productDef) {
-                            productDefinitions.push(productDef);
-                        }
-                    });
-
-                    if (!allProductsValid) {
-                        return; // Stop if any product was invalid
-                    }
-
-                    if (productDefinitions.length > 0) {
-                        params.push(`products=${encodeURIComponent(productDefinitions.join('||'))}`);
-                    } else {
-                        showMessage('No valid products defined for dynamic bill.', 'error');
-                        return;
-                    }
-
-                    // Add custom title for dynamic bills ONLY if provided
-                    const customTitle = customBillTitleInput.value.trim();
-                    if (customTitle) {
-                        params.push(`info=${encodeURIComponent(customTitle)}`);
-                    }
-                }
-                
-                const finalUrl = baseUrl + params.join('&');
-                generatedUrlTextarea.value = finalUrl;
-                goToBillPageBtn.href = finalUrl;
-                showMessage('URL generated successfully!', 'success');
-            }
-
-            function copyUrl() {
-                if (generatedUrlTextarea.value) {
-                    generatedUrlTextarea.select();
-                    document.execCommand('copy');
-                    showMessage('URL copied to clipboard!', 'success');
-                } else {
-                    showMessage('No URL to copy. Please generate one first.', 'error');
-                }
-            }
-
-            // --- Event Listeners ---
-            billSourceRadios.forEach(radio => {
-                radio.addEventListener('change', toggleBillSourceFields);
+            const newProductTypeRadios = productRow.querySelectorAll(`input[name="productType_${productCounter}"]`);
+            newProductTypeRadios.forEach(radio => {
+                radio.addEventListener('change', () => toggleProductInputFields(productRow));
             });
 
-            addProductBtn.addEventListener('click', addProductRow);
-            generateUrlBtn.addEventListener('click', generateUrl);
-            copyUrlBtn.addEventListener('click', copyUrl);
+            productRow.querySelector('.remove-product-btn').addEventListener('click', (event) => {
+                event.target.closest('.product-row').remove();
+                updateProductRowTitles();
+            });
 
-            // Initial setup
+            toggleProductInputFields(productRow);
+            updateProductRowTitles();
+        }
+
+        function toggleProductInputFields(productRow) {
+            const productId = productRow.dataset.id;
+            const productType = productRow.querySelector(`input[name="productType_${productId}"]:checked`).value;
+            const srFields = productRow.querySelector(`#productSrFields_${productId}`);
+            const directFields = productRow.querySelector(`#productDirectFields_${productId}`);
+
+            if (productType === 'sr') {
+                srFields.classList.remove('hidden');
+                directFields.classList.add('hidden');
+            } else {
+                srFields.classList.add('hidden');
+                directFields.classList.remove('hidden');
+            }
+        }
+
+        function toggleBillSourceFields() {
+            const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
+
+            dataJsBillFields.classList.add('hidden');
+            dynamicCustomerFields.classList.add('hidden');
+            customerCodeForDynamicFields.classList.add('hidden');
+            customerDirectForDynamicFields.classList.add('hidden');
+            dynamicProductsSection.classList.add('hidden');
+            productsContainer.classList.add('hidden');
+            addProductBtn.classList.add('hidden');
+            billDetailsSection.classList.add('hidden');
+
+            if (selectedSource === 'dataJsBill') {
+                dataJsBillFields.classList.remove('hidden');
+            } else if (selectedSource === 'dynamicBillWithCode') {
+                dynamicCustomerFields.classList.remove('hidden');
+                customerCodeForDynamicFields.classList.remove('hidden');
+                dynamicProductsSection.classList.remove('hidden');
+                productsContainer.classList.remove('hidden');
+                addProductBtn.classList.remove('hidden');
+                billDetailsSection.classList.remove('hidden');
+                if (productsContainer.children.length === 0) {
+                    addProductRow();
+                }
+            } else if (selectedSource === 'dynamicBillDirect') {
+                dynamicCustomerFields.classList.remove('hidden');
+                customerDirectForDynamicFields.classList.remove('hidden');
+                dynamicProductsSection.classList.remove('hidden');
+                productsContainer.classList.remove('hidden');
+                addProductBtn.classList.remove('hidden');
+                billDetailsSection.classList.remove('hidden');
+                if (productsContainer.children.length === 0) {
+                    addProductRow();
+                }
+            }
+        }
+
+        async function checkBillExistenceInFirebase(customerCode, billId) {
+            try {
+                // Sign in anonymously if not already authenticated (for read access)
+                if (!auth.currentUser) {
+                    await signInAnonymously(auth);
+                    console.log("Signed in anonymously to Firebase for existence check.");
+                }
+
+                const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
+                const customerDocSnap = await getDoc(customerDocRef);
+
+                if (!customerDocSnap.exists()) {
+                    showMessage(`Customer with code '${customerCode}' not found in Firebase.`, 'error');
+                    return false;
+                }
+
+                const billDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills', billId);
+                const billDocSnap = await getDoc(billDocRef);
+
+                if (!billDocSnap.exists()) {
+                    showMessage(`Bill with ID '${billId}' not found for customer '${customerCode}' in Firebase.`, 'error');
+                    return false;
+                }
+
+                return true; // Both customer and bill exist
+            } catch (error) {
+                console.error("Error checking bill existence in Firebase:", error);
+                showMessage(`Error checking Firebase: ${error.message}`, 'error');
+                return false;
+            }
+        }
+
+        async function generateUrl() {
+            let baseUrl = 'https://shop.lakhiairconditioners.com/bill?';
+            let params = [];
+            const selectedSource = document.querySelector('input[name="billSource"]:checked').value;
+            
+            showMessage('', 'hidden'); // Clear previous messages
+
+            if (selectedSource === 'dataJsBill') {
+                const customerCode = document.getElementById('dataJsCustomerCode').value.trim();
+                const billIdentifier = document.getElementById('dataJsBillIdentifier').value.trim();
+
+                if (!customerCode || !billIdentifier) {
+                    showMessage('Please enter both Customer Code and Bill/Quotation Identifier for Firebase lookup.', 'error');
+                    return;
+                }
+
+                // Perform Firebase existence check
+                const exists = await checkBillExistenceInFirebase(customerCode, billIdentifier);
+                if (!exists) {
+                    return; // Stop URL generation if not found
+                }
+
+                params.push(`customerCode=${encodeURIComponent(customerCode)}`);
+                params.push(`billId=${encodeURIComponent(billIdentifier)}`);
+
+            } else { // dynamicBillWithCode or dynamicBillDirect
+                // --- Customer Parameters for Dynamic Bills ---
+                if (selectedSource === 'dynamicBillWithCode') {
+                    const customerCode = document.getElementById('customerCodeDynamic').value.trim();
+                    if (customerCode) {
+                        params.push(`ccode=${encodeURIComponent(customerCode)}`);
+                    } else {
+                        showMessage('Please enter a Customer Code for dynamic bill with code.', 'error');
+                        return;
+                    }
+                } else { // dynamicBillDirect
+                    const name = document.getElementById('directCustomerName').value.trim();
+                    const addr1 = document.getElementById('directCustomerAddr1').value.trim();
+                    const ct = document.getElementById('directCustomerCt').value.trim();
+                    const pincode = document.getElementById('directCustomerPincode').value.trim();
+
+                    if (name) params.push(`customerName=${encodeURIComponent(name)}`);
+                    if (addr1) params.push(`customerAddr1=${encodeURIComponent(addr1)}`);
+                    if (ct) params.push(`customerCt=${encodeURIComponent(ct)}`);
+                    if (pincode) params.push(`customerPincode=${encodeURIComponent(pincode)}`);
+                    
+                    if (!name && !addr1 && !ct && !pincode) {
+                        showMessage('Please enter customer details for direct dynamic bill.', 'error');
+                        return;
+                    }
+                }
+
+                // --- Product Parameters for Dynamic Bills ---
+                let productDefinitions = [];
+                const productRows = productsContainer.querySelectorAll('.product-row');
+                if (productRows.length === 0) {
+                    showMessage('Please add at least one product for dynamic bill.', 'error');
+                    return;
+                }
+
+                let allProductsValid = true;
+                for (const row of productRows) { // Use for...of to allow await inside
+                    const productId = row.dataset.id;
+                    const productType = row.querySelector(`input[name="productType_${productId}"]:checked`).value;
+                    let productDef = '';
+
+                    if (productType === 'sr') {
+                        const sr = row.querySelector(`#productSr_${productId}`).value.trim();
+                        const qty = row.querySelector(`#productQtySr_${productId}`).value.trim();
+                        const priceSrOpt = row.querySelector(`#productPriceSrOpt_${productId}`).value.trim(); // Optional price for SR
+
+                        if (!sr || !qty) {
+                            showMessage(`Missing Serial No or Quantity for Product ${productId}.`, 'error');
+                            allProductsValid = false;
+                            break; // Exit loop
+                        }
+
+                        // Optional: Check if product exists in Firebase if SR is given
+                        try {
+                            // Sign in anonymously if not already authenticated (for read access)
+                            if (!auth.currentUser) {
+                                await signInAnonymously(auth);
+                                console.log("Signed in anonymously to Firebase for product existence check.");
+                            }
+                            const productsCollectionRef = collection(db, "artifacts", appIdFromConfig, "products");
+                            const q = query(productsCollectionRef, where("serial_no", "==", sr));
+                            const querySnapshot = await getDocs(q);
+                            if (querySnapshot.empty) {
+                                showMessage(`Product with Serial No '${sr}' not found in Firebase products.`, 'error');
+                                allProductsValid = false;
+                                break; // Exit loop
+                            }
+                        } catch (prodCheckError) {
+                            console.error("Error checking product existence:", prodCheckError);
+                            showMessage(`Error checking product existence for SR '${sr}': ${prodCheckError.message}`, 'error');
+                            allProductsValid = false;
+                            break; // Exit loop
+                        }
+
+
+                        productDef = `type=SR&sr=${encodeURIComponent(sr)}&qty=${encodeURIComponent(qty)}`;
+                        if (priceSrOpt) {
+                            productDef += `&price=${encodeURIComponent(priceSrOpt)}`; // Add optional price
+                        }
+                    } else { // direct
+                        const name = row.querySelector(`#productName_${productId}`).value.trim();
+                        const price = row.querySelector(`#productPrice_${productId}`).value.trim();
+                        const qty = row.querySelector(`#productQtyDirect_${productId}`).value.trim();
+                        const sr_opt = row.querySelector(`#productSrOpt_${productId}`).value.trim();
+
+                        if (!name || !price || !qty) {
+                            showMessage(`Missing Name, Price, or Quantity for Direct Product ${productId}.`, 'error');
+                            allProductsValid = false;
+                            break; // Exit loop
+                        }
+
+                        productDef = `type=DIRECT&name=${encodeURIComponent(name)}&price=${encodeURIComponent(price)}&qty=${encodeURIComponent(qty)}`;
+                        if (sr_opt) {
+                            productDef += `&sr_opt=${encodeURIComponent(sr_opt)}`;
+                        }
+                    }
+                    if (productDef) {
+                        productDefinitions.push(productDef);
+                    }
+                }
+
+                if (!allProductsValid) {
+                    return; // Stop if any product was invalid
+                }
+
+                if (productDefinitions.length > 0) {
+                    params.push(`products=${encodeURIComponent(productDefinitions.join('||'))}`);
+                } else {
+                    showMessage('No valid products defined for dynamic bill.', 'error');
+                    return;
+                }
+
+                // --- Add Bill Financial Details and Custom Title ---
+                const billSubtotal = billSubtotalInput.value.trim();
+                if (billSubtotal) {
+                    params.push(`subtotal=${encodeURIComponent(billSubtotal)}`);
+                }
+                const billTax = billTaxInput.value.trim();
+                if (billTax) {
+                    params.push(`tax=${encodeURIComponent(billTax)}`);
+                }
+                const billTotal = billTotalInput.value.trim();
+                if (billTotal) {
+                    params.push(`total=${encodeURIComponent(billTotal)}`);
+                }
+                const billType = billTypeInput.value.trim();
+                if (billType) {
+                    params.push(`type=${encodeURIComponent(billType)}`);
+                }
+                const customTitle = customBillTitleInput.value.trim();
+                if (customTitle) {
+                    params.push(`info=${encodeURIComponent(customTitle)}`);
+                }
+            }
+            
+            const finalUrl = baseUrl + params.join('&');
+            generatedUrlTextarea.value = finalUrl;
+            goToBillPageBtn.href = finalUrl;
+            goToBillPageBtn.style.display = 'inline-flex'; // Show the button
+            showMessage('URL generated successfully!', 'success');
+        }
+
+        function copyUrl() {
+            if (generatedUrlTextarea.value) {
+                generatedUrlTextarea.select();
+                document.execCommand('copy');
+                showMessage('URL copied to clipboard!', 'success');
+            } else {
+                showMessage('No URL to copy. Please generate one first.', 'error');
+            }
+        }
+
+        // --- Event Listeners ---
+        billSourceRadios.forEach(radio => {
+            radio.addEventListener('change', toggleBillSourceFields);
+        });
+
+        addProductBtn.addEventListener('click', addProductRow);
+        generateUrlBtn.addEventListener('click', generateUrl);
+        copyUrlBtn.addEventListener('click', copyUrl);
+
+        // Initial setup
+        document.addEventListener('DOMContentLoaded', async () => {
+            // Sign in anonymously on page load to allow Firebase checks immediately
+            try {
+                await signInAnonymously(auth);
+                console.log("Signed in anonymously to Firebase on bu.html load.");
+            } catch (error) {
+                console.error("Error signing in anonymously on bu.html load:", error);
+                showMessage("Failed to connect to Firebase for initial checks. Some features may not work.", 'error');
+            }
             toggleBillSourceFields(); // Set initial visibility based on default radio
-            // No initial addProductRow here, as it depends on the selected source.
-            // addProductRow() is called within toggleBillSourceFields if dynamic option is selected.
         });
     </script>
 </body>

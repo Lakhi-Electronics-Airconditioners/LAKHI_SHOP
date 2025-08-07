@@ -17,11 +17,11 @@
                 <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
                 <nav>
                     <ul id="Menuitems">
-                        <li><a href="index.html">Home</a></li>
-                        <li><a href="about.html">About Us</a></li>
-                        <li><a href="products.html">All Products</a></li>
-                        <li><a href="contact.html">Contact Us</a></li>
-                        <li><a href="account.html">Account</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="about">About Us</a></li>
+                        <li><a href="products">All Products</a></li>
+                        <li><a href="contact">Contact Us</a></li>
+                        <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px"></a>
@@ -34,7 +34,6 @@
     <div class="small-container single-product">
         <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back to Products</a>
         <div class="row" id="productDetailContainer">
-            <!-- Product details will be dynamically loaded here -->
             <div class="col-2">
                 <img src="https://placehold.co/400x400/cccccc/ffffff?text=Loading..." alt="Loading Product Image">
             </div>
@@ -50,14 +49,11 @@
                     </select>
                 </div>
 
-                <!-- Add To Cart Section with Quantity Unit -->
                 <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
                     <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
                     <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
                     <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
                 </div>
-                <!-- End Add To Cart Section -->
-
                 <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
                 <p>Loading Description...</p>
                 <div class="rating">
@@ -74,7 +70,6 @@
         </div>
     </div>
 
-    <!--footer-->
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -82,7 +77,7 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://gonativeio-apps.s3-accelerate.amazonaws.com/static/6675cb704ad00e517ecc6016/app-release.apk?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYMYFO3A75OQPINCL%2F20250516%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20250516T124428Z&X-Amz-Expires=14400&X-Amz-Signature=203fc53e1989a4bbe8fc8eb5e0451d05cbd205c5ea781318237539ae6db7b7cd&X-Amz-SignedHeaders=host"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
@@ -95,14 +90,14 @@
                         <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
                         <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
                         <li><a href="https://lakhiairconditioners.com">INFO</a></li>
-                        <li><a href="https://made.lakhiairconditioners.com">VIDEOS MADE</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
                     </ul>
                 </div>
                 <div class="foot-col-4">
                     <h3>Follow us</h3>
                     <ul>
-                        <Li><a href="https://www.instagram.com/lakhi_electronic_airconditions/">Instagram</a></Li>
-                        <Li><a href="https://www.facebook.com/lakhielectronicsairconditioner">Facebook</a></Li>
+                        <Li><a href="https://insta.lakhiairconditioners.com/">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com/">Facebook</a></Li>
                     </ul>
                     <h3 style="margin-top: 20px">Contact info</h3>
                     <ul>
@@ -113,9 +108,9 @@
                 </div>
             </div>
             <hr>
-            <p class="copyright">copyright 2025 lakhiairconditioners<br>
-               all right given to fontawesome for their icons
-               <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
 
         </div>
     </div>
@@ -132,197 +127,234 @@
             }
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        // New function for handling image loading errors with fallbacks
+        function handleImageError(imgElement, serialNo) {
+            // Check if we've already tried the serial number fallback
+            if (!imgElement.dataset.serialFallbackAttempted) {
+                imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
+                imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
+                console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
+            } else {
+                // If serial number fallback was already attempted and failed, use final default
+                imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
+                imgElement.src = 'img/PROC/DP.png';
+                console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+            }
+        }
+    </script>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        // Import Firestore modules for fetching a single document using a query
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        // Ensure this APP_ID matches the projectId in your firebaseConfig
+        const FIRESTORE_APP_ID = "lakhi-airconditioners"; 
+
+        // --- Cart Functions ---
+        // Function to get cart items from localStorage
+        function getCartItems() {
+            const cartItemsString = localStorage.getItem('cartitems');
+            return cartItemsString ? JSON.parse(cartItemsString) : [];
+        }
+
+        // Function to save cart items to localStorage
+        function saveCartItems(cartItems) {
+            localStorage.setItem('cartitems', JSON.stringify(cartItems));
+        }
+
+        // Function to add an item to the cart - now accepts 'unit' and 'productName'
+        function addToCart(serialNo, quantity, size, unit, productName) {
+            let cartItems = getCartItems();
+            // Find if item with same serialNo AND size (variant) already exists
+            const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
+
+            if (existingItemIndex > -1) {
+                cartItems[existingItemIndex].quantity += quantity;
+            } else {
+                // Include the unit when adding a new item to cart
+                cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
+            }
+            saveCartItems(cartItems);
+            alert(`Added ${quantity} ${unit} of ${productName} (Size: ${size}) to cart!`); // Updated alert
+            console.log('Current cartitems:', cartItems);
+        }
+        // --- End Cart Functions ---
+
+        // Function to generate star ratings HTML based on a numeric rating
+        function generateStars(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            }
+            if (hasHalfStar) {
+                starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+            return starsHTML;
+        }
+
+        document.addEventListener('DOMContentLoaded', async function() {
             const urlParams = new URLSearchParams(window.location.search);
             const serialNo = urlParams.get('serial_no');
             const productDetailContainer = document.getElementById('productDetailContainer');
-            const productSizeSelect = document.getElementById('product-size');
-            const productQuantityInput = document.getElementById('product-quantity');
-            const addToCartBtn = document.getElementById('add-to-cart-btn');
-            const productUnitDisplay = document.getElementById('product-unit-display'); // New element for unit display
+            let productSizeSelect;
+            let productQuantityInput;
+            let addToCartBtn;
+            let productUnitDisplay;
 
-            let currentProduct = null; // Store the fetched product data
+            let currentProduct = null;
 
-            // Function to generate star ratings HTML based on a numeric rating
-            function generateStars(rating) {
-                let starsHTML = '';
-                const fullStars = Math.floor(rating);
-                const hasHalfStar = rating % 1 !== 0;
-                const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
-                for (let i = 0; i < fullStars; i++) {
-                    starsHTML += '<i class="fa-solid fa-star"></i>';
-                }
-                if (hasHalfStar) {
-                    starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
-                }
-                for (let i = 0; i < emptyStars; i++) {
-                    starsHTML += '<i class="fa-regular fa-star"></i>';
-                }
-                return starsHTML;
-            }
-
-            // Function to get cart items from localStorage
-            function getCartItems() {
-                const cartItemsString = localStorage.getItem('cartItems');
-                return cartItemsString ? JSON.parse(cartItemsString) : [];
-            }
-
-            // Function to save cart items to localStorage
-            function saveCartItems(cartItems) {
-                localStorage.setItem('cartItems', JSON.stringify(cartItems));
-            }
-
-            // Function to add an item to the cart - now accepts 'unit'
-            function addToCart(serialNo, quantity, size, unit) {
-                let cartItems = getCartItems();
-                // Find if item with same serialNo AND size (variant) already exists
-                const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
-
-                if (existingItemIndex > -1) {
-                    cartItems[existingItemIndex].quantity += quantity;
-                } else {
-                    // Include the unit when adding a new item to cart
-                    cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
-                }
-                saveCartItems(cartItems);
-                alert(`Added ${quantity} ${unit} of ${currentProduct.name} (Size: ${size}) to cart!`); // Updated alert
-                console.log('Current cart:', cartItems);
-            }
-
-            // Event listener for the "Add To Cart" button
-            addToCartBtn.addEventListener('click', function(event) {
-                event.preventDefault(); // Prevent default link behavior
-                if (currentProduct) {
-                    const quantity = parseInt(productQuantityInput.value, 10);
-                    const selectedSize = productSizeSelect.value;
-                    const productUnit = currentProduct.unit; // Get the unit from the product data
-
-                    if (quantity > 0) {
-                        addToCart(currentProduct.serial_no, quantity, selectedSize, productUnit); // Pass unit to addToCart
-                    } else {
-                        alert("Please enter a valid quantity (at least 1).");
-                    }
-                } else {
-                    alert("Product data not loaded yet. Please try again.");
-                }
-            });
-
+            // Display loading state initially
+            productDetailContainer.innerHTML = `
+                <div class="col-2">
+                    <img src="https://placehold.co/400x400/cccccc/ffffff?text=Loading..." alt="Loading Product Image">
+                </div>
+                <div class="col-2">
+                    <p>Category: Loading...</p>
+                    <h1>Loading Product Name...</h1>
+                    <h4>Loading Price...</h4>
+                    <div class="size-selector-container">
+                        <label for="product-size">Select Size:</label>
+                        <select id="product-size" class="large-size-selector" disabled>
+                            <option>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
+                        <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;" disabled>
+                        <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
+                        <a href="#" class="btn-Cart disabled" id="add-to-cart-btn">Add To Cart</a>
+                    </div>
+                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                    <p>Loading Description...</p>
+                    <div class="rating"><span>Loading rating...</span></div>
+                </div>
+            `;
 
             if (serialNo) {
-                fetch('products_data.js') // Ensure this path is correct
-                    .then(response => {
-                        if (!response.ok) {
-                            throw new Error(`HTTP error! status: ${response.status}`);
-                        }
-                        return response.json();
-                    })
-                    .then(data => {
-                        currentProduct = data.find(product => product.serial_no === serialNo);
+                try {
+                    // --- CHANGED: Query by serial_no field instead of document ID ---
+                    const productsCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "products");
+                    const q = query(productsCollectionRef, where("serial_no", "==", serialNo));
+                    const querySnapshot = await getDocs(q);
 
-                        if (currentProduct) {
-                            const imagePath = `img/PROC/${currentProduct.serial_no.replace(/\//g, '!')}.jpg`;
-                            let ratingSourcePath = currentProduct.rating_source_icon ? currentProduct.rating_source_icon : '';
-                            let formattedPrice = currentProduct.price ? `₹${parseFloat(currentProduct.price).toLocaleString('en-IN')}` : 'Price not available';
-                            let stars = currentProduct.rating_stars !== null && currentProduct.rating_stars !== undefined ? generateStars(currentProduct.rating_stars) : 'No rating';
+                    if (!querySnapshot.empty) {
+                        // Assuming serial_no is unique, get the first matching document
+                        currentProduct = querySnapshot.docs[0].data();
+                        
+                        // Prioritize image_url from Firestore, otherwise use the existing local path logic
+                        const imageSrc = currentProduct.image_url || `img/PROC/${currentProduct.serial_no.replace(/\//g, '!')}.jpg`;
+                        let formattedPrice = currentProduct.price ? `₹${parseFloat(currentProduct.price).toLocaleString('en-IN')}` : 'Price not available';
+                        let stars = currentProduct.rating_stars !== null && currentProduct.rating !== undefined ? generateStars(currentProduct.rating) : 'No rating';
+                        let ratingSourcePath = currentProduct.rating_icon ? currentProduct.rating_icon : '';
 
-                            // Populate size options (example: for AC TR values)
-                            // Clear existing options, then add the specific product's size option
-                            productSizeSelect.innerHTML = ''; 
-                            if (currentProduct.type === 'AC' && currentProduct['AC-TR']) {
-                                const option = document.createElement('option');
-                                option.value = `${currentProduct['AC-TR']} Ton`; // Store size with unit
-                                option.textContent = `${currentProduct['AC-TR']} Ton`;
-                                productSizeSelect.appendChild(option);
-                            } else {
-                                const option = document.createElement('option');
-                                option.value = 'N/A'; // Default size if no specific size property
-                                option.textContent = 'N/A';
-                                productSizeSelect.appendChild(option);
-                                productSizeSelect.disabled = true; // Disable if no relevant sizes
-                            }
-
-                            // Update the unit display
-                            productUnitDisplay.textContent = currentProduct.unit || 'unit'; // Display the product's unit or default to 'unit'
-
-                            productDetailContainer.innerHTML = `
-                                <div class="col-2">
-                                    <img src="${imagePath}" alt="${currentProduct.name}" onerror="this.onerror=null;this.src='https://placehold.co/400x400/cccccc/ffffff?text=Image+Not+Found';">
-                                </div>
-                                <div class="col-2">
-                                    <p>Category: ${currentProduct.type || 'N/A'}</p>
-                                    <h1>${currentProduct.name}</h1>
-                                    <h4 class="dynamic-price">${formattedPrice}</h4>
-                                    
-                                    <div class="size-selector-container">
-                                        <label for="product-size">Select Size:</label>
-                                        <select id="product-size" class="large-size-selector">
-                                            <!-- Options populated by JS below -->
+                        productDetailContainer.innerHTML = `
+                            <div class="col-2">
+                                <img src="${imageSrc}"
+                                     alt="${currentProduct.name}" 
+                                     onerror="handleImageError(this, '${currentProduct.serial_no}');"
+                                     style="display: flex;justify-content: center;align-items: center;">
+                            </div>
+                            <div class="col-2">
+                                <p>Category: ${currentProduct.type || 'N/A'}</p>
+                                <h1>${currentProduct.name}</h1>
+                                <h4 class="dynamic-price">${formattedPrice}</h4>
+                                
+                                <div class="size-selector-container">
+                                    <label for="product-size">Select Size:</label>
+                                    <select id="product-size" class="large-size-selector">
                                         </select>
-                                    </div>
-
-                                    <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
-                                        <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
-                                        <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">${currentProduct.unit || 'unit'}</span> <!-- Display unit here -->
-                                        <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
-                                    </div>
-
-                                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
-                                    <p>${currentProduct.description || 'No description available.'}</p>
-                                    ${currentProduct['AC-TR'] ? `<p><b>AC Tonnage:</b> ${currentProduct['AC-TR']} Ton</p>` : ''}
-                                    ${currentProduct['AC-Type'] ? `<p><b>AC Type:</b> ${currentProduct['AC-Type']}</p>` : ''}
-                                    ${currentProduct['AC-STAR'] ? `<p><b>Energy Rating:</b> ${currentProduct['AC-STAR']} Star</p>` : ''}
-
-                                    <div class="rating">
-                                        <span>
-                                            ${stars}
-                                        </span>
-                                        ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
-                                    </div>
                                 </div>
-                            `;
-                            // Re-get elements after innerHTML update and re-populate select & re-attach event listener
-                            const updatedProductSizeSelect = document.getElementById('product-size');
-                            const updatedProductQuantityInput = document.getElementById('product-quantity');
-                            const updatedAddToCartBtn = document.getElementById('add-to-cart-btn');
-                            const updatedProductUnitDisplay = document.getElementById('product-unit-display');
 
-                            if (currentProduct.type === 'AC' && currentProduct['AC-TR']) {
-                                const option = document.createElement('option');
-                                option.value = `${currentProduct['AC-TR']} Ton`;
-                                option.textContent = `${currentProduct['AC-TR']} Ton`;
-                                updatedProductSizeSelect.appendChild(option);
-                            } else {
-                                const option = document.createElement('option');
-                                option.value = 'N/A';
-                                option.textContent = 'N/A';
-                                updatedProductSizeSelect.appendChild(option);
-                                updatedProductSizeSelect.disabled = true;
-                            }
-                            updatedProductUnitDisplay.textContent = currentProduct.unit || 'unit';
+                                <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
+                                    <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
+                                    <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">${currentProduct.unit || 'unit'}</span>
+                                    <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
+                                </div>
+                                <div class="rating" style="">
+                                    <span>
+                                        ${stars}
+                                    </span>
+                                    ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">  Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
+                                </div>
+                            </div>
 
-                            updatedAddToCartBtn.addEventListener('click', function(event) {
-                                event.preventDefault();
-                                const quantity = parseInt(updatedProductQuantityInput.value, 10);
-                                const selectedSize = updatedProductSizeSelect.value;
-                                const productUnit = currentProduct.unit;
-                                if (quantity > 0) {
-                                    addToCart(currentProduct.serial_no, quantity, selectedSize, productUnit);
-                                } else {
-                                    alert("Please enter a valid quantity (at least 1).");
-                                }
-                            });
+                                <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                                <p>${currentProduct.description || 'No description available.'}</p>
+                                ${currentProduct['ac_tr'] ? `<p><b>AC Tonnage:</b> ${currentProduct['ac_tr']} Ton</p>` : ''}
+                                ${currentProduct['ac_type'] ? `<p><b>AC Type:</b> ${currentProduct['ac_type']}</p>` : ''}
+                                ${currentProduct['ac_stars'] ? `<p><b>Energy Rating:</b> ${currentProduct['ac_stars']} Star</p>` : ''}
+                                ${currentProduct['ac_inv'] ? `<p><b>Inverter /Non-Inverter:</b> ${currentProduct['ac_inv']}</p>` : ''}
+                                
+                            </div>
+                        `;
 
+                        // Re-select elements after innerHTML update
+                        productSizeSelect = document.getElementById('product-size');
+                        productQuantityInput = document.getElementById('product-quantity');
+                        addToCartBtn = document.getElementById('add-to-cart-btn');
+                        productUnitDisplay = document.getElementById('product-unit-display');
+
+                        // Populate size options
+                        if (currentProduct.type === 'AC' && currentProduct['ac_tr']) {
+                            const option = document.createElement('option');
+                            option.value = `${currentProduct['ac_tr']} Ton`;
+                            option.textContent = `${currentProduct['ac_tr']} Ton`;
+                            productSizeSelect.appendChild(option);
                         } else {
-                            productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found.</p>';
+                            const option = document.createElement('option');
+                            option.value = 'N/A';
+                            option.textContent = 'N/A';
+                            productSizeSelect.appendChild(option);
+                            productSizeSelect.disabled = true;
                         }
-                    })
-                    .catch(error => {
-                        console.error('Error fetching product data:', error);
-                        productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details.</p>';
-                    });
+                        productUnitDisplay.textContent = currentProduct.unit || 'unit';
+
+                        // Re-attach event listener for the "Add To Cart" button
+                        addToCartBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const quantity = parseInt(productQuantityInput.value, 10);
+                            const selectedSize = productSizeSelect.value;
+                            const productUnit = currentProduct.unit;
+                            const productName = currentProduct.name;
+                            if (quantity > 0) {
+                                addToCart(currentProduct.serial_no, quantity, selectedSize, productUnit, productName);
+                            } else {
+                                alert("Please enter a valid quantity (at least 1).");
+                            }
+                        });
+
+                    } else {
+                        // If query snapshot is empty, no product found with that serial_no field value
+                        productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found with the provided serial number.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching product data from Firestore:', error);
+                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details. Please check your internet connection or Firebase permissions.</p>';
+                }
             } else {
-                productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">No product serial number provided.</p>';
+                productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">No product serial number provided in the URL.</p>';
             }
         });
     </script>

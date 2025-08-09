@@ -9,6 +9,13 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('❌ Service Worker error:', err));
+        }
+    </script>
 </head>
 <body>
     <div class="header-NAV">
@@ -262,6 +269,11 @@
                     if (!querySnapshot.empty) {
                         // Assuming serial_no is unique, get the first matching document
                         currentProduct = querySnapshot.docs[0].data();
+                    if (currentProduct && currentProduct.serial_no) {
+                        const sr = currentProduct.serial_no;
+                        document.title = `Lakhi Airconditioners | Product Details | ${sr}`;
+                    }
+
                         
                         // Prioritize image_url from Firestore, otherwise use the existing local path logic
                         const imageSrc = currentProduct.image_url || `img/PROC/${currentProduct.serial_no.replace(/\//g, '!')}.jpg`;

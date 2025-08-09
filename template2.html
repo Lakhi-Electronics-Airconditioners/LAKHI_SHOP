@@ -11,10 +11,11 @@
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
     <meta name="google-site-verification" content="3WJMESWY8huA1C6uNJbxahjiRoTCzahkcjAxx0WDuLw" />
     
-    <script>
-        // Register the service worker - Keep this if needed
-        if ("serviceworker" in navigator) {
-            navigator.serviceWorker.register("service-worker.js");
+    <<script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('Service Worker error:', err));
         }
     </script>
     <style>

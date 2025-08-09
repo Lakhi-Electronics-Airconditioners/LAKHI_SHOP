@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lakhi Airconditioners | Offline</title>
+  <link rel="icon" href="img/1x1-logo.png">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="game.js" defer></script>
+</head>
+<body>
+  <div class="header-NAV">
+    <div class="container">
+      <div class="navbar">
+        <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+        <nav>
+          <ul id="Menuitems">
+            <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
+            <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
+            <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
+            <li><a href="https://shop.lakhiairconditioners.com/AC-only">AC Products</a></li>
+            <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
+            <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
+          </ul>
+        </nav>
+        <a href="https://shop.lakhiairconditioners.com/cart"><img src="img/NABR/SCI.png" width="30px"></a>
+        <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+      </div>
+    </div>
+  </div>
+
+  <div class="color-NAV">
+    <br><br>
+    <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+  </div>
+
+  <div class="container">
+    <h2 style="color: red; text-align: center;">⚠️ You are viewing an offline version</h2>
+
+    <div id="game-area" style="margin-top: 40px; text-align: center;">
+      <h3>🎮 Try this game while you're offline!</h3>
+      <h3>Click on the Red dot</h3>
+      <div id="circle"></div>
+      <p>Score: <span id="score">0</span></p>
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="container">
+      <div class="foot-col-2">
+        <img src="img/log-w.png" width="200px" alt="Lakhi Airconditioners Logo">
+        <p>Our Purpose Is to give the best deal and products to the Many.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔔 Popup -->
+  <div id="offline-popup" style="display:none; position:fixed; top:30%; left:50%; transform:translate(-50%, -50%);
+    background:#fff; border:2px solid #333; padding:20px; z-index:9999; text-align:center; box-shadow:0 0 10px rgba(0,0,0,0.3);">
+    <p id="popup-message">Nice try buddy, but you're offline.</p>
+    <button onclick="closePopup()">OK</button>
+    <button onclick="forceGo()">Just let me go</button>
+  </div>
+
+  <script>
+    function menutoggle() {
+      const Menuitems = document.getElementById("Menuitems");
+      if (Menuitems.style.maxHeight === "0px") {
+        Menuitems.style.maxHeight = "200px";
+      } else {
+        Menuitems.style.maxHeight = "0px";
+      }
+    }
+
+    // 🌐 Check if network is back
+    setInterval(() => {
+      fetch("https://shop.lakhiairconditioners.com", { mode: 'no-cors' })
+        .then(() => {
+          location.href = "https://shop.lakhiairconditioners.com";
+        })
+        .catch(() => {
+          // Still offline
+        });
+    }, 5000); // Check every 5 seconds
+
+    // 😎 Link Interception
+    let targetHref = null;
+
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        targetHref = this.href;
+
+        document.getElementById('popup-message').textContent = "Nice try buddy, but you're offline.";
+        document.getElementById('offline-popup').style.display = 'block';
+      });
+    });
+
+    function closePopup() {
+      document.getElementById('offline-popup').style.display = 'none';
+      targetHref = null;
+    }
+
+    function forceGo() {
+      document.getElementById('offline-popup').style.display = 'none';
+
+      if (targetHref) {
+        const isInternal = targetHref.includes(location.hostname);
+
+        if (isInternal) {
+          setTimeout(() => {
+            alert("Welcome back! Good to see you again. Told you so 😎");
+          }, 800);
+        } else {
+          window.location.href = targetHref;
+        }
+      }
+    }
+  </script>
+</body>
+</html>

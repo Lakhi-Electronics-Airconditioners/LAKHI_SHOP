@@ -18,6 +18,86 @@
     </script>
 </head>
 <body>
+    <!-- Terms and Conditions Modal (Initial Agreement) -->
+    <div id="tacpp" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Please Agree to Proceed</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <input type="checkbox" id="agree">
+                <label for="agree">
+                    I agree to the 
+                    <a href="../info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="../info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Disclaimer Section -->
+            <p style="font-size:14px; margin-bottom:20px;">
+                * Prices may not be accurate, and not all products are listed.<br>
+                *product may not be in stock or may not even be buyable anymore
+            </p>
+            <!-- Continue Button -->
+            <div class="w3-center">
+                <button 
+                    class="btn-modal" 
+                    onclick="continueAction(event)">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Terms and Conditions Update Modal -->
+    <div id="updateTacppModal" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeUpdateModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Terms and Conditions Updated</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Update Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
+                <input type="checkbox" id="agreeUpdate">
+                <label for="agreeUpdate">
+                    I agree to the updated 
+                    <a href="../info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="../info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Continue Button for Update -->
+            <div class="w3-center">
+                <button 
+                    class="btn-modal" 
+                    onclick="continueUpdateAction(event)">
+                    Agree to Update
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="TACPP.js" defer></script>
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
@@ -254,6 +334,7 @@
                         <a href="#" class="btn-Cart disabled" id="add-to-cart-btn">Add To Cart</a>
                     </div>
                     <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                    <h3>Product Info <i class="fa-solid fa-info"></i></h3>
                     <p>Loading Description...</p>
                     <div class="rating"><span>Loading rating...</span></div>
                 </div>
@@ -273,6 +354,7 @@
                         const sr = currentProduct.serial_no;
                         document.title = `Lakhi Airconditioners | Product Details | ${sr}`;
                     }
+                    
 
                         
                         // Prioritize image_url from Firestore, otherwise use the existing local path logic
@@ -311,14 +393,25 @@
                                     ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">  Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
                                 </div>
                             </div>
-
+                                <div>
                                 <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
                                 <p>${currentProduct.description || 'No description available.'}</p>
+                                </div>
+
+                                <div><br>
+                                <h3>Product Info <i class="fa-solid fa-info"></i></h3>
+                                <p>${currentProduct.info || 'No Info available.'}</p>
+                                <br><br>
+                                </div>
+                            
+                                <div id="ac_info">
+                                <h3>AC INFO</h3>
+                                <span>
                                 ${currentProduct['ac_tr'] ? `<p><b>AC Tonnage:</b> ${currentProduct['ac_tr']} Ton</p>` : ''}
                                 ${currentProduct['ac_type'] ? `<p><b>AC Type:</b> ${currentProduct['ac_type']}</p>` : ''}
                                 ${currentProduct['ac_stars'] ? `<p><b>Energy Rating:</b> ${currentProduct['ac_stars']} Star</p>` : ''}
                                 ${currentProduct['ac_inv'] ? `<p><b>Inverter /Non-Inverter:</b> ${currentProduct['ac_inv']}</p>` : ''}
-                                
+                                </span> 
                             </div>
                         `;
 
@@ -342,6 +435,14 @@
                             productSizeSelect.disabled = true;
                         }
                         productUnitDisplay.textContent = currentProduct.unit || 'unit';
+                        
+                        const ac_info = document.getElementById('ac_info');
+                        if (currentProduct.type === 'AC') {
+                            ac_info.style.display = "block"; // Show the message
+                        } 
+                        else {
+                            ac_info.style.display = "none"; // Hide the message
+                        }
 
                         // Re-attach event listener for the "Add To Cart" button
                         addToCartBtn.addEventListener('click', function(event) {

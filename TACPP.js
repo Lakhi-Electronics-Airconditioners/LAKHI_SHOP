@@ -1,10 +1,10 @@
  // --- Terms and Conditions Modal Logic ---
-        const currentTermsVersion = '3.0'; // Define the current version of your TAC/PP
+        const currentTermsVersion = '4'; // Define the current version of your TAC/PP
 
         // Function for Close Button of initial TACPP modal
         function closeModal() {
             // User did not agree to initial terms, redirect them
-            window.location.href = "/NOTAGR";
+            window.location.href = "https://shop.lakhiairconditioners.com/NOTAGR";
         }
     
         // Function for Continue Button of initial TACPP modal

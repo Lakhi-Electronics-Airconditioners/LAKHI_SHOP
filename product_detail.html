@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lakhi Airconditioners | Product Details</title>
+    <meta name="description" content="Veiw one product only (will not work if S/R number is not in the URL)">
     <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -47,11 +48,13 @@
             <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
-                *product may not be in stock or may not even be buyable anymore
+                *product may not be in stock or may not even be buyable <br>
+                * price may go down because of some gst/cst payment things
             </p>
             <!-- Continue Button -->
             <div class="w3-center">
                 <button 
+                    type="button"
                     class="btn-modal" 
                     onclick="continueAction(event)">
                     Continue
@@ -90,6 +93,7 @@
             <!-- Continue Button for Update -->
             <div class="w3-center">
                 <button 
+                    type="button"
                     class="btn-modal" 
                     onclick="continueUpdateAction(event)">
                     Agree to Update
@@ -101,7 +105,7 @@
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="/">Home</a></li>
@@ -111,8 +115,8 @@
                         <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
-                <a href="cart"><img src="img/NABR/SCI.png" width="30px"></a>
-                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+                <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
             </div>
         </div>
     </div>
@@ -137,7 +141,8 @@
                 </div>
 
                 <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
-                    <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
+                    <label for="product-quantity" class="visually-hidden">Quantity</label>
+                    <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;" placeholder="Qty" title="Enter quantity">
                     <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
                     <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
                 </div>
@@ -164,11 +169,11 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg" alt="apk downlaod button"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="img/log-w.png" width="200px">
+                    <img src="img/log-w.png" width="200px" alt="lakhi airconditioners all white logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">

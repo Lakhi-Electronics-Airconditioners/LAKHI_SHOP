@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lakhi Airconditioners | ALL products</title>
+    <meta name="description" content="See All the products in on are website (only goods)">
     <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -48,10 +49,12 @@
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
                 *product may not be in stock or may not even be buyable anymore
+                * price may go down because of some gst/cst payment things
             </p>
             <!-- Continue Button -->
             <div class="w3-center">
                 <button 
+                    type="button"
                     class="btn-modal" 
                     onclick="continueAction(event)">
                     Continue
@@ -90,6 +93,7 @@
             <!-- Continue Button for Update -->
             <div class="w3-center">
                 <button 
+                    type="button"
                     class="btn-modal" 
                     onclick="continueUpdateAction(event)">
                     Agree to Update
@@ -101,7 +105,7 @@
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
@@ -115,14 +119,15 @@
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
             </div>
         </div>
-    </div>
-    <div class="color-NAV">
-        <br><br>
-        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
-    </div>
-    
-
-    <div class="small-container">
+            <h2>All Products</h2>
+            <label for="sortSelect" class="visually-hidden">Sort products</label>
+            <select id="sortSelect">
+                <option value="default">Default Sorting</option>
+                <option value="price-asc">Sort by Price (Low to High)</option>
+                <option value="price-desc">Sort by Price (High to Low)</option>
+                <option value="name-asc">Sort by Name (A-Z)</option>
+                <option value="name-desc">Sort by Name (Z-A)</option>
+            </select>
         <div class="row row-2">
             <h2>All Products</h2>
             <select id="sortSelect">
@@ -145,11 +150,11 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u> for now</p>
                     <div class="app-logo">
-                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg" alt="apk download button"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="img/log-w.png" width="200px">
+                    <img src="img/log-w.png" width="200px" alt="lakhi airconditioners white logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lakhi-cache-v2';
+const CACHE_NAME = 'lakhi-cache-v1';
 const OFFLINE_URL = 'offline.html';
 
 const FILES_TO_CACHE = [
@@ -56,6 +56,4 @@ self.addEventListener('fetch', event => {
       })
     );
   }
-
 });
-

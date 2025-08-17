@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -63,7 +62,6 @@
             </div>
         </form>
     </div>
-    
 
     <!-- Terms and Conditions Update Modal -->
     <div id="updateTacppModal" class="w3-modal-content">
@@ -107,7 +105,9 @@
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
+                <div class="logo">
+                    <img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo">
+                </div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
@@ -122,15 +122,9 @@
             </div>
         </div>
     </div>
-            <h2>All Products</h2>
-            <label for="sortSelect" class="visually-hidden">Sort products</label>
-            <select id="sortSelect">
-                <option value="default">Default Sorting</option>
-                <option value="price-asc">Sort by Price (Low to High)</option>
-                <option value="price-desc">Sort by Price (High to Low)</option>
-                <option value="name-asc">Sort by Name (A-Z)</option>
-                <option value="name-desc">Sort by Name (Z-A)</option>
-            </select>
+
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+
         <div class="row row-2">
             <h2>All Products</h2>
             <select id="sortSelect">
@@ -142,9 +136,11 @@
             </select>
         </div>
 
-        <div id="productContainer" class="row">
+        <div id="productSection" class="container">
+            <div id="productContainer" class="row">
             </div>
-    </div>
+            <p id="totalProducts" style="text-align: center; width: 100%; margin-top: 20px;"></p>
+        </div>
 
     <div class="footer">
         <div class="container">
@@ -399,14 +395,22 @@
             // Add event listener for sorting dropdown
             sortSelect.addEventListener('change', () => {
                 sortProducts(sortSelect.value);
+                // Add total product count
+                const totalProductsElement = document.getElementById('totalProducts');
+                if (totalProductsElement) {
+                    totalProductsElement.textContent = `Total Products: ${allProducts.length}`;
+                    totalProductsElement.style.marginTop = '20px';
+                    productContainer.parentElement.appendChild(totalProductsElement);
+                }
             });
 
-            // Add total product count
-            const totalProductsElement = document.createElement('p');
-            totalProductsElement.textContent = `Total Products: ${allProducts.length}`;
-            totalProductsElement.style.marginTop = '20px';
-            productContainer.parentElement.appendChild(totalProductsElement);
-
+            // Add total product count after initial render
+            const totalProductsElement = document.getElementById('totalProducts');
+            if (totalProductsElement) {
+                totalProductsElement.textContent = `Total Products: ${allProducts.length}`;
+                totalProductsElement.style.marginTop = '20px';
+                productContainer.parentElement.appendChild(totalProductsElement);
+            }
         } catch (error) {
             console.error("Error loading product data", error);
             // Display an error message on the page if data loading fails
@@ -419,5 +423,4 @@
     });
 </script>
 </body>
-
 </html>

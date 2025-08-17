@@ -283,11 +283,10 @@
                         <li><a href="products">All Products</a></li>
                         <li><a href="AC-only">AC Products</a></li>
                         <li><a href="contact">Contact Us</a></li>
-                        <li><a href="account">Account</a></li>
-                        
+                        <li><a href="account">Account</a></li>  
                     </ul>
                 </nav>
-                <li><a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
+                <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
             </div>
         </div>
@@ -306,6 +305,10 @@
 
         <!-- Customer Details Section -->
         <div class="customer-info">
+            <h3 style="margin-bottom: 15px; color: #f44336;">bills Details</h3>
+            <p><span>Customer Code:</span> <span id="customerCodeDisplay">N/A</span></p>
+            <p><span>Bill Number:</span> <span id="billIdDisplay">N/A</span></p>
+            <p><span>Bill Code:</span> <span id="billCodeDisplay">N/A</span></p>
             <h3 style="margin-bottom: 15px; color: #f44336;">Customer Details</h3>
             <p><span>Name:</span> <span id="customerName">N/A</span></p>
             <p><span>Address:</span> <span id="customerAddr">N/A</span></p>
@@ -450,6 +453,7 @@
             const params = new URLSearchParams(window.location.search);
             const customerCode = params.get('customerCode');
             const billId = params.get('billId');
+            const billCode = customerCode && billId ? `${customerCode}-${billId}` : 'N/A';
 
             // Dynamic bill details from URL parameters (prioritize these)
             const dynamicProductsParam = params.get('products');
@@ -468,21 +472,16 @@
             let finalTotal = '*GET TOTAL BY CONTACTING US*';
 
             try {
-                // Check if user is authenticated and not anonymous
-                if (!user || user.isAnonymous) {
-                    const currentUrl = encodeURIComponent(window.location.href);
-                    // Redirect to login page, passing the current bill URL as a redirect parameter
-                    window.location.href = `account.html?redirect=${currentUrl}&message=${encodeURIComponent('Please sign in to view this bill.')}`;
-                    return; // Stop execution
-                }
-
                 // --- Fetch Customer Data ---
                 const customerNameElem = document.getElementById('customerName');
                 const customerAddrElem = document.getElementById('customerAddr');
                 const customerCityElem = document.getElementById('customerCity');
                 const customerPincodeElem = document.getElementById('customerPincode');
+                const customerCodeElem = document.getElementById('customerCodeDisplay');
+                const billIdElem = document.getElementById('billIdDisplay');
+                const billCodeElem = document.getElementById('billCodeDisplay');
                 const errorMessage = document.getElementById('errorMessage'); // Re-get for local scope
-
+                
                 if (customerCode) {
                     const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
                     const customerDocSnap = await getDoc(customerDocRef);
@@ -625,6 +624,10 @@
                     if (customerCityElem) customerCityElem.textContent = 'N/A';
                     if (customerPincodeElem) customerPincodeElem.textContent = 'N/A';
                 }
+
+                if (customerCodeElem) customerCodeElem.textContent = customerCode || 'N/A';
+                if (billIdElem) billIdElem.textContent = billId || 'N/A';
+                if (billCodeElem) billCodeElem.textContent = billCode;
 
                 const productTableBody = document.getElementById('productTableBody'); // Re-get for local scope
                 const noProductsMessage = document.getElementById('noProductsMessage'); // Re-get for local scope

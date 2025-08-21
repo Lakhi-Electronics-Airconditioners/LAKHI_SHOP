@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Veiw a bill (will not work without a bill info)">
     <title>Lakhi Airconditioners | Bill Details</title>
-    <!-- Favicon -->
     <link rel="icon" href="img/1x1-logo.png">
-    <!-- Main stylesheet -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Poppins font -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
     <style>
         /* General styling for containers */
         .small-container {
@@ -114,6 +111,8 @@
             display: flex;
             justify-content: flex-end;
             margin-top: 20px;
+            flex-direction: column;
+            align-items: flex-end;
         }
         .total-price table {
             border-top: 3px solid #f44336; /* Red border top */
@@ -180,6 +179,37 @@
                 max-width: 100%;
             }
         }
+        
+        /* New button and note styles */
+        .btn {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            transition: background-color 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #d32f2f;
+        }
+
+        #billNoteContainer h4 {
+            color: #333;
+            border-bottom: 2px solid #ccc;
+            padding-bottom: 5px;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        #billNoteContainer p {
+            font-style: italic;
+            color: #555;
+            line-height: 1.6;
+        }
     </style>
     <script>
         if ('serviceWorker' in navigator) {
@@ -190,42 +220,38 @@
     </script>
 </head>
 <body>
-    <!-- Terms and Conditions Modal (Initial Agreement) -->
     <div id="tacpp" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeModal()" 
-                class="close-button" 
+            <span
+                onclick="closeModal()"
+                class="close-button"
                 title="Close Modal">
                 Close ×
             </span>
             <h2>Please Agree to Proceed</h2>
         </div>
         <form class="w3-container">
-            <!-- Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <input type="checkbox" id="agree">
                 <label for="agree">
-                    I agree to the 
+                    I agree to the
                     <a href="../info/TAC">
                         Terms and Conditions
-                    </a> 
-                    and 
+                    </a>
+                    and
                     <a href="../info/PP">
                         Privacy Policy
                     </a>.
                 </label>
             </div>
-            <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
                 *product may not be in stock or may not even be buyable anymore<br>
                 * price may go down because of some gst/cst payment things
             </p>
-            <!-- Continue Button -->
             <div class="w3-center">
-                <button 
-                    class="btn-modal" 
+                <button
+                    class="btn-modal"
                     onclick="continueAction(event)">
                     Continue
                 </button>
@@ -233,37 +259,34 @@
         </form>
     </div>
 
-    <!-- Terms and Conditions Update Modal -->
     <div id="updateTacppModal" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeUpdateModal()" 
-                class="close-button" 
+            <span
+                onclick="closeUpdateModal()"
+                class="close-button"
                 title="Close Modal">
                 Close ×
             </span>
             <h2>Terms and Conditions Updated</h2>
         </div>
         <form class="w3-container">
-            <!-- Update Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
                 <input type="checkbox" id="agreeUpdate">
                 <label for="agreeUpdate">
-                    I agree to the updated 
+                    I agree to the updated
                     <a href="../info/TAC">
                         Terms and Conditions
-                    </a> 
-                    and 
+                    </a>
+                    and
                     <a href="../info/PP">
                         Privacy Policy
                     </a>.
                 </label>
             </div>
-            <!-- Continue Button for Update -->
             <div class="w3-center">
-                <button 
-                    class="btn-modal" 
+                <button
+                    class="btn-modal"
                     onclick="continueUpdateAction(event)">
                     Agree to Update
                 </button>
@@ -271,7 +294,6 @@
         </form>
     </div>
     <script src="TACPP.js" defer></script>
-    <!-- Header Navigation -->
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
@@ -283,7 +305,7 @@
                         <li><a href="products">All Products</a></li>
                         <li><a href="AC-only">AC Products</a></li>
                         <li><a href="contact">Contact Us</a></li>
-                        <li><a href="account">Account</a></li>  
+                        <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
@@ -294,21 +316,20 @@
     <div class="color-NAV"><br><br></div>
     <div><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
 
-    <!-- Main content area -->
     <div class="small-container cart-page">
         <div id="loadingMessage" class="loading-message">Loading bill details...</div>
         <div id="errorMessage" class="error-message hidden"></div>
 
-        <!-- Bill Title -->
         <h1 id="billTitle" class="title" style="font-size: xx-large;"></h1>
         <br>
 
-        <!-- Customer Details Section -->
         <div class="customer-info">
             <h3 style="margin-bottom: 15px; color: #f44336;">bills Details</h3>
             <p><span>Customer Code:</span> <span id="customerCodeDisplay">N/A</span></p>
             <p><span>Bill Number:</span> <span id="billIdDisplay">N/A</span></p>
             <p><span>Bill Code:</span> <span id="billCodeDisplay">N/A</span></p>
+            <h3 style="margin-bottom: 15px; color: #f44336;">Note</h3>
+            <p id="billNoteText" style="white-space: pre-wrap;color:#000000"><span></span></p>
             <h3 style="margin-bottom: 15px; color: #f44336;">Customer Details</h3>
             <p><span>Name:</span> <span id="customerName">N/A</span></p>
             <p><span>Address:</span> <span id="customerAddr">N/A</span></p>
@@ -316,23 +337,25 @@
             <p><span>Pincode:</span> <span id="customerPincode">N/A</span></p>
         </div>
 
-        <!-- Product Details Table -->
+        <div class="row" id="billNoteContainer" style="display:none; margin-top: 20px;">
+            <div class="col-12" style="text-align: left;color:#f44336">
+                <br>
+            </div>
+        </div>
+
         <table id="productTable">
             <thead>
                 <tr>
                     <th>Product</th>
                     <th>Unit</th>
                     <th>Subtotal</th>
-                    <th>Action</th> <!-- Placeholder for consistency with cart.html -->
                 </tr>
             </thead>
             <tbody id="productTableBody">
-                <!-- Product rows will be inserted here by JavaScript -->
-            </tbody>
+                </tbody>
         </table>
         <p id="noProductsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">No products found for this bill.</p>
 
-        <!-- Total Price section -->
         <div class="total-price">
             <table>
                 <tr>
@@ -341,17 +364,19 @@
                 </tr>
                 <tr>
                     <td>Tax</td>
-                    <td id="billTax">*GET TOTAL BY CONTACTING US*</td>
+                    <td id="billTax">*(not defined)*</td>
                 </tr>
                 <tr>
                     <td>Total</td>
-                    <td id="billGrandTotal">*GET TOTAL BY CONTACTING US*</td>
+                    <td id="billGrandTotal">*(not defined)*</td>
                 </tr>
             </table>
+             <div style="width: 100%; text-align: right; margin-top: 15px;">
+                <button id="downloadBillButton" class="btn hidden">Download Bill</button>
+            </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -397,7 +422,6 @@
         </div>
     </div>
 
-    <!-- Firebase SDKs -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -420,7 +444,7 @@
         const db = getFirestore(app);
         const appIdFromConfig = firebaseConfig.projectId;
 
-        // --- Helper Functions (Moved to global scope) ---
+        // --- Helper Functions ---
         function showMessage(element, message, type = 'error') {
             if (element) {
                 element.textContent = message;
@@ -439,15 +463,44 @@
             const loadingMessage = document.getElementById('loadingMessage');
             const errorMessage = document.getElementById('errorMessage');
             const noProductsMessage = document.getElementById('noProductsMessage');
+            const downloadButton = document.getElementById('downloadBillButton');
 
             if (loadingMessage) loadingMessage.classList.add('hidden');
             if (errorMessage) errorMessage.classList.add('hidden');
             if (noProductsMessage) noProductsMessage.classList.add('hidden');
+            if (downloadButton) downloadButton.classList.add('hidden');
+        }
+
+        function handleImageError(imgElement, serialNo) {
+            if (!imgElement.dataset.serialFallbackAttempted) {
+                imgElement.dataset.serialFallbackAttempted = 'true';
+                imgElement.src = `img/PROC/${serialNo}.jpg`;
+            } else {
+                imgElement.onerror = null;
+                imgElement.src = 'img/PROC/DP.png';
+            }
+        }
+        window.handleImageError = handleImageError;
+
+        function generatePDF() {
+            const element = document.querySelector('.cart-page');
+            const customerCode = document.getElementById('customerCodeDisplay')?.textContent || 'customerscode';
+            const billId = document.getElementById('billIdDisplay')?.textContent || 'billid';
+            const filename = `Lakhi_Airconditioners_Bill_${customerCode}-${billId}.pdf`;
+
+            const options = {
+                margin: [0.5, 0.5, 0.5, 0.5],
+                filename: filename,
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
+            };
+            html2pdf().set(options).from(element).save();
         }
 
         async function loadBillDetails(user) {
             hideMessages();
-            const loadingMessage = document.getElementById('loadingMessage'); // Re-get inside function for safety
+            const loadingMessage = document.getElementById('loadingMessage');
             if (loadingMessage) loadingMessage.classList.remove('hidden');
 
             const params = new URLSearchParams(window.location.search);
@@ -455,24 +508,24 @@
             const billId = params.get('billId');
             const billCode = customerCode && billId ? `${customerCode}-${billId}` : 'N/A';
 
-            // Dynamic bill details from URL parameters (prioritize these)
             const dynamicProductsParam = params.get('products');
             const dynamicSubtotal = params.get('subtotal');
             const dynamicTax = params.get('tax');
             const dynamicTotal = params.get('total');
             const dynamicType = params.get('type');
-            const dynamicInfo = params.get('info'); // This is the custom title
+            const dynamicInfo = params.get('info');
 
             let billData = null;
             let customerData = null;
             let productsToDisplay = [];
             let finalBillTitle = 'Bill Details';
             let finalSubtotal = 0;
-            let finalTax = '*GET TOTAL BY CONTACTING US*';
-            let finalTotal = '*GET TOTAL BY CONTACTING US*';
+            let finalTax = '*(not defined)*';
+            let finalTotal = '*(not defined)*';
+            let downloadUrl = null;
+            let noteText = null;
 
             try {
-                // --- Fetch Customer Data ---
                 const customerNameElem = document.getElementById('customerName');
                 const customerAddrElem = document.getElementById('customerAddr');
                 const customerCityElem = document.getElementById('customerCity');
@@ -480,20 +533,18 @@
                 const customerCodeElem = document.getElementById('customerCodeDisplay');
                 const billIdElem = document.getElementById('billIdDisplay');
                 const billCodeElem = document.getElementById('billCodeDisplay');
-                const errorMessage = document.getElementById('errorMessage'); // Re-get for local scope
-                
+                const errorMessage = document.getElementById('errorMessage');
+
                 if (customerCode) {
                     const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
                     const customerDocSnap = await getDoc(customerDocRef);
                     if (customerDocSnap.exists()) {
                         customerData = customerDocSnap.data();
-                        console.log("Fetched customer data from Firebase:", customerData);
                     } else {
                         console.warn(`Customer with code ${customerCode} not found in Firestore.`);
                     }
                 }
 
-                // If customer data not found in Firebase, or if dynamic customer details are provided, use them
                 if (!customerData && params.get('customerName')) {
                     customerData = {
                         NAME: params.get('customerName') || 'N/A',
@@ -501,7 +552,6 @@
                         ct: params.get('customerCt') || 'N/A',
                         pincode: params.get('customerPincode') || 'N/A'
                     };
-                    console.log("Using dynamic customer data from URL:", customerData);
                 } else if (!customerCode && !params.get('customerName')) {
                     showMessage(errorMessage, 'No customer details provided in URL or Firebase.', 'error');
                     const billTitleElem = document.getElementById('billTitle');
@@ -510,19 +560,18 @@
                     return;
                 }
 
-                // --- Fetch Bill Data from Firestore (if not dynamic products are explicitly passed) ---
                 if (customerCode && billId && !dynamicProductsParam) {
                     const billDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills', billId);
                     const billDocSnap = await getDoc(billDocRef);
                     if (billDocSnap.exists()) {
                         billData = billDocSnap.data();
-                        console.log("Fetched bill data from Firebase:", billData);
                         productsToDisplay = billData.products || [];
                         finalSubtotal = billData.billSubtotal || 0;
-                        finalTax = billData.billTax || '*GET TOTAL BY CONTACTING US*';
-                        finalTotal = billData.billTotal || '*GET TOTAL BY CONTACTING US*';
-                        
-                        // Set bill title from Firebase data
+                        finalTax = billData.billTax || '*(not defined)*';
+                        finalTotal = billData.billTotal || '*(not defined)*';
+                        downloadUrl = billData.url || null;
+                        noteText = billData.note || null;
+
                         if (billData.title === "C" && billData.Cname) {
                             finalBillTitle = billData.Cname;
                         } else if (billData.type === 1) {
@@ -533,7 +582,6 @@
                             finalBillTitle = "Bill Details #" + billId;
                         }
                     } else {
-                        console.warn(`Bill with ID ${billId} for customer ${customerCode} not found in Firestore.`);
                         showMessage(errorMessage, `Bill "${billId}" for customer "${customerCode}" not found.`, 'error');
                         const billTitleElem = document.getElementById('billTitle');
                         if (billTitleElem) billTitleElem.textContent = 'Bill Not Found';
@@ -542,7 +590,6 @@
                     }
                 }
 
-                // --- Override/Supplement with Dynamic URL Parameters (always take precedence) ---
                 if (dynamicProductsParam) {
                     try {
                         productsToDisplay = dynamicProductsParam.split('||').map(productStr => {
@@ -552,7 +599,7 @@
                                 return {
                                     SR: parts.get('sr'),
                                     qty: parseInt(parts.get('qty'), 10),
-                                    price: parseFloat(parts.get('price')) || undefined // Price from URL for SR product
+                                    price: parseFloat(parts.get('price')) || undefined
                                 };
                             } else if (type === 'DIRECT') {
                                 return {
@@ -565,9 +612,8 @@
                             return null;
                         }).filter(p => p !== null);
 
-                        // Recalculate subtotal from dynamic products if they are present
                         finalSubtotal = productsToDisplay.reduce((sum, p) => {
-                            const price = parseFloat(p.price) || 0; // Use price from dynamic product data
+                            const price = parseFloat(p.price) || 0;
                             const qty = parseInt(p.qty, 10) || 0;
                             return sum + (price * qty);
                         }, 0);
@@ -575,17 +621,14 @@
                     } catch (e) {
                         console.error("Error parsing dynamic products from URL:", e);
                         showMessage(errorMessage, "Error loading dynamic product data from URL.", 'error');
-                        productsToDisplay = []; // Clear products if parsing fails
+                        productsToDisplay = [];
                     }
                 }
 
-                // Override financial totals if dynamic parameters are present
                 if (dynamicSubtotal) finalSubtotal = parseFloat(dynamicSubtotal);
                 if (dynamicTax) finalTax = dynamicTax;
                 if (dynamicTotal) finalTotal = dynamicTotal;
-                
-                // Override bill title/type if dynamic parameters are present
-                if (dynamicInfo) { // 'info' parameter from bu.html is for custom title
+                if (dynamicInfo) {
                     finalBillTitle = dynamicInfo;
                 } else if (dynamicType) {
                     const typeNum = parseInt(dynamicType, 10);
@@ -594,22 +637,42 @@
                     else finalBillTitle = `Type ${dynamicType}`;
                 }
 
+                // --- Handle Download Button Logic Here ---
+                const downloadButton = document.getElementById('downloadBillButton');
+                if (downloadButton) {
+                    downloadButton.classList.remove('hidden');
+                    if (downloadUrl) {
+                        downloadButton.onclick = () => {
+                            window.open(downloadUrl, '_blank');
+                        };
+                    } else {
+                        downloadButton.onclick = generatePDF;
+                    }
+                }
+                // --- End Download Button Logic ---
 
-                // --- Populate HTML ---
-                const billTitleElem = document.getElementById('billTitle'); // Re-get for local scope
+                // --- NEW CODE FOR THE NOTE ---
+                const billNoteContainer = document.getElementById('billNoteContainer');
+                const billNoteText = document.getElementById('billNoteText');
+                if (billNoteContainer && billNoteText) {
+                    if (noteText && noteText.trim() !== '') {
+                        billNoteText.textContent = noteText;
+                        billNoteContainer.style.display = 'block';
+                    } else {
+                        billNoteContainer.style.display = 'none';
+                    }
+                }
+                // --- END NEW CODE ---
+
+                const billTitleElem = document.getElementById('billTitle');
                 if (billTitleElem) billTitleElem.textContent = finalBillTitle;
 
                 if (customerData) {
                     if (customerNameElem) customerNameElem.textContent = customerData.NAME || 'N/A';
                     if (customerAddrElem) {
                         if (Array.isArray(customerData.addr) && customerData.addr.length > 0) {
-                            // Robustly convert each part to string, handle potential objects
                             customerAddrElem.textContent = customerData.addr
-                                .map(part => {
-                                    if (typeof part === 'string') return part.trim();
-                                    if (typeof part === 'object' && part !== null) return JSON.stringify(part); // Stringify objects
-                                    return ''; // Fallback for other types
-                                })
+                                .map(part => typeof part === 'string' ? part.trim() : JSON.stringify(part))
                                 .filter(part => part !== '')
                                 .join(', ') || 'N/A';
                         } else {
@@ -629,17 +692,16 @@
                 if (billIdElem) billIdElem.textContent = billId || 'N/A';
                 if (billCodeElem) billCodeElem.textContent = billCode;
 
-                const productTableBody = document.getElementById('productTableBody'); // Re-get for local scope
-                const noProductsMessage = document.getElementById('noProductsMessage'); // Re-get for local scope
+                const productTableBody = document.getElementById('productTableBody');
+                const noProductsMessage = document.getElementById('noProductsMessage');
 
-                if (productTableBody) productTableBody.innerHTML = ''; // Clear existing rows
+                if (productTableBody) productTableBody.innerHTML = '';
                 if (productsToDisplay.length > 0) {
                     for (const product of productsToDisplay) {
                         let finalProductName = product.name || 'N/A Product';
-                        let finalProductPrice = parseFloat(product.price); // Price from bill data or dynamic URL
+                        let finalProductPrice = parseFloat(product.price);
                         let finalProductSR = product.SR || 'N/A';
 
-                        // If price from bill data is not valid, try to fetch from products collection
                         if (isNaN(finalProductPrice) && finalProductSR !== 'N/A') {
                             try {
                                 const productsCollectionRef = collection(db, "artifacts", appIdFromConfig, "products");
@@ -659,18 +721,18 @@
                                 console.error(`Error querying product by serial_no "${finalProductSR}":`, prodError);
                             }
                         }
-                        
-                        // Ensure finalProductPrice is a number, default to 0 if still NaN
+
                         finalProductPrice = isNaN(finalProductPrice) ? 0 : finalProductPrice;
 
                         const qty = parseInt(product.quantity || product.qty, 10) || 1;
                         const itemTotal = finalProductPrice * qty;
+                        const imagePath = `img/PROC/${finalProductSR}.jpg`;
 
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>
                                 <div class="cart-info">
-                                    <img src="https://placehold.co/80x80/cccccc/ffffff?text=Product" alt="${finalProductName}">
+                                    <img src="${imagePath}" alt="${finalProductName}" onerror="handleImageError(this, '${finalProductSR}');" style="display: flex;justify-content: center;align-items: center;width: 80px;height: 80px;margin-right: 10px;border-radius: 5px;object-fit: cover;">
                                     <div>
                                         <small>PN/SR: ${finalProductSR}</small>
                                         <p>${finalProductName}</p>
@@ -680,7 +742,7 @@
                             </td>
                             <td>${qty} unit</td>
                             <td>₹${itemTotal.toFixed(2)}</td>
-                            <td></td> <!-- Action column, empty for bill view -->
+                            <td></td>
                         `;
                         productTableBody.appendChild(row);
                     }
@@ -689,9 +751,9 @@
                     if (noProductsMessage) noProductsMessage.style.display = 'block';
                 }
 
-                const billSubtotalElem = document.getElementById('billSubtotal'); // Re-get for local scope
-                const billTaxElem = document.getElementById('billTax'); // Re-get for local scope
-                const billGrandTotalElem = document.getElementById('billGrandTotal'); // Re-get for local scope
+                const billSubtotalElem = document.getElementById('billSubtotal');
+                const billTaxElem = document.getElementById('billTax');
+                const billGrandTotalElem = document.getElementById('billGrandTotal');
 
                 if (billSubtotalElem) billSubtotalElem.textContent = `₹${parseFloat(finalSubtotal).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
                 if (billTaxElem) billTaxElem.textContent = finalTax;
@@ -707,19 +769,16 @@
             }
         }
 
-        // --- Event Listeners and Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            // Use onAuthStateChanged to ensure Firebase Auth is ready and check user status
             onAuthStateChanged(auth, (user) => {
-                loadBillDetails(user); // Pass the user object to loadBillDetails
+                loadBillDetails(user);
             });
         });
 
-        // Mobile menu toggle (from your original HTML)
         var Menuitems = document.getElementById("Menuitems");
         if (Menuitems) {
             Menuitems.style.maxHeight = "0px";
-            window.menutoggle = function() { // Make it a global function
+            window.menutoggle = function() {
                 if (Menuitems.style.maxHeight == "0px") {
                     Menuitems.style.maxHeight = "200px";
                 } else {

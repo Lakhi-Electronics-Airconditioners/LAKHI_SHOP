@@ -1434,3 +1434,28 @@ select:focus{
     clip: rect(1px, 1px, 1px, 1px);
     white-space: nowrap;
 }
+.search-container {
+    position: relative;
+    width: 1000px auto;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ff523b;
+    border-radius: 20px;
+    padding: 5px 15px;
+    background-color: #f9f9f9;
+}
+
+.search-container input {
+    border: none;
+    outline: none;
+    background: transparent;
+    flex-grow: 1;
+    padding-right: 10px;
+    font-size: 14px;
+}
+
+.search-container .fa-search {
+    color: #888;
+}
+
+/* Ensure search and sort are aligned */

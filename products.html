@@ -133,11 +133,7 @@
                 <option value="price-desc">Sort by Price (High to Low)</option>
                 <option value="name-asc">Sort by Name (A-Z)</option>
                 <option value="name-desc">Sort by Name (Z-A)</option>
-            </select><br>
-            <div class="search-container">
-                <input type="text" id="searchInput" placeholder="find bar" title="Type in a product name or serial number">
-                <i class="fas fa-search"></i>
-            </div>
+            </select>
         </div>
 
         <div id="productSection" class="container">
@@ -240,10 +236,6 @@
     // Ensure this APP_ID matches the projectId in your firebaseConfig and your Python backend's APP_ID
     const FIRESTORE_APP_ID = "lakhi-airconditioners"; // This must match your Firebase project ID and APP_ID in Python scripts
 
-    // search bar
-    const searchInput = document.getElementById('searchInput');
-
-
     // --- Cart Functions ---
     function addToCart(serialNo, quantity, selectedSize, productUnit, productName, productPrice) {
         console.log('addToCart function entered.'); // Debugging log
@@ -331,28 +323,11 @@
         });
         attachAddToCartListeners(); // Attach listeners after rendering products
     }
-    function filterProducts(query) {
-        let filteredProducts;
-        if (!query) {
-            filteredProducts = allProducts;
-        } else {
-            const lowerCaseQuery = query.toLowerCase();
-            filteredProducts = allProducts.filter(product => {
-                const nameMatch = (product.name || '').toLowerCase().includes(lowerCaseQuery);
-                const serialNoMatch = (product.serial_no || '').toLowerCase().includes(lowerCaseQuery);
-                return nameMatch || serialNoMatch;
-            });
-        }
-        
-        // Update total products count based on the filtered list
-        const totalProductsElement = document.getElementById('totalProducts');
-        if (totalProductsElement) {
-            totalProductsElement.textContent = `Total Products: ${filteredProducts.length}`;
-        }
-        
-        // Sort the filtered products before rendering
-        const sortBy = sortSelect.value;
-        let sortedProducts = [...filteredProducts];
+
+    // Function to sort products
+    function sortProducts(sortBy) {
+        let sortedProducts = [...allProducts]; // Create a copy to sort
+
         if (sortBy === 'price-asc') {
             sortedProducts.sort((a, b) => (a.price || 0) - (b.price || 0));
         } else if (sortBy === 'price-desc') {
@@ -362,10 +337,8 @@
         } else if (sortBy === 'name-desc') {
             sortedProducts.sort((a, b) => (b.name || '').localeCompare(a.name || ''));
         }
-        
         renderProducts(sortedProducts);
     }
-
 
     // Function to attach event listeners to 'Add to Cart' buttons
     function attachAddToCartListeners() {
@@ -383,7 +356,6 @@
         const productName = this.dataset.name;
         const priceString = this.dataset.price; // Get the string directly
         const ProductPrice = parseFloat(priceString); // Ensure price is a number
-        
 
         console.log('--- Add to Cart Click Debug ---'); // Debugging log
         console.log('Button Data:', this.dataset); // Debugging log

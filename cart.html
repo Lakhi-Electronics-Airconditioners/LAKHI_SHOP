@@ -75,7 +75,7 @@
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="img/NABR/log.jpg" width="125px"></div>
+                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
@@ -85,8 +85,8 @@
                         <li><a href="account">Account</a></li>
                     </ul>
                 </nav>
-                <a href="cart"><img src="img/NABR/SCI.png" width="30px"></a>
-                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()">
+                <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
+                <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
             </div>
         </div>
     </div>
@@ -147,11 +147,11 @@
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u>for now</p>
                     <div class="app-logo">
-                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg"></a>
+                        <a href="https://drive.google.com/uc?export=download&id=1jx18KtEjAwaQtto0XqbPWe8cz49oUuUG"><img src="img/NABR/apk-down.jpeg" alt="download apk button"></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="img/log-w.png" width="200px">
+                    <img src="img/log-w.png" width="200px" alt="lakhi airconditioners all white logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">
@@ -184,23 +184,6 @@
         </div>
     </div>
 
-    <script>
-        var Menuitems = document.getElementById('Menuitems')
-
-        Menuitems.style.maxHeight = "0px";
-
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px")
-                { 
-                    Menuitems.style.maxHeight= "200px"
-                }
-            else
-                {
-                    Menuitems.style.maxHeight ="0px";
-                }
-        }
-    </script>
-    
     <script type="module">
     // Import necessary Firebase functions
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -312,7 +295,8 @@
                     price: '${priceValue * 10}', // Raw price
                     type: '${productType}',
                     ac_tr: ${ac_tr},
-                    ac_type: '${ac_type}'
+                    ac_type: '${ac_type}',
+                    isCustom: true // Add this flag
                 }, 1, 'standard', '${productUnit}')">Add to Cart</button>
             `;
         } catch (error) {
@@ -377,7 +361,8 @@
                 ac_type: productObj.ac_type || null,
                 ac_stars: productObj.ac_stars || null,
                 ac_inv: productObj.ac_inv || null,
-                image_url: productObj.image_url || 'img/PROC/DP.png'
+                image_url: productObj.image_url || 'img/PROC/DP.png',
+                isCustom: productObj.isCustom || false // Add this flag to the saved item
             };
             cartItems.push(itemToSave);
         }
@@ -436,56 +421,48 @@
         if (cartItems.length > 0) {
             cartItems.forEach(cartItem => {
                 const productData = allProducts.find(p => p.serial_no === cartItem.serial_no);
-
-                if (productData) {
-                    const price = parseFloat(productData.price);
-                    if (isNaN(price)) {
-                        console.error(`Invalid price for product ${productData.serial_no}: ${productData.price}`);
-                        return;
-                    }
-                    const itemSubtotal = price * cartItem.quantity;
-                    subtotal += itemSubtotal;
-                    
-                    const productName = productData.name;
-                    const productPriceFormatted = `₹${price.toLocaleString('en-IN')}`;
-                    const imageUrl = productData.image_url || 'https://placehold.co/80x80/cccccc/ffffff?text=Image+Not+Found';
-                    const productSize = cartItem.size || 'N/A';
-                    const quantity = cartItem.quantity;
-                    const productUnit = productData.unit || 'unit';
-                    
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td>
-                            <div class="cart-info">
-                                <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='https://placehold.co/80x80/cccccc/ffffff?text=Image+Not+Found';">
-                                <div>
-                                    <small>S/N: ${cartItem.serial_no}</small>
-                                    <p>${productName}</p>
-                                    <small>Price: ${productPriceFormatted}</small>
-                                    ${productSize && productSize !== 'N/A' ? `<br><small>Size: ${productSize}</small>` : ''}
-                                    <br><a href="#" class="remove-item" data-serial-no="${cartItem.serial_no}" data-size="${productSize}">remove</a>
-                                </div>
-                            </div>
-                        </td>
-                        <td>
-                            <input type="number" value="${quantity}" min="1" class="cart-quantity-input" 
-                                data-serial-no="${cartItem.serial_no}" data-size="${productSize}">
-                            ${productUnit} <!-- Display the unit next to the quantity input -->
-                        </td>
-                        <td>₹${itemSubtotal.toLocaleString('en-IN')}</td>
-                        <td><a href="#" class="remove-item-btn" data-serial-no="${cartItem.serial_no}" data-size="${productSize}">X</a></td>
-                    `;
-                    cartTableBody.appendChild(row);
-                } else {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td colspan="4" style="text-align: center;">
-                            <p>${cartItem.name} (Serial No: ${cartItem.serial_no}) could not be found.</p>
-                            <button class="btn-remove" onclick="removeCartItem('${cartItem.serial_no}', '${cartItem.size}')">Remove from Cart</button>
-                        </td>
-                    `;
-                    cartTableBody.appendChild(row);
+                
+                const isCustomProduct = cartItem.isCustom;
+                const price = isCustomProduct ? parseFloat(cartItem.price) : (productData ? parseFloat(productData.price) : 0);
+                
+                if (isNaN(price)) {
+                    console.error(`Invalid price for product ${cartItem.serial_no}: ${cartItem.price}`);
+                    return;
                 }
+                
+                const itemSubtotal = price * cartItem.quantity;
+                subtotal += itemSubtotal;
+                
+                const productName = isCustomProduct ? cartItem.name : (productData ? productData.name : 'Unknown Product');
+                const productPriceFormatted = `₹${price.toLocaleString('en-IN')}`;
+                const imageUrl = isCustomProduct ? 'img/PROC/CUS.jpg' : (productData ? productData.image_url || 'img/PROC/DP.png' : 'img/PROC/DP.png');
+                const productSize = cartItem.size || 'N/A';
+                const quantity = cartItem.quantity;
+                const productUnit = cartItem.unit || 'unit';
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="cart-info">
+                            <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='img/PROC/DP.png';">
+                            <div>
+                                <small>S/N: ${cartItem.serial_no}</small>
+                                <p>${productName}</p>
+                                <small>Price: ${productPriceFormatted}</small>
+                                ${productSize && productSize !== 'N/A' ? `<br><small>Size: ${productSize}</small>` : ''}
+                                <br><a href="#" class="remove-item" data-serial-no="${cartItem.serial_no}" data-size="${productSize}">remove</a>
+                            </div>
+                        </div>
+                    </td>
+                    <td>
+                        <input type="number" value="${quantity}" min="1" class="cart-quantity-input" 
+                            data-serial-no="${cartItem.serial_no}" data-size="${productSize}">
+                        ${productUnit} </td>
+                    <td>₹${itemSubtotal.toLocaleString('en-IN')}</td>
+                    <td><a href="#" class="remove-item-btn" data-serial-no="${cartItem.serial_no}" data-size="${productSize}">X</a></td>
+                `;
+                cartTableBody.appendChild(row);
+
             });
         } else {
             const emptyCartRow = `<tr><td colspan="4" style="text-align: center;">The current cart is empty.</td></tr>`;
@@ -523,12 +500,8 @@
     window.checkProductCode = checkProductCode;
     window.removeCartItem = removeCartItem;
     window.updateCartItemQuantity = updateCartItemQuantity;
-    window.addToCart = addToCart; // Ensure addToCart is global for inline usage
-
-    // Initial render
-    // Removed isAuthReady check because it is not defined and not needed.
-    // fetchAndRenderCart(); // Already called after Firebase initialization above.
-    </script>
+    window.addToCart = addToCart;
+</script>
 </body>
 </html>
 

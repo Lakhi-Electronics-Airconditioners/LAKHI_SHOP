@@ -706,8 +706,11 @@
                         const finalProductName = product.name || 'N/A Product';
                         const finalProductSR = product.SR || null;
                         
-                        // New logic: Check for image_url, then try SR, then use default
-                        const finalProductImage = product.image_url || (finalProductSR ? `img/PROC/${finalProductSR}.jpg` : 'img/PROC/DP.gif');
+                        // Set the primary image source based on available data
+                        let imageSource = product.image_url;
+                        if (!imageSource && finalProductSR) {
+                           imageSource = `img/PROC/${finalProductSR}.jpg`;
+                        }
 
                         const qty = parseInt(product.quantity || product.qty, 10) || 1;
 
@@ -719,7 +722,7 @@
                         row.innerHTML = `
                             <td>
                                 <div class="cart-info">
-                                    <img src="${finalProductImage}" alt="${finalProductName}" style="display: flex;justify-content: center;align-items: center;width: 80px;height: 80px;margin-right: 10px;border-radius: 5px;object-fit: cover;">
+                                    <img src="${imageSource || 'img/PROC/DP.gif'}" alt="${finalProductName}" style="display: flex;justify-content: center;align-items: center;width: 80px;height: 80px;margin-right: 10px;border-radius: 5px;object-fit: cover;" onerror="this.src='img/PROC/DP.gif';">
                                     <div>
                                         <small>PN/SR: ${finalProductSR || 'N/A'}</small>
                                         <p>${finalProductName}</p>

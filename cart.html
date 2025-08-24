@@ -361,7 +361,7 @@
                 ac_type: productObj.ac_type || null,
                 ac_stars: productObj.ac_stars || null,
                 ac_inv: productObj.ac_inv || null,
-                image_url: productObj.image_url || 'img/PROC/DP.png',
+                image_url: productObj.image_url || 'img/PROC/DP.gif',
                 isCustom: productObj.isCustom || false // Add this flag to the saved item
             };
             cartItems.push(itemToSave);
@@ -410,9 +410,9 @@
             querySnapshot.forEach((doc) => {
                 allProducts.push(doc.data());
             });
-            console.log("Products loaded from Firestore:", allProducts.length);
+            console.log("Products loaded from database:", allProducts.length);
         } catch (error) {
-            console.error("Error loading products from Firestore:", error);
+            console.error("Error loading products from database:", error);
             const errorRow = `<tr><td colspan="4" style="color: red; text-align: center;">Failed to load product data. Please try again.</td></tr>`;
             cartTableBody.innerHTML = errorRow;
             return;
@@ -435,7 +435,7 @@
                 
                 const productName = isCustomProduct ? cartItem.name : (productData ? productData.name : 'Unknown Product');
                 const productPriceFormatted = `₹${price.toLocaleString('en-IN')}`;
-                const imageUrl = isCustomProduct ? 'img/PROC/CUS.jpg' : (productData ? productData.image_url || 'img/PROC/DP.png' : 'img/PROC/DP.png');
+                const imageUrl = isCustomProduct ? 'img/PROC/CUS.gif' : (productData ? productData.image_url || 'img/PROC/DP.gif' : 'img/PROC/DP.gif');
                 const productSize = cartItem.size || 'N/A';
                 const quantity = cartItem.quantity;
                 const productUnit = cartItem.unit || 'unit';
@@ -444,7 +444,7 @@
                 row.innerHTML = `
                     <td>
                         <div class="cart-info">
-                            <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='img/PROC/DP.png';">
+                            <img src="${imageUrl}" alt="${productName}" onerror="this.onerror=null;this.src='img/PROC/DP.gif';">
                             <div>
                                 <small>S/N: ${cartItem.serial_no}</small>
                                 <p>${productName}</p>

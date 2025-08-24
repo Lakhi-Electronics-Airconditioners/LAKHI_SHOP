@@ -203,13 +203,13 @@
             // Check if we've already tried the serial number fallback
             if (!imgElement.dataset.serialFallbackAttempted) {
                 imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
-                imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
-                console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
+                imgElement.src = `img/PROC/${serialNo}.jpg`; // Try serial number image
+                console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.jpg`);
             } else {
                 // If serial number fallback was already attempted and failed, use final default
                 imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
-                imgElement.src = 'img/PROC/DP.png';
-                console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+                imgElement.src = 'img/PROC/DP.gif';
+                console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.gif`);
             }
         }
     </script>

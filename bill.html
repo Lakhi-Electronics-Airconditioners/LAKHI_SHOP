@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Veiw a bill (will not work without a bill info)">
+    <meta name="description" content="View a bill (will not work without a bill info)">
     <title>Lakhi Airconditioners | Bill Details</title>
     <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="styles.css">
@@ -21,7 +21,8 @@
         }
 
         .cart-page {
-            margin: 80px auto;
+            /* Adjusted top margin to fix the PDF spacing issue */
+            margin: 20px auto; 
             padding: 20px;
             background-color: #fff;
             border-radius: 8px;
@@ -153,33 +154,6 @@
             display: none; /* Hidden by default */
         }
 
-        /* Hidden class */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Responsive adjustments */
-        @media (max-width: 768px) {
-            .cart-page {
-                margin: 20px auto;
-                padding: 15px;
-            }
-            .title {
-                font-size: 1.8rem !important;
-            }
-            #productTable th, #productTable td {
-                padding: 8px 10px;
-                font-size: 0.9em;
-            }
-            .cart-info img {
-                width: 60px;
-                height: 60px;
-            }
-            .total-price table {
-                max-width: 100%;
-            }
-        }
-        
         /* New button and note styles */
         .btn {
             background-color: #f44336;
@@ -210,6 +184,89 @@
             color: #555;
             line-height: 1.6;
         }
+
+        /* Modal styles */
+        .w3-modal-content {
+            background-color: #fefefe;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 500px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            display: block;
+        }
+        
+        .w3-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+        
+        /* This class will be added/removed by JavaScript */
+        .hidden-modal {
+            display: none;
+        }
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            color: #aaa;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .close-button:hover, .close-button:focus {
+            color: black;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        .btn-modal {
+            background-color: #f44336;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .btn-modal:hover {
+            background-color: #d32f2f;
+        }
+        .w3-center { text-align: center; }
+        .w3-section { margin-top: 16px !important; margin-bottom: 16px !important; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .cart-page {
+                margin: 20px auto;
+                padding: 15px;
+            }
+            .title {
+                font-size: 1.8rem !important;
+            }
+            #productTable th, #productTable td {
+                padding: 8px 10px;
+                font-size: 0.9em;
+            }
+            .cart-info img {
+                width: 60px;
+                height: 60px;
+            }
+            .total-price table {
+                max-width: 100%;
+            }
+        }
     </style>
     <script>
         if ('serviceWorker' in navigator) {
@@ -220,80 +277,100 @@
     </script>
 </head>
 <body>
-    <div id="tacpp" class="w3-modal-content">
-        <div class="w3-center" style="margin-bottom:20px;">
-            <span
-                onclick="closeModal()"
-                class="close-button"
-                title="Close Modal">
-                Close ×
-            </span>
-            <h2>Please Agree to Proceed</h2>
+    <div id="tacpp" class="w3-modal hidden-modal">
+        <div class="w3-modal-content">
+            <div class="w3-center" style="margin-bottom:20px;">
+                <span
+                    onclick="closeModal()"
+                    class="close-button"
+                    title="Close Modal">
+                    Close ×
+                </span>
+                <h2>Please Agree to Proceed</h2>
+            </div>
+            <form class="w3-container">
+                <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                    <input type="checkbox" id="agree">
+                    <label for="agree">
+                        I agree to the
+                        <a href="../info/TAC">
+                            Terms and Conditions
+                        </a>
+                        and
+                        <a href="../info/PP">
+                            Privacy Policy
+                        </a>.
+                    </label>
+                </div>
+                <p style="font-size:14px; margin-bottom:20px;">
+                    * Prices may not be accurate, and not all products are listed.<br>
+                    *product may not be in stock or may not even be buyable anymore<br>
+                    * price may go down because of some gst/cst payment things
+                </p>
+                <div class="w3-center">
+                    <button
+                        class="btn-modal"
+                        onclick="continueAction(event)">
+                        Continue
+                    </button>
+                </div>
+            </form>
         </div>
-        <form class="w3-container">
-            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <input type="checkbox" id="agree">
-                <label for="agree">
-                    I agree to the
-                    <a href="../info/TAC">
-                        Terms and Conditions
-                    </a>
-                    and
-                    <a href="../info/PP">
-                        Privacy Policy
-                    </a>.
-                </label>
-            </div>
-            <p style="font-size:14px; margin-bottom:20px;">
-                * Prices may not be accurate, and not all products are listed.<br>
-                *product may not be in stock or may not even be buyable anymore<br>
-                * price may go down because of some gst/cst payment things
-            </p>
-            <div class="w3-center">
-                <button
-                    class="btn-modal"
-                    onclick="continueAction(event)">
-                    Continue
-                </button>
-            </div>
-        </form>
     </div>
 
-    <div id="updateTacppModal" class="w3-modal-content">
-        <div class="w3-center" style="margin-bottom:20px;">
-            <span
-                onclick="closeUpdateModal()"
-                class="close-button"
-                title="Close Modal">
-                Close ×
-            </span>
-            <h2>Terms and Conditions Updated</h2>
+    <div id="updateTacppModal" class="w3-modal hidden-modal">
+        <div class="w3-modal-content">
+            <div class="w3-center" style="margin-bottom:20px;">
+                <span
+                    onclick="closeUpdateModal()"
+                    class="close-button"
+                    title="Close Modal">
+                    Close ×
+                </span>
+                <h2>Terms and Conditions Updated</h2>
+            </div>
+            <form class="w3-container">
+                <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                    <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
+                    <input type="checkbox" id="agreeUpdate">
+                    <label for="agreeUpdate">
+                        I agree to the updated
+                        <a href="../info/TAC">
+                            Terms and Conditions
+                        </a>
+                        and
+                        <a href="../info/PP">
+                            Privacy Policy
+                        </a>.
+                    </label>
+                </div>
+                <div class="w3-center">
+                    <button
+                        class="btn-modal"
+                        onclick="continueUpdateAction(event)">
+                        Agree to Update
+                    </button>
+                </div>
+            </form>
         </div>
-        <form class="w3-container">
-            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
-                <input type="checkbox" id="agreeUpdate">
-                <label for="agreeUpdate">
-                    I agree to the updated
-                    <a href="../info/TAC">
-                        Terms and Conditions
-                    </a>
-                    and
-                    <a href="../info/PP">
-                        Privacy Policy
-                    </a>.
-                </label>
-            </div>
-            <div class="w3-center">
-                <button
-                    class="btn-modal"
-                    onclick="continueUpdateAction(event)">
-                    Agree to Update
-                </button>
-            </div>
-        </form>
     </div>
     <script src="TACPP.js" defer></script>
+    
+    <!-- New Modal for Sign-in -->
+    <div id="signInModal" class="w3-modal hidden-modal">
+        <div class="w3-modal-content">
+            <div class="w3-center" style="margin-bottom:20px;">
+                <h2>Bill Not Found</h2>
+            </div>
+            <div class="w3-container">
+                <p style="text-align: center; color: #555;">The bill you are trying to view does not exist. Please sign in to access your bills or check the URL.</p>
+                <div class="w3-center" style="margin-top: 20px;">
+                    <button class="btn-modal" onclick="window.location.href='/ls'">Sign In / Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
@@ -318,7 +395,7 @@
 
     <div class="small-container cart-page">
         <div id="loadingMessage" class="loading-message">Loading bill details...</div>
-        <div id="errorMessage" class="error-message hidden"></div>
+        <div id="errorMessage" class="error-message hidden-modal"></div>
 
         <h1 id="billTitle" class="title" style="font-size: xx-large;"></h1>
         <br>
@@ -328,19 +405,11 @@
             <p><span>Customer Code:</span> <span id="customerCodeDisplay">N/A</span></p>
             <p><span>Bill Number:</span> <span id="billIdDisplay">N/A</span></p>
             <p><span>Bill Code:</span> <span id="billCodeDisplay">N/A</span></p>
-            <h3 style="margin-bottom: 15px; color: #f44336;">Note</h3>
-            <p id="billNoteText" style="white-space: pre-wrap;color:#000000"><span></span></p>
             <h3 style="margin-bottom: 15px; color: #f44336;">Customer Details</h3>
             <p><span>Name:</span> <span id="customerName">N/A</span></p>
             <p><span>Address:</span> <span id="customerAddr">N/A</span></p>
             <p><span>City:</span> <span id="customerCity">N/A</span></p>
             <p><span>Pincode:</span> <span id="customerPincode">N/A</span></p>
-        </div>
-
-        <div class="row" id="billNoteContainer" style="display:none; margin-top: 20px;">
-            <div class="col-12" style="text-align: left;color:#f44336">
-                <br>
-            </div>
         </div>
 
         <table id="productTable">
@@ -355,6 +424,15 @@
                 </tbody>
         </table>
         <p id="noProductsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">No products found for this bill.</p>
+
+        <!-- Bill Note Section moved here as requested -->
+        <div class="row" id="billNoteContainer" style="display:none; margin-top: 20px;">
+            <div class="col-12" style="text-align: left;color:#f44336">
+                <br>
+                <h3 style="margin-bottom: 15px; color: #f44336;">Note</h3>
+                <p id="billNoteText" style="white-space: pre-wrap;color:#000000"><span></span></p>
+            </div>
+        </div>
 
         <div class="total-price">
             <table>
@@ -372,7 +450,7 @@
                 </tr>
             </table>
              <div style="width: 100%; text-align: right; margin-top: 15px;">
-                <button id="downloadBillButton" class="btn hidden">Download Bill</button>
+                <button id="downloadBillButton" class="btn hidden-modal">Download Bill</button>
             </div>
         </div>
     </div>
@@ -424,7 +502,7 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, onAuthStateChanged, signOut, deleteUser } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getAuth } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, getDoc, collection, query, getDocs, where } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // IMPORTANT: Replace with your actual Firebase config
@@ -450,38 +528,29 @@
                 element.textContent = message;
                 element.classList.remove('success', 'error');
                 element.classList.add(type);
-                element.classList.remove('hidden');
+                element.classList.remove('hidden-modal');
             }
         }
 
         function hideLoading() {
             const loadingMessage = document.getElementById('loadingMessage');
-            if (loadingMessage) loadingMessage.classList.add('hidden');
+            if (loadingMessage) loadingMessage.classList.add('hidden-modal');
         }
 
-        function hideMessages() {
+        function hideAllElements() {
             const loadingMessage = document.getElementById('loadingMessage');
             const errorMessage = document.getElementById('errorMessage');
             const noProductsMessage = document.getElementById('noProductsMessage');
             const downloadButton = document.getElementById('downloadBillButton');
+            const signInModal = document.getElementById('signInModal');
 
-            if (loadingMessage) loadingMessage.classList.add('hidden');
-            if (errorMessage) errorMessage.classList.add('hidden');
-            if (noProductsMessage) noProductsMessage.classList.add('hidden');
-            if (downloadButton) downloadButton.classList.add('hidden');
+            if (loadingMessage) loadingMessage.classList.add('hidden-modal');
+            if (errorMessage) errorMessage.classList.add('hidden-modal');
+            if (noProductsMessage) noProductsMessage.classList.add('hidden-modal');
+            if (downloadButton) downloadButton.classList.add('hidden-modal');
+            if (signInModal) signInModal.classList.add('hidden-modal');
         }
-
-        function handleImageError(imgElement, serialNo) {
-            if (!imgElement.dataset.serialFallbackAttempted) {
-                imgElement.dataset.serialFallbackAttempted = 'true';
-                imgElement.src = `img/PROC/${serialNo}.jpg`;
-            } else {
-                imgElement.onerror = null;
-                imgElement.src = 'img/PROC/DP.png';
-            }
-        }
-        window.handleImageError = handleImageError;
-
+        
         function generatePDF() {
             const element = document.querySelector('.cart-page');
             const customerCode = document.getElementById('customerCodeDisplay')?.textContent || 'customerscode';
@@ -489,7 +558,8 @@
             const filename = `Lakhi_Airconditioners_Bill_${customerCode}-${billId}.pdf`;
 
             const options = {
-                margin: [0.5, 0.5, 0.5, 0.5],
+                // Adjusted margins to fit more content and fix top spacing
+                margin: [0.2, 0.2, 0.2, 0.2], 
                 filename: filename,
                 image: { type: 'jpeg', quality: 0.98 },
                 html2canvas: { scale: 2 },
@@ -498,22 +568,22 @@
             html2pdf().set(options).from(element).save();
         }
 
-        async function loadBillDetails(user) {
-            hideMessages();
+        function showSignInModal() {
+            const modal = document.getElementById('signInModal');
+            if (modal) {
+                modal.classList.remove('hidden-modal');
+            }
+        }
+
+        async function loadBillDetails() {
+            hideAllElements(); 
             const loadingMessage = document.getElementById('loadingMessage');
-            if (loadingMessage) loadingMessage.classList.remove('hidden');
+            if (loadingMessage) loadingMessage.classList.remove('hidden-modal');
 
             const params = new URLSearchParams(window.location.search);
             const customerCode = params.get('customerCode');
             const billId = params.get('billId');
             const billCode = customerCode && billId ? `${customerCode}-${billId}` : 'N/A';
-
-            const dynamicProductsParam = params.get('products');
-            const dynamicSubtotal = params.get('subtotal');
-            const dynamicTax = params.get('tax');
-            const dynamicTotal = params.get('total');
-            const dynamicType = params.get('type');
-            const dynamicInfo = params.get('info');
 
             let billData = null;
             let customerData = null;
@@ -526,121 +596,53 @@
             let noteText = null;
 
             try {
-                const customerNameElem = document.getElementById('customerName');
-                const customerAddrElem = document.getElementById('customerAddr');
-                const customerCityElem = document.getElementById('customerCity');
-                const customerPincodeElem = document.getElementById('customerPincode');
                 const customerCodeElem = document.getElementById('customerCodeDisplay');
                 const billIdElem = document.getElementById('billIdDisplay');
-                const billCodeElem = document.getElementById('billCodeDisplay');
                 const errorMessage = document.getElementById('errorMessage');
 
-                if (customerCode) {
-                    const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
-                    const customerDocSnap = await getDoc(customerDocRef);
-                    if (customerDocSnap.exists()) {
-                        customerData = customerDocSnap.data();
-                    } else {
-                        console.warn(`Customer with code ${customerCode} not found in Firestore.`);
-                    }
+                if (!customerCode || !billId) {
+                    showSignInModal();
+                    hideLoading();
+                    return;
+                }
+                
+                const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
+                const customerDocSnap = await getDoc(customerDocRef);
+                
+                if (customerDocSnap.exists()) {
+                    customerData = customerDocSnap.data();
                 }
 
-                if (!customerData && params.get('customerName')) {
-                    customerData = {
-                        NAME: params.get('customerName') || 'N/A',
-                        addr: params.get('customerAddr1') ? [params.get('customerAddr1')] : [],
-                        ct: params.get('customerCt') || 'N/A',
-                        pincode: params.get('customerPincode') || 'N/A'
-                    };
-                } else if (!customerCode && !params.get('customerName')) {
-                    showMessage(errorMessage, 'No customer details provided in URL or Firebase.', 'error');
-                    const billTitleElem = document.getElementById('billTitle');
-                    if (billTitleElem) billTitleElem.textContent = 'Error Loading Bill';
+                const billDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills', billId);
+                const billDocSnap = await getDoc(billDocRef);
+
+                if (billDocSnap.exists()) {
+                    billData = billDocSnap.data();
+                    productsToDisplay = billData.products || [];
+                    finalSubtotal = billData.billSubtotal || 0;
+                    finalTax = billData.billTax || '*(not defined)*';
+                    finalTotal = billData.billTotal || '*(not defined)*';
+                    downloadUrl = billData.url || null;
+                    noteText = billData.note || null;
+
+                    if (billData.title === "C" && billData.Cname) {
+                        finalBillTitle = billData.Cname;
+                    } else if (billData.type === 1) {
+                        finalBillTitle = "Invoice #" + billId;
+                    } else if (billData.type === 2) {
+                        finalBillTitle = "Quotation #" + billId;
+                    } else {
+                        finalBillTitle = "Bill Details #" + billId;
+                    }
+                } else {
+                    showSignInModal();
                     hideLoading();
                     return;
                 }
 
-                if (customerCode && billId && !dynamicProductsParam) {
-                    const billDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills', billId);
-                    const billDocSnap = await getDoc(billDocRef);
-                    if (billDocSnap.exists()) {
-                        billData = billDocSnap.data();
-                        productsToDisplay = billData.products || [];
-                        finalSubtotal = billData.billSubtotal || 0;
-                        finalTax = billData.billTax || '*(not defined)*';
-                        finalTotal = billData.billTotal || '*(not defined)*';
-                        downloadUrl = billData.url || null;
-                        noteText = billData.note || null;
-
-                        if (billData.title === "C" && billData.Cname) {
-                            finalBillTitle = billData.Cname;
-                        } else if (billData.type === 1) {
-                            finalBillTitle = "Invoice #" + billId;
-                        } else if (billData.type === 2) {
-                            finalBillTitle = "Quotation #" + billId;
-                        } else {
-                            finalBillTitle = "Bill Details #" + billId;
-                        }
-                    } else {
-                        showMessage(errorMessage, `Bill "${billId}" for customer "${customerCode}" not found.`, 'error');
-                        const billTitleElem = document.getElementById('billTitle');
-                        if (billTitleElem) billTitleElem.textContent = 'Bill Not Found';
-                        hideLoading();
-                        return;
-                    }
-                }
-
-                if (dynamicProductsParam) {
-                    try {
-                        productsToDisplay = dynamicProductsParam.split('||').map(productStr => {
-                            const parts = new URLSearchParams(productStr);
-                            const type = parts.get('type');
-                            if (type === 'SR') {
-                                return {
-                                    SR: parts.get('sr'),
-                                    qty: parseInt(parts.get('qty'), 10),
-                                    price: parseFloat(parts.get('price')) || undefined
-                                };
-                            } else if (type === 'DIRECT') {
-                                return {
-                                    name: parts.get('name'),
-                                    price: parseFloat(parts.get('price')),
-                                    qty: parseInt(parts.get('qty'), 10),
-                                    SR: parts.get('sr_opt') || 'N/A'
-                                };
-                            }
-                            return null;
-                        }).filter(p => p !== null);
-
-                        finalSubtotal = productsToDisplay.reduce((sum, p) => {
-                            const price = parseFloat(p.price) || 0;
-                            const qty = parseInt(p.qty, 10) || 0;
-                            return sum + (price * qty);
-                        }, 0);
-
-                    } catch (e) {
-                        console.error("Error parsing dynamic products from URL:", e);
-                        showMessage(errorMessage, "Error loading dynamic product data from URL.", 'error');
-                        productsToDisplay = [];
-                    }
-                }
-
-                if (dynamicSubtotal) finalSubtotal = parseFloat(dynamicSubtotal);
-                if (dynamicTax) finalTax = dynamicTax;
-                if (dynamicTotal) finalTotal = dynamicTotal;
-                if (dynamicInfo) {
-                    finalBillTitle = dynamicInfo;
-                } else if (dynamicType) {
-                    const typeNum = parseInt(dynamicType, 10);
-                    if (typeNum === 1) finalBillTitle = 'Invoice';
-                    else if (typeNum === 2) finalBillTitle = 'Quotation';
-                    else finalBillTitle = `Type ${dynamicType}`;
-                }
-
-                // --- Handle Download Button Logic Here ---
                 const downloadButton = document.getElementById('downloadBillButton');
                 if (downloadButton) {
-                    downloadButton.classList.remove('hidden');
+                    downloadButton.classList.remove('hidden-modal');
                     if (downloadUrl) {
                         downloadButton.onclick = () => {
                             window.open(downloadUrl, '_blank');
@@ -649,9 +651,7 @@
                         downloadButton.onclick = generatePDF;
                     }
                 }
-                // --- End Download Button Logic ---
 
-                // --- NEW CODE FOR THE NOTE ---
                 const billNoteContainer = document.getElementById('billNoteContainer');
                 const billNoteText = document.getElementById('billNoteText');
                 if (billNoteContainer && billNoteText) {
@@ -662,10 +662,15 @@
                         billNoteContainer.style.display = 'none';
                     }
                 }
-                // --- END NEW CODE ---
 
                 const billTitleElem = document.getElementById('billTitle');
                 if (billTitleElem) billTitleElem.textContent = finalBillTitle;
+
+                const customerNameElem = document.getElementById('customerName');
+                const customerAddrElem = document.getElementById('customerAddr');
+                const customerCityElem = document.getElementById('customerCity');
+                const customerPincodeElem = document.getElementById('customerPincode');
+                const billCodeElem = document.getElementById('billCodeDisplay');
 
                 if (customerData) {
                     if (customerNameElem) customerNameElem.textContent = customerData.NAME || 'N/A';
@@ -698,43 +703,25 @@
                 if (productTableBody) productTableBody.innerHTML = '';
                 if (productsToDisplay.length > 0) {
                     for (const product of productsToDisplay) {
-                        let finalProductName = product.name || 'N/A Product';
-                        let finalProductPrice = parseFloat(product.price);
-                        let finalProductSR = product.SR || 'N/A';
-
-                        if (isNaN(finalProductPrice) && finalProductSR !== 'N/A') {
-                            try {
-                                const productsCollectionRef = collection(db, "artifacts", appIdFromConfig, "products");
-                                const q = query(productsCollectionRef, where("serial_no", "==", finalProductSR));
-                                const querySnapshot = await getDocs(q);
-
-                                if (!querySnapshot.empty) {
-                                    const fetchedProduct = querySnapshot.docs[0].data();
-                                    finalProductName = fetchedProduct.name || finalProductName;
-                                    if (fetchedProduct.price && !isNaN(parseFloat(fetchedProduct.price))) {
-                                        finalProductPrice = parseFloat(fetchedProduct.price);
-                                    }
-                                } else {
-                                    console.warn(`Product with serial_no "${finalProductSR}" not found in products collection. Displaying data from bill.`);
-                                }
-                            } catch (prodError) {
-                                console.error(`Error querying product by serial_no "${finalProductSR}":`, prodError);
-                            }
-                        }
-
-                        finalProductPrice = isNaN(finalProductPrice) ? 0 : finalProductPrice;
+                        const finalProductName = product.name || 'N/A Product';
+                        const finalProductSR = product.SR || null;
+                        
+                        // New logic: Check for image_url, then try SR, then use default
+                        const finalProductImage = product.image_url || (finalProductSR ? `img/PROC/${finalProductSR}.jpg` : 'img/PROC/DP.gif');
 
                         const qty = parseInt(product.quantity || product.qty, 10) || 1;
+
+                        // Use the price from the bill data
+                        const finalProductPrice = isNaN(parseFloat(product.price)) ? 0 : parseFloat(product.price);
                         const itemTotal = finalProductPrice * qty;
-                        const imagePath = `img/PROC/${finalProductSR}.jpg`;
 
                         const row = document.createElement('tr');
                         row.innerHTML = `
                             <td>
                                 <div class="cart-info">
-                                    <img src="${imagePath}" alt="${finalProductName}" onerror="handleImageError(this, '${finalProductSR}');" style="display: flex;justify-content: center;align-items: center;width: 80px;height: 80px;margin-right: 10px;border-radius: 5px;object-fit: cover;">
+                                    <img src="${finalProductImage}" alt="${finalProductName}" style="display: flex;justify-content: center;align-items: center;width: 80px;height: 80px;margin-right: 10px;border-radius: 5px;object-fit: cover;">
                                     <div>
-                                        <small>PN/SR: ${finalProductSR}</small>
+                                        <small>PN/SR: ${finalProductSR || 'N/A'}</small>
                                         <p>${finalProductName}</p>
                                         <small>Price: ₹${finalProductPrice.toFixed(2)}</small>
                                     </div>
@@ -742,7 +729,6 @@
                             </td>
                             <td>${qty} unit</td>
                             <td>₹${itemTotal.toFixed(2)}</td>
-                            <td></td>
                         `;
                         productTableBody.appendChild(row);
                     }
@@ -761,18 +747,16 @@
 
             } catch (error) {
                 console.error("Error loading bill details:", error);
-                showMessage(errorMessage, `Failed to load bill: ${error.message}. Check console for details.`, 'error');
                 const billTitleElem = document.getElementById('billTitle');
                 if (billTitleElem) billTitleElem.textContent = 'Error Loading Bill';
+                showSignInModal();
             } finally {
                 hideLoading();
             }
         }
 
         document.addEventListener('DOMContentLoaded', () => {
-            onAuthStateChanged(auth, (user) => {
-                loadBillDetails(user);
-            });
+            loadBillDetails();
         });
 
         var Menuitems = document.getElementById("Menuitems");

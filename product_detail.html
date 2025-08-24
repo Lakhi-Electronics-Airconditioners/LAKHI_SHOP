@@ -229,85 +229,84 @@
             } else {
                 // If serial number fallback was already attempted and failed, use final default
                 imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
-                imgElement.src = 'img/PROC/DP.png';
+                imgElement.src = 'img/PROC/DP.gif';
                 console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
             }
         }
     </script>
 
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        // Import Firestore modules for fetching a single document using a query
-        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        // Import Firestore modules for fetching a single document using a query
+        import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
 
-        // Your web app's Firebase configuration
-        const firebaseConfig = {
-            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
-            authDomain: "lakhi-airconditioners.firebaseapp.com",
-            projectId: "lakhi-airconditioners",
-            storageBucket: "lakhi-airconditioners.firebasestorage.app",
-            messagingSenderId: "284430318185",
-            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
-            measurementId: "G-LB63B1FRYC"
-        };
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
 
-        // Initialize Firebase
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-        // Ensure this APP_ID matches the projectId in your firebaseConfig
-        const FIRESTORE_APP_ID = "lakhi-airconditioners"; 
+        // Ensure this APP_ID matches the projectId in your firebaseConfig
+        const FIRESTORE_APP_ID = "lakhi-airconditioners"; 
 
-        // --- Cart Functions ---
-        // Function to get cart items from localStorage
-        function getCartItems() {
-            const cartItemsString = localStorage.getItem('cartitems');
-            return cartItemsString ? JSON.parse(cartItemsString) : [];
-        }
+        // --- Cart Functions ---
+        // Function to get cart items from localStorage
+        function getCartItems() {
+            const cartItemsString = localStorage.getItem('cartitems');
+            return cartItemsString ? JSON.parse(cartItemsString) : [];
+        }
 
-        // Function to save cart items to localStorage
-        function saveCartItems(cartItems) {
-            localStorage.setItem('cartitems', JSON.stringify(cartItems));
-        }
+        // Function to save cart items to localStorage
+        function saveCartItems(cartItems) {
+            localStorage.setItem('cartitems', JSON.stringify(cartItems));
+        }
 
-        // Function to add an item to the cart - now accepts 'unit' and 'productName'
-        function addToCart(serialNo, quantity, size, unit, productName) {
-            let cartItems = getCartItems();
-            // Find if item with same serialNo AND size (variant) already exists
-            const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
+        // Function to add an item to the cart - now accepts 'unit' and 'productName'
+        function addToCart(serialNo, quantity, size, unit, productName) {
+            let cartItems = getCartItems();
+            // Find if item with same serialNo AND size (variant) already exists
+            const existingItemIndex = cartItems.findIndex(item => item.serial_no === serialNo && item.size === size);
 
-            if (existingItemIndex > -1) {
-                cartItems[existingItemIndex].quantity += quantity;
-            } else {
-                // Include the unit when adding a new item to cart
-                cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
-            }
-            saveCartItems(cartItems);
-            alert(`Added ${quantity} ${unit} of ${productName} (Size: ${size}) to cart!`); // Updated alert
-            console.log('Current cartitems:', cartItems);
-        }
-        // --- End Cart Functions ---
+            if (existingItemIndex > -1) {
+                cartItems[existingItemIndex].quantity += quantity;
+            } else {
+                // Include the unit when adding a new item to cart
+                cartItems.push({ serial_no: serialNo, quantity: quantity, size: size, unit: unit });
+            }
+            saveCartItems(cartItems);
+            alert(`Added ${quantity} ${unit} of ${productName} (Size: ${size}) to cart!`); // Updated alert
+            console.log('Current cartitems:', cartItems);
+        }
+        // --- End Cart Functions ---
 
-        // Function to generate star ratings HTML based on a numeric rating
-        function generateStars(rating) {
-            let starsHTML = '';
-            const fullStars = Math.floor(rating);
-            const hasHalfStar = rating % 1 !== 0;
-            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+        // Function to generate star ratings HTML based on a numeric rating
+        function generateStars(rating) {
+            let starsHTML = '';
+            const fullStars = Math.floor(rating);
+            const hasHalfStar = rating % 1 !== 0;
+            const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
 
-            for (let i = 0; i < fullStars; i++) {
-                starsHTML += '<i class="fa-solid fa-star"></i>';
-            }
-            if (hasHalfStar) {
-                starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
-            }
-            for (let i = 0; i < emptyStars; i++) {
-                starsHTML += '<i class="fa-regular fa-star"></i>';
-            }
-            return starsHTML;
-        }
-
-        // New function to update the meta description
+            for (let i = 0; i < fullStars; i++) {
+                starsHTML += '<i class="fa-solid fa-star"></i>';
+            }
+            if (hasHalfStar) {
+                starsHTML += '<i class="fa-solid fa-star-half-stroke"></i>';
+            }
+            for (let i = 0; i < emptyStars; i++) {
+                starsHTML += '<i class="fa-regular fa-star"></i>';
+            }
+            return starsHTML;
+        }
+        // New function to update the meta description
         function updateMetaDescription(description) {
             const metaTag = document.querySelector('meta[name="description"]');
             let newDescription = description || "Sorry, the following product does not have a description.";
@@ -318,182 +317,179 @@
             }
             metaTag.setAttribute('content', newDescription);
         }
+        document.addEventListener('DOMContentLoaded', async function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const serialNo = urlParams.get('serial_no');
+            const productDetailContainer = document.getElementById('productDetailContainer');
+            let productSizeSelect;
+            let productQuantityInput;
+            let addToCartBtn;
+            let productUnitDisplay;
 
-        document.addEventListener('DOMContentLoaded', async function() {
-            const urlParams = new URLSearchParams(window.location.search);
-            const serialNo = urlParams.get('serial_no');
-            const productDetailContainer = document.getElementById('productDetailContainer');
-            let productSizeSelect;
-            let productQuantityInput;
-            let addToCartBtn;
-            let productUnitDisplay;
+            let currentProduct = null;
 
-            let currentProduct = null;
 
-            // Display loading state initially
-            productDetailContainer.innerHTML = `
-                <div class="col-2">
-                    <img src="/img/PROC/loading.gif" alt="Loading Product Image">
-                </div>
-                <div class="col-2">
-                    <p>Category: Loading...</p>
-                    <h1>Loading Product Name...</h1>
-                    <h4>Loading Price...</h4>
-                    <div class="size-selector-container">
-                        <label for="product-size">Select Size:</label>
-                        <select id="product-size" class="large-size-selector" disabled>
-                            <option>Loading...</option>
-                        </select>
-                    </div>
-                    <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
-                        <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;" disabled>
-                        <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
-                        <a href="#" class="btn-Cart disabled" id="add-to-cart-btn">Add To Cart</a>
-                    </div>
-                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
-                    <h3>Product Info <i class="fa-solid fa-info"></i></h3>
-                    <p>Loading Description...</p>
-                    <div class="rating"><span>Loading rating...</span></div>
-                </div>
-            `;
+            // Display loading state initially
+            productDetailContainer.innerHTML = `
+                <div class="col-2">
+                    <img src="/img/PROC/Loading.gif" alt="Loading Product Image">
+                </div>
+                <div class="col-2">
+                    <p>Category: Loading...</p>
+                    <h1>Loading Product Name...</h1>
+                    <h4>Loading Price...</h4>
+                    <div class="size-selector-container">
+                        <label for="product-size">Select Size:</label>
+                        <select id="product-size" class="large-size-selector" disabled>
+                            <option>Loading...</option>
+                        </select>
+                    </div>
+                    <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
+                        <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;" disabled>
+                        <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
+                        <a href="#" class="btn-Cart disabled" id="add-to-cart-btn">Add To Cart</a>
+                    </div>
+                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3><br>
+                    <p>Loading Description...</p>
+                    <h3>Product Info <i class="fa-solid fa-info"></i></h3><br>
+                    <p>Loading Info...</p>
+                    <div class="rating"><span>Loading rating...</span></div>
+                </div>
+            `;
 
-            if (serialNo) {
-                try {
-                    // --- CHANGED: Query by serial_no field instead of document ID ---
-                    const productsCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "products");
-                    const q = query(productsCollectionRef, where("serial_no", "==", serialNo));
-                    const querySnapshot = await getDocs(q);
+            if (serialNo) {
+                try {
+                    // --- CHANGED: Query by serial_no field instead of document ID ---
+                    const productsCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "products");
+                    const q = query(productsCollectionRef, where("serial_no", "==", serialNo));
+                    const querySnapshot = await getDocs(q);
 
-                    if (!querySnapshot.empty) {
-                        // Assuming serial_no is unique, get the first matching document
-                        currentProduct = querySnapshot.docs[0].data();
-                        if (currentProduct && currentProduct.serial_no) {
-                            const sr = currentProduct.serial_no;
-                            document.title = `Lakhi Airconditioners | Product Details | ${sr}`;
-                        }
-                        
-                        // Dynamically update the meta description after fetching the product
+                    if (!querySnapshot.empty) {
+                        // Assuming serial_no is unique, get the first matching document
+                        currentProduct = querySnapshot.docs[0].data();
+                    if (currentProduct && currentProduct.serial_no) {
+                        const sr = currentProduct.serial_no;
+                        document.title = `Lakhi Airconditioners | Product Details | ${sr}`;
+                        // Dynamically update the meta description after fetching the product
                         updateMetaDescription(currentProduct.description);
+                    
+                    }
+                     
 
-                        // Prioritize image_url from Firestore, otherwise use the existing local path logic
-                        const imageSrc = currentProduct.image_url || `img/PROC/${currentProduct.serial_no.replace(/\//g, '!')}.jpg`;
-                        let formattedPrice = currentProduct.price ? `₹${parseFloat(currentProduct.price).toLocaleString('en-IN')}` : 'Price not available';
-                        let stars = currentProduct.rating_stars !== null && currentProduct.rating !== undefined ? generateStars(currentProduct.rating) : 'No rating';
-                        let ratingSourcePath = currentProduct.rating_icon ? currentProduct.rating_icon : '';
+                        
+                        // Prioritize image_url from Firestore, otherwise use the existing local path logic
+                        const imageSrc = currentProduct.image_url || `img/PROC/${currentProduct.serial_no.replace(/\//g, '!')}.jpg`;
+                        let formattedPrice = currentProduct.price ? `₹${parseFloat(currentProduct.price).toLocaleString('en-IN')}` : 'Price not available';
+                        let stars = currentProduct.rating_stars !== null && currentProduct.rating !== undefined ? generateStars(currentProduct.rating) : 'No rating';
+                        let ratingSourcePath = currentProduct.rating_icon ? currentProduct.rating_icon : '';
 
-                        productDetailContainer.innerHTML = `
-                            <div class="col-2">
-                                <img src="${imageSrc}"
-                                     alt="${currentProduct.name}" 
-                                     onerror="handleImageError(this, '${currentProduct.serial_no}');"
-                                     style="display: flex;justify-content: center;align-items: center;">
-                            </div>
-                            <div class="col-2">
-                                <p>Category: ${currentProduct.type || 'N/A'}</p>
-                                <h1>${currentProduct.name}</h1>
-                                <h4 class="dynamic-price">${formattedPrice}</h4>
-                                
-                                <div class="size-selector-container">
-                                    <label for="product-size">Select Size:</label>
-                                    <select id="product-size" class="large-size-selector">
-                                        </select>
-                                </div>
+                        productDetailContainer.innerHTML = `
+                            <div class="col-2">
+                                <img src="${imageSrc}"
+                                     alt="${currentProduct.name}" 
+                                     onerror="handleImageError(this, '${currentProduct.serial_no}');"
+                                     style="display: flex;justify-content: center;align-items: center;">
+                            </div>
+                            <div class="col-2">
+                                <p>Category: ${currentProduct.type || 'N/A'}</p>
+                                <h1>${currentProduct.name}</h1>
+                                <h4 class="dynamic-price">${formattedPrice}</h4>
+                                
+                                <div class="size-selector-container">
+                                    <label for="product-size">Select Size:</label>
+                                    <select id="product-size" class="large-size-selector">
+                                        </select>
+                                </div>
 
-                                <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
-                                    <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
-                                    <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">${currentProduct.unit || 'unit'}</span>
-                                    <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
-                                </div>
-                                <div class="rating" style="">
-                                    <span>
-                                        ${stars}
-                                    </span>
-                                    ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">  Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
-                                </div>
-                            </div>
-                                <div>
-                                <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
-                                <p>${currentProduct.description || 'No description available.'}</p>
-                                </div>
+                                <div class="add-to-cart-section" style="margin-top: 20px; display: flex; align-items: center;">
+                                    <input type="number" value="1" min="1" id="product-quantity" class="quantity-input" style="width: 70px; text-align: center; margin-right: 5px;">
+                                    <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">${currentProduct.unit || 'unit'}</span>
+                                    <a href="#" class="btn-Cart" id="add-to-cart-btn">Add To Cart</a>
+                                </div>
+                                <div class="rating" style="">
+                                    <span>
+                                        ${stars}
+                                    </span>
+                                    ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">  Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
+                                </div>
+                            </div>
+                                <div>
+                                <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
+                                <p>${currentProduct.description || 'No description available.'}</p>
+                                </div>
 
-                                <div><br>
-                                <h3>Product Info <i class="fa-solid fa-info"></i></h3>
-                                <p>${currentProduct.info || 'No Info available.'}</p>
-                                <br><br>
-                                </div>
-                            
-                                <div id="ac_info">
-                                <h3>AC INFO</h3>
-                                <span>
-                                ${currentProduct['ac_tr'] ? `<p><b>AC Tonnage:</b> ${currentProduct['ac_tr']} Ton</p>` : ''}
-                                ${currentProduct['ac_type'] ? `<p><b>AC Type:</b> ${currentProduct['ac_type']}</p>` : ''}
-                                ${currentProduct['ac_stars'] ? `<p><b>Energy Rating:</b> ${currentProduct['ac_stars']} Star</p>` : ''}
-                                ${currentProduct['ac_inv'] ? `<p><b>Inverter /Non-Inverter:</b> ${currentProduct['ac_inv']}</p>` : ''}
-                                </span> 
-                            </div>
-                        `;
+                                <div><br>
+                                <h3>Product Info <i class="fa-solid fa-info"></i></h3>
+                                <p>${currentProduct.info || 'No Info available.'}</p>
+                                <br><br>
+                                </div>
+                            
+                                <div id="ac_info">
+                                <h3>AC INFO</h3>
+                                <span>
+                                ${currentProduct['ac_tr'] ? `<p><b>AC Tonnage:</b> ${currentProduct['ac_tr']} Ton</p>` : ''}
+                                ${currentProduct['ac_type'] ? `<p><b>AC Type:</b> ${currentProduct['ac_type']}</p>` : ''}
+                                ${currentProduct['ac_stars'] ? `<p><b>Energy Rating:</b> ${currentProduct['ac_stars']} Star</p>` : ''}
+                                ${currentProduct['ac_inv'] ? `<p><b>Inverter /Non-Inverter:</b> ${currentProduct['ac_inv']}</p>` : ''}
+                                </span> 
+                            </div>
+                        `;
 
-                        // Re-select elements after innerHTML update
-                        productSizeSelect = document.getElementById('product-size');
-                        productQuantityInput = document.getElementById('product-quantity');
-                        addToCartBtn = document.getElementById('add-to-cart-btn');
-                        productUnitDisplay = document.getElementById('product-unit-display');
+                        // Re-select elements after innerHTML update
+                        productSizeSelect = document.getElementById('product-size');
+                        productQuantityInput = document.getElementById('product-quantity');
+                        addToCartBtn = document.getElementById('add-to-cart-btn');
+                        productUnitDisplay = document.getElementById('product-unit-display');
 
-                        // Populate size options
-                        if (currentProduct.type === 'AC' && currentProduct['ac_tr']) {
-                            const option = document.createElement('option');
-                            option.value = `${currentProduct['ac_tr']} Ton`;
-                            option.textContent = `${currentProduct['ac_tr']} Ton`;
-                            productSizeSelect.appendChild(option);
-                        } else {
-                            const option = document.createElement('option');
-                            option.value = 'N/A';
-                            option.textContent = 'N/A';
-                            productSizeSelect.appendChild(option);
-                            productSizeSelect.disabled = true;
-                        }
-                        productUnitDisplay.textContent = currentProduct.unit || 'unit';
-                        
-                        const ac_info = document.getElementById('ac_info');
-                        if (currentProduct.type === 'AC') {
-                            ac_info.style.display = "block"; // Show the message
-                        } 
-                        else {
-                            ac_info.style.display = "none"; // Hide the message
-                        }
+                        // Populate size options
+                        if (currentProduct.type === 'AC' && currentProduct['ac_tr']) {
+                            const option = document.createElement('option');
+                            option.value = `${currentProduct['ac_tr']} Ton`;
+                            option.textContent = `${currentProduct['ac_tr']} Ton`;
+                            productSizeSelect.appendChild(option);
+                        } else {
+                            const option = document.createElement('option');
+                            option.value = 'N/A';
+                            option.textContent = 'N/A';
+                            productSizeSelect.appendChild(option);
+                            productSizeSelect.disabled = true;
+                        }
+                        productUnitDisplay.textContent = currentProduct.unit || 'unit';
+                        
+                        const ac_info = document.getElementById('ac_info');
+                        if (currentProduct.type === 'AC') {
+                            ac_info.style.display = "block"; // Show the message
+                        } 
+                        else {
+                            ac_info.style.display = "none"; // Hide the message
+                        }
 
-                        // Re-attach event listener for the "Add To Cart" button
-                        addToCartBtn.addEventListener('click', function(event) {
-                            event.preventDefault();
-                            const quantity = parseInt(productQuantityInput.value, 10);
-                            const selectedSize = productSizeSelect.value;
-                            const productUnit = currentProduct.unit;
-                            const productName = currentProduct.name;
-                            if (quantity > 0) {
-                                addToCart(currentProduct.serial_no, quantity, selectedSize, productUnit, productName);
-                            } else {
-                                alert("Please enter a valid quantity (at least 1).");
-                            }
-                        });
+                        // Re-attach event listener for the "Add To Cart" button
+                        addToCartBtn.addEventListener('click', function(event) {
+                            event.preventDefault();
+                            const quantity = parseInt(productQuantityInput.value, 10);
+                            const selectedSize = productSizeSelect.value;
+                            const productUnit = currentProduct.unit;
+                            const productName = currentProduct.name;
+                            if (quantity > 0) {
+                                addToCart(currentProduct.serial_no, quantity, selectedSize, productUnit, productName);
+                            } else {
+                                alert("Please enter a valid quantity (at least 1).");
+                            }
+                        });
 
-                    } else {
-                        // If query snapshot is empty, no product found with that serial_no field value
-                        productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found with the provided serial number.</p>';
-                        // Update meta description for not found products
-                        updateMetaDescription(null);
-                    }
-                } catch (error) {
-                    console.error('Error fetching product data from Firestore:', error);
-                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details. Please check your internet connection.</p>';
-                    // Update meta description on error
-                    updateMetaDescription("Failed to load product details. Please try again later.");
-                }
-            } else {
-                productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">No product serial number provided in the URL.</p>';
-                // Update meta description for no serial number
-                updateMetaDescription("No product serial number was found in the URL. Please navigate from the products page.");
-            }
-        });
-    </script>
+                    } else {
+                        // If query snapshot is empty, no product found with that serial_no field value
+                        productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found with the provided serial number.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching product data from Firestore:', error);
+                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details. Please check your internet connection or Firebase permissions.</p>';
+                }
+            } else {
+                productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">No product serial number provided in the URL.</p>';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -160,6 +160,17 @@
                     <p style="font-size: 10px; margin: 0;">No rating info</p>
                 </div>
             </div>
+            <div class="col-1">
+                <h3>Product Details <i class="fa-solid fa-indent"></i></h3><br>
+                <p>Loading Description...</p><br>
+                <h3>Product Info <i class="fa-solid fa-info"></i></h3><br>
+                <p>Loading Info...</p><br>
+                <h3>Checking if AC</h3><br>
+                <p><b>AC Tonnage:</b> loading... </p>
+                <p><b>AC Type:</b> loading ac type</p>
+                <p><b>Energy Rating:</b> loading Stars</p>
+                <p><b>Inverter /Non-Inverter:</b> loading</p>
+            </div>
         </div>
     </div>
 
@@ -351,11 +362,18 @@
                         <span id="product-unit-display" style="margin-right: 15px; font-weight: bold; color: #555;">unit</span>
                         <a href="#" class="btn-Cart disabled" id="add-to-cart-btn">Add To Cart</a>
                     </div>
-                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3><br>
-                    <p>Loading Description...</p>
-                    <h3>Product Info <i class="fa-solid fa-info"></i></h3><br>
-                    <p>Loading Info...</p>
                     <div class="rating"><span>Loading rating...</span></div>
+                </div>
+                <div class="col-1">
+                    <h3>Product Details <i class="fa-solid fa-indent"></i></h3><br>
+                    <p>Loading Description...</p><br>
+                    <h3>Product Info <i class="fa-solid fa-info"></i></h3><br>
+                    <p>Loading Info...</p><br>
+                    <h3>Checking if AC</h3><br>
+                    <p><b>AC Tonnage:</b> loading... </p>
+                    <p><b>AC Type:</b> loading ac type</p>
+                    <p><b>Energy Rating:</b> loading Stars</p>
+                    <p><b>Inverter /Non-Inverter:</b> loading</p>
                 </div>
             `;
 
@@ -416,25 +434,22 @@
                                     ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">  Based on <img src="${ratingSourcePath}" class="rating-source-icon"></p>` : ''}
                                 </div>
                             </div>
+                            <div class="col-1">
                                 <div>
                                 <h3>Product Details <i class="fa-solid fa-indent"></i></h3>
                                 <p>${currentProduct.description || 'No description available.'}</p>
                                 </div>
-
                                 <div><br>
                                 <h3>Product Info <i class="fa-solid fa-info"></i></h3>
                                 <p>${currentProduct.info || 'No Info available.'}</p>
                                 <br><br>
                                 </div>
-                            
                                 <div id="ac_info">
                                 <h3>AC INFO</h3>
-                                <span>
                                 ${currentProduct['ac_tr'] ? `<p><b>AC Tonnage:</b> ${currentProduct['ac_tr']} Ton</p>` : ''}
                                 ${currentProduct['ac_type'] ? `<p><b>AC Type:</b> ${currentProduct['ac_type']}</p>` : ''}
                                 ${currentProduct['ac_stars'] ? `<p><b>Energy Rating:</b> ${currentProduct['ac_stars']} Star</p>` : ''}
                                 ${currentProduct['ac_inv'] ? `<p><b>Inverter /Non-Inverter:</b> ${currentProduct['ac_inv']}</p>` : ''}
-                                </span> 
                             </div>
                         `;
 

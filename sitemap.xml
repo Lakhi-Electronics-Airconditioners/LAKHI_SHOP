@@ -61,7 +61,7 @@
 </url>
 <url>
     <loc>https://shop.lakhiairconditioners.com/AC-only</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
     <priority>0.90</priority>
 </url>
 <url>
@@ -101,14 +101,18 @@
 </url>
 <url>
     <loc>https://shop.lakhiairconditioners.com/products</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
     <priority>0.90</priority>
 </url>
-
-
-
-
-
+<url>
+    <loc>https://shop.lakhiairconditioners.com/all/samsung/fr</loc>
+    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+<url>
+    <loc>https://shop.lakhiairconditioners.com/all/hitachi/L1</loc>
+    <lastmod>2025-08-31T00:00:00+00:00</lastmod>
+    <priority>0.70</priority>
+</url>
 
 
 
@@ -136,6 +140,10 @@
     <lastmod>2025-08-23T00:00:00+00:00</lastmod>
     <priority>0.65</priority>
 </url>
+<url>
+    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=GTL50UV16</loc>
+    <lastmod>2025-08-28T00:00:00+00:00</lastmod>
+    <priority>0.65</priority>
 <url>
     <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=AR60F19D13WNNAL</loc>
     <lastmod>2025-08-23T00:00:00+00:00</lastmod>
@@ -176,5 +184,4 @@
     <lastmod>2025-08-23T00:00:00+00:00</lastmod>
     <priority>0.65</priority>
 </url>
-
 </urlset>

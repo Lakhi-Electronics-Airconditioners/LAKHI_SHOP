@@ -376,7 +376,7 @@
     // --- Load products from Firebase Firestore ---
     document.addEventListener('DOMContentLoaded', async () => {
         // Display loading message
-        productContainer.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px;">Loading products...</p>';
+        productContainer.innerHTML = '<img src="/img/PROC/Loading.gif" alt="Loading Products"><p style="text-align: center; width: 100%; margin-top: 20px;">Loading  products...</p>';
 
         // Corrected collection path to match your Firebase rules and backend data structure
         const productsCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "products"); 

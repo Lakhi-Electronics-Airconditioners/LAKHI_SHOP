@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lakhi Airconditioners | all samsung Bespoke ai Refrigerator</title>
+    <title>Lakhi Airconditioners | all Hitachi (L1)</title>
     <meta name="description" content="All Samsung Bespoke AI Refrigerator">
     <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
@@ -118,11 +118,11 @@
         function handleImageError(imgElement, serialNo) {
             if (!imgElement.dataset.serialFallbackAttempted) {
                 imgElement.dataset.serialFallbackAttempted = 'true';
-                imgElement.src = `img/PROC/${serialNo}.png`;
+                imgElement.src = `https://shop.lakhiairconditioners.com/img/PROC/${serialNo}.png`;
                 console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
             } else {
                 imgElement.onerror = null;
-                imgElement.src = 'img/PROC/DP.gif';
+                imgElement.src = 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif';
                 console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.gif`);
             }
         }
@@ -131,7 +131,7 @@
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-        import { DATA } from "/all/samsung/fr.js";
+        import { DATA } from "/all/Hitachi/L1.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {

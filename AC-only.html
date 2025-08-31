@@ -468,7 +468,7 @@
 
         // --- Load products from Firebase Firestore ---
         document.addEventListener('DOMContentLoaded', async () => {
-            productContainer.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px;">Loading products...</p>';
+            productContainer.innerHTML = '<img src="/img/PROC/Loading.gif" alt="Loading"><p style="text-align: center; width: 100%; margin-top: 20px;">Loading ALL AIRCONDITONERS</p>';
             try {
                 const querySnapshot = await getDocs(productsCollectionRef);
                 querySnapshot.forEach((doc) => {

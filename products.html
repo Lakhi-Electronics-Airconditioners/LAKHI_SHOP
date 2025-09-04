@@ -127,13 +127,27 @@
 
         <div class="row row-2">
             <h2>All Products</h2>
-            <select id="sortSelect">
-                <option value="default">Default Sorting</option>
-                <option value="price-asc">Sort by Price (Low to High)</option>
-                <option value="price-desc">Sort by Price (High to Low)</option>
-                <option value="name-asc">Sort by Name (A-Z)</option>
-                <option value="name-desc">Sort by Name (Z-A)</option>
-            </select>
+            <hr width="100%" style="margin-top: 10px; margin-bottom: 10px; border: 0px solid #ccc;text-align: center;">
+            <div class="col-2" style="text-align: center;">
+            <!-- Sorting Dropdown -->
+                <select id="sortSelect">
+                    <option value="default">Default Sorting</option>
+                    <option value="price-asc">Sort by Price (Low to High)</option>
+                    <option value="price-desc">Sort by Price (High to Low)</option>
+                    <option value="name-asc">Sort by Name (A-Z)</option>
+                    <option value="name-desc">Sort by Name (Z-A)</option>
+                </select>
+            </div>
+            <div class="col-2" style="text-align: center;">
+            <!-- Search Bar -->
+                <div class="search-bar search-container" style="margin-bottom: 20px; text-align: center;">
+                    <input type="text" id="productSearchInput" placeholder="Search by Name or S/R Number..." style="padding: 8px; width: 250px; border-radius: 4px; border: 1px solid #ccc;">
+                    <button id="productSearchBtn" style="padding: 8px 12px; border-radius: 4px; border: none; background: #d12711; color: #ffffff; cursor: pointer;">
+                        <i class="fa fa-search"></i> Search
+                    </button>
+            </div>
+            </div>
+        </div>
         </div>
 
         <div id="productSection" class="container">
@@ -403,6 +417,38 @@
                     productContainer.parentElement.appendChild(totalProductsElement);
                 }
             });
+            // Search functionality for products
+                const searchInput = document.getElementById('productSearchInput');
+                const searchBtn = document.getElementById('productSearchBtn');
+
+                function filterProductsBySearch(query) {
+                    const lowerQuery = query.trim().toLowerCase();
+                    if (!lowerQuery) {
+                        renderProducts(allProducts);
+                        return;
+                    }
+                    const filtered = allProducts.filter(product => {
+                        const name = (product.name || '').toLowerCase();
+                        const serial = (product.serial_no || '').toLowerCase();
+                        return name.includes(lowerQuery) || serial.includes(lowerQuery);
+                    });
+                    renderProducts(filtered);
+                    // Update total products count
+                    const totalProductsElement = document.getElementById('totalProducts');
+                    if (totalProductsElement) {
+                        totalProductsElement.textContent = `Total Products: ${filtered.length}`;
+                    }
+                }
+
+                searchBtn.addEventListener('click', () => {
+                    filterProductsBySearch(searchInput.value);
+                });
+
+                searchInput.addEventListener('keyup', (e) => {
+                    if (e.key === 'Enter') {
+                        filterProductsBySearch(searchInput.value);
+                    }
+                });
 
             // Add total product count after initial render
             const totalProductsElement = document.getElementById('totalProducts');

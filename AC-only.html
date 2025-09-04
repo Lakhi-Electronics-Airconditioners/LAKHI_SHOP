@@ -124,14 +124,17 @@
     <div class="small-container">
         <div class="small-container row row-2">
             <h2>AC Products</h2>
-            <select id="sortSelect">
-                <option value="name-asc">Default Sorting (A-Z)</option>
-                <option value="name-desc">Sort Z-A</option>
-                <option value="price-asc">Sort by Price: Low to High</option>
-                <option value="price-desc">Sort by Price: High to Low</option>
-                <option value="rating">Sort by Rating</option>
-            </select>
+            <div class="col-2" style="text-align: center;">
+            <!-- Sorting Dropdown -->
+                <select id="sortSelect">
+                    <option value="name-asc">Default Sorting (A-Z)</option>
+                    <option value="name-desc">Sort Z-A</option>
+                    <option value="price-asc">Sort by Price: Low to High</option>
+                    <option value="price-desc">Sort by Price: High to Low</option>
+                    <option value="rating">Sort by Rating</option>
+                </select>
         </div>
+        <!-- Filter Section -->
         
         <div class="small-container row" style="margin-top: 20px;">
             <div class="col-4">
@@ -159,9 +162,21 @@
                 </select>
             </div>
         </div>
+        </div>
+        <div class="col-2" style="text-align: center;">
+        <!-- Search Bar -->
+        <hr width="100%" style="margin-top: 10px; margin-bottom: 10px; border: 0px solid #ccc;text-align: center;">
+        <div class="search-bar search-container" style="margin-bottom: 20px; text-align: center;">
+            <input type="text" id="productSearchInput" placeholder="Search by Name or S/R Number..." style="padding: 8px; width: 250px; border-radius: 4px; border: 1px solid #ccc;">
+            <button id="productSearchBtn" style="padding: 8px 12px; border-radius: 4px; border: none; background: #d12711; color: #ffffff; cursor: pointer;">
+                <i class="fa fa-search"></i> Search
+            </button>
+            </div>
+        <!-- Product List Container -->
         
         <div class="row" id="productListContainer">
             </div>
+    </div>
     </div>
 
     <div class="footer">
@@ -348,16 +363,11 @@
                              onerror="handleImageError(this, '${product.serial_no}');"> 
                         <h4>${product.name} (S/N: ${product.serial_no})</h4>
                         <p>${formattedPrice}</p>
+                        <BR>
                         ${acTrDisplay}
                         ${acTypeDisplay}
                         ${acStarDisplay}
                         ${acInvDisplay}
-                        <div class="rating">
-                            <span>
-                                ${generateStars(product['rating'] || 0)} 
-                            </span>
-                            ${ratingSourcePath ? `<p style="font-size: 10px; margin: 0;">Based on <img src="${ratingSourcePath}" style="width: 30px; height: 10px; vertical-align: middle;"></p>` : ''}
-                        </div>
                     </a>
                     <div class="add-to-cart-container" style="text-align: center; margin-top: 10px;">
                         <a href="#" class="btn-Cart add-to-cart-btn" 
@@ -494,6 +504,16 @@
                 filterAcTrSelect.addEventListener('change', filterProducts);
                 filterAcStarSelect.addEventListener('change', filterProducts);
                 filterAcinvSelect.addEventListener('change', filterProducts)
+
+                document.getElementById('productSearchBtn').addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const searchTerm = document.getElementById('productSearchInput').value.toLowerCase().trim();
+                    displayedProducts = allProducts.filter(product => 
+                        (product.name && product.name.toLowerCase().includes(searchTerm)) || 
+                        (product.serial_no && product.serial_no.toLowerCase().includes(searchTerm))
+                    );
+                    sortProducts(sortSelect.value);
+                });
 
             } catch (error) {
                 console.error("Error loading AC product data from Firestore:", error);

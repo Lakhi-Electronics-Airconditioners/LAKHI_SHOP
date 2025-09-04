@@ -1,8 +1,7 @@
-const CACHE_NAME = 'lakhi-cache-v1';
+const CACHE_NAME = 'lakhi-cache-v2';
 const OFFLINE_URL = 'offline.html';
 
 const FILES_TO_CACHE = [
-  '/',
   'offline.html',
   'styles.css',
   'game.js',
@@ -10,9 +9,10 @@ const FILES_TO_CACHE = [
   'img/NABR/log.jpg',
   'img/NABR/SCI.png',
   'img/NABR/menu.png',
+  'img/NABR/apk-down.jpeg',
   'img/log-w.png',
   'DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css',
-  'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap'
+  'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
 ];
 
 // Install event: cache all required files

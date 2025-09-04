@@ -59,14 +59,17 @@
                 <button id="googleSignInBtn" class="btn social-btn google-btn">
                     <i class="fab fa-google"></i> Sign In with Google
                 </button>
-                <button id="appleSignInBtn" class="btn social-btn apple-btn">
-                    <i class="fab fa-apple"></i> Sign In with Apple
+                <button id="appleSignInBtn" class="btn social-btn apple-btn" disabled>
+                    <i class="fab fa-apple"></i> Sign In with Apple (Coming Soon)
                 </button>
                 <button id="githubSignInBtn" class="btn social-btn github-btn">
-                    <i class="fab fa-github"></i> Sign In with GitHub
+                    <i class="fab fa-github"></i> Sign In with GitHub 
                 </button>
-                <button id="facebookSignInBtn" class="btn social-btn facebook-btn">
-                    <i class="fab fa-facebook-f"></i> Sign In with Facebook
+                <button id="facebookSignInBtn" class="btn social-btn facebook-btn" disabled>
+                    <i class="fab fa-facebook-f"></i> Sign In with Facebook (down right now)
+                </button>
+                <button id='twitterSignInBtn' class="btn social-btn twitter-btn">
+                    <i class="fab fa-twitter"></i> Sign In with Twitter
                 </button>
             </div>
 
@@ -129,6 +132,7 @@
             OAuthProvider, // For Apple
             GithubAuthProvider, // For GitHub
             FacebookAuthProvider, // For Facebook
+            TwitterAuthProvider, // For Twitter
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -161,6 +165,7 @@
         const appleSignInBtn = document.getElementById('appleSignInBtn');
         const githubSignInBtn = document.getElementById('githubSignInBtn');
         const facebookSignInBtn = document.getElementById('facebookSignInBtn');
+        const twitterSignInBtn = document.getElementById('twitterSignInBtn');
         const signinBtn = document.getElementById('signinBtn'); // Reference to the submit button
 
 
@@ -341,6 +346,29 @@ if (facebookSignInBtn) { // Safety check
                 errorMessage = 'Facebook sign-in popup closed.';
             } else if (error.code === 'auth/cancelled-popup-request') {
                 errorMessage = 'Facebook sign-in already in progress.';
+            } else if (error.code === 'auth/account-exists-with-different-credential') {
+                errorMessage = 'An account with this email already exists using different credentials. Please sign in with your other method.';
+            }
+            showMessage(signInError, errorMessage);
+        }
+    });
+}
+// Twitter Sign In
+if (twitterSignInBtn) { // Safety check
+    twitterSignInBtn.addEventListener('click', async () => {
+        const provider = new TwitterAuthProvider();
+        if (signInError) signInError.textContent = '';
+        try {
+            await signInWithPopup(auth, provider);
+            showMessage(signInSuccess, 'Signed in with Twitter successfully! Redirecting...', 'success');
+            window.location.href = '../account';
+        } catch (error) {
+            console.error("Twitter Sign In Error:", error);
+            let errorMessage = 'Twitter sign-in failed.';
+            if (error.code === 'auth/popup-closed-by-user') {
+                errorMessage = 'Twitter sign-in popup closed.';
+            } else if (error.code === 'auth/cancelled-popup-request') {
+                errorMessage = 'Twitter sign-in already in progress.';
             } else if (error.code === 'auth/account-exists-with-different-credential') {
                 errorMessage = 'An account with this email already exists using different credentials. Please sign in with your other method.';
             }

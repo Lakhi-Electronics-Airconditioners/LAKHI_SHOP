@@ -64,14 +64,17 @@
                 <button id="googleSignUpBtn" class="btn social-btn google-btn">
                     <i class="fab fa-google"></i> Sign Up with Google
                 </button>
-                <button id="appleSignUpBtn" class="btn social-btn apple-btn">
-                    <i class="fab fa-apple"></i> Sign Up with Apple
+                <button id="appleSignUpBtn" class="btn social-btn apple-btn" disabled>
+                    <i class="fab fa-apple"></i> Sign Up with Apple (Coming Soon)
                 </button>
                 <button id="githubSignUpBtn" class="btn social-btn github-btn">
                     <i class="fab fa-github"></i> Sign Up with GitHub
                 </button>
-                <button id="facebookSignUpBtn" class="btn social-btn facebook-btn">
-                    <i class="fab fa-facebook-f"></i> Sign Up with Facebook
+                <button id="facebookSignUpBtn" class="btn social-btn facebook-btn" disabled>
+                    <i class="fab fa-facebook-f"></i> Sign Up with Facebook (down right now)
+                </button>
+                <button id='twitterSignUpBtn' class="btn social-btn twitter-btn">
+                    <i class="fab fa-twitter"></i> Sign Up with Twitter
                 </button>
             </div>
 
@@ -137,6 +140,7 @@
             OAuthProvider, // For Apple
             GithubAuthProvider, // For GitHub
             FacebookAuthProvider, // For Facebook
+            TwitterAuthProvider, // For Twitter
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -170,6 +174,7 @@
         const appleSignUpBtn = document.getElementById('appleSignUpBtn');
         const githubSignUpBtn = document.getElementById('githubSignUpBtn');
         const facebookSignUpBtn = document.getElementById('facebookSignUpBtn');
+        const twitterSignUpBtn = document.getElementById('twitterSignUpBtn');
         const signupBtn = document.getElementById('signupBtn'); // Reference to the submit button
 
         // ReCAPTCHA initialization
@@ -449,6 +454,46 @@
                         errorMessage = 'Facebook sign-up popup closed.';
                     } else if (error.code === 'auth/cancelled-popup-request') {
                         errorMessage = 'Facebook sign-up already in progress.';
+                    } else if (error.code === 'auth/account-exists-with-different-credential') {
+                        errorMessage = 'An account with this email already exists using different credentials.';
+                    }
+                    showMessage(signUpError, errorMessage);
+                }
+            });
+        }
+        // Twitter Sign Up
+        if (twitterSignUpBtn) { // Safety check
+            twitterSignUpBtn.addEventListener('click', async () => {
+                const provider = new TwitterAuthProvider();
+                if (signUpError) signUpError.textContent = '';
+                try {
+                    const userCredential = await signInWithPopup(auth, provider);
+                    const user = userCredential.user;
+                    const currentUserId = user.uid;
+
+                    // Firestore profile creation for social sign-up
+                    const appId = firebaseConfig.projectId;
+                    const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+                    const docSnap = await getDoc(userProfileDocRef);
+
+                    if (!docSnap.exists()) {
+                        await setDoc(userProfileDocRef, {
+                            email: user.email,
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+
+                    showMessage(signUpSuccess, 'Signed up with Twitter successfully! Redirecting to profile setup...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'ls/su2.html';
+                    }, 2000);
+                } catch (error) {
+                    console.error("Twitter Sign Up Error:", error);
+                    let errorMessage = 'Twitter sign-up failed.';
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        errorMessage = 'Twitter sign-up popup closed.';
+                    } else if (error.code === 'auth/cancelled-popup-request') {
+                        errorMessage = 'Twitter sign-up already in progress.';
                     } else if (error.code === 'auth/account-exists-with-different-credential') {
                         errorMessage = 'An account with this email already exists using different credentials.';
                     }

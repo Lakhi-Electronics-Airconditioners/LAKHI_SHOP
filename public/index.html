@@ -8,10 +8,142 @@
     <script src="https://shop.lakhiairconditioners.com/script.js" defer></script>
 </head>
 <body>
+    <style>
+        .text p{
+            font-style: normal;
+            color: #000;
+            font-weight: bold;
+            display: flex; 
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+            
+        }
+        .text a{
+            text-decoration: none;
+            color: #ff523b;
+            font-weight: bolder;
+        }
+        
+        .text h1{
+            color: rgb(209, 39, 17)
+        }
+        .title2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: firebrick;
+        }
+        .text h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: firebrick;
+        }
+        .text li{
+            font-style: normal;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .text h4{
+            font-style: normal;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .text-1{
+            font-style: normal;
+            color: #9c9c9c;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+    <!-- Terms and Conditions Modal (Initial Agreement) -->
+    <div id="tacpp" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Please Agree to Proceed</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <input type="checkbox" id="agree">
+                <label for="agree">
+                    I agree to the 
+                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://shop.lakhiairconditioners.com/info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Disclaimer Section -->
+            <p style="font-size:14px; margin-bottom:20px;">
+                * Prices may not be accurate, and not all products are listed.<br>
+                *product may not be in stock or may not even be buyable <br>
+                * price may go down because of some gst/cst payment things
+            </p>
+            <!-- Continue Button -->
+            <div class="w3-center">
+                <button 
+                    type="button"
+                    class="btn-modal" 
+                    onclick="continueAction(event)">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Terms and Conditions Update Modal -->
+    <div id="updateTacppModal" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeUpdateModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Terms and Conditions Updated</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Update Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
+                <input type="checkbox" id="agreeUpdate">
+                <label for="agreeUpdate">
+                    I agree to the updated 
+                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://shop.lakhiairconditioners.com/info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Continue Button for Update -->
+            <div class="w3-center">
+                <button 
+                    type="button"
+                    class="btn-modal" 
+                    onclick="continueUpdateAction(event)">
+                    Agree to Update
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="img/NABR/log.jpg" width="125px" alt="lakhi airconditoners logo"></div>
+                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="lakhi airconditoners logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
@@ -31,10 +163,15 @@
         <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
     </div>
     <br><br>
+    <div class="container"><div class="text">
+    <center>
     <h1>THIS IS NOT OUR MAIN WEBSITE</h1><br>
-    <p>This is the OAuth URL.</p><br>
-    <p>Please go back to the main website to continue.</p><br>
+    <p style="text-align: center;">This is the OAuth URL.</p><br>
+    <p style="text-align: center;">Please go back to the main website to continue.</p><br>
     <a href="https://shop.lakhiairconditioners.com/">Go to Main Website</a><br>
+    </center>
+    <br><br>
+    </div></div>
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -100,6 +237,22 @@
 
         </div>
     </div> 
+    <script>
+        var Menuitems = document.getElementById('Menuitems');
+
+        Menuitems.style.maxHeight ="0px";
+
+        function menutoggle(){
+            if(Menuitems.style.maxHeight == "0px")
+                { 
+                    Menuitems.style.maxHeight= "200px"
+                }
+            else
+                {
+                    Menuitems.style.maxHeight ="0px";
+                }
+        }
+    </script>
 </body>
 
 </html>

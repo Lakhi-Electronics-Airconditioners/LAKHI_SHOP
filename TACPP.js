@@ -1,5 +1,5 @@
  // --- Terms and Conditions Modal Logic ---
-        const currentTermsVersion = '4'; // Define the current version of your TAC/PP
+        const currentTermsVersion = '4.3'; // Define the current version of your TAC/PP
 
         // Function for Close Button of initial TACPP modal
         function closeModal() {

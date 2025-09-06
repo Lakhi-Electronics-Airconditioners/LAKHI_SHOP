@@ -5,9 +5,9 @@ export const DATA = {
             title: "Color Option",
             unit: "",
             list: {
-                "1": "BLACK CAVIR MATT / PET",
+                "1": "BLACK CAVIR MATT",
                 "2": "Black DOI",
-                "3": "SpaceMax™",
+                "3": "BLACK CAVIR PET",
                 "4": "clean black",
                 "5": "Elegant Inox",
                 "6": "Ez Clean Steel",
@@ -76,9 +76,19 @@ export const DATA = {
                 "3": "10",
                 "4": "2"
             }
-        }
+        },
+        "4": {
+            SR: "RT45CG662BB1TL",
+            OPTION_SELECT: {
+                "1": "3",
+                "2": "1",
+                "3": "8",
+                "4": "2"
+            }
+        },
+
     },
-    ERROR_MESSAGE_FT_NOT_MATCH: "No Product Matches Your Filter Options",
+    ERROR_MESSAGE_FT_NOT_MATCH: "No Samsung Refrigerator Matches Your Filter Options",
     DES: "All Samsung Bespoke AI Refrigerator",
-    title_in_head: "Lakhi Airconditioners | all samsung Bespoke ai Refrigerator"
+    title_in_head: "Lakhi Airconditioners | All Samsung Bespoke AI Refrigerator"
 };

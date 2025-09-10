@@ -1451,8 +1451,8 @@ select:focus{
     border-color: #1DA1F2;
 }
 .twitter-btn:hover {
-    background-color: #f0f0f0; 
-    color: #c00;
+   background-color: #f0f0f0; /* Light grey/white on hover */
+    color: #c00; /* Red text on hover */
 }
 
 .visually-hidden {

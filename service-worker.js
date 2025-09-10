@@ -1,9 +1,9 @@
-const CACHE_NAME = 'lakhi-cache-v2';
+const CACHE_NAME = 'lakhi_airconditioners_cache_v3';
 const OFFLINE_URL = 'offline.html';
 
 const FILES_TO_CACHE = [
   'offline.html',
-  'styles.css',
+  'style-min.css',
   'game.js',
   'img/1x1-logo.png',
   'img/NABR/log.jpg',
@@ -43,17 +43,24 @@ self.addEventListener('activate', event => {
 
 // Fetch event: serve cached content or offline page
 self.addEventListener('fetch', event => {
-  if (event.request.mode === 'navigate') {
-    event.respondWith(
-      fetch(event.request).catch(() =>
-        caches.match(OFFLINE_URL)
-      )
-    );
-  } else {
-    event.respondWith(
-      caches.match(event.request).then(response => {
-        return response || fetch(event.request);
+  event.respondWith(
+    fetch(event.request)
+      .then(response => {
+        // Optionally update cache with new response
+        const responseClone = response.clone();
+        caches.open(CACHE_NAME).then(cache => {
+          cache.put(event.request, responseClone);
+        });
+        return response;
       })
-    );
-  }
+      .catch(() => {
+        // If fetch fails, try cache or offline page
+        return caches.match(event.request).then(cachedResponse => {
+          if (cachedResponse) return cachedResponse;
+          if (event.request.mode === 'navigate') {
+            return caches.match(OFFLINE_URL);
+          }
+        });
+      })
+  );
 });

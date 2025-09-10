@@ -1454,6 +1454,15 @@ select:focus{
    background-color: #f0f0f0; /* Light grey/white on hover */
     color: #c00; /* Red text on hover */
 }
+.yahoo-btn {
+    background-color: #400191; /* Standard Yahoo purple */
+    color: #fff; /* White logo */
+    border-color: #400191;
+}
+.yahoo-btn:hover {
+    background-color: #f0f0f0; /* Light grey/white on hover */
+    color: #c00; /* Red text on hover */
+}
 
 .visually-hidden {
     position: absolute !important;

@@ -158,11 +158,12 @@
             GithubAuthProvider, // For GitHub
             FacebookAuthProvider, // For Facebook
             TwitterAuthProvider, // For Twitter
-            YahooAuthProvider, // For Yahoo 
+            YahooAuthProvider, 
+            OAuthProvider, // For Yahoo 
             signInWithPopup,
             onAuthStateChanged
-        } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        } from "firebase/auth";
+        import { RecaptchaVerifier } from "firebase/auth";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js"; // Only for signup.html
 
 

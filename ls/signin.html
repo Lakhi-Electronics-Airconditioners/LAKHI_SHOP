@@ -71,8 +71,8 @@
                 <button id='twitterSignInBtn' class="btn social-btn twitter-btn">
                     <i class="fab fa-x-twitter"></i></i> Sign In with X(Twitter)
                 </button>
-                <button id="yahooSignInBtn" class="btn social-btn yahoo-btn">
-                    <i class="fab fa-yahoo"></i> Sign In with Yahoo (Beta)
+                <button id="yahooSignInBtn" class="btn social-btn yahoo-btn" disabled>
+                    <i class="fab fa-yahoo"></i> Sign In with Yahoo (Coming Soon)
                 </button>  
             </div>
 
@@ -158,9 +158,6 @@
             GithubAuthProvider, // For GitHub
             FacebookAuthProvider, // For Facebook
             TwitterAuthProvider, // For Twitter
-            YahooAuthProvider, // For Yahoo
-            OauthCredential,
-
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -194,7 +191,6 @@
         const githubSignInBtn = document.getElementById('githubSignInBtn');
         const facebookSignInBtn = document.getElementById('facebookSignInBtn');
         const twitterSignInBtn = document.getElementById('twitterSignInBtn');
-        const yahooSignInBtn = document.getElementById('yahooSignInBtn');
         const signinBtn = document.getElementById('signinBtn'); // Reference to the submit button
 
 
@@ -398,29 +394,6 @@ if (twitterSignInBtn) { // Safety check
                 errorMessage = 'Twitter sign-in popup closed.';
             } else if (error.code === 'auth/cancelled-popup-request') {
                 errorMessage = 'Twitter sign-in already in progress.';
-            } else if (error.code === 'auth/account-exists-with-different-credential') {
-                errorMessage = 'An account with this email already exists using different credentials. Please sign in with your other method.';
-            }
-            showMessage(signInError, errorMessage);
-        }
-    });
-}
-// Yahoo Sign In
-if (yahooSignInBtn) { // Safety check
-    yahooSignInBtn.addEventListener('click', async () => {
-        const provider = new YahooAuthProvider();
-        if (signInError) signInError.textContent = '';
-        try {
-            await signInWithPopup(auth, provider);
-            showMessage(signInSuccess, 'Signed in with Yahoo successfully! Redirecting...', 'success');
-            window.location.href = '../account';
-        } catch (error) {
-            console.error("Yahoo Sign In Error:", error);
-            let errorMessage = 'Yahoo sign-in failed.';
-            if (error.code === 'auth/popup-closed-by-user') {
-                errorMessage = 'Yahoo sign-in popup closed.';
-            } else if (error.code === 'auth/cancelled-popup-request') {
-                errorMessage = 'Yahoo sign-in already in progress.';
             } else if (error.code === 'auth/account-exists-with-different-credential') {
                 errorMessage = 'An account with this email already exists using different credentials. Please sign in with your other method.';
             }

@@ -76,12 +76,12 @@
                 <button id='twitterSignUpBtn' class="btn social-btn twitter-btn">
                     <i class="fab fa-x-twitter"></i> Sign Up with X(Twitter)
                 </button>
-                <button id="yahooSignUpBtn" class="btn social-btn yahoo-btn" disabled>
-                    <i class="fab fa-yahoo"></i> Sign Up with Yahoo (Coming Soon)
+                <button id="yahooSignUpBtn" class="btn social-btn yahoo-btn">
+                    <i class="fab fa-yahoo"></i> Sign Up with Yahoo (Beta)
                 </button>
             </div>
 
-            <p class="toggle-form-text">Already have an account? <a href="signin.html">Sign In here</a></p>
+            <p class="toggle-form-text">Already have an account? <a href="signin">Sign In here</a></p>
         </div>
     </div>
 
@@ -164,6 +164,8 @@
             GithubAuthProvider, // For GitHub
             FacebookAuthProvider, // For Facebook
             TwitterAuthProvider, // For Twitter
+            YahooAuthProvider, // For Yahoo
+            OauthCredential,
             signInWithPopup,
             onAuthStateChanged
         } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
@@ -198,6 +200,7 @@
         const githubSignUpBtn = document.getElementById('githubSignUpBtn');
         const facebookSignUpBtn = document.getElementById('facebookSignUpBtn');
         const twitterSignUpBtn = document.getElementById('twitterSignUpBtn');
+        const yahooSignUpBtn = document.getElementById('yahooSignUpBtn');
         const signupBtn = document.getElementById('signupBtn'); // Reference to the submit button
 
         // ReCAPTCHA initialization
@@ -517,6 +520,46 @@
                         errorMessage = 'Twitter sign-up popup closed.';
                     } else if (error.code === 'auth/cancelled-popup-request') {
                         errorMessage = 'Twitter sign-up already in progress.';
+                    } else if (error.code === 'auth/account-exists-with-different-credential') {
+                        errorMessage = 'An account with this email already exists using different credentials.';
+                    }
+                    showMessage(signUpError, errorMessage);
+                }
+            });
+        }
+        // Yahoo Sign Up
+        if (yahooSignUpBtn) { // Safety check
+            yahooSignUpBtn.addEventListener('click', async () => {
+                const provider = new YahooAuthProvider();
+                if (signUpError) signUpError.textContent = '';
+                try {
+                    const userCredential = await signInWithPopup(auth, provider);
+                    const user = userCredential.user;
+                    const currentUserId = user.uid;
+
+                    // Firestore profile creation for social sign-up
+                    const appId = firebaseConfig.projectId;
+                    const userProfileDocRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+                    const docSnap = await getDoc(userProfileDocRef);
+
+                    if (!docSnap.exists()) {
+                        await setDoc(userProfileDocRef, {
+                            email: user.email,
+                            createdAt: new Date().toISOString()
+                        });
+                    }
+
+                    showMessage(signUpSuccess, 'Signed up with Yahoo successfully! Redirecting to profile setup...', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'ls/su2.html';
+                    }, 2000);
+                } catch (error) {
+                    console.error("Yahoo Sign Up Error:", error);
+                    let errorMessage = 'Yahoo sign-up failed.';
+                    if (error.code === 'auth/popup-closed-by-user') {
+                        errorMessage = 'Yahoo sign-up popup closed.';
+                    } else if (error.code === 'auth/cancelled-popup-request') {
+                        errorMessage = 'Yahoo sign-up already in progress.';
                     } else if (error.code === 'auth/account-exists-with-different-credential') {
                         errorMessage = 'An account with this email already exists using different credentials.';
                     }

@@ -156,8 +156,8 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import {
             getAuth,
-            createUserWithEmailAndPassword, // Make sure you import this for email/password signup
-            signInWithEmailAndPassword, // This is for sign-in, but good to have if you plan to reuse code
+            createUserWithEmailAndPassword,
+            signInWithEmailAndPassword,
             GoogleAuthProvider,
             // Add these new providers:
             OAuthProvider, // For Apple
@@ -170,7 +170,7 @@
         import { RecaptchaVerifier } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // IMPORTANT: Replace with your actual Firebase config
+        
         const firebaseConfig = {
             apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
             authDomain: "lakhi-airconditioners.firebaseapp.com",

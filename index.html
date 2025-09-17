@@ -19,7 +19,6 @@
     </script>
 </head>
 <body>
-    <!-- Terms and Conditions Modal (Initial Agreement) -->
     <div id="tacpp" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
             <span 
@@ -31,7 +30,6 @@
             <h2>Please Agree to Proceed</h2>
         </div>
         <form class="w3-container">
-            <!-- Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <input type="checkbox" id="agree">
                 <label for="agree">
@@ -45,13 +43,11 @@
                     </a>.
                 </label>
             </div>
-            <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
                 *product may not be in stock or may not even be buyable anymore<br>
                 * price may go down because of some gst/cst payment things
             </p>
-            <!-- Continue Button -->
             <div class="w3-center">
                 <button 
                     type="button"
@@ -63,7 +59,6 @@
         </form>
     </div>
 
-    <!-- Terms and Conditions Update Modal -->
     <div id="updateTacppModal" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
             <span 
@@ -75,7 +70,6 @@
             <h2>Terms and Conditions Updated</h2>
         </div>
         <form class="w3-container">
-            <!-- Update Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
                 <input type="checkbox" id="agreeUpdate">
@@ -90,7 +84,6 @@
                     </a>.
                 </label>
             </div>
-            <!-- Continue Button for Update -->
             <div class="w3-center">
                 <button 
                     type="button"
@@ -119,19 +112,28 @@
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="cart icon"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
             </div>
-            <div class="row">
-                <div class="col-2">
-                    <h1>Your one-stop store for all your electronics needs</h1>
-                    <p>It's not just about being cool in the moment. We provide the consistent cooling that brings true comfort.</p>
-                    <a href="/products" class="btn">Explore Now &#10132;</a>
+            <script type="module" src="/event-check.js" defer></script>
+            <div class="event-display" id="event-display" >
+                
+                <div class="event-none" id="event-default">
+                    <div class="row">
+                        <div class="col-2">
+                            <h1>Your one-stop store for all your electronics needs</h1>
+                            <p>It's not just about being cool in the moment. We provide the consistent cooling that brings true comfort.</p>
+                            <a href="/products" class="btn">Explore Now &#10132;</a>
+                        </div>
+                        <div class="col-2">
+                            <img src="img/HOPA/enter-img.png" alt="a person sit on a couch enjoying his ac bought and installed by lakhi airconditioners">
+                        </div>
+                    </div>
                 </div>
-                <div class="col-2">
-                    <img src="img/HOPA/enter-img.png" alt="a person sit on a couch enjoying his ac bought and installed by lakhi airconditioners">
-                </div>
-            </div>
+                <div class="event-display-main" id="event-display-main"></div>
         </div>
     </div>
+    </div>
+    
 
+    
     <div class="categories">
         <div class="small-container">
             <div class="row">
@@ -234,7 +236,6 @@
             </div>
         </div>
     </div>
-    <!--USEFUL LINKS-->
     <br><br>
     <h2 class="title">TAC AND PP</h2>
     <div class="text-center">
@@ -244,7 +245,6 @@
     <br><br>
     
 
-    <!--footer-->
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -278,7 +278,7 @@
                     </ul>
                     <h3 style="margin-top: 20px">Contant info</h3>
                     <ul>
-                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="tel:+919825513000">+91982513000</a></li>
                         <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
                         <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
                     </ul>
@@ -311,7 +311,6 @@
         </div>
     </div> 
     
-    <!--js for menu 700px-->
     <script>
         var Menuitems = document.getElementById('Menuitems');
 

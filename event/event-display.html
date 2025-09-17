@@ -3,35 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="this is just a template for the website (not for public use)">
-    <title>Lakhi Airconditioners | </title>
-    <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
-    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
+    <meta name="description" content="to show info about the event (may not work if event is not added in url)">
+    <title>Lakhi Airconditioners | event display</title>
+    <link rel="icon" href="/img/1x1-logo.png">
+    <link rel="stylesheet" href="/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
-    <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link rel="stylesheet" href="/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
     <script>
         if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('service-worker.js')
+            navigator.serviceWorker.register('/service-worker.js')
                 .then(() => console.log('✅ Service Worker registered'))
                 .catch(err => console.error('❌ Service Worker error:', err));
         }
     </script>
 </head>
 <body>
-    <!-- Terms and Conditions Modal (Initial Agreement) -->
-    <div id="tacpp" class="w3-modal-content">
+    <div id="tacpp" class="w3-modal-content" style="display: none;">
         <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeModal()" 
-                class="close-button" 
-                title="Close Modal">
+            <span onclick="closeModal()" class="close-button" title="Close Modal">
                 Close ×
             </span>
             <h2>Please Agree to Proceed</h2>
         </div>
         <form class="w3-container">
-            <!-- Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <input type="checkbox" id="agree">
                 <label for="agree">
@@ -45,12 +40,10 @@
                     </a>.
                 </label>
             </div>
-            <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
                 *product may not be in stock or may not even be buyable anymore
             </p>
-            <!-- Continue Button -->
             <div class="w3-center">
                 <button 
                     type="button"
@@ -62,19 +55,14 @@
         </form>
     </div>
 
-    <!-- Terms and Conditions Update Modal -->
-    <div id="updateTacppModal" class="w3-modal-content">
+    <div id="updateTacppModal" class="w3-modal-content" style="display: none;">
         <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeUpdateModal()" 
-                class="close-button" 
-                title="Close Modal">
+            <span onclick="closeUpdateModal()" class="close-button" title="Close Modal">
                 Close ×
             </span>
             <h2>Terms and Conditions Updated</h2>
         </div>
         <form class="w3-container">
-            <!-- Update Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
                 <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
                 <input type="checkbox" id="agreeUpdate">
@@ -89,7 +77,6 @@
                     </a>.
                 </label>
             </div>
-            <!-- Continue Button for Update -->
             <div class="w3-center">
                 <button 
                     type="button"
@@ -100,61 +87,51 @@
             </div>
         </form>
     </div>
-    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+    <script src="/TACPP.js" defer></script>
     
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
+                <div class="logo"><img src="/img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
                 <nav>
                     <ul id="Menuitems">
-                        <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">AC Products</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/about">About Us</a></li>
+                        <li><a href="/products">All Products</a></li>
+                        <li><a href="/AC-only">AC Products</a></li>
+                        <li><a href="/contact">Contact Us</a></li>
+                        <li><a href="/account">Account</a></li>
                     </ul>
                 </nav>
-                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
-                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <a href="/cart"><img src="/img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
+                <img src="/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
             </div>
         </div>
     </div>
     <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
     
-    <div class="container">
-        <center>
-            <H1 style="color: #704c14">Happy Diwali 2025</H1>
-            <h2 style="color: rgb(255, 140, 0)"><b style="color: rgb(0, 0, 0)">DATE: </b>20 Oct 2025</h2>
-            <h3 style="color: rgb(255, 0, 0)"><b style="color: rgb(0, 0, 0)">State: </b>N/A</h3>
-            <p style="font-size: 20px; color: #555; margin-top: 10px;">Wishing you a joyous and prosperous Diwali!</p>
-            <img src="../../img/events/diwali-cel-2025.png" alt="Diwali 2025 Celebration" style="width:80%; max-width:600px; margin-top:20px; border-radius:10px;">
-            <p style="font-size: 16px; color: #777; margin-top: 10px;">Celebrate the festival of lights with us. Enjoy special offers and discounts on all air conditioners this Diwali season!</p>
-            <a href="https://shop.lakhiairconditioners.com/products" class="btn">Shop Now</a>
-            <br><br><br>
-        </center>
-    </div>
+    <div class="container" id="event-content">
+        </div>
 
-   <div class="footer">
+    <div class="footer">
         <div class="container">
             <div class="row">
                 <div class="foot-col-1">
                     <h3>Download Our App</h3>
                     <p>Download App for Android but not <u>iphone</u>for now</p>
                     <div class="app-logo">
-                        <a href="http://apk.download.lakhiairconditioners.com/"><img src="https://shop.lakhiairconditioners.com/img/NABR/apk-down.jpeg" alt="apk download button"></a>
+                        <a href="http://apk.download.lakhiairconditioners.com/"><img src="/img/NABR/apk-down.jpeg" alt="apk download button" ></a>
                     </div>
                 </div>
                 <div class="foot-col-2">
-                    <img src="https://shop.lakhiairconditioners.com/img/log-w.png" width="200px" alt="lakhi airconditioners white logo">
+                    <img src="/img/log-w.png" width="200px" alt="lakhi airconditioners white logo">
                     <p>Our Purpose Is to give the best deal and products to the Many.</p>
                 </div>
                 <div class="foot-col-3">
                     <h3>Useful links</h3>
                     <ul>
-                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
-                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></li>
+                        <li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></li>
                         <li><a href="https://lakhiairconditioners.com">INFO</a></li>
                         <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
                     </ul>
@@ -162,8 +139,8 @@
                 <div class="foot-col-4">
                     <h3>Follow us</h3>
                     <ul>
-                        <Li><a href="https://insta.lakhiairconditioners.com">Instagram</a></Li>
-                        <Li><a href="https://fb.lakhiairconditioners.com">Facebook</a></Li>
+                        <li><a href="https://insta.lakhiairconditioners.com">Instagram</a></li>
+                        <li><a href="https://fb.lakhiairconditioners.com">Facebook</a></li>
                         <li><a href="https://x.lakhiairconditioners.com">X(Twitter)</a></li>
                         <li><a href="https://yt.lakhiairconditioners.com">YouTube</a></li>
                     </ul>
@@ -177,32 +154,32 @@
             </div>
             <hr>
             <center>
-            <div class="row">
-                <div class="col-2">
-                    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
-                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="66d2011df3f7fe4eab3948e1" data-style-height="52px" data-style-width="50%" data-token="90f6214c-ff58-439e-8e8e-cd4fccd0223b">
-                        <a href="https://uk.trustpilot.com/review/lakhiairconditioners.com" target="_blank" rel="noopener">Trustpilot</a>
+                <div class="row">
+                    <div class="col-2">
+                        <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async=""></script>
+                        <div class="trustpilot-widget" data-locale="en-GB" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="66d2011df3f7fe4eab3948e1" data-style-height="52px" data-style-width="50%" data-token="90f6214c-ff58-439e-8e8e-cd4fccd0223b">
+                            <a href="https://uk.trustpilot.com/review/lakhiairconditioners.com" target="_blank" rel="noopener">Trustpilot</a>
+                        </div>
+                    </div>
+                    <div class="col-2">
+                        <div class="greview">
+                            <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white;display: inline;background-color: #ffffff; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                                <a>review us on</a><br>
+                                <a style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</a>
+                            </button>
+                        </div>
                     </div>
                 </div>
-                <div class="col-2">
-                    <div class="greview">
-                        <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white;display: inline;background-color: #ffffff; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px;   border-radius: 5px; cursor: pointer; font-size: 16px;">
-                            <a>review us on<a> <br>
-                            <a style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</a>
-                    </div>
-                </div>
-                </div>
-            </div>
             </center>
             <hr>
             <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
                 all right given to fontawesome for their icons
                 <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
-
         </div>
     </div> 
     <script>
         function menutoggle(){
+            var Menuitems = document.getElementById('Menuitems');
             if(Menuitems.style.maxHeight == "0px")
                 { 
                     Menuitems.style.maxHeight= "200px"
@@ -213,4 +190,6 @@
                 }
         }
     </script>
+    <script type="module" src="event-loader.js"></script>
 </body>
+</html>

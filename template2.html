@@ -170,6 +170,7 @@
                 </nav>
                 <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart Icon"></a>
                 <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <script src="https://shop.lakhiairconditioners.com/menubar.js"></script>
             </div>
         </div>
     </div>
@@ -246,23 +247,5 @@
 
         </div>
     </div> 
-
-    <script>
-        var Menuitems = document.getElementById('Menuitems');
-        // Ensure Menuitems exists before setting style
-        if (Menuitems) {
-            Menuitems.style.maxHeight = "0px";
-        }
-
-        function menutoggle(){
-            if(Menuitems) { // Check again if Menuitems exists
-                if(Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            }
-        }
-    </script>
 </body>
 </html>

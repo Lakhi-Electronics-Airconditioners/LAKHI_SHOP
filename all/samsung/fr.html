@@ -35,6 +35,7 @@
                 </nav>
                 <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
                 <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -127,15 +128,6 @@
     </div> 
     
     <script>
-        var Menuitems = document.getElementById("Menuitems");
-        Menuitems.style.maxHeight = "0px";
-        function menutoggle() {
-            if (Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px";
-            } else {
-                Menuitems.style.maxHeight = "0px";
-            }
-        }
 
         function handleImageError(imgElement, serialNo) {
             if (!imgElement.dataset.serialFallbackAttempted) {

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Where to Watch</title>
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .container {
+            padding: 20px;
+            text-align: center;
+        }
+        .platform-list {
+            list-style-type: none;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .platform-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .platform-item a {
+            text-decoration: none;
+            color: #333;
+            font-weight: bold;
+            font-size: 1.2em;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .platform-icon {
+            font-size: 3em;
+            color: #ff523b;
+            margin-bottom: 5px;
+        }
+        .back-button {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+    <div class="container">
+        <h1>Choose a Platform to Watch</h1>
+        <p id="video-name"></p>
+        <ul id="platform-list" class="platform-list">
+            <!-- Platform links will be inserted here by JavaScript -->
+        </ul>
+    </div>
+    
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const FIRESTORE_APP_ID = "lakhi-airconditioners";
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vidId = urlParams.get('vid_id');
+            const year = urlParams.get('year') || '2025';
+
+            if (!vidId) {
+                document.getElementById('platform-list').innerHTML = '<li>Error: Video ID not found.</li>';
+                return;
+            }
+
+            try {
+                const docRef = doc(db, "artifacts", FIRESTORE_APP_ID, "video", year, "links", vidId);
+                const docSnap = await getDoc(docRef);
+
+                const platformListElement = document.getElementById('platform-list');
+                const videoNameElement = document.getElementById('video-name');
+                platformListElement.innerHTML = '<li>Loading platforms...</li>';
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    platformListElement.innerHTML = '';
+                    videoNameElement.textContent = `Video: ${data.name}`;
+
+                    const platforms = {
+                        yt: { name: 'YouTube', icon: 'fab fa-youtube' },
+                        insta: { name: 'Instagram', icon: 'fab fa-instagram' },
+                        website: { name: 'Website', icon: 'fas fa-globe' },
+                        thread: { name: 'Threads', icon: 'fab fa-threads' },
+                        x: { name: 'X', icon: 'fab fa-x-twitter' },
+                    };
+
+                    for (const key in platforms) {
+                        if (data[key] && data[key] !== 'main url') {
+                            const listItem = document.createElement('li');
+                            listItem.className = 'platform-item';
+                            const link = document.createElement('a');
+                            link.href = `watch?vid_id=${vidId}&platform=${key}&year=${year}`;
+
+                            const platformListElement = document.getElementById('platform-list');
+                            platformListElement.innerHTML = ''; // Clear loading message
+
+                            // Function to create a platform link item
+                            const createPlatformLink = (text, href, iconClass) => {
+                                const listItem = document.createElement('li');
+                                listItem.className = 'platform-item';
+                                const link = document.createElement('a');
+                                link.href = href;
+                                const icon = document.createElement('i');
+                                icon.className = `${iconClass} platform-icon`;
+                                const textNode = document.createTextNode(text);
+                                link.appendChild(icon);
+                                link.appendChild(textNode);
+                                listItem.appendChild(link);
+                                platformListElement.appendChild(listItem);
+                            };
+
+                            // Always show the two main options
+                            createPlatformLink('Watch on Website', `watch?vid_id=${vidId}&year=${year}`, 'fas fa-globe');
+                            createPlatformLink('Watch on Social Media', `choose?vid_id=${vidId}&year=${year}`, 'fas fa-share-alt');
+                            
+                            // Since we replaced the loop and its logic, we break out of it.
+                            break; 
+                            icon.className = `${platforms[key].icon} platform-icon`;
+                            
+                            const text = document.createTextNode(platforms[key].name);
+
+                            link.appendChild(icon);
+                            link.appendChild(text);
+                            listItem.appendChild(link);
+                            platformListElement.appendChild(listItem);
+                        }
+                    }
+
+                    if (platformListElement.children.length === 0) {
+                        platformListElement.innerHTML = '<li>No platforms available for this video.</li>';
+                    }
+                } else {
+                    platformListElement.innerHTML = '<li>Video not found in database.</li>';
+                }
+            } catch (error) {
+                console.error("Error fetching video data:", error);
+                document.getElementById('platform-list').innerHTML = '<li>Error loading platforms.</li>';
+            }
+        });
+    </script>
+</body>
+</html>

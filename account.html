@@ -247,6 +247,7 @@
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
                 <img src="/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -298,6 +299,7 @@
                     <button id="logoutButton" class="btn">Logout</button>
                     <button class="btn" onclick="window.location.href='ls/del'">Delete Account</button>
                     <button class="btn" onclick="window.location.href='ls/change_password'">Change Password</button>
+                    <button class="btn" onclick="window.location.href='ls/su2-edit'">change Account details</button>
                     <button id="verifyEmailBtn" class="btn hidden">Verify Email</button>
                 </div>
             </div>
@@ -678,20 +680,6 @@
             console.error("One or more toggle buttons or content sections not found in HTML for event listeners.");
         }
     });
-
-    var Menuitems = document.getElementById("Menuitems");
-    if (Menuitems) {
-        Menuitems.style.maxHeight = "0px";
-        window.menutoggle = function() {
-            if (Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px";
-            } else {
-                Menuitems.style.maxHeight = "0px";
-            }
-        };
-    } else {
-        console.warn("Menuitems element not found for mobile toggle.");
-    }
 </script>
 </body>
 </html>

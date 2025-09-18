@@ -398,9 +398,10 @@
                         <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
                         <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
                         <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
-                        <!-- <li><a href="https://shop.lakhiairconditioners.comAC-only">AC Products</a></li> -->
+                        <li><a href="https://shop.lakhiairconditioners.comAC-only">AC Products</a></li>
                         <li><a href="contact">Contact Us</a></li>
                         <li><a href="account">Account</a></li>
+                        <script src="menubar.js" defer></script>
                     </ul>
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a></li>
@@ -804,20 +805,6 @@
         document.addEventListener('DOMContentLoaded', () => {
             loadBillDetails();
         });
-
-        var Menuitems = document.getElementById("Menuitems");
-        if (Menuitems) {
-            Menuitems.style.maxHeight = "0px";
-            window.menutoggle = function() {
-                if (Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            };
-        } else {
-            console.warn("Menuitems element not found for mobile toggle.");
-        }
     </script>
 </body>
 </html>

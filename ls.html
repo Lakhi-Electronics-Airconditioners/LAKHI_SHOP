@@ -118,6 +118,7 @@
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -204,16 +205,6 @@
         var Menuitems = document.getElementById('Menuitems');
         if (Menuitems) {
             Menuitems.style.maxHeight = "0px";
-        }
-
-        function menutoggle(){
-            if(Menuitems) {
-                if(Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            }
         }
     </script>
 </body>

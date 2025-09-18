@@ -31,6 +31,7 @@
                 </nav>
                 <a href="../cart"><img src="../img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
                 <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="../menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -341,7 +342,7 @@
 
                     showMessage(signUpSuccess, 'Signed up with Google successfully! Redirecting to profile setup...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'ls/su2.html'; // Redirect to profile completion page
+                        window.location.href = 'ls/su2'; // Redirect to profile completion page
                     }, 2000);
                 } catch (error) {
                     console.error("Google Sign Up Error:", error);
@@ -383,7 +384,7 @@
 
                     showMessage(signUpSuccess, 'Signed up with Apple successfully! Redirecting to profile setup...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'ls/su2.html';
+                        window.location.href = 'ls/su2';
                     }, 2000);
                 } catch (error) {
                     console.error("Apple Sign Up Error:", error);
@@ -424,7 +425,7 @@
 
                     showMessage(signUpSuccess, 'Signed up with GitHub successfully! Redirecting to profile setup...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'ls/su2.html';
+                        window.location.href = 'ls/su2';
                     }, 2000);
                 } catch (error) {
                     console.error("GitHub Sign Up Error:", error);
@@ -468,7 +469,7 @@
 
                     showMessage(signUpSuccess, 'Signed up with Facebook successfully! Redirecting to profile setup...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'ls/su2.html';
+                        window.location.href = 'ls/su2';
                     }, 2000);
                 } catch (error) {
                     console.error("Facebook Sign Up Error:", error);
@@ -508,7 +509,7 @@
 
                     showMessage(signUpSuccess, 'Signed up with Twitter successfully! Redirecting to profile setup...', 'success');
                     setTimeout(() => {
-                        window.location.href = 'ls/su2.html';
+                        window.location.href = 'ls/su2';
                     }, 2000);
                 } catch (error) {
                     console.error("Twitter Sign Up Error:", error);
@@ -533,40 +534,28 @@
                 try {
                     const docSnap = await getDoc(userProfileDocRef);
                     // Check if the user is already on the target page to avoid a redirect loop
-                    if (window.location.pathname.endsWith('su2.html') && (!docSnap.exists() || !docSnap.data().name || !docSnap.data().phoneNumber)) {
+                    if (window.location.pathname.endsWith('su2') && (!docSnap.exists() || !docSnap.data().name || !docSnap.data().phoneNumber)) {
                         // Do nothing, already on the correct page to complete profile
                         return;
-                    } else if (window.location.pathname.endsWith('account.html') && docSnap.exists() && docSnap.data().name && docSnap.data().phoneNumber) {
+                    } else if (window.location.pathname.endsWith('account') && docSnap.exists() && docSnap.data().name && docSnap.data().phoneNumber) {
                         // Do nothing, already on the correct page
                         return;
                     }
                     if (docSnap.exists() && docSnap.data().name && docSnap.data().phoneNumber) {
                         // If profile exists and has name/phone, go to account
-                        window.location.href = '../account.html';
+                        window.location.href = '../account';
                     } else {
                         // Otherwise, go to profile completion
-                        window.location.href = 'su2.html';
+                        window.location.href = 'su2';
                     }
                 } catch (error) {
                     console.error("Error checking user profile on signup page:", error);
                     // Fallback to account.html if profile check fails
-                    window.location.href = '../account.html';
+                    window.location.href = '../account';
                 }
             }
         });
 
-        // Menu toggle function from the template
-        const Menuitems = document.getElementById('Menuitems');
-
-        window.menutoggle = function() {
-            if (Menuitems) {
-                if (Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            }
-        };
     </script>
 </body>
 </html>

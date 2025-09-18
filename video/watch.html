@@ -3,60 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lakhi airconditoners | Oauth page | home</title>
+    <title>Watch Video</title>
+    <link rel="icon" href="../img/1x1-logo.png">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
-    <script src="https://shop.lakhiairconditioners.com/script.js" defer></script>
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        .text p{
-            font-style: normal;
-            color: #000;
-            font-weight: bold;
-            display: flex; 
-            flex-wrap: wrap;
-            margin-left: auto;
-            margin-right: auto;
-            
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            margin-top: 20px;
         }
-        .text a{
-            text-decoration: none;
-            color: #ff523b;
-            font-weight: bolder;
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .main-content {
+            padding: 20px;
         }
         
-        .text h1{
-            color: rgb(209, 39, 17)
-        }
-        .title2 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: firebrick;
-        }
-        .text h2 {
-            font-size: 1.5em;
-            margin-bottom: 20px;
-            color: firebrick;
-        }
-        .text li{
-            font-style: normal;
-            color: #000;
-            font-weight: bold;
+        .loading-text {
             text-align: center;
-        }
-        .text h4{
-            font-style: normal;
-            color: #000;
-            font-weight: bold;
-            text-align: center;
-        }
-        .text-1{
-            font-style: normal;
-            color: #9c9c9c;
-            font-weight: bold;
-            text-align: center;
+            font-size: 1.2em;
+            color: #555;
+            margin-top: 50px;
         }
     </style>
+</head>
+<body>
     <!-- Terms and Conditions Modal (Initial Agreement) -->
     <div id="tacpp" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
@@ -140,40 +121,35 @@
         </form>
     </div>
     <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="lakhi airconditoners logo"></div>
+                <div class="logo"><img src="../img/NABR/log.jpg" width="125px" alt="Lakhiairconditioners's logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">AC Products</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
-                        
+                        <li><a href="../about">About Us</a></li>
+                        <li><a href="../products">ALL Products</a></li>
+                        <li><a href="../AC-only">AC Products</a></li>
+                        <li><a href="../contact">Contact Us</a></li>
+                        <li><a href="../account">Account</a></li>
                     </ul>
                 </nav>
-                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
-                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
-                <script src="https://shop.lakhiairconditioners.com/menubar.js" defer></script>
+                <a href="../cart"><img src="../img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
+                <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="../menubar.js" defer></script>
             </div>
         </div>
     </div>
-    <div class="color-NAV">
-        <br><br>
-        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+    <div class="container main-content">
+        <h1 class="title2">Watch Video</h1>
+        <p id="loading-message" class="loading-text">Loading video...</p>
+        <div id="video-embed-container" class="video-container">
+            <!-- Video embed will be loaded here by JavaScript -->
+        </div>
     </div>
-    <br><br>
-    <div class="container"><div class="text">
-    <center>
-    <h1>THIS IS NOT OUR MAIN WEBSITE</h1><br>
-    <p style="text-align: center;">This is the OAuth URL.</p><br>
-    <p style="text-align: center;">Please go back to the main website to continue.</p><br>
-    <a href="https://shop.lakhiairconditioners.com/">Go to Main Website</a><br>
-    </center>
-    <br><br>
-    </div></div>
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -239,6 +215,81 @@
 
         </div>
     </div> 
-</body>
 
+    <!-- Firebase SDKs -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, doc, getDoc, collection } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+
+        // Firebase config is provided by the canvas environment
+       const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        // App ID is also provided by the canvas environment
+        const appId = 'lakhi-airconditioners';
+
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const vidId = urlParams.get('vid_id');
+            const year = urlParams.get('year');
+            const platform = urlParams.get('platform');
+            const videoEmbedContainer = document.getElementById('video-embed-container');
+            const loadingMessage = document.getElementById('loading-message');
+
+            if (!vidId || !year) {
+                loadingMessage.textContent = 'Error: Video ID or Year not provided.';
+                return;
+            }
+
+            try {
+                if (platform) {
+                    // If platform is provided, try to redirect
+                    try {
+                        const linkDocRef = doc(db, "artifacts", appId, "video", year, "links", vidId);
+                        const linkDocSnap = await getDoc(linkDocRef);
+                        if (linkDocSnap.exists() && linkDocSnap.data()[platform]) {
+                            window.location.href = linkDocSnap.data()[platform];
+                            return; // Stop further execution
+                        } else {
+                            // Fallback to embed if platform link not found
+                            loadingMessage.textContent = `Link for platform '${platform}' not found. Trying to load embed...`;
+                        }
+                    } catch (linkError) {
+                        console.error("Error fetching platform link:", linkError);
+                        loadingMessage.textContent = 'Error fetching platform link. Trying to load embed...';
+                    }
+                }
+
+                // Load embed code if platform is not specified or link is not found
+                const embedDocRef = doc(db, "artifacts", appId, "video", year, "embed", vidId);
+                const docSnap = await getDoc(embedDocRef);
+
+                if (docSnap.exists()) {
+                    const data = docSnap.data();
+                    if (data.code) {
+                        videoEmbedContainer.innerHTML = data.code;
+                        loadingMessage.style.display = 'none'; // Hide loading message
+                    } else {
+                        loadingMessage.textContent = 'Embed code not found for this video.';
+                    }
+                } else {
+                    loadingMessage.textContent = 'Video not found in the database.';
+                }
+            } catch (error) {
+                console.error("Error fetching video embed code:", error);
+                loadingMessage.textContent = 'Error loading video. Please check your Firestore rules.';
+            }
+        });
+    </script>
+    
+</body>
 </html>

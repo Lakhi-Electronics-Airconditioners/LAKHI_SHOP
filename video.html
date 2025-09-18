@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lakhi airconditoners | Oauth page | home</title>
+    <meta name="description" content="this is just a template for the website (not for public use)">
+    <title>Lakhi Electronic Airconditions | Video</title>
+    <link rel="icon" href="img/1x1-logo.png">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
-    <script src="https://shop.lakhiairconditioners.com/script.js" defer></script>
-</head>
-<body>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" xintegrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <meta name="google-site-verification" content="3WJMESWY8huA1C6uNJbxahjiRoTCzahkcjAxx0WDuLw" />
+    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('Service Worker error:', err));
+        }
+    </script>
     <style>
         .text p{
             font-style: normal;
@@ -56,7 +68,46 @@
             font-weight: bold;
             text-align: center;
         }
+        .video-list {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+        }
+        .video-list li {
+            margin-bottom: 10px;
+        }
+        .video-list a {
+            text-decoration: none;
+            color: #ff523b;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .product-link-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .product-link-container a {
+            text-decoration: none;
+            color: #ff523b;
+            font-weight: bold;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        .product-image {
+            width: 150px;
+            height: auto;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .main-content {
+            margin-top: 20px;
+        }
     </style>
+</head>
+<body>
     <!-- Terms and Conditions Modal (Initial Agreement) -->
     <div id="tacpp" class="w3-modal-content">
         <div class="w3-center" style="margin-bottom:20px;">
@@ -71,9 +122,9 @@
         <form class="w3-container">
             <!-- Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <input type="checkbox" id="agree">
+                <input type="checkbox" id="agree" title="Agree to the updated Terms and Conditions and Privacy Policy">
                 <label for="agree">
-                    I agree to the 
+                    I agree to the updated 
                     <a href="https://shop.lakhiairconditioners.com/info/TAC">
                         Terms and Conditions
                     </a> 
@@ -86,8 +137,7 @@
             <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
-                *product may not be in stock or may not even be buyable <br>
-                * price may go down because of some gst/cst payment things
+                *product may not be in stock or may not even be buyable anymore
             </p>
             <!-- Continue Button -->
             <div class="w3-center">
@@ -139,41 +189,44 @@
             </div>
         </form>
     </div>
-    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+    
     <div class="header-NAV">
         <div class="container">
             <div class="navbar">
-                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="lakhi airconditoners logo"></div>
+                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
                 <nav>
                     <ul id="Menuitems">
                         <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
                         <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">AC Products</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">All Airconditionrs</a></li>
                         <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
                         <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
-                        
                     </ul>
                 </nav>
-                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
-                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
-                <script src="https://shop.lakhiairconditioners.com/menubar.js" defer></script>
+                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart Icon"></a>
+                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
-    <div class="color-NAV">
-        <br><br>
-        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+    
+    <div class="container main-content"> 
+        <center>
+            <h1 class="title2" id="video-collection-title"></h1>
+            <input type="number" id="year-input" placeholder="Enter Year (e.g., 2025)" value="2025" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 20px;">
+            <button onclick="changeYear()" style="padding: 10px 20px; background-color: #ff523b; color: white; border: none; border-radius: 5px; cursor: pointer;">Go</button>
+            <br>
+            <br>
+            <ol id="video-list" class="video-list" type="A">
+                <!-- Video links will be inserted here by JavaScript -->
+            </ol>
+            <br><br>
+        </center>
     </div>
-    <br><br>
-    <div class="container"><div class="text">
-    <center>
-    <h1>THIS IS NOT OUR MAIN WEBSITE</h1><br>
-    <p style="text-align: center;">This is the OAuth URL.</p><br>
-    <p style="text-align: center;">Please go back to the main website to continue.</p><br>
-    <a href="https://shop.lakhiairconditioners.com/">Go to Main Website</a><br>
-    </center>
-    <br><br>
-    </div></div>
+
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -233,12 +286,98 @@
             </div>
             </center>
             <hr>
-            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+            <p class="copyright">&copy; <span id="current-year"></span> Lakhi Airconditioners. All rights reserved.<br>
                 all right given to fontawesome for their icons
                 <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
 
         </div>
     </div> 
-</body>
 
+    <!-- Firebase SDKs -->
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+        import { getFirestore, collection, getDocs, query, where, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        const FIRESTORE_APP_ID = "lakhi-airconditioners";
+
+        // Function to fetch and display video links for a given year
+        async function fetchVideosByYear(year) {
+            const videoList = document.getElementById('video-list');
+            const titleElement = document.getElementById('video-collection-title');
+            videoList.innerHTML = '<li>Loading videos...</li>';
+            titleElement.textContent = `${year} Video Collection`;
+
+            try {
+                const linksCollectionRef = collection(db, "artifacts", FIRESTORE_APP_ID, "video", year, "links"); 
+                const querySnapshot = await getDocs(linksCollectionRef);
+                
+                videoList.innerHTML = ''; // Clear previous list
+
+                if (querySnapshot.empty) {
+                    console.log("No documents found for this year!");
+                    videoList.innerHTML = '<li>No videos found for this year.</li>';
+                } else {
+                    querySnapshot.forEach((doc) => {
+                        const data = doc.data();
+                        if (data.name && data.vid_id) {
+                            const listItem = document.createElement('li');
+                            const link = document.createElement('a');
+                            link.href = `video/ex_or_in?vid_id=${data.vid_id}&year=${year}`;
+                            link.textContent = data.name;
+                            listItem.appendChild(link);
+                            videoList.appendChild(listItem);
+                        }
+                    });
+                }
+            } catch (error) {
+                console.error("Error getting documents:", error);
+                videoList.innerHTML = '<li>Error loading videos.</li>';
+            }
+        }
+        
+        // Initial load with the default year
+        const initialYear = document.getElementById('year-input').value;
+        fetchVideosByYear(initialYear);
+
+        // Function to handle year change
+        window.changeYear = function() {
+            const year = document.getElementById('year-input').value;
+            if (year) {
+                fetchVideosByYear(year);
+            }
+        };
+
+        // Update the copyright year
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
+    <script>
+        // Rest of the existing JavaScript functions
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+    </script>
+</body>
 </html>

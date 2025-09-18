@@ -28,6 +28,7 @@
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu lcon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -108,16 +109,6 @@
         function backtohome() {
             // User did not agree to initial terms, redirect them
             window.location.href = "/";
-        }
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px")
-                { 
-                    Menuitems.style.maxHeight= "200px"
-                }
-            else
-                {
-                    Menuitems.style.maxHeight ="0px";
-                }
         }
     </script>
 </body>

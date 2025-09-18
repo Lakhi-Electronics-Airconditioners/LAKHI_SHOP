@@ -28,6 +28,7 @@
         </nav>
         <a href="https://shop.lakhiairconditioners.com/cart"><img src="img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
         <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+        <script src="menubar.js" defer></script>
       </div>
     </div>
   </div>
@@ -70,16 +71,6 @@
   </div>
 
   <script>
-    function menutoggle() {
-      const Menuitems = document.getElementById("Menuitems");
-      if (Menuitems.style.maxHeight === "0px") {
-        Menuitems.style.maxHeight = "200px";
-      } else {
-        Menuitems.style.maxHeight = "0px";
-      }
-    }
-
-
     // 😎 Link Interception
     let targetHref = null;
 

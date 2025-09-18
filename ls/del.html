@@ -115,6 +115,7 @@
                 </nav>
                 <a href="../cart"><img src="../img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart"></a>
                 <img src="../img/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="../menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -314,21 +315,6 @@
             showMessage('error', errorMessage);
         }
     });
-
-    // Mobile menu toggle (from your original HTML)
-    var Menuitems = document.getElementById("Menuitems");
-    if (Menuitems) {
-        Menuitems.style.maxHeight = "0px";
-        window.menutoggle = function() {
-            if (Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px";
-            } else {
-                Menuitems.style.maxHeight = "0px";
-            }
-        };
-    } else {
-        console.warn("Menuitems element not found for mobile toggle.");
-    }
 </script>
 </body>
 </html>

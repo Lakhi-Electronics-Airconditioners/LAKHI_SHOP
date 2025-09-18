@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="edit your account details">
+    <title>Lakhi Airconditioners | EDIT Profile</title>
+    <link rel="icon" href="../img/1x1-logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="../DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        .profile-completion-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 30px;
+            background-color: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            flex-grow: 1;
+        }
+
+        .profile-completion-container h1 {
+            font-size: 2.5rem;
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid #ff523b;
+            padding-bottom: 15px;
+        }
+
+        .profile-completion-container h2 {
+            font-size: 1.8rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+            box-sizing: border-box;
+        }
+
+        .btn-save-profile {
+            display: inline-block;
+            background: #ff523b;
+            color: #fff;
+            padding: 10px 25px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+            border: none;
+            font-size: 1rem;
+            margin-top: 20px;
+            width: 100%;
+        }
+
+        .btn-save-profile:hover {
+            background: #563434;
+        }
+
+        .message-box {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .message-box.success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .message-box.error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="../img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../about.html">About Us</a></li>
+                        <li><a href="../products.html">All Products</a></li>
+                        <li><a href="../AC-only.html">AC Products</a></li>
+                        <li><a href="../contact.html">Contact Us</a></li>
+                        <li><a href="../account.html">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="../cart.html"><img src="../img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
+                <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="../menubar.js" defer></script>
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV">
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a>
+    </div>
+
+    <div class="profile-completion-container">
+        <h1>Complete Your Profile</h1>
+        <p style="text-align: center; margin-bottom: 20px; color: #555;">Please provide your details to complete your account setup.</p>
+
+        <div id="profileForm">
+            <div class="form-group">
+                <label for="profileName">Full Name:</label>
+                <input type="text" id="profileName" placeholder="Enter your full name" required>
+            </div>
+            <div class="form-group">
+                <label for="profilePhoneNumber">Phone Number:</label>
+                <input type="tel" id="profilePhoneNumber" placeholder="+91-XXXXXXXXXX" required>
+                <small style="color:#777;">(Required)</small>
+            </div>
+            <div class="form-group">
+                <label for="profileCustomerCode">Customer Code (Optional):</label>
+                <input type="text" id="profileCustomerCode" placeholder="Enter your customer code if you have one">
+            </div>
+
+            <h3>Address Details</h3>
+            <div class="form-group">
+                <label for="profileHouseAndFlatNumber">House/Flat Number:</label>
+                <input type="text" id="profileHouseAndFlatNumber" placeholder="e.g., Flat 101, Bldg A-5">
+            </div>
+            <div class="form-group">
+                <label for="profileHousingAreaAndFlatName">Housing Area/Flat Name:</label>
+                <input type="text" id="profileHousingAreaAndFlatName" placeholder="e.g., Green Valley Society, Maple Apartments">
+            </div>
+            <div class="form-group">
+                <label for="profileAreaName">Area Name:</label>
+                <input type="text" id="profileAreaName" placeholder="e.g., Satellite">
+            </div>
+            <div class="form-group">
+                <label for="profileCity">City:</label>
+                <input type="text" id="profileCity" placeholder="e.g., Ahmedabad">
+            </div>
+            <div class="form-group">
+                <label for="profileState">State:</label>
+                <input type="text" id="profileState" placeholder="e.g., Gujarat">
+            </div>
+            <div class="form-group">
+                <label for="profilePincode">Pincode:</label>
+                <input type="text" id="profilePincode" placeholder="e.g., 380015">
+            </div>
+
+            <button id="saveProfileButton" class="btn-save-profile">Save Profile</button>
+            <div id="profileMessage" class="message-box"></div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="http://apk.download.lakhiairconditioners.com/"><img src="https://shop.lakhiairconditioners.com/img/NABR/apk-down.jpeg" alt="apk download button"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="https://shop.lakhiairconditioners.com/img/log-w.png" width="200px" alt="lakhi airconditioners white logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://insta.lakhiairconditioners.com">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com">Facebook</a></Li>
+                        <li><a href="https://x.lakhiairconditioners.com">X(Twitter)</a></li>
+                        <li><a href="https://yt.lakhiairconditioners.com">YouTube</a></li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <center>
+            <div class="row">
+                <div class="col-2">
+                    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="66d2011df3f7fe4eab3948e1" data-style-height="52px" data-style-width="50%" data-token="90f6214c-ff58-439e-8e8e-cd4fccd0223b">
+                        <a href="https://uk.trustpilot.com/review/lakhiairconditioners.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="greview">
+                        <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white;display: inline;background-color: #ffffff; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px;   border-radius: 5px; cursor: pointer; font-size: 16px;">
+                            <a>review us on<a> <br>
+                            <a style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </center>
+            <hr>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div> 
+
+    <script type="module">
+        // Firebase SDK imports
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+        import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+        // Initialize Firebase with canvas-provided variables
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+            measurementId: "G-LB63B1FRYC"
+          };
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        
+        const appId = 'lakhi-airconditioners'
+        let currentUserId = null;
+        
+        // UI Element References
+        const profileNameInput = document.getElementById('profileName');
+        const profilePhoneNumberInput = document.getElementById('profilePhoneNumber');
+        const profileCustomerCodeInput = document.getElementById('profileCustomerCode');
+        const profileHouseAndFlatNumberInput = document.getElementById('profileHouseAndFlatNumber');
+        const profileHousingAreaAndFlatNameInput = document.getElementById('profileHousingAreaAndFlatName');
+        const profileAreaNameInput = document.getElementById('profileAreaName');
+        const profileCityInput = document.getElementById('profileCity');
+        const profileStateInput = document.getElementById('profileState');
+        const profilePincodeInput = document.getElementById('profilePincode');
+        const profileMessageDiv = document.getElementById('profileMessage');
+        const saveProfileButton = document.getElementById('saveProfileButton');
+
+        // Menu toggle function from the template
+        var Menuitems = document.getElementById('Menuitems');
+        if (Menuitems) {
+            Menuitems.style.maxHeight = "0px";
+        }
+
+        function menutoggle(){
+            if(Menuitems) {
+                if(Menuitems.style.maxHeight == "0px") {
+                    Menuitems.style.maxHeight = "200px";
+                } else {
+                    Menuitems.style.maxHeight = "0px";
+                }
+            }
+        }
+
+        // Message display helper
+        function showMessage(element, message, type = 'error') {
+            element.textContent = message;
+            element.className = `message-box ${type}`;
+            setTimeout(() => {
+                element.textContent = '';
+                element.className = 'message-box'; // Reset to default
+            }, 5000);
+        }
+
+        // Save Profile Details
+        async function saveProfileDetails() {
+            if (!currentUserId) {
+                showMessage(profileMessageDiv, 'No user logged in. Please sign up or log in first.', 'error');
+                return;
+            }
+
+            const name = profileNameInput.value.trim();
+            const phoneNumber = profilePhoneNumberInput.value.trim();
+            const customerCode = profileCustomerCodeInput.value.trim() || null;
+            const houseAndFlatNumber = profileHouseAndFlatNumberInput.value.trim() || null;
+            const housingAreaAndFlatName = profileHousingAreaAndFlatNameInput.value.trim() || null;
+            const areaName = profileAreaNameInput.value.trim() || null;
+            const city = profileCityInput.value.trim() || null;
+            const state = profileStateInput.value.trim() || null;
+            const pincode = profilePincodeInput.value.trim() || null;
+
+            if (!name) {
+                showMessage(profileMessageDiv, 'Name is required.', 'error');
+                return;
+            }
+            if (!phoneNumber) {
+                showMessage(profileMessageDiv, 'Phone Number is required.', 'error');
+                return;
+            }
+            if (!/^\+?\d{10,15}$/.test(phoneNumber)) {
+                showMessage(profileMessageDiv, 'Please enter a valid phone number (e.g., +91-XXXXXXXXXX).', 'error');
+                return;
+            }
+
+            const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+
+            try {
+                await setDoc(userProfileRef, {
+                    name: name,
+                    phoneNumber: phoneNumber,
+                    customerCode: customerCode,
+                    address: {
+                        houseAndFlatNumber: houseAndFlatNumber,
+                        housingAreaAndFlatName: housingAreaAndFlatName,
+                        areaName: areaName,
+                        city: city,
+                        state: state,
+                        pincode: pincode
+                    }
+                }, { merge: true });
+
+                showMessage(profileMessageDiv, 'Profile saved successfully!', 'success');
+            } catch (error) {
+                console.error("Error saving profile details:", error);
+                showMessage(profileMessageDiv, `Failed to save profile: ${error.message}. Please check Firestore rules.`);
+            }
+        }
+
+        // Attach event listener to the save profile button
+        if (saveProfileButton) {
+            saveProfileButton.addEventListener('click', saveProfileDetails);
+        }
+
+        // Authentication state observer
+        onAuthStateChanged(auth, async (user) => {
+            if (user) {
+                currentUserId = user.uid;
+                const userProfileRef = doc(db, `artifacts/${appId}/users/${currentUserId}/user_profiles`, "profile");
+                try {
+                    const docSnap = await getDoc(userProfileRef);
+                    if (docSnap.exists()) {
+                        const data = docSnap.data();
+                        
+                        // Populate form fields with existing data
+                        profileNameInput.value = data.name || '';
+                        profilePhoneNumberInput.value = data.phoneNumber || '';
+                        profileCustomerCodeInput.value = data.customerCode || '';
+                        profileHouseAndFlatNumberInput.value = data.address?.houseAndFlatNumber || '';
+                        profileHousingAreaAndFlatNameInput.value = data.address?.housingAreaAndFlatName || '';
+                        profileAreaNameInput.value = data.address?.areaName || '';
+                        profileCityInput.value = data.address?.city || '';
+                        profileStateInput.value = data.address?.state || '';
+                        profilePincodeInput.value = data.address?.pincode || '';
+
+                        // Show a message to the user that their profile was loaded
+                        if (data.name && data.phoneNumber) {
+                            showMessage(profileMessageDiv, 'Your existing profile has been loaded. You can now make changes.', 'success');
+                        }
+                    } else {
+                        // Optionally show a message that they are creating a new profile
+                        showMessage(profileMessageDiv, 'Welcome! Please complete your profile to continue.', 'success');
+                    }
+                } catch (error) {
+                    console.error("Error loading existing profile:", error);
+                    showMessage(profileMessageDiv, `Error loading existing profile: ${error.message}`);
+                }
+            } else {
+                // User is not logged in, redirect to signin page
+                window.location.href = 'signin';
+            }
+        });
+    </script>
+</body>
+</html>

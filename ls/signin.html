@@ -28,6 +28,7 @@
                 </nav>
                 <a href="../cart"><img src="../img/NABR/SCI.png" width="30px" alt="Shopping Cart Icon"></a>
                 <img src="../img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="Menu Icon">
+                <script src="../menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -407,19 +408,6 @@ if (twitterSignInBtn) { // Safety check
                 window.location.href = '../account';
             }
         });
-
-        // Menu toggle function from the template
-        const Menuitems = document.getElementById('Menuitems');
-
-        window.menutoggle = function() {
-            if (Menuitems) {
-                if (Menuitems.style.maxHeight == "0px") {
-                    Menuitems.style.maxHeight = "200px";
-                } else {
-                    Menuitems.style.maxHeight = "0px";
-                }
-            }
-        };
     </script>
 </body>
 </html>

@@ -117,6 +117,7 @@
                 </nav>
                 <a href="cart"><img src="img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
                 <img src="img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <script src="menubar.js" defer></script>
             </div>
         </div>
     </div>
@@ -241,17 +242,6 @@
     </div> 
 
     <script>
-        var Menuitems = document.getElementById('Menuitems');
-        Menuitems.style.maxHeight = "0px";
-
-        function menutoggle() {
-            if (Menuitems.style.maxHeight == "0px") {
-                Menuitems.style.maxHeight = "200px";
-            } else {
-                Menuitems.style.maxHeight = "0px";
-            }
-        }
-
         // New function for handling image loading errors with fallbacks
         function handleImageError(imgElement, serialNo) {
             // Check if we've already tried the serial number fallback

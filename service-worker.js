@@ -11,6 +11,7 @@ const FILES_TO_CACHE = [
   'img/NABR/menu.png',
   'img/NABR/apk-down.jpeg',
   'img/log-w.png',
+  'menubar.js',
   'DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
 ];

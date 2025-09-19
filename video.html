@@ -329,16 +329,24 @@
                     console.log("No documents found for this year!");
                     videoList.innerHTML = '<li>No videos found for this year.</li>';
                 } else {
+                    const videos = [];
                     querySnapshot.forEach((doc) => {
                         const data = doc.data();
                         if (data.name && data.vid_id) {
-                            const listItem = document.createElement('li');
-                            const link = document.createElement('a');
-                            link.href = `video/ex_or_in?vid_id=${data.vid_id}&year=${year}`;
-                            link.textContent = data.name;
-                            listItem.appendChild(link);
-                            videoList.appendChild(listItem);
+                            videos.push(data);
                         }
+                    });
+
+                    // Sort videos by vid_id in descending order
+                    videos.sort((a, b) => b.vid_id.localeCompare(a.vid_id));
+
+                    videos.forEach((videoData) => {
+                        const listItem = document.createElement('li');
+                        const link = document.createElement('a');
+                        link.href = `video/ex_or_in?vid_id=${videoData.vid_id}&year=${year}`;
+                        link.textContent = videoData.name;
+                        listItem.appendChild(link);
+                        videoList.appendChild(listItem);
                     });
                 }
             } catch (error) {

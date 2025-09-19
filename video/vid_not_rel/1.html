@@ -3,56 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lakhi Airconditioners | Choose Which platform to Watch</title>
-    <meta name="description" content="Choose Which platform to watch to Watch (will not work without vidid in url)">
+    <meta name="description" content="Video not relsesed Error Page (not for public use)">
+    <title>Lakhi Electronic Airconditions | Video Not relsesed</title>
     <link rel="icon" href="img/1x1-logo.png">
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <meta name="google-site-verification" content="3WJMESWY8huA1C6uNJbxahjiRoTCzahkcjAxx0WDuLw" />
+    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+    
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
                 .then(() => console.log('✅ Service Worker registered'))
-                .catch(err => console.error('❌ Service Worker error:', err));
+                .catch(err => console.error('Service Worker error:', err));
         }
     </script>
     <style>
-        .container {
-            padding: 20px;
-            text-align: center;
-        }
-        .platform-list {
-            list-style-type: none;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .platform-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .platform-item a {
-            text-decoration: none;
-            color: #333;
+        .text p{
+            font-style: normal;
+            color: #000;
             font-weight: bold;
-            font-size: 1.2em;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            display: flex; 
+            flex-wrap: wrap;
+            margin-left: auto;
+            margin-right: auto;
+            
         }
-        .platform-icon {
-            font-size: 3em;
+        .text a{
+            text-decoration: none;
             color: #ff523b;
-            margin-bottom: 5px;
+            font-weight: bolder;
         }
-        .back-button {
-            display: inline-block;
+        
+        .text h1{
+            color: rgb(209, 39, 17)
+        }
+        .title2 {
+            font-size: 1.5em;
             margin-bottom: 20px;
+            color: firebrick;
+        }
+        .text h2 {
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            color: firebrick;
+        }
+        .text li{
+            font-style: normal;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .text h4{
+            font-style: normal;
+            color: #000;
+            font-weight: bold;
+            text-align: center;
+        }
+        .text-1{
+            font-style: normal;
+            color: #9c9c9c;
+            font-weight: bold;
+            text-align: center;
         }
     </style>
 </head>
@@ -71,9 +86,9 @@
         <form class="w3-container">
             <!-- Agreement Checkbox -->
             <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <input type="checkbox" id="agree">
+                <input type="checkbox" id="agree" title="Agree to the updated Terms and Conditions and Privacy Policy">
                 <label for="agree">
-                    I agree to the 
+                    I agree to the updated 
                     <a href="https://shop.lakhiairconditioners.com/info/TAC">
                         Terms and Conditions
                     </a> 
@@ -86,8 +101,7 @@
             <!-- Disclaimer Section -->
             <p style="font-size:14px; margin-bottom:20px;">
                 * Prices may not be accurate, and not all products are listed.<br>
-                *product may not be in stock or may not even be buyable <br>
-                * price may go down because of some gst/cst payment things
+                *product may not be in stock or may not even be buyable anymore
             </p>
             <!-- Continue Button -->
             <div class="w3-center">
@@ -139,8 +153,8 @@
             </div>
         </form>
     </div>
-    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
-     <div class="header-NAV">
+    
+    <div class="header-NAV">
         <div class="container">
             <div class="navbar">
                 <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
@@ -160,15 +174,18 @@
             </div>
         </div>
     </div>
-    </div>
+    
     <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
-    <div class="container">
-        <h1>Choose a Platform to Watch</h1>
-        <p id="video-name"></p>
-        <ul id="platform-list" class="platform-list">
-            <!-- Platform links will be inserted here by JavaScript -->
-        </ul>
+        
+    <div class="container"> 
+        <center>
+            <h1>This Video is not Public</h1>
+            <h2>Video not relsesed Error 404</h2>
+           <h4>this video is not relsesed as is not not been the day of video being public</h4>
+           <br><br>
+        </center>
     </div>
+
     <div class="footer">
         <div class="container">
             <div class="row">
@@ -234,85 +251,5 @@
 
         </div>
     </div> 
-    
-    <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
-        import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";
-
-        const firebaseConfig = {
-            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
-            authDomain: "lakhi-airconditioners.firebaseapp.com",
-            projectId: "lakhi-airconditioners",
-            storageBucket: "lakhi-airconditioners.firebasestorage.app",
-            messagingSenderId: "284430318185",
-            appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
-            measurementId: "G-LB63B1FRYC"
-        };
-        const app = initializeApp(firebaseConfig);
-        const db = getFirestore(app);
-        const FIRESTORE_APP_ID = "lakhi-airconditioners";
-
-        document.addEventListener('DOMContentLoaded', async () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const vidId = urlParams.get('vid_id');
-            const year = urlParams.get('year') || '2025';
-
-            if (!vidId) {
-                document.getElementById('platform-list').innerHTML = '<li>Error: Video ID not found.</li>';
-                return;
-            }
-
-            try {
-                const docRef = doc(db, "artifacts", FIRESTORE_APP_ID, "video", year, "links", vidId);
-                const docSnap = await getDoc(docRef);
-
-                const platformListElement = document.getElementById('platform-list');
-                const videoNameElement = document.getElementById('video-name');
-                platformListElement.innerHTML = '<li>Loading platforms...</li>';
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    platformListElement.innerHTML = '';
-                    videoNameElement.textContent = `Video: ${data.name}`;
-
-                    const platforms = {
-                        yt: { name: 'YouTube', icon: 'fab fa-youtube' },
-                        insta: { name: 'Instagram', icon: 'fab fa-instagram' },
-                        website: { name: 'Website', icon: 'fas fa-globe' },
-                        thread: { name: 'Threads', icon: 'fab fa-threads' },
-                        x: { name: 'X', icon: 'fab fa-x-twitter' },
-                    };
-
-                    for (const key in platforms) {
-                        if (data[key] && data[key] !== 'main url') {
-                            const listItem = document.createElement('li');
-                            listItem.className = 'platform-item';
-                            const link = document.createElement('a');
-                            link.href = `watch?vid_id=${vidId}&platform=${key}&year=${year}`;
-
-                            const icon = document.createElement('i');
-                            icon.className = `${platforms[key].icon} platform-icon`;
-                            
-                            const text = document.createTextNode(platforms[key].name);
-
-                            link.appendChild(icon);
-                            link.appendChild(text);
-                            listItem.appendChild(link);
-                            platformListElement.appendChild(listItem);
-                        }
-                    }
-
-                    if (platformListElement.children.length === 0) {
-                        platformListElement.innerHTML = '<li>No platforms available for this video.</li>';
-                    }
-                } else {
-                    platformListElement.innerHTML = '<li>Video not found in database.</li>';
-                }
-            } catch (error) {
-                console.error("Error fetching video data:", error);
-                document.getElementById('platform-list').innerHTML = '<li>Error loading platforms.</li>';
-            }
-        });
-    </script>
 </body>
 </html>

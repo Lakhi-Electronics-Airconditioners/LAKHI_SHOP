@@ -99,7 +99,7 @@ export const events = [
                 <div class="col-2" style="padding-right: 20px;">
                     <h1>Happy Navratri to all</h1>
                     <p>May you and your family be graced by the blessing of the nine Goddesses: Maa Shailputri, Maa Brahmacharini, Maa Chandraghanta, Maa Kushmanda, Maa Skandamata, Maa Katyayani, Maa Kalaratri, Maa Mahagauri and Maa Siddhidatri. May the first morning of Navratri start with renewed hope and joy.</p>
-                    <a href="https://shop.lakhiairconditioners.com/event/2025/navratri" class="btn">Learn More &#10132;</a>
+                    <a href="https://shop.lakhiairconditioners.com/event/event-display?event=navratri-2025" class="btn">Learn More &#10132;</a>
                 </div>
                 <div class="col-2">
                     <img src="/img/events/2025/navratri/col2-img.png" style="display: inline-block;background: #ff69b4;color: #ffffff;padding: 8px 30px;border-radius: 30px;margin: 30px 0;transition: background 0.3s" alt="navratri celebration col2 image">

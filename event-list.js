@@ -11,7 +11,7 @@ export const events = [
             day: 30, month: 10, year: 2025          
         },
         state: 3,
-        link: "https://shop.lakhiairconditioners.com/event/2025/diwali",
+        link: "https://shop.lakhiairconditioners.com/event/event-display?event=diwali-2025",
         img: "img/events/2025/diwali/main-img.png",
         bannerimg: "img/events/2025/diwali/banner-img.png",
         col2img: "img/events/2025/diwali/col2-img.png",
@@ -25,8 +25,8 @@ export const events = [
         bannerhtml: `<div class="row">
                 <div class="col-2" style="padding-right: 20px;">
                     <h1>Happy Diwali to all</h1>
-                    <p>Wishing you a joyous and prosperous Diwali! Celebrate the festival of lights with us. Enjoy special offers and discounts on all air conditioners this Diwali season!</p>
-                    <a href="https://shop.lakhiairconditioners.com/event/2025/diwali" class="btn">Learn More &#10132;</a>
+                    <p>Wishing you a joyous and prosperous Diwali! Celebrate the festival of lights with us.You may also revice a gift from us</p>
+                    <a href="https://shop.lakhiairconditioners.com/event/event-display?event=diwali-2025" class="btn">Learn More &#10132;</a>
                 </div>
                <div class="col-2">
                     <img src="img/events/2025/test-event/col2-img.png" min-width="1000" min-height="1000"  width="1000%" alt="test event col2 image" style="display: inline-block;margin-left:10px;item-align: center;">
@@ -42,13 +42,13 @@ export const events = [
         name: "Blue Day 2025",
         slug: "blue-day-2025",
         from: {
-            day: 1, month: 10, year: 2025
+            day: 20, month: 9, year: 2025
         },
         to: {
             day: 10, month: 10, year: 2025
         },
         state: 3,
-        link: "https://shop.lakhiairconditioners.com/event/2025/blue-day",
+        link: "https://shop.lakhiairconditioners.com/event/event-display?event=blue-day-2025",
         img: "img/events/2025/blue-day/main-img.png",
         bannerimg: "img/events/2025/blue-day/banner-img.png",
         col2img: "img/events/2025/blue-day/col2-img.png",
@@ -63,10 +63,10 @@ export const events = [
                 <div class="col-2" style="padding-right: 20px;">
                     <h1>Blue Day</h1>
                     <p>Blue day is a day which are website becomes blue theme for 10 days</p>
-                    <a href="https://shop.lakhiairconditioners.com/event/2025/blue-day" class="btn">Learn More &#10132;</a>
+                    <a href="https://shop.lakhiairconditioners.com/event/event-display?event=blue-day-2025" class="btn">Learn More &#10132;</a>
                 </div> 
                 <div class="col-2">
-                    <img src="img/events/2025/blue-day/col2-img.png" display: inline-block;background: #1e90ff;color: #ffffff;padding: 8px 30px;border-radius: 30px;margin: 30px 0;transition: background 0.3s" alt="blue day celebration col2 image">
+                    <img src="img/events/2025/blue-day/col2-img.gif" display: inline-block;background: #1e90ff;color: #ffffff;padding: 8px 30px;border-radius: 30px;margin: 30px 0;transition: background 0.3s" alt="blue day celebration col2 image">
                 </div>
                 <div class="col-1">
                     <img src="img/events/2025/blue-day/banner-img.png" alt="Blue Day 2025 Celebration" style="width:100%; max-width:400px; margin-top:20px; border-radius:10px;">
@@ -84,7 +84,7 @@ export const events = [
             day: 22, month: 9, year: 2025
         },
         state: 3,
-        link: "https://shop.lakhiairconditioners.com/event/2025/navratri",
+        link: "https://shop.lakhiairconditioners.com/event/event-display?event=navratri-2025",
         img: "img/events/2025/navratri/main-img.png",
         bannerimg: "img/events/2025/navratri/banner-img.png",
         col2img: "img/events/2025/navratri/col2-img.png",
@@ -99,7 +99,7 @@ export const events = [
                 <div class="col-2" style="padding-right: 20px;">
                     <h1>Happy Navratri to all</h1>
                     <p>May you and your family be graced by the blessing of the nine Goddesses: Maa Shailputri, Maa Brahmacharini, Maa Chandraghanta, Maa Kushmanda, Maa Skandamata, Maa Katyayani, Maa Kalaratri, Maa Mahagauri and Maa Siddhidatri. May the first morning of Navratri start with renewed hope and joy.</p>
-                    <a href="https://shop.lakhiairconditioners.com/event/2025/navratri" class="btn">Learn More &#10132;</a>
+                    <a href="https://shop.lakhiairconditioners.com/event/event-display?event=navratri-2025" class="btn">Learn More &#10132;</a>
                 </div>
                 <div class="col-2">
                     <img src="/img/events/2025/navratri/col2-img.png" style="display: inline-block;background: #ff69b4;color: #ffffff;padding: 8px 30px;border-radius: 30px;margin: 30px 0;transition: background 0.3s" alt="navratri celebration col2 image">

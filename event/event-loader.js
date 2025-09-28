@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 <p style="font-size: 20px; color: #555; margin-top: 10px;">${eventData.text1}</p>
                 <img src="/${eventData.img}" alt="${eventData.name} Celebration" style="width:800%; max-width:600px; margin-top:20px; border-radius:10px;">
                 <p style="font-size: 16px; color: #777; margin-top: 10px;">${eventData.text2}</p>
-                <a href="${eventData.link}" class="btn">Shop Now</a>
+                <a href=${eventData.videolink} class="btn" style="background-color: ${eventData.secondarycolor};">Watch Video</a>
                 <br><br><br>
             </center>
         `;

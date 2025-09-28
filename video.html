@@ -74,7 +74,7 @@
             text-align: center;
         }
         .video-list li {
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
         .video-list a {
             text-decoration: none;
@@ -220,7 +220,7 @@
             <button onclick="changeYear()" style="padding: 10px 20px; background-color: #ff523b; color: white; border: none; border-radius: 5px; cursor: pointer;">Go</button>
             <br>
             <br>
-            <ol id="video-list" class="video-list" type="A">
+            <ol id="video-list" class="video-list" style="list-style: disc;color:#FF523b" >
                 <!-- Video links will be inserted here by JavaScript -->
             </ol>
             <br><br>
@@ -345,6 +345,7 @@
                         const link = document.createElement('a');
                         link.href = `video/ex_or_in?vid_id=${videoData.vid_id}&year=${year}`;
                         link.textContent = videoData.name;
+                        link.style.color = '#000000'; // Set link color to black
                         listItem.appendChild(link);
                         videoList.appendChild(listItem);
                     });

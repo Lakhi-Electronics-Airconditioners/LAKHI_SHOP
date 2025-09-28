@@ -43,7 +43,7 @@ export const events = [
         slug: "blue-day-2025",
         from: {
             day: 1, month: 10, year: 2025
-            
+
         },
         to: {
             day: 10, month: 10, year: 2025
@@ -76,6 +76,7 @@ export const events = [
         bannerstyle: `background: radial-gradient(#0000ff, #d6e0ff) color: #00008b;`
     },
     {
+        // OLD/COMPLETED EVENTS
         name: "Navratri 2025",
         slug: "navratri-2025",
         from: {

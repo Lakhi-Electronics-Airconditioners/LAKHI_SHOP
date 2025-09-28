@@ -43,6 +43,7 @@ export const events = [
         slug: "blue-day-2025",
         from: {
             day: 1, month: 10, year: 2025
+            
         },
         to: {
             day: 10, month: 10, year: 2025

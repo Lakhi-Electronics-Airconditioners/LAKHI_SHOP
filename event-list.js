@@ -42,11 +42,11 @@ export const events = [
         name: "Blue Day 2025",
         slug: "blue-day-2025",
         from: {
-            day: 1, month: 10, year: 2025
+            day: 10, month: 10, year: 2025
 
         },
         to: {
-            day: 10, month: 10, year: 2025
+            day: 20, month: 10, year: 2025
         },
         state: 3,
         link: "https://shop.lakhiairconditioners.com/event/event-display?event=blue-day-2025",

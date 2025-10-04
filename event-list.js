@@ -1,6 +1,8 @@
 // event-list.js
 // 0 = N/A, 1 = Happening, 3 = Coming Soon, 4 = Done
+
 export const events = [
+    //still in making (event coming soon)
     {
         name: "Diwali 2025",
         slug: "diwali-2025",
@@ -38,6 +40,7 @@ export const events = [
             </div>`,
         bannerstyle: `background: radial-gradient(#ff9800, #fff2e6) color: #704c14;`
     },
+    //next event (still being made)
     {
         name: "Blue Day 2025",
         slug: "blue-day-2025",

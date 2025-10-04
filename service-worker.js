@@ -2,25 +2,30 @@ const CACHE_NAME = 'lakhi_airconditioners_cache_v3.1';
 const OFFLINE_URL = 'offline.html';
 
 const FILES_TO_CACHE = [
-  'offline.html',
-  'style-min.css',
-  'game.js',
-  'img/1x1-logo.png',
-  'img/NABR/log.jpg',
-  'img/NABR/SCI.png',
-  'img/NABR/menu.png',
-  'img/NABR/apk-down.jpeg',
-  'img/log-w.png',
-  'menubar.js',
-  'DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css',
+  'https://shop.lakhiairconditioners.com/offline.html',
+  'https://shop.lakhiairconditioners.com/style-min.css',
+  'https://shop.lakhiairconditioners.com/game.js',
+  'https://shop.lakhiairconditioners.com/img/1x1-logo.png',
+  'https://shop.lakhiairconditioners.com/img/NABR/log.jpg',
+  'https://shop.lakhiairconditioners.com/img/NABR/SCI.png',
+  'https://shop.lakhiairconditioners.com/img/NABR/menu.png',
+  'https://shop.lakhiairconditioners.com/img/NABR/apk-down.jpeg',
+  'https://shop.lakhiairconditioners.com/img/log-w.png',
+  'https://shop.lakhiairconditioners.com/menubar.js',
+  'https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css',
   'https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap',
+  '//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js'
 ];
 
 // Install event: cache all required files
 self.addEventListener('install', event => {
   event.waitUntil(
     caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(FILES_TO_CACHE);
+      const cachePromises = FILES_TO_CACHE.map(url => {
+        const request = new Request(url, { mode: 'no-cors' });
+        return cache.add(request);
+      });
+      return Promise.all(cachePromises);
     })
   );
   self.skipWaiting();

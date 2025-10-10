@@ -456,7 +456,7 @@ select:focus{
     color: #333;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 480px) { 
     .w3-modal-content {
         padding: 15px;
     }

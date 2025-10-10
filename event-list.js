@@ -40,7 +40,7 @@ export const events = [
             </div>`,
         bannerstyle: `background: radial-gradient(#ff9800, #fff2e6) color: #704c14;`
     },
-    //next event
+    //Old/Completed Events
     {
         name: "Blue Day 2025",
         slug: "blue-day-2025",
@@ -49,9 +49,9 @@ export const events = [
 
         },
         to: {
-            day: 15, month: 10, year: 2025
+            day: 10, month: 10, year: 2025
         },
-        state: 3,
+        state: 4,
         link: "https://shop.lakhiairconditioners.com/event/event-display?event=blue-day-2025",
         img: "img/events/2025/blue-day/main-img.png",
         bannerimg: "img/events/2025/blue-day/banner-img.png",
@@ -88,7 +88,7 @@ export const events = [
         to: {
             day: 22, month: 9, year: 2025
         },
-        state: 3,
+        state: 4,
         link: "https://shop.lakhiairconditioners.com/event/event-display?event=navratri-2025",
         img: "img/events/2025/navratri/main-img.png",
         bannerimg: "img/events/2025/navratri/banner-img.png",

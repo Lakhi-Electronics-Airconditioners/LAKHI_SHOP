@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Share Your Account/Customer info with Us (share to others at your own risk)">
+    <title>Lakhi Airconditioners | Share Account/Customer Info</title>
+    <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
+    <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.min.js"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://shop.lakhiairconditioners.com/service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('❌ Service Worker error:', err));
+        }
+    </script>
+    <style>
+          .data-section {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+        }
+        .data-section h3 {
+            color: #333;
+            margin-bottom: 15px;
+        }
+        .data-section p {
+            margin-bottom: 8px;
+            color: #555;
+        }
+        .data-section strong {
+            color: #000;
+        }
+        .toggle-buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        .toggle-buttons button {
+            background-color: #ff523b; /* Red/Orange when inactive */
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 0 10px;
+            transition: background-color 0.3s ease;
+        }
+        .toggle-buttons button:hover {
+            background-color: #563434; /* Darker red on hover */
+        }
+        .toggle-buttons button.active {
+            background-color: #841d1d; /* Green for active */
+        }
+        .toggle-buttons button.active:hover {
+            background-color: #470f0f; /* Darker green for active */
+        }
+        .loading-message, .error-message {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 1.1em;
+            color: #777;
+        }
+        .error-message {
+            color: red;
+        }
+        /* Ensure hidden class works */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Specific styling for bill items in account.html */
+        .bill-item-wrapper {
+            display: block;
+            text-decoration: none;
+            color: inherit;
+            margin-bottom: 15px;
+        }
+
+        .bill-item {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 15px;
+            background-color: #ffffff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+
+        .bill-item-wrapper:hover .bill-item {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+        }
+
+        .bill-item h5 {
+            color: #333;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            border-bottom: 1px dashed #eee;
+            padding-bottom: 5px;
+        }
+
+        .bill-item p {
+            margin-bottom: 5px;
+        }
+
+        .bill-item ul {
+            list-style-type: disc;
+            padding-left: 25px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+        }
+
+        .bill-item ul li {
+            margin-bottom: 3px;
+        }
+
+        #customerDetails {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 20px;
+        }
+
+        /* Ensure account.html titles are red or black, not blue */
+        .account-container h1.title {
+            color: #f44336;
+        }
+
+        #customerProfileContent h4, #customerBillsContent h4, .user-bills-section h2 {
+            color: #f44336;
+        }
+
+        .user-actions {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .user-actions .btn {
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <!-- Terms and Conditions Modal (Initial Agreement) -->
+    <div id="tacpp" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Please Agree to Proceed</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <input type="checkbox" id="agree">
+                <label for="agree">
+                    I agree to the 
+                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://shop.lakhiairconditioners.com/info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Disclaimer Section -->
+            <p style="font-size:14px; margin-bottom:20px;">
+                * Prices may not be accurate, and not all products are listed.<br>
+                *product may not be in stock or may not even be buyable anymore
+            </p>
+            <!-- Continue Button -->
+            <div class="w3-center">
+                <button 
+                    type="button"
+                    class="btn-modal" 
+                    onclick="continueAction(event)">
+                    Continue
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Terms and Conditions Update Modal -->
+    <div id="updateTacppModal" class="w3-modal-content">
+        <div class="w3-center" style="margin-bottom:20px;">
+            <span 
+                onclick="closeUpdateModal()" 
+                class="close-button" 
+                title="Close Modal">
+                Close ×
+            </span>
+            <h2>Terms and Conditions Updated</h2>
+        </div>
+        <form class="w3-container">
+            <!-- Update Agreement Checkbox -->
+            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
+                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
+                <input type="checkbox" id="agreeUpdate">
+                <label for="agreeUpdate">
+                    I agree to the updated 
+                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
+                        Terms and Conditions
+                    </a> 
+                    and 
+                    <a href="https://shop.lakhiairconditioners.com/info/PP">
+                        Privacy Policy
+                    </a>.
+                </label>
+            </div>
+            <!-- Continue Button for Update -->
+            <div class="w3-center">
+                <button 
+                    type="button"
+                    class="btn-modal" 
+                    onclick="continueUpdateAction(event)">
+                    Agree to Update
+                </button>
+            </div>
+        </form>
+    </div>
+    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
+    
+    <div class="header-NAV">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="lakhi airconditioners logo"></div>
+                <nav>
+                    <ul id="Menuitems">
+                        <li><a href="https://shop.lakhiairconditioners.com/">Home</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">AC Products</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
+                        <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
+                    </ul>
+                </nav>
+                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" alt="shopping cart icon"></a>
+                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
+                <script src="https://shop.lakhiairconditioners.com/menubar.js"></script>
+            </div>
+        </div>
+    </div>
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+    
+    <div class="container">
+        <div class="account-container">
+            <h1 class="title" style="font-size: xx-large;">Your Account Info</h1>
+            <!--Hidden by DF-->
+            <div id="notLoggedInMessage" class="data-section hidden" style="text-align: center;">
+            <h2>Please Log In</h2>
+            <p>You need to be logged in to view your account details.</p>
+            <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/ls/su2'">Go to Login/Signup</button>
+            </div>
+
+            <!--Hidden By DF-->
+             <div id="profileIncompleteMessage" class="data-section hidden" style="text-align: center;">
+            <h2>Profile Incomplete</h2>
+            <p>Please complete your profile details to view your account information and linked bills</p>
+            <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/ls/su2'">Complete Profile</button>
+            </div>
+            <div id="share-section">
+            <div class="data-section" id="userProfileContent">
+                <h3 class="title">Info Based on Customer Code</h3>
+                <hr>
+                <p><strong>Customer Code:</strong> <span id="displayCustomerCode">Loading...</span></p>
+                <p><strong>Customer Name:</strong> <span id="customerName">Loading...</span></p>
+                <p><strong>Customer Address:</strong> <span id="customerAddress">Loading...</span></p>
+                <p><strong>Customer City:</strong> <span id="customerCity">Loading...</span></p>
+                <p><strong>Customer Pincode:</strong> <span id="customerPincode">Loading...</span></p>
+                <hr>
+                <h3 class="title">Info Based On Account/Profile</h3>
+                <p><strong>User ID:</strong> <span id="displayUserId">Loading...</span></p>
+                <p><strong>Email:</strong> <span id="displayUserEmail">Loading...</span></p>
+                <p><strong>Email Status:</strong> <span id="displayEmailStatus">Loading...</span></p>
+                <p><strong>Name:</strong> <span id="displayName">Loading...</span></p>
+                <p><strong>Phone Number:</strong> <span id="displayPhoneNumber">Loading...</span></p>
+                <hr>
+                <h3 class="title">Address based on Account/Profile:</h3>
+                <p>House/Flat Number: <span id="displayHouseAndFlatNumber">Loading...</span></p>
+                <p>Housing Area/Flat Name: <span id="displayHousingAreaAndFlatName">Loading...</span></p>
+                <p>Area Name: <span id="displayAreaName">Loading...</span></p>
+                <p>City: <span id="displayCity">Loading...</span></p>
+                <p>State: <span id="displayState">Loading...</span></p>
+                <p>Pincode: <span id="displayPincode">Loading...</span></p>
+            </div></div>
+            <center>
+            <button class="btn" id="Share-info" style="margin-right: 10px;">Download and share info <i class="fa-solid fa-share-nodes"></i></button>
+            <button class="btn" id="Copy-info">Copy info to share <i class="fa-solid fa-copy"></i></button>
+            </center>
+        </div>
+        </div>
+    </div>
+
+   <div class="footer">
+        <div class="container">
+            <div class="row">
+                <div class="foot-col-1">
+                    <h3>Download Our App</h3>
+                    <p>Download App for Android but not <u>iphone</u>for now</p>
+                    <div class="app-logo">
+                        <a href="http://apk.download.lakhiairconditioners.com/"><img src="https://shop.lakhiairconditioners.com/img/NABR/apk-down.jpeg" alt="apk download button"></a>
+                    </div>
+                </div>
+                <div class="foot-col-2">
+                    <img src="https://shop.lakhiairconditioners.com/img/log-w.png" width="200px" alt="lakhi airconditioners white logo">
+                    <p>Our Purpose Is to give the best deal and products to the Many.</p>
+                </div>
+                <div class="foot-col-3">
+                    <h3>Useful links</h3>
+                    <ul>
+                        <Li><a href="https://main.lakhiairconditioners.com/TAC">Terms and Conditions</a></Li>
+                        <Li><a href="https://main.lakhiairconditioners.com/PP">Privacy Policy</a></Li>
+                        <li><a href="https://lakhiairconditioners.com">INFO</a></li>
+                        <li><a href="https://maps.lakhiairconditioners.com">G-MAPS</a></li>
+                    </ul>
+                </div>
+                <div class="foot-col-4">
+                    <h3>Follow us</h3>
+                    <ul>
+                        <Li><a href="https://insta.lakhiairconditioners.com">Instagram</a></Li>
+                        <Li><a href="https://fb.lakhiairconditioners.com">Facebook</a></Li>
+                        <li><a href="https://x.lakhiairconditioners.com">X(Twitter)</a></li>
+                        <li><a href="https://yt.lakhiairconditioners.com">YouTube</a></li>
+                    </ul>
+                    <h3 style="margin-top: 20px">Contant info</h3>
+                    <ul>
+                        <li><a href="tel:+919825513000">+919825513000</a></li>
+                        <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&amp;body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
+                        <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
+                    </ul>
+                </div>
+            </div>
+            <hr>
+            <center>
+            <div class="row">
+                <div class="col-2">
+                    <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+                    <div class="trustpilot-widget" data-locale="en-GB" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="66d2011df3f7fe4eab3948e1" data-style-height="52px" data-style-width="50%" data-token="90f6214c-ff58-439e-8e8e-cd4fccd0223b">
+                        <a href="https://uk.trustpilot.com/review/lakhiairconditioners.com" target="_blank" rel="noopener">Trustpilot</a>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <div class="greview">
+                        <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white;display: inline;background-color: #ffffff; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px;   border-radius: 5px; cursor: pointer; font-size: 16px;">
+                            <a>review us on<a> <br>
+                            <a style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</a>
+                    </div>
+                </div>
+                </div>
+            </div>
+            </center>
+            <hr>
+            <p class="copyright">&copy; 2025 Lakhi Airconditioners. All rights reserved.<br>
+                all right given to fontawesome for their icons
+                <a href="https://www.flaticon.com/free-icons/menu" title="menu icons">Menu icons created by ariefstudio - Flaticon</a></p>
+
+        </div>
+    </div>
+    <script type="module">
+    // Firebase SDK imports - UNIFIED TO 11.6.1 FOR ALL FIRESTORE FUNCTIONS
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
+    import {
+        getAuth,
+        signOut,
+        onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
+    import {
+        getFirestore,
+        doc,
+        getDoc, // Explicitly import getDoc
+        onSnapshot,
+        getDocs,
+        collection,
+        query
+    } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+
+    // IMPORTANT: Replace with your actual Firebase config
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+        authDomain: "lakhi-airconditioners.firebaseapp.com",
+        projectId: "lakhi-airconditioners",
+        storageBucket: "lakhi-airconditioners.firebasestorage.app",
+        messagingSenderId: "284430318185",
+        appId: "1:284430318185:web:ad09598be7a16ab46a00f8",
+        measurementId: "G-LB63B1FRYC"
+    };
+
+    // Initialize Firebase
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+
+    let userId = null; // Variable to store the current user's UID
+    const appIdFromConfig = firebaseConfig.projectId; // Get projectId for consistent use in Firestore paths
+
+    // Helper function to show/hide sections
+    function showSection(sectionId) {
+        const allSections = ['notLoggedInMessage', 'profileIncompleteMessage', 'userProfileContent', 'customerDataSection'];
+        allSections.forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.classList.add('hidden');
+        });
+
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+            targetSection.classList.remove('hidden');
+        } else {
+            console.error(`Section with ID '${sectionId}' not found.`);
+        }
+    }
+
+    // Function to load and display customer data and all bills
+    async function loadCustomerData(customerCode) {
+        console.log("Attempting to load customer data for:", customerCode);
+
+        const customerNameSpan = document.getElementById('customerName');
+        const customerAddressSpan = document.getElementById('customerAddress');
+        const customerCitySpan = document.getElementById('customerCity');
+        const customerPincodeSpan = document.getElementById('customerPincode');
+        const customerDetailsDiv = document.getElementById('customerDetails');
+        try {
+            const customerDocRef = doc(db, "artifacts", appIdFromConfig, "customers", customerCode);
+            const customerDocSnap = await getDoc(customerDocRef);
+
+            if (customerDocSnap.exists()) {
+                const customerData = customerDocSnap.data();
+                console.log("Customer profile loaded:", customerData);
+                if(document.getElementById('customerName')) document.getElementById('customerName').textContent = customerData.NAME
+                if(document.getElementById('customerAddress')) document.getElementById('customerAddress').textContent = customerData.addr
+                if(document.getElementById('customerCity')) document.getElementById('customerCity').textContent = customerData.ct
+                if(document.getElementById('customerPincode')) document.getElementById('customerPincode').textContent = customerData.pincode
+
+            } else {
+                if (customerDetailsDiv) customerDetailsDiv.innerHTML = `<p class="error-message">No customer data found for code: ${customerCode}</p>`;
+                console.log("No such customer document!");
+            }
+        } catch (error) {
+            console.error("Error loading customer data or bills:", error);
+            if (customerDetailsDiv) customerDetailsDiv.innerHTML = `<p class="error-message">Error loading customer data. Please try again.</p>`;
+        }
+    }
+
+
+    // --- Authentication and Initial Data Load ---
+    onAuthStateChanged(auth, (user) => {
+        const notLoggedInMessage = document.getElementById('notLoggedInMessage');
+        const profileIncompleteMessage = document.getElementById('profileIncompleteMessage');
+        const userProfileContent = document.getElementById('userProfileContent');
+        const customerDataSection = document.getElementById('customerDataSection');
+
+        if (user) {
+            userId = user.uid;
+            console.log("User logged in:", userId);
+            // Display email verification status
+            if (user.emailVerified) {
+                if (displayEmailStatus) displayEmailStatus.innerHTML = `<b style="color:green">Verified <i class="fa-solid fa-check"></i></b>`;
+            } else {
+                if (displayEmailStatus) displayEmailStatus.innerHTML = `<b style="color:red">Not Verified <i class="fa-solid fa-xmark"></i></b>`;
+            }
+            // Fetch user_profiles data using onSnapshot for real-time updates
+            const userProfileRef = doc(db, "artifacts", appIdFromConfig, "users", userId, "user_profiles", "profile");
+            onSnapshot(userProfileRef, (docSnap) => {
+                if (docSnap.exists()) {
+                    const profileData = docSnap.data();
+                    console.log("User profile loaded:", profileData);
+
+                    const customerCode = profileData.customerCode || userId;
+                    window.currentUserCustomerCode = customerCode;
+
+                    if (document.getElementById('displayUserId')) document.getElementById('displayUserId').textContent = userId;
+                    if (document.getElementById('displayUserEmail')) document.getElementById('displayUserEmail').textContent = profileData.email || user.email || 'N/A';
+                    if (document.getElementById('displayName')) document.getElementById('displayName').textContent = profileData.name || 'N/A';
+                    if (document.getElementById('displayPhoneNumber')) document.getElementById('displayPhoneNumber').textContent = profileData.phoneNumber || 'N/A';
+                    if (document.getElementById('displayCustomerCode')) document.getElementById('displayCustomerCode').textContent = profileData.customerCode || 'N/A';
+
+                    if (document.getElementById('displayHouseAndFlatNumber')) document.getElementById('displayHouseAndFlatNumber').textContent = profileData.address?.houseAndFlatNumber || 'N/A';
+                    if (document.getElementById('displayHousingAreaAndFlatName')) document.getElementById('displayHousingAreaAndFlatName').textContent = profileData.address?.housingAreaAndFlatName || 'N/A';
+                    if (document.getElementById('displayAreaName')) document.getElementById('displayAreaName').textContent = profileData.address?.areaName || 'N/A';
+                    if (document.getElementById('displayCity')) document.getElementById('displayCity').textContent = profileData.address?.city || 'N/A';
+                    if (document.getElementById('displayState')) document.getElementById('displayState').textContent = profileData.address?.state || 'N/A';
+                    if (document.getElementById('displayPincode')) document.getElementById('displayPincode').textContent = profileData.address?.pincode || 'N/A';
+
+                    showSection('userProfileContent');
+                    loadCustomerData(profileData.customerCode)
+
+                } else {
+                    console.log("No user profile document found for UID:", userId);
+                    showSection('profileIncompleteMessage');
+                    if (profileIncompleteMessage) {
+                        profileIncompleteMessage.innerHTML = `
+                            <h2>Profile Access Denied</h2>
+                            <p>It seems you're logged in but don't have permission to view your profile or it's incomplete.</p>
+                            <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/ls/su2'">Complete Profile</button>
+                        `;
+                    }
+                }
+            }, (error) => {
+                console.error("Error fetching user profile:", error);
+                if (error.code === 'permission-denied') {
+                    showSection('profileIncompleteMessage');
+                    if (profileIncompleteMessage) {
+                        profileIncompleteMessage.innerHTML = `
+                            <h2>Profile Access Denied</h2>
+                            <p>It seems you're logged in but don't have permission to view your profile or it's incomplete.</p>
+                            <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/ls/su2'">Complete Profile</button>
+                        `;
+                    }
+                } else {
+                    if (userProfileContent) userProfileContent.innerHTML = `<p class="error-message">Error loading user profile: ${error.message}</p>`;
+                    showSection('userProfileContent');
+                }
+            });
+
+        } else {
+            userId = null;
+            console.log("User not logged in.");
+            showSection('notLoggedInMessage');
+            if (document.getElementById('displayUserId')) document.getElementById('displayUserId').textContent = '';
+            if (document.getElementById('displayUserEmail')) document.getElementById('displayUserEmail').textContent = '';
+            if (document.getElementById('displayEmailStatus')) document.getElementById('displayEmailStatus').textContent = '';
+            if (document.getElementById('displayName')) document.getElementById('displayName').textContent = '';
+            if (document.getElementById('displayPhoneNumber')) document.getElementById('displayPhoneNumber').textContent = '';
+            if (document.getElementById('displayCustomerCode')) document.getElementById('displayCustomerCode').textContent = '';
+            if (document.getElementById('displayHouseAndFlatNumber')) document.getElementById('displayHouseAndFlatNumber').textContent = '';
+            if (document.getElementById('displayHousingAreaAndFlatName')) document.getElementById('displayHousingAreaAndFlatName').textContent = '';
+            if (document.getElementById('displayAreaName')) document.getElementById('displayAreaName').textContent = '';
+            if (document.getElementById('displayCity')) document.getElementById('displayCity').textContent = '';
+            if (document.getElementById('displayState')) document.getElementById('displayState').textContent = '';
+            if (document.getElementById('displayPincode')) document.getElementById('displayPincode').textContent = '';
+            const customerDetailsDiv = document.getElementById('customerDetails');
+            if (customerDetailsDiv) customerDetailsDiv.innerHTML = '';
+        }
+    });
+    document.getElementById('Share-info').addEventListener('click', function () {
+                    // The userId is set in the onAuthStateChanged listener above.
+                    // We check for its existence.
+                    const currentUserId = userId;
+                    if (currentUserId) {
+                        const element = document.getElementById('share-section');
+                        html2canvas(element).then(function (canvas) {
+                            const imgData = canvas.toDataURL('image/png');
+                            const pdf = new jsPDF('p', 'mm', 'a5'); // Create PDF in portrait, mm units, A4 size
+                            const pdfWidth = pdf.internal.pageSize.getWidth();
+                            const pdfHeight = pdf.internal.pageSize.getHeight();
+                            
+                            const canvasWidth = canvas.width;
+                            const canvasHeight = canvas.height;
+                            const canvasAspectRatio = canvasWidth / canvasHeight;
+
+                            // Set image dimensions to fit page width with a margin
+                            const margin = 15; // 15mm margin
+                            let imgWidth = pdfWidth - 2 * margin;
+                            let imgHeight = imgWidth / canvasAspectRatio;
+
+                            // If the image height is too large for the page, scale by height instead
+                            if (imgHeight > pdfHeight - 2 * margin) {
+                                imgHeight = pdfHeight - 2 * margin;
+                                imgWidth = imgHeight * canvasAspectRatio;
+                            }
+
+                            // Calculate x and y coordinates to center the image
+                            const x = (pdfWidth - imgWidth) / 2;
+                            const y = (pdfHeight - imgHeight) / 2;
+                            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+                            pdf.save(`${userId || 'UID'}_account_customer-info.pdf`);
+                        });          
+                    } else {
+                        alert('You must be logged in to download your information.');
+                    }
+                });
+         document.getElementById('Copy-info').addEventListener('click', function () {
+                    const shareSection = document.getElementById('share-section');
+                    if (shareSection) {
+                        // Select all <p> tags within the share-section, excluding titles
+                        const infoElements = shareSection.querySelectorAll('p');
+                        let textToCopy = [];
+
+                        // Extract text from each <p> element
+                        infoElements.forEach(p => {
+                            textToCopy.push(p.innerText.trim());
+                        });
+
+                        // Join the lines with a newline character
+                        const finalString = textToCopy.join('\n');
+
+                        // Use the Clipboard API to copy the text
+                        navigator.clipboard.writeText(finalString).then(() => {
+                            // Optional: Provide feedback to the user
+                            const originalText = this.innerHTML;
+                            this.innerHTML = 'Copied! <i class="fa-solid fa-check"></i>';
+                            setTimeout(() => {
+                                this.innerHTML = originalText;
+                            }, 2000);
+                        }).catch(err => {
+                            console.error('Failed to copy text: ', err);
+                            alert('Failed to copy information. Please try again.');
+                        });
+                    } else {
+                        alert('Could not find the information section to copy.');
+                    }
+                });
+</script>
+</body>

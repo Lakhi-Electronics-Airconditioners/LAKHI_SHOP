@@ -300,7 +300,6 @@
                     <button class="btn" onclick="window.location.href='ls/del'">Delete Account</button>
                     <button class="btn" onclick="window.location.href='ls/change_password'">Change Password</button>
                     <button class="btn" onclick="window.location.href='ls/su2-edit'">change Account details</button>
-                    <button class="btn" onclick="window.location.href='/share-your-info'">View/Share Your Info</button>
                     <button id="verifyEmailBtn" class="btn hidden">Verify Email</button>
                 </div>
             </div>
@@ -544,10 +543,10 @@
 
             // Display email verification status
             if (user.emailVerified) {
-                if (displayEmailStatus) displayEmailStatus.innerHTML = `<b style="color:green">Verified <i class="fa-solid fa-check"></i></b>`;
+                if (displayEmailStatus) displayEmailStatus.textContent = "Verified";
                 if (verifyEmailBtn) verifyEmailBtn.classList.add('hidden');
             } else {
-                if (displayEmailStatus) displayEmailStatus.innerHTML = `<b style="color:red">Not Verified <i class="fa-solid fa-xmark"></i></b>`;
+                if (displayEmailStatus) displayEmailStatus.textContent = "Not Verified";
                 if (verifyEmailBtn) verifyEmailBtn.classList.remove('hidden');
                 if (verifyEmailBtn) verifyEmailBtn.onclick = () => window.location.href = 'ls/email_verf';
             }

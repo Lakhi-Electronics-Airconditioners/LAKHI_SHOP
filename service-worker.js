@@ -1,4 +1,4 @@
-const CACHE_NAME = 'lakhi_airconditioners_cache_v3.2';
+const CACHE_NAME = 'lakhi_airconditioners_cache_v3.1';
 const OFFLINE_URL = 'offline.html';
 
 const FILES_TO_CACHE = [

@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Share Your Account/Customer info with Us (share to others at your own risk)">
-    <title>Lakhi Airconditioners | Share Account/Customer Info</title>
+    <meta name="description" content="View/Share Your User Address with us (share to others at your own risk)">
+    <title>Lakhi Airconditioners | account-display | User Address</title>
     <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
-    <link rel="stylesheet" href="../styles.css">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
@@ -255,7 +255,7 @@
     </div>
     <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
     
-    <div class="container">
+    <center><div class="container">
         <div class="account-container">
             <h1 class="title" style="font-size: xx-large;">Your Account Info</h1>
             <!--Hidden by DF-->
@@ -273,22 +273,6 @@
             </div>
             <div id="share-section">
             <div class="data-section" id="userProfileContent">
-                <h3 class="title">Info Based on Customer Code</h3>
-                <hr>
-                <p><strong>Customer Code:</strong> <span id="displayCustomerCode">Loading...</span></p>
-                <p><strong>Customer Name:</strong> <span id="customerName">Loading...</span></p>
-                <p><strong>Customer Address:</strong> <span id="customerAddress">Loading...</span></p>
-                <p><strong>Customer City:</strong> <span id="customerCity">Loading...</span></p>
-                <p><strong>Customer Pincode:</strong> <span id="customerPincode">Loading...</span></p>
-                <hr>
-                <h3 class="title">Info Based On Account/Profile</h3>
-                <p><strong>User ID:</strong> <span id="displayUserId">Loading...</span></p>
-                <p><strong>Email:</strong> <span id="displayUserEmail">Loading...</span></p>
-                <p><strong>Email Status:</strong> <span id="displayEmailStatus">Loading...</span></p>
-                <p><strong>Name:</strong> <span id="displayName">Loading...</span></p>
-                <p><strong>Phone Number:</strong> <span id="displayPhoneNumber">Loading...</span></p>
-                <hr>
-                <h3 class="title">Address based on Account/Profile:</h3>
                 <p>House/Flat Number: <span id="displayHouseAndFlatNumber">Loading...</span></p>
                 <p>Housing Area/Flat Name: <span id="displayHousingAreaAndFlatName">Loading...</span></p>
                 <p>Area Name: <span id="displayAreaName">Loading...</span></p>
@@ -299,11 +283,18 @@
             <center>
             <button class="btn" id="Share-info" style="margin-right: 10px;">Download and share info <i class="fa-solid fa-share-nodes"></i></button>
             <button class="btn" id="Copy-info">Copy info to share <i class="fa-solid fa-copy"></i></button>
-            <button class="btn" onclick="window.location.href='display'">Display Only <i class="fa-solid fa-o"></i><i class="fa-solid fa-n"></i><i class="fa-solid fa-e"></i></button>
-            </center>
         </div>
         </div>
-    </div>
+        <h2 class="title2">only one of these at a time,HERE CHOOSE WHICH ONE:</h2>
+        <ul style="list-style: disc;">
+            <li><a href="addr/HFN">House/Flat Number</a></li>
+            <li><a href="addr/HAF">House Area/Flat Name</a></li>
+            <li><a href="addr/ARA">Area Name</a></li>
+            <li><a href="addr/CTY">City</a></li>
+            <li><a href="addr/STA">State</a></li>
+            <li><a href="addr/PIC">Pincode</a></li>
+        </ul>
+    </div><br></center>
 
    <div class="footer">
         <div class="container">
@@ -370,5 +361,5 @@
 
         </div>
     </div>
-    <script type="module" src="render-info.js"></script>
+        <script type="module" src="../../render-info.js"></script>
 </body>

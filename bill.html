@@ -601,15 +601,16 @@
             const billId = document.getElementById('billIdDisplay')?.textContent || 'billid';
             const filename = `Lakhi_Airconditioners_Bill_${customerCode}-${billId}.pdf`;
 
-            const options = {
-                // Adjusted margins to fit more content and fix top spacing
-                margin: [0.2, 0.2, 0.2, 0.2], 
+            const opt = {
+                margin: 0.5,
                 filename: filename,
                 image: { type: 'jpeg', quality: 0.98 },
-                html2canvas: { scale: 2 },
+                html2canvas: { scale: 2, useCORS: true },
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
-            html2pdf().set(options).from(element).save();
+
+            // Use html2pdf() to generate the PDF from the element.
+            html2pdf().from(element).set(opt).save();
         }
 
         function showSignInModal() {
@@ -644,8 +645,8 @@
                 const billIdElem = document.getElementById('billIdDisplay');
                 const errorMessage = document.getElementById('errorMessage');
 
-                if (!customerCode || !billId) {
-                    showSignInModal();
+                if (customerCode = null || billId= null) {
+                    showerrorpopup();
                     hideLoading();
                     return;
                 }

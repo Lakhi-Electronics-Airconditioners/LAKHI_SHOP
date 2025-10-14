@@ -597,7 +597,6 @@
                         profileIncompleteMessage.innerHTML = `
                             <h2>Profile Access Denied</h2>
                             <p>It seems you're logged in but don't have permission to view your profile or it's incomplete.</p>
-                            <p>Please ensure your profile is fully set up and your Firebase Security Rules allow read access to your profile document.</p>
                             <button class="btn" onclick="window.location.href='ls/su2'">Complete Profile</button>
                         `;
                     }
@@ -636,7 +635,7 @@
             try {
                 await signOut(auth);
                 console.log("User signed out.");
-                window.location.href = "/";
+                window.location.href = "/ls";
             } catch (error) {
                 console.error("Error signing out:", error);
                 // Using a simple alert for now, consider a custom modal in production

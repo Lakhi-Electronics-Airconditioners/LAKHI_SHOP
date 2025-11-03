@@ -7,12 +7,12 @@ export const events = [
         name: "Diwali 2025",
         slug: "diwali-2025",
         from: {
-            day: 20, month: 10, year: 2025
+            day: 18, month: 10, year: 2025
         },
         to: {
             day: 30, month: 10, year: 2025          
         },
-        state: 3,
+        state: 4,
         link: "https://shop.lakhiairconditioners.com/event/event-display?event=diwali-2025",
         img: "img/events/2025/diwali/main-img.png",
         bannerimg: "img/events/2025/diwali/banner-img.png",
@@ -31,10 +31,10 @@ export const events = [
                     <a href="https://shop.lakhiairconditioners.com/event/event-display?event=diwali-2025" class="btn">Learn More &#10132;</a>
                 </div>
                <div class="col-2">
-                    <img src="img/events/2025/test-event/col2-img.png" min-width="1000" min-height="1000"  width="1000%" alt="test event col2 image" style="display: inline-block;margin-left:10px;item-align: center;">
+                    <img src="img/events/2025/diwali/col2-img.png" min-width="1000" min-height="1000"  width="1000%" alt="test event col2 image" style="display: inline-block;margin-left:10px;item-align: center;">
                 </div>
                 <div class="col-1">
-                    <img src="img/events/2025/test-event/banner-img.png" alt="Test Event 2025 Celebration" style="max-width:300px; width:1000%"; height:1000%;  max-height: 300px; display:flex; ">
+                    <img src="img/events/2025/diwali/banner-img.png" alt="Test Event 2025 Celebration" style="max-width:300px; width:1000%"; height:1000%;  max-height: 300px; display:flex; ">
                     <br><br>
                 </div>
             </div>`,

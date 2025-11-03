@@ -644,6 +644,10 @@ select:focus{
     margin-bottom: 10px;
     text-align: center;
 }
+.error-excl {
+    font-size: 100px;
+    color: firebrick;
+}
 
 .product-item .size-selector {
     width: 80px;

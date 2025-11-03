@@ -124,7 +124,7 @@
     <div class="color-NAV"><br><br></div>
     
     <div class="small-container single-product">
-        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back to Products</a>
+        <a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a><br><br>
         <div class="row" id="productDetailContainer">
             <div class="col-2">
                 <img src="/img/PROC/Loading.gif" alt="Loading Product Image">
@@ -226,8 +226,9 @@
                 <div class="col-2">
                     <div class="greview">
                         <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white;display: inline;background-color: #ffffff; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px;   border-radius: 5px; cursor: pointer; font-size: 16px;">
-                            <a>review us on<a> <br>
-                            <a style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</a>
+                            Review us on<br>
+                            <span style="font-weight: bold;"><i class="fab fa-google"></i> Google maps</span>
+                        </button>
                     </div>
                 </div>
                 </div>
@@ -242,22 +243,119 @@
     </div> 
 
     <script>
-        // New function for handling image loading errors with fallbacks
-        function handleImageError(imgElement, serialNo) {
-            // Check if we've already tried the serial number fallback
-            if (!imgElement.dataset.serialFallbackAttempted) {
-                imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
-                imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
-                console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
-            } else {
-                // If serial number fallback was already attempted and failed, use final default
-                imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
-                imgElement.src = 'img/PROC/DP.gif';
-                console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+            // New function for handling image loading errors with fallbacks
+            function handleImageError(imgElement, serialNo) {
+                // Check if we've already tried the serial number fallback
+                if (!imgElement.dataset.serialFallbackAttempted) {
+                    imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
+                    imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
+                    console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
+                } else {
+                    // If serial number fallback was already attempted and failed, use final default
+                    imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
+                    imgElement.src = 'img/PROC/DP.gif';
+                    console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+                }
             }
+            
+        // Convert to a named function declaration so it can be called from other scripts
+        function noSRgiven() {
+            const productDetailContainer = document.getElementById('productDetailContainer');
+            if (!productDetailContainer) return;
+    
+            productDetailContainer.innerHTML =  `
+                    <br><br>
+                    <div style="text-align: center; width: 100%;">
+                        <p class="error-excl"><i class="fa-solid fa-exclamation"></i></p>
+                        <br><br><br>
+                        <p style="text-align: center; width: 100%;">No product serial number provided in the URL.</p>
+                        <br>
+                        <div class="search-bar search-container" style="margin-bottom: 20px; text-align: center;">
+                            <input type="text" id="productSearchInput" placeholder="Enter the S/R Number of the Product" style="padding: 8px; width: 250px; border-radius: 4px; border: 1px solid #ccc;">
+                            <button type="button" id="productSearchBtn" style="padding: 8px 12px; border-radius: 4px; border: none; background: #d12711; color: #ffffff; cursor: pointer;">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter
+                            </button>
+                        </div>
+                         <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/products'"> See all Products </button>
+                    </div>
+                    `;
+    
+            const input = document.getElementById('productSearchInput');
+            const btn = document.getElementById('productSearchBtn');
+    
+            function doSearch() {
+                const q = (input.value || '').trim();
+                if (!q) {
+                    alert('Please enter the product S/R number.');
+                    input.focus();
+                    return;
+                }
+                // If user entered something that looks like "serial_no=xxx" or includes ?serial_no=, normalize it
+                const match = q.match(/serial_no=([^&\s]+)/i);
+                const serial = match ? match[1] : q;
+                // Redirect to same page with serial_no param
+                const base = window.location.pathname;
+                // Use concatenation here to avoid interpolation at template evaluation time
+                window.location.href = base + '?serial_no=' + encodeURIComponent(serial);
+            }
+    
+            if (btn) btn.addEventListener('click', doSearch);
+            if (input) input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doSearch();
+                }
+            });
         }
-    </script>
-
+         function incorrectSRgiven() {
+            const productDetailContainer = document.getElementById('productDetailContainer');
+            if (!productDetailContainer) return;
+    
+            productDetailContainer.innerHTML =  `
+                    <br><br>
+                    <div style="text-align: center; width: 100%;">
+                        <br><p class="error-excl"><i class="fa-solid fa-exclamation"></i></p><br><br>
+                        <p style="text-align: center; width: 100%;">product not found with the provided serial number.</p>
+                        <br>
+                        <div class="search-bar search-container" style="margin-bottom: 20px; text-align: center;">
+                            <input type="text" id="productSearchInput" placeholder="Enter the S/R Number of the Product" style="padding: 8px; width: 250px; border-radius: 4px; border: 1px solid #ccc;">
+                            <button type="button" id="productSearchBtn" style="padding: 8px 12px; border-radius: 4px; border: none; background: #d12711; color: #ffffff; cursor: pointer;">
+                                <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter
+                            </button>
+                        </div>
+                        <button class="btn" onclick="window.location.href='https://shop.lakhiairconditioners.com/products'"> See all Products </button>
+                    </div>
+                    `;
+    
+            const input = document.getElementById('productSearchInput');
+            const btn = document.getElementById('productSearchBtn');
+            
+    
+            function doSearch() {
+                const q = (input.value || '').trim();
+                if (!q) {
+                    alert('Please enter the product S/R number.');
+                    input.focus();
+                    return;
+                }
+                // If user entered something that looks like "serial_no=xxx" or includes ?serial_no=, normalize it
+                const match = q.match(/serial_no=([^&\s]+)/i);
+                const serial = match ? match[1] : q;
+                // Redirect to same page with serial_no param
+                const base = window.location.pathname;
+                // Use concatenation here to avoid interpolation at template evaluation time
+                window.location.href = base + '?serial_no=' + encodeURIComponent(serial);
+            }
+    
+            if (btn) btn.addEventListener('click', doSearch);
+            if (input) input.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    doSearch();
+                }
+            });
+        }
+        </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         // Import Firestore modules for fetching a single document using a query
@@ -508,17 +606,18 @@
                         });
 
                     } else {
-                        // If query snapshot is empty, no product found with that serial_no field value
-                        productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">Product not found with the provided serial number.</p>';
+                        incorrectSRgiven()
                     }
                 } catch (error) {
                     console.error('Error fetching product data from Firestore:', error);
-                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details. Please check your internet connection or Firebase permissions.</p>';
+                    productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%; color: red;">Failed to load product details. Please check your internet connection </p>';
                 }
             } else {
-                productDetailContainer.innerHTML = '<p style="text-align: center; width: 100%;">No product serial number provided in the URL.</p>';
+                noSRgiven()
             }
-        });
+        }); 
+               
+
     </script>
 </body>
 </html>

@@ -645,10 +645,10 @@
                 const billIdElem = document.getElementById('billIdDisplay');
                 const errorMessage = document.getElementById('errorMessage');
 
-                if (customerCode = null || billId= null) {
-                    showerrorpopup();
-                    hideLoading();
-                    return;
+                if (!customerCode || !billId) {
+showSignInModal();
+ hideLoading();
+ return;
                 }
                 
                 const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);

@@ -1,4 +1,4 @@
-/* General styles from user's provided block */
+/* General styles f rom user's provided block */
 * {
     margin: 0;
     padding: 0;
@@ -1511,4 +1511,5 @@ select:focus{
     box-sizing: border-box; /* Include padding in height calculation */
     text-align: center;
 }
+
 /* Ensure search and sort are aligned 

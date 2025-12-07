@@ -381,10 +381,10 @@
                 <h2>Bill Not Found</h2>
             </div>
             <div class="w3-container">
-                <p style="text-align: center; color: #555;">The bill you are trying to view does not exist. Please sign in to access your bills or check the URL.</p>
-                <div class="w3-center" style="margin-top: 20px;">
-                    <button class="btn-modal" onclick="window.location.href='/ls'">Sign In / Sign Up</button>
-                </div>
+                <p style="text-align: center; color: #555;">The bill you are trying to view does not exist or the info is in correct</p>
+                <p style='text-align: center; color: #000;'>TRY TO ENTER THE INFO</p>  
+                <p>Customer code</p>  
+                <input type="text"> 
             </div>
         </div>
     </div>
@@ -646,9 +646,9 @@
                 const errorMessage = document.getElementById('errorMessage');
 
                 if (!customerCode || !billId) {
-showSignInModal();
- hideLoading();
- return;
+                    showSignInModal();
+                    hideLoading();
+                    return;
                 }
                 
                 const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);

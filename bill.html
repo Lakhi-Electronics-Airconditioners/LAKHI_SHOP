@@ -150,7 +150,6 @@
         #noProductsMessage {
             text-align: center;
             color: #777;
-            margin-top: 20px;
             display: none; /* Hidden by default */
         }
 
@@ -283,6 +282,32 @@
             box-sizing: border-box; /* Include padding in height calculation */
             text-align: center;
         }
+        
+        /* New styling for status indicators and input */
+        .input-with-status {
+            position: relative;
+            margin-bottom: 15px;
+        }
+        .input-with-status input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .status-icon {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2em;
+        }
+        .status-icon.correct {
+            color: green;
+        }
+        .status-icon.incorrect {
+            color: red;
+        }
 
 
     </style>
@@ -374,20 +399,62 @@
     </div>
     <script src="TACPP.js" defer></script>
     
-    <!-- New Modal for Sign-in -->
+    <div id="customerCodeModal" class="w3-modal hidden-modal">
+        <div class="w3-modal-content">
+            <div class="w3-center" style="margin-bottom:20px;">
+                <h2>Enter Customer Code</h2>
+            </div>
+            <div class="w3-container">
+                <p style="text-align: center; color: #555;">Please enter your customer code to view your linked bills.</p>
+                <div class="input-with-status">
+                    <input type="text" id="modalCustomerCodeInput" placeholder="Customer Code" autocomplete="off">
+                    <span id="codeStatusIcon" class="status-icon hidden-modal"></span>
+                </div>
+                <p id="codeErrorMessage" style="color: red; text-align: center; margin-bottom: 10px; display: none;">Invalid Customer Code or Error.</p>
+                <div class="w3-center">
+                    <button class="btn-modal" id="submitCustomerCodeBtn">View Bills</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="billSelectionModal" class="w3-modal hidden-modal">
+        <div class="w3-modal-content">
+            <div class="w3-center" style="margin-bottom:20px;">
+                <h2>Select Your Bill</h2>
+            </div>
+            <div class="w3-container">
+                <p style="text-align: center; color: #555;">Select the bill you wish to view for code: <strong id="modalCustomerCodeDisplay">N/A</strong></p>
+                <div class="w3-section">
+                    <label for="billSelect">Available Bills:</label>
+                    <select id="billSelect" style="width: 100%; padding: 10px; border-radius: 5px; margin-top: 5px;">
+                        <option value="">-- Select a Bill --</option>
+                    </select>
+                </div>
+                <p id="noBillsFoundMessage" style="color: #f44336; text-align: center; display: none;">No bills found for this customer code.</p>
+                <div class="w3-center">
+                    <button class="btn-modal" id="loadSelectedBillBtn" disabled>Load Bill</button>
+                    <button class="btn-modal" id="goBackToCodeBtn" style="background-color: #555; margin-left: 10px;">Change Code</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <div id="signInModal" class="w3-modal hidden-modal">
         <div class="w3-modal-content">
             <div class="w3-center" style="margin-bottom:20px;">
                 <h2>Bill Not Found</h2>
             </div>
             <div class="w3-container">
-                <p style="text-align: center; color: #555;">The bill you are trying to view does not exist or the info is in correct</p>
-                <p style='text-align: center; color: #000;'>TRY TO ENTER THE INFO</p>  
-                <p>Customer code</p>  
-                <input type="text"> 
+                <p style="text-align: center; color: #555;">The bill you are trying to view does not exist or the info is incorrect.</p>
+                <p style='text-align: center; color: #000;'>Please try entering your customer code:</p>
+                <div class="w3-center">
+                    <button class="btn-modal" onclick="showCustomerCodeModal(); hideModal('signInModal');">Enter Code</button>
+                </div>
             </div>
         </div>
     </div>
+
 
     <div class="header-NAV">
         <div class="container">
@@ -444,7 +511,6 @@
         </table>
         <p id="noProductsMessage" style="text-align: center; color: #777; margin-top: 20px; display: none;">No products found for this bill.</p>
 
-        <!-- Bill Note Section moved here as requested -->
         <div class="row" id="billNoteContainer" style="display:none; margin-top: 20px;">
             <div class="col-12" style="text-align: left;color:#f44336">
                 <br>
@@ -566,6 +632,9 @@
         const db = getFirestore(app);
         const appIdFromConfig = firebaseConfig.projectId;
 
+        // Global variable to store customer code for modal use
+        let currentCustomerCode = null;
+
         // --- Helper Functions ---
         function showMessage(element, message, type = 'error') {
             if (element) {
@@ -587,15 +656,133 @@
             const noProductsMessage = document.getElementById('noProductsMessage');
             const downloadButton = document.getElementById('downloadBillButton');
             const signInModal = document.getElementById('signInModal');
+            const billSelectionModal = document.getElementById('billSelectionModal');
+            const customerCodeModal = document.getElementById('customerCodeModal');
 
             if (loadingMessage) loadingMessage.classList.add('hidden-modal');
             if (errorMessage) errorMessage.classList.add('hidden-modal');
             if (noProductsMessage) noProductsMessage.classList.add('hidden-modal');
             if (downloadButton) downloadButton.classList.add('hidden-modal');
+            
+            // Hide all custom modals
             if (signInModal) signInModal.classList.add('hidden-modal');
+            if (billSelectionModal) billSelectionModal.classList.add('hidden-modal');
+            if (customerCodeModal) customerCodeModal.classList.add('hidden-modal');
         }
         
+        function showModal(modalId) {
+            hideAllElements(); // Hide others before showing one
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.remove('hidden-modal');
+        }
+
+        function hideModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) modal.classList.add('hidden-modal');
+        }
+
+        function showCustomerCodeModal() {
+            showModal('customerCodeModal');
+            // Reset state
+            document.getElementById('modalCustomerCodeInput').value = currentCustomerCode || '';
+            document.getElementById('codeStatusIcon').classList.add('hidden-modal');
+            document.getElementById('codeErrorMessage').style.display = 'none';
+        }
+
+        function showBillSelectionModal(customerCode) {
+            currentCustomerCode = customerCode;
+            document.getElementById('modalCustomerCodeDisplay').textContent = customerCode;
+            showModal('billSelectionModal');
+            fetchAndPopulateBills(customerCode);
+        }
+
+        async function validateCustomerCode(code) {
+            const statusIcon = document.getElementById('codeStatusIcon');
+            const errorMessage = document.getElementById('codeErrorMessage');
+            statusIcon.classList.add('hidden-modal');
+            errorMessage.style.display = 'none';
+
+            if (!code || code.trim() === '') {
+                errorMessage.textContent = 'Please enter a customer code.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            try {
+                const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', code);
+                const customerDocSnap = await getDoc(customerDocRef);
+                
+                if (customerDocSnap.exists()) {
+                    statusIcon.classList.remove('hidden-modal', 'incorrect');
+                    statusIcon.classList.add('correct', 'fa-solid', 'fa-check');
+                    return true;
+                } else {
+                    statusIcon.classList.remove('hidden-modal', 'correct');
+                    statusIcon.classList.add('incorrect', 'fa-solid', 'fa-xmark');
+                    errorMessage.textContent = `No customer found with code: ${code}`;
+                    errorMessage.style.display = 'block';
+                    return false;
+                }
+            } catch (error) {
+                console.error("Error validating customer code:", error);
+                statusIcon.classList.remove('hidden-modal', 'correct');
+                statusIcon.classList.add('incorrect', 'fa-solid', 'fa-xmark');
+                errorMessage.textContent = `Error checking code: ${error.message}`;
+                errorMessage.style.display = 'block';
+                return false;
+            }
+        }
+
+        async function fetchAndPopulateBills(customerCode) {
+            const billSelect = document.getElementById('billSelect');
+            const noBillsMessage = document.getElementById('noBillsFoundMessage');
+            const loadSelectedBillBtn = document.getElementById('loadSelectedBillBtn');
+
+            billSelect.innerHTML = '<option value="">-- Loading Bills... --</option>';
+            loadSelectedBillBtn.disabled = true;
+            noBillsMessage.style.display = 'none';
+
+            try {
+                const billsCollectionRef = collection(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills');
+                const q = query(billsCollectionRef);
+                const querySnapshot = await getDocs(q);
+                
+                billSelect.innerHTML = '<option value="">-- Select a Bill --</option>';
+
+                if (!querySnapshot.empty) {
+                    querySnapshot.forEach((billDoc) => {
+                        const billId = billDoc.id;
+                        const billData = billDoc.data();
+                        
+                        let title = billData.title || `Bill ID: ${billId}`;
+                        
+                        if (billData.type === 1) {
+                            title = `Invoice: ${billData.Cname || billId}`;
+                        } else if (billData.type === 2) {
+                            title = `Quotation: ${billData.Cname || billId}`;
+                        } else if (billData.Cname) {
+                            title = `Project: ${billData.Cname}`;
+                        }
+
+                        // Format: TITLE (BILLID)
+                        const optionText = `${title} (${billId})`;
+                        const option = new Option(optionText, billId);
+                        billSelect.appendChild(option);
+                    });
+                } else {
+                    noBillsMessage.style.display = 'block';
+                    billSelect.innerHTML = '<option value="">-- No Bills Found --</option>';
+                }
+            } catch (error) {
+                console.error("Error fetching bills:", error);
+                billSelect.innerHTML = '<option value="">-- Error Loading Bills --</option>';
+                noBillsMessage.style.display = 'block';
+                noBillsMessage.textContent = `Error loading bills: ${error.message}`;
+            }
+        }
+
         function generatePDF() {
+            // ... (keep generatePDF function as is)
             const element = document.querySelector('.cart-page');
             const customerCode = document.getElementById('customerCodeDisplay')?.textContent || 'customerscode';
             const billId = document.getElementById('billIdDisplay')?.textContent || 'billid';
@@ -609,26 +796,33 @@
                 jsPDF: { unit: 'in', format: 'a4', orientation: 'portrait' }
             };
 
-            // Use html2pdf() to generate the PDF from the element.
             html2pdf().from(element).set(opt).save();
         }
 
-        function showSignInModal() {
-            const modal = document.getElementById('signInModal');
-            if (modal) {
-                modal.classList.remove('hidden-modal');
-            }
-        }
-
-        async function loadBillDetails() {
+        async function loadBillDetails(customerCode, billId) {
             hideAllElements(); 
             const loadingMessage = document.getElementById('loadingMessage');
             if (loadingMessage) loadingMessage.classList.remove('hidden-modal');
+            
+            // Clear previous details
+            document.getElementById('billTitle').textContent = '';
+            document.getElementById('customerCodeDisplay').textContent = 'N/A';
+            document.getElementById('billIdDisplay').textContent = 'N/A';
+            document.getElementById('billCodeDisplay').textContent = 'N/A';
+            document.getElementById('productTableBody').innerHTML = '';
+            document.getElementById('billSubtotal').textContent = '₹0.00';
+            document.getElementById('billTax').textContent = '*(not defined)*';
+            document.getElementById('billGrandTotal').textContent = '*(not defined)*';
+            document.getElementById('billNoteContainer').style.display = 'none';
 
-            const params = new URLSearchParams(window.location.search);
-            const customerCode = params.get('customerCode');
-            const billId = params.get('billId');
-            const billCode = customerCode && billId ? `${customerCode}-${billId}` : 'N/A';
+            if (!customerCode || !billId) {
+                // If either is missing, show the initial customer code prompt
+                showCustomerCodeModal();
+                hideLoading();
+                return;
+            }
+
+            const billCode = `${customerCode}-${billId}`;
 
             let billData = null;
             let customerData = null;
@@ -641,16 +835,7 @@
             let noteText = null;
 
             try {
-                const customerCodeElem = document.getElementById('customerCodeDisplay');
-                const billIdElem = document.getElementById('billIdDisplay');
-                const errorMessage = document.getElementById('errorMessage');
-
-                if (!customerCode || !billId) {
-                    showSignInModal();
-                    hideLoading();
-                    return;
-                }
-                
+                // 1. Fetch Customer Data
                 const customerDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode);
                 const customerDocSnap = await getDoc(customerDocRef);
                 
@@ -658,6 +843,7 @@
                     customerData = customerDocSnap.data();
                 }
 
+                // 2. Fetch Bill Data
                 const billDocRef = doc(db, 'artifacts', appIdFromConfig, 'customers', customerCode, 'bills', billId);
                 const billDocSnap = await getDoc(billDocRef);
 
@@ -680,11 +866,13 @@
                         finalBillTitle = "Bill Details #" + billId;
                     }
                 } else {
-                    showSignInModal();
+                    // Bill not found, but we have a code, so show Bill Selection
+                    showBillSelectionModal(customerCode);
                     hideLoading();
                     return;
                 }
 
+                // --- Display Logic (Same as original) ---
                 const downloadButton = document.getElementById('downloadBillButton');
                 if (downloadButton) {
                     downloadButton.classList.remove('hidden-modal');
@@ -708,39 +896,29 @@
                     }
                 }
 
-                const billTitleElem = document.getElementById('billTitle');
-                if (billTitleElem) billTitleElem.textContent = finalBillTitle;
-
-                const customerNameElem = document.getElementById('customerName');
-                const customerAddrElem = document.getElementById('customerAddr');
-                const customerCityElem = document.getElementById('customerCity');
-                const customerPincodeElem = document.getElementById('customerPincode');
-                const billCodeElem = document.getElementById('billCodeDisplay');
+                document.getElementById('billTitle').textContent = finalBillTitle;
 
                 if (customerData) {
-                    if (customerNameElem) customerNameElem.textContent = customerData.NAME || 'N/A';
-                    if (customerAddrElem) {
-                        if (Array.isArray(customerData.addr) && customerData.addr.length > 0) {
-                            customerAddrElem.textContent = customerData.addr
+                    document.getElementById('customerName').textContent = customerData.NAME || 'N/A';
+                    if (document.getElementById('customerAddr')) {
+                        const addr = Array.isArray(customerData.addr) ? customerData.addr
                                 .map(part => typeof part === 'string' ? part.trim() : JSON.stringify(part))
                                 .filter(part => part !== '')
-                                .join(', ') || 'N/A';
-                        } else {
-                            customerAddrElem.textContent = 'N/A';
-                        }
+                                .join(', ') : 'N/A';
+                        document.getElementById('customerAddr').textContent = addr || 'N/A';
                     }
-                    if (customerCityElem) customerCityElem.textContent = customerData.ct || 'N/A';
-                    if (customerPincodeElem) customerPincodeElem.textContent = customerData.pincode || 'N/A';
+                    document.getElementById('customerCity').textContent = customerData.ct || 'N/A';
+                    document.getElementById('customerPincode').textContent = customerData.pincode || 'N/A';
                 } else {
-                    if (customerNameElem) customerNameElem.textContent = 'N/A';
-                    if (customerAddrElem) customerAddrElem.textContent = 'N/A';
-                    if (customerCityElem) customerCityElem.textContent = 'N/A';
-                    if (customerPincodeElem) customerPincodeElem.textContent = 'N/A';
+                    document.getElementById('customerName').textContent = 'N/A (Code Validated)';
+                    document.getElementById('customerAddr').textContent = 'N/A';
+                    document.getElementById('customerCity').textContent = 'N/A';
+                    document.getElementById('customerPincode').textContent = 'N/A';
                 }
 
-                if (customerCodeElem) customerCodeElem.textContent = customerCode || 'N/A';
-                if (billIdElem) billIdElem.textContent = billId || 'N/A';
-                if (billCodeElem) billCodeElem.textContent = billCode;
+                document.getElementById('customerCodeDisplay').textContent = customerCode;
+                document.getElementById('billIdDisplay').textContent = billId;
+                document.getElementById('billCodeDisplay').textContent = billCode;
 
                 const productTableBody = document.getElementById('productTableBody');
                 const noProductsMessage = document.getElementById('noProductsMessage');
@@ -751,15 +929,12 @@
                         const finalProductName = product.name || 'N/A Product';
                         const finalProductSR = product.SR || null;
                         
-                        // Set the primary image source based on available data
                         let imageSource = product.image_url;
                         if (!imageSource && finalProductSR) {
                            imageSource = `img/PROC/${finalProductSR}.jpg`;
                         }
 
                         const qty = parseInt(product.quantity || product.qty, 10) || 1;
-
-                        // Use the price from the bill data
                         const finalProductPrice = isNaN(parseFloat(product.price)) ? 0 : parseFloat(product.price);
                         const itemTotal = finalProductPrice * qty;
 
@@ -785,26 +960,103 @@
                     if (noProductsMessage) noProductsMessage.style.display = 'block';
                 }
 
-                const billSubtotalElem = document.getElementById('billSubtotal');
-                const billTaxElem = document.getElementById('billTax');
-                const billGrandTotalElem = document.getElementById('billGrandTotal');
-
-                if (billSubtotalElem) billSubtotalElem.textContent = `₹${parseFloat(finalSubtotal).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
-                if (billTaxElem) billTaxElem.textContent = finalTax;
-                if (billGrandTotalElem) billGrandTotalElem.textContent = finalTotal;
+                document.getElementById('billSubtotal').textContent = `₹${parseFloat(finalSubtotal).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                document.getElementById('billTax').textContent = finalTax;
+                document.getElementById('billGrandTotal').textContent = finalTotal;
 
             } catch (error) {
                 console.error("Error loading bill details:", error);
-                const billTitleElem = document.getElementById('billTitle');
-                if (billTitleElem) billTitleElem.textContent = 'Error Loading Bill';
-                showSignInModal();
+                document.getElementById('billTitle').textContent = 'Error Loading Bill';
+                showModal('errorMessage'); // Show the main error message area
+                document.getElementById('errorMessage').textContent = `An error occurred: ${error.message}. Please try again or enter your code.`;
+                showCustomerCodeModal();
             } finally {
                 hideLoading();
             }
         }
 
+        // --- Event Listeners and Initial Load ---
         document.addEventListener('DOMContentLoaded', () => {
-            loadBillDetails();
+            const params = new URLSearchParams(window.location.search);
+            const customerCode = params.get('customerCode');
+            const billId = params.get('billId');
+
+            // 1. Initial Load: Check URL parameters
+            if (customerCode && billId) {
+                // If both are present, load the bill directly
+                loadBillDetails(customerCode, billId);
+            } else if (customerCode) {
+                // If only code is present, check validity and show bill selection
+                validateCustomerCode(customerCode).then(isValid => {
+                    if (isValid) {
+                        showBillSelectionModal(customerCode);
+                    } else {
+                        // Code from URL is bad, fall back to entry modal
+                        showCustomerCodeModal();
+                    }
+                });
+            } else {
+                // If neither is present, show the initial customer code prompt
+                showCustomerCodeModal();
+            }
+
+            // 2. Customer Code Modal Handlers
+            document.getElementById('submitCustomerCodeBtn').addEventListener('click', async () => {
+                const codeInput = document.getElementById('modalCustomerCodeInput');
+                const code = codeInput.value.trim();
+                
+                if (await validateCustomerCode(code)) {
+                    hideModal('customerCodeModal');
+                    showBillSelectionModal(code);
+                }
+            });
+
+            document.getElementById('modalCustomerCodeInput').addEventListener('input', async (e) => {
+                const code = e.target.value.trim();
+                const statusIcon = document.getElementById('codeStatusIcon');
+                const errorMessage = document.getElementById('codeErrorMessage');
+                
+                statusIcon.classList.add('hidden-modal');
+                errorMessage.style.display = 'none';
+                
+                if (code.length > 0) {
+                    // Check validity in real-time, but don't wait for it to block typing
+                    // We'll rely on the button click for the critical check
+                    // For a smooth UX, we can show status after a slight delay
+                    setTimeout(async () => {
+                         if (e.target.value.trim() === code) { // Check if value hasn't changed
+                             await validateCustomerCode(code);
+                         }
+                    }, 800);
+                }
+            });
+
+            // 3. Bill Selection Modal Handlers
+            document.getElementById('billSelect').addEventListener('change', (e) => {
+                const billId = e.target.value;
+                document.getElementById('loadSelectedBillBtn').disabled = !billId;
+            });
+
+            document.getElementById('loadSelectedBillBtn').addEventListener('click', () => {
+                const billId = document.getElementById('billSelect').value;
+                if (currentCustomerCode && billId) {
+                    hideModal('billSelectionModal');
+                    // Reload the URL with the selected parameters
+                    window.history.pushState({}, '', `bill?customerCode=${currentCustomerCode}&billId=${billId}`);
+                    loadBillDetails(currentCustomerCode, billId);
+                }
+            });
+
+            document.getElementById('goBackToCodeBtn').addEventListener('click', () => {
+                hideModal('billSelectionModal');
+                showCustomerCodeModal();
+            });
+
+            // Set up PDF download button on the main bill page
+            const downloadButton = document.getElementById('downloadBillButton');
+            if (downloadButton) {
+                // Note: The click handler is set inside loadBillDetails based on billData.url
+            }
         });
     </script>
 </body>

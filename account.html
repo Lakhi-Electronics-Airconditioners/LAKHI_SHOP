@@ -276,10 +276,9 @@
             <p>Please complete your profile details to view your account information and linked bills, or ensure you have the necessary permissions.</p>
             <button class="btn" onclick="window.location.href='ls/su2'">Complete Profile</button>
         </div>
-
         <div id="userProfileContent" class="data-section">
             <div id="userDashboard">
-                <h2>Welcome!</h2>
+                <h2>Welcome!</h2>             
                 <p><strong>User ID:</strong> <span id="displayUserId">Loading...</span></p>
                 <p><strong>Email:</strong> <span id="displayUserEmail">Loading...</span></p>
                 <p><strong>Email Status:</strong> <span id="displayEmailStatus">Loading...</span></p>
@@ -400,7 +399,8 @@
     import {
         getAuth,
         signOut,
-        onAuthStateChanged
+        onAuthStateChanged,
+        updateProfile
     } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
     import {
         getFirestore,
@@ -542,6 +542,27 @@
             userId = user.uid;
             console.log("User logged in:", userId);
 
+            // --- NEW PROFILE PICTURE VIEWING LOGIC ---
+           const displayProfilePic = document.getElementById('displayProfilePic');
+           const editProfilePicBtn = document.getElementById('editProfilePicBtn');
+        
+           if (displayProfilePic) {
+               // Use photoURL from Firebase Auth object, falling back to a default image
+              displayProfilePic.src = user.photoURL || 'img/default-profile.png';
+           }
+   
+           // --- NEW PROFILE PICTURE BUTTON LINKING ---
+           if (editProfilePicBtn) {
+               // Direct the button to the requested edit page
+               editProfilePicBtn.onclick = () => {
+                   window.location.href = 'ls/edit-pic';
+               };
+           }
+        
+           // Ensure the old 'uploadProfilePicBtn' is removed if you kept it from the previous step
+           const oldBtn = document.getElementById('uploadProfilePicBtn');
+           if (oldBtn) oldBtn.remove();
+
             // Display email verification status
             if (user.emailVerified) {
                 if (displayEmailStatus) displayEmailStatus.innerHTML = `<b style="color:green">Verified <i class="fa-solid fa-check"></i></b>`;
@@ -626,6 +647,10 @@
             const billsListDiv = document.getElementById('billsList');
             if (customerDetailsDiv) customerDetailsDiv.innerHTML = '';
             if (billsListDiv) billsListDiv.innerHTML = '';
+            const displayProfilePic = document.getElementById('displayProfilePic');
+            if (displayProfilePic) {
+                displayProfilePic.src = 'img/default-profile.png';
+            }
         }
     });
 

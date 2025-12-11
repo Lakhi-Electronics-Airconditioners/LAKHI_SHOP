@@ -93,7 +93,23 @@ p {
 .btn:hover {
     background: #563434;
 }
+.btn.grey { /* Style for the 'Not Now' button */
+    background-color: #777;
+}
 
+#loginPopup button {
+   display: inline-block;
+    background: #ff523b;
+    color: #fff;
+    padding: 8px 30px;
+    border-radius: 30px;
+    margin: 30px 0;
+    transition: background 0.3s;
+}
+#loginPopup button {
+    background: #563434;
+}
+/* You don't need to add the animation CSS since the script uses inline styles for the cool effect */
 .header {
     background: radial-gradient(#fff, #ffd6d6)
 }
@@ -1038,6 +1054,28 @@ select:focus{
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     flex-grow: 1; /* Allows container to grow and push footer down */
+}
+/* New CSS for Profile Picture Display in account.html */
+.profile-pic-container {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.profile-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+    border: 3px solid #ff523b; /* Red border for emphasis */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.small-btn {
+    padding: 8px 15px;
+    font-size: 0.9em;
 }
 
 .user-dashboard {

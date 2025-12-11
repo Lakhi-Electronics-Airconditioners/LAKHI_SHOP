@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <script type="module" src="js/auth-menu-logic.js"></script>
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('service-worker.js')
@@ -95,7 +96,13 @@
         </form>
     </div>
     <script src="TACPP.js" defer></script>
+     <div id="auth-menu" class="w3-modal-content w3-center">
+        
+        <button id="close-auth-menu-btn" class="close-button" title="Close Modal"> Close ×</button>
+        <div id="auth-menu-text">
 
+        </div>
+    </div>
     <div class="header">
         <div class="container">
             <div class="navbar">
@@ -315,22 +322,5 @@
 
         </div>
     </div> 
-    
-    <script>
-        var Menuitems = document.getElementById('Menuitems');
-
-        Menuitems.style.maxHeight ="0px";
-
-        function menutoggle(){
-            if(Menuitems.style.maxHeight == "0px")
-                { 
-                    Menuitems.style.maxHeight= "200px"
-                }
-            else
-                {
-                    Menuitems.style.maxHeight ="0px";
-                }
-        }
-    </script>
 </body>
 </html>

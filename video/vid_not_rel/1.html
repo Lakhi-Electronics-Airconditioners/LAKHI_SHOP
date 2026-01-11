@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.css">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
     <meta name="google-site-verification" content="3WJMESWY8huA1C6uNJbxahjiRoTCzahkcjAxx0WDuLw" />
-    <script src="https://shop.lakhiairconditioners.com/TACPP.js" defer></script>
     <script type="text/javascript" src="//widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
     
     <script>
@@ -72,108 +71,13 @@
     </style>
 </head>
 <body>
-    <!-- Terms and Conditions Modal (Initial Agreement) -->
-    <div id="tacpp" class="w3-modal-content">
-        <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeModal()" 
-                class="close-button" 
-                title="Close Modal">
-                Close ×
-            </span>
-            <h2>Please Agree to Proceed</h2>
-        </div>
-        <form class="w3-container">
-            <!-- Agreement Checkbox -->
-            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <input type="checkbox" id="agree" title="Agree to the updated Terms and Conditions and Privacy Policy">
-                <label for="agree">
-                    I agree to the updated 
-                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
-                        Terms and Conditions
-                    </a> 
-                    and 
-                    <a href="https://shop.lakhiairconditioners.com/info/PP">
-                        Privacy Policy
-                    </a>.
-                </label>
-            </div>
-            <!-- Disclaimer Section -->
-            <p style="font-size:14px; margin-bottom:20px;">
-                * Prices may not be accurate, and not all products are listed.<br>
-                *product may not be in stock or may not even be buyable anymore
-            </p>
-            <!-- Continue Button -->
-            <div class="w3-center">
-                <button 
-                    type="button"
-                    class="btn-modal" 
-                    onclick="continueAction(event)">
-                    Continue
-                </button>
-            </div>
-        </form>
-    </div>
-
-    <!-- Terms and Conditions Update Modal -->
-    <div id="updateTacppModal" class="w3-modal-content">
-        <div class="w3-center" style="margin-bottom:20px;">
-            <span 
-                onclick="closeUpdateModal()" 
-                class="close-button" 
-                title="Close Modal">
-                Close ×
-            </span>
-            <h2>Terms and Conditions Updated</h2>
-        </div>
-        <form class="w3-container">
-            <!-- Update Agreement Checkbox -->
-            <div class="w3-section" style="margin-bottom:20px; text-align:left;">
-                <p>Our Terms and Conditions and Privacy Policy have been updated. Please review the changes and agree to continue.</p>
-                <input type="checkbox" id="agreeUpdate">
-                <label for="agreeUpdate">
-                    I agree to the updated 
-                    <a href="https://shop.lakhiairconditioners.com/info/TAC">
-                        Terms and Conditions
-                    </a> 
-                    and 
-                    <a href="https://shop.lakhiairconditioners.com/info/PP">
-                        Privacy Policy
-                    </a>.
-                </label>
-            </div>
-            <!-- Continue Button for Update -->
-            <div class="w3-center">
-                <button 
-                    type="button"
-                    class="btn-modal" 
-                    onclick="continueUpdateAction(event)">
-                    Agree to Update
-                </button>
-            </div>
-        </form>
-    </div>
+    <div id="tacpp-el"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/tacpp.js" defer></script>
+    <script src="https://shop.lakhiairconditioners.com/js/TACPP.js" defer></script>
     
-    <div class="header-NAV">
-        <div class="container">
-            <div class="navbar">
-                <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
-                <nav>
-                    <ul id="Menuitems">
-                        <li><a href="https://shop.lakhiairconditioners.com">Home</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/about">About Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/products">All Products</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/AC-only">All Airconditionrs</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/contact">Contact Us</a></li>
-                        <li><a href="https://shop.lakhiairconditioners.com/account">Account</a></li>
-                    </ul>
-                </nav>
-                <a href="https://shop.lakhiairconditioners.com/cart"><img src="https://shop.lakhiairconditioners.com/img/NABR/SCI.png" width="30px" height="30px" alt="Shopping Cart Icon"></a>
-                <img src="https://shop.lakhiairconditioners.com/img/NABR/menu.png" class="menu-icon" onclick="menutoggle()" alt="menu icon">
-                <script src="https://shop.lakhiairconditioners.com/menubar.js"></script>
-            </div>
-        </div>
-    </div>
+    
+    <div class="header-NAV" id="header"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/header.js" defer></script>
     
     <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
         

@@ -2,6 +2,9 @@ const headerElement = document.getElementById('header');
 
 const headerContent = `
     <div class="container">
+        <div class="banner">
+            <p>Customer system will be down for a few days for improvement of data safety.</p>
+        </div>
         <div class="navbar">
             <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
             <nav>

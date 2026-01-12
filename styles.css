@@ -131,6 +131,15 @@ p {
     min-height: 50px; /* Ensure a minimum height */
     box-sizing: border-box; /* Include padding in height calculation */
 }
+.banner{
+    --entry-duration: 5s;
+    background-color: #ff4949;
+    color: #800000;
+    text-align: center;
+    padding: 0px 0;
+    font-weight: bold;
+    font-size: 14px;
+}
 
 .categories {
     margin: 70px 0;

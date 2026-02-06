@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lakhi Airconditioners | FIND THE RIGHT TV</title>
+    <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        :root { --primary: #004aad; --accent: #00c6ff; --bg: #f0f4f8; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); }
+        .ftr-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin: 40px auto; max-width: 600px; }
+        .step { display: none; }
+        .active { display: block; animation: slideIn 0.3s ease; }
+        .input-group { margin: 20px 0; }
+        input[type="number"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
+        .tech-card { border: 2px solid #eee; border-radius: 15px; padding: 20px; cursor: pointer; margin: 10px 0; transition: 0.3s; }
+        .tech-card:hover { border-color: var(--primary); transform: translateX(5px); }
+        .tech-card.selected { border-color: var(--primary); background: #f0f7ff; }
+        .btn-main { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 20px; }
+        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+    </style>
+</head>
+<body>
+    <div id="tacpp-el"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/tacpp.js" defer></script>
+    <script src="https://shop.lakhiairconditioners.com/js/TACPP.js" defer></script>
+    
+    <div class="header-NAV" id="header"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/header.js" defer></script>
+    
+    <div class="container">
+        <div class="ftr-card">
+            <!-- STEP 1: DIMENSIONS -->
+            <div id="step1" class="step active">
+                <h2>1. Measuring your Space</h2>
+                <p>Enter your wall dimensions (inches) to calculate the best TV size.</p>
+                <div class="input-group">
+                    <label>Wall Length (Inches)</label>
+                    <input type="number" id="wall-l" placeholder="e.g. 50">
+                </div>
+                <div class="input-group">
+                    <label>Wall Breadth (Inches)</label>
+                    <input type="number" id="wall-b" placeholder="e.g. 30">
+                </div>
+                <button class="btn-main" onclick="calcSize()">Calculate Perfect Size</button>
+            </div>
+
+            <!-- STEP 2: TECH -->
+            <div id="step2" class="step">
+                <h2>2. Screen Technology</h2>
+                <div class="tech-card" onclick="setTech('LED', this)">
+                    <h3>LED</h3>
+                    <p>Bright rooms & Value for money.</p>
+                </div>
+                <div class="tech-card" onclick="setTech('QLED', this)">
+                    <h3>QLED</h3>
+                    <p>Quantum Dots for vivid, punchy colors.</p>
+                </div>
+                <div class="tech-card" onclick="setTech('OLED', this)">
+                    <h3>OLED</h3>
+                    <p>Perfect blacks. Best for movies & dark rooms.</p>
+                </div>
+                <button class="btn-main" onclick="next(3)">Continue</button>
+            </div>
+
+            <!-- STEP 3: RESULT -->
+            <div id="step3" class="step" style="text-align:center;">
+                <div id="tv-result-box">
+                    <i class="fa fa-tv fa-4x" style="color: var(--primary); margin-bottom: 20px;"></i>
+                    <h2 id="rec-size">43" Recommended</h2>
+                    <p id="rec-desc">Based on your wall size, a 43-inch TV will fit perfectly with adequate borders.</p>
+                    <button class="btn-main" onclick="findInStore()">Browse Matches in Store</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="footer" class="footer"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/footer.js" defer></script>
+
+    <script>
+        let tvData = { size: 0, tech: '' };
+
+        function calcSize() {
+            const l = document.getElementById('wall-l').value;
+            const b = document.getElementById('wall-b').value;
+            if(!l || !b) return alert("Please enter dimensions");
+
+            // Pythagorean: c = sqrt(a^2 + b^2)
+            const diagonal = Math.sqrt(Math.pow(l, 2) + Math.pow(b, 2));
+            
+            // Suggest 80% of diagonal to leave room for wall borders
+            let suggested = diagonal * 0.8;
+            
+            if (suggested < 32) tvData.size = 32;
+            else if (suggested < 43) tvData.size = 43;
+            else if (suggested < 55) tvData.size = 55;
+            else tvData.size = 65;
+
+            document.getElementById('rec-size').innerText = tvData.size + '" Recommended';
+            next(2);
+        }
+
+        function setTech(val, el) {
+            tvData.tech = val;
+            const cards = document.querySelectorAll('.tech-card');
+            cards.forEach(c => c.classList.remove('selected'));
+            el.classList.add('selected');
+        }
+
+        function next(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById('step' + step).classList.add('active');
+        }
+
+        function findInStore() {
+            // Redirect to products filtered by size and tech
+            window.location.href = `../products.html?type=tv&size=${tvData.size}&tech=${tvData.tech}`;
+        }
+    </script>
+</body>
+</html>

@@ -142,7 +142,7 @@ p {
 }
 
 .categories {
-    margin: 70px 0;
+    margin: 10px 0;
 }
 
 .col-3 {
@@ -1558,5 +1558,14 @@ select:focus{
     box-sizing: border-box; /* Include padding in height calculation */
     text-align: center;
 }
-
+.text a{
+            text-decoration: none;
+            color: #555;
+            font-weight: bolder;
+            
+        }
+.text-size-35{
+    font-size: 35px;
+    text-align: center
+}
 /* Ensure search and sort are aligned 

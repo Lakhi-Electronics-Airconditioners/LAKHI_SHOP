@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Find the right AC for your room with Lakhi Airconditioners expert consultant.">
+    <title>Lakhi Airconditioners | FIND THE RIGHT AC</title>
+    <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED%20CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <style>
+        :root { 
+            --primary: #d32f2f; 
+            --accent: #ff5252; 
+            --bg: #f8fafc; 
+        }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #333; margin: 0; }
+        .ftr-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 2rem; margin-top: 20px; transition: all 0.3s ease; overflow: hidden; }
+        .step-container { display: none; animation: fadeIn 0.4s ease; }
+        .step-active { display: block; }
+        .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .option-card { border: 2px solid #edf2f7; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; position: relative; }
+        .option-card:hover:not(.greyed-out) { border-color: var(--primary); background: #fff5f5; }
+        .option-card.selected { border-color: var(--primary); background: #ffebee; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(211,47,47,0.1); }
+        
+        .option-card h3 { color: var(--primary); margin: 5px 0; font-weight: 700; }
+        .option-card h4 { margin: 5px 0; font-size: 1rem; color: #4a5568; }
+
+        #step3 .option-card { text-align: left; padding: 20px; }
+        #step3 h4 { text-align: center; margin-bottom: 10px; }
+        #step3 .icon-wrapper { text-align: center; margin-bottom: 10px; display: block; }
+
+        .greyed-out { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; pointer-events: none; }
+        .brand-logo { width: 80px; height: 50px; object-fit: contain; margin-bottom: 10px; pointer-events: none; }
+        .nav-controls { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
+        .btn-ftr { padding: 10px 25px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+        .btn-back { background: #edf2f7; color: #4a5568; }
+        .btn-reset { background: #fee2e2; color: #991b1b; }
+        .btn-check { background: var(--primary); color: white; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        
+        .adv-list { list-style: none; padding: 0; margin: 10px 0 0 0; font-size: 0.85rem; color: #555; border-top: 1px solid #f0f0f0; padding-top: 10px; }
+        .adv-list li { margin-bottom: 5px; display: flex; align-items: flex-start; gap: 6px; }
+        .adv-list li i { color: #48bb78; font-size: 0.75rem; margin-top: 4px; }
+        .recommendation { font-weight: 600; color: var(--primary); margin-top: 8px; font-size: 0.8rem; }
+
+        .product-preview { max-width: 300px; margin: 20px auto; border-radius: 10px; display: block; }
+        
+        #loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); display:none; justify-content:center; align-items:center; z-index:9999; flex-direction:column; }
+        .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        /* Mobile Optimizations */
+        @media (max-width: 600px) {
+            .ftr-card {
+                padding: 1rem; /* Less padding on small screens */
+            }
+    
+            .product-preview {
+                width: 100%; /* Image takes full width */
+                max-width: 250px;
+                height: auto;
+            }
+
+            .option-grid {
+                grid-template-columns: repeat(2, 1fr); /* 2 items per row instead of 1 */
+                gap: 10px;
+            }
+        
+            #step5 .result-card {
+                flex-direction: column; /* Stack image and text vertically */
+                text-align: center;
+            }
+        }
+        
+        /* Specific Card Styling for results */
+        .result-card {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: #fff;
+            border: 1px solid #edf2f7;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+        }
+    </style>
+</head>
+<body>
+    <div id="tacpp-el"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/tacpp.js" defer></script>
+    <script src="https://shop.lakhiairconditioners.com/js/TACPP.js" defer></script>
+    
+    <div class="header-NAV" id="header"></div>
+    <script src="../js/rw/header.js" defer></script>
+    
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
+    <div id="loading-overlay">
+        <div class="spinner"></div>
+        <p style="margin-top:10px; font-weight:bold;">loading...</p>
+    </div>
+
+    <div class="header-NAV" id="header"></div>
+    
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 20px;">
+        <div class="ftr-card">
+            <div id="ftr-header" style="margin-bottom: 20px;">
+                <h2 id="step-title" style="color: var(--primary); margin: 0;">What is your Room Size?</h2>
+                <div id="progress-bar" style="height: 4px; background: #eee; border-radius: 2px; margin-top: 10px;">
+                    <div id="progress-inner" style="width: 20%; height: 100%; background: var(--primary); transition: 0.3s;"></div>
+                </div>
+            </div>
+
+            <div id="step1" class="step-container step-active">
+                <p>Select your room dimensions to find the perfect cooling capacity.</p>
+                <div class="option-grid">
+                    <div class="option-card" onclick="window.selectTonnage('1.0', this)">
+                        <i class="fa fa-door-open fa-2x" style="color: #4a5568; margin-bottom: 10px;"></i>
+                        <h3>1.0 - 1.4 Ton</h3>
+                        <h4>Small Room</h4>
+                        <p class="small">Up to 120 sq. ft.</p>
+                    </div>
+                    <div class="option-card" onclick="window.selectTonnage('1.5', this)">
+                        <i class="fa fa-home fa-2x" style="color: #4a5568; margin-bottom: 10px;"></i>
+                        <h3>1.5 - 1.9 Ton</h3>
+                        <h4>Medium Room</h4>
+                        <p class="small">121–180 sq. ft.</p>
+                    </div>
+                    <div class="option-card" onclick="window.selectTonnage('2.0', this)">
+                        <i class="fa fa-couch fa-2x" style="color: #4a5568; margin-bottom: 10px;"></i>
+                        <h3>2.0+ Ton</h3>
+                        <h4>Large Hall</h4>
+                        <p class="small">181+ sq. ft.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step2" class="step-container">
+                <p>Choose your preferred brand. Only available brands are shown.</p>
+                <div class="option-grid" id="brand-grid"></div>
+            </div>
+
+            <div id="step3" class="step-container">
+                <p>Select the cooling technology that fits your usage pattern.</p>
+                <div class="option-grid">
+                    <div class="option-card" onclick="window.selectTech('INV', this)" id="tech-inv">
+                        <span class="icon-wrapper"><i class="fa fa-bolt fa-2x" style="color: #f6ad55;"></i></span>
+                        <h4>Inverter AC</h4>
+                        <ul class="adv-list">
+                            <li><i class="fa fa-check"></i>Better Energy Efficiency</li>
+                            <li><i class="fa fa-check"></i>Consistent Temperature</li>
+                            <li><i class="fa fa-check"></i>Longer Lifespan</li>
+                            <li><i class="fa fa-check"></i>Quieter Operation</li>
+                            <li><i class="fa fa-check"></i>Faster Cooling</li>
+                        </ul>
+                    </div>
+                    <div class="option-card" onclick="window.selectTech('NON-INV', this)" id="tech-non">
+                        <span class="icon-wrapper"><i class="fa fa-fan fa-2x" style="color: #4299e1;"></i></span>
+                        <h4>Fixed Speed</h4>
+                        <ul class="adv-list">
+                            <li><i class="fa fa-check"></i> Lower Initial Cost</li>
+                            <li><i class="fa fa-check"></i> More Affordable Repairs</li>
+                            <li><i class="fa fa-check"></i> Effective for Occasional Use</li>
+                            <li><i class="fa fa-check"></i> Simpler Technology</li>
+                            <li><i class="fa fa-check"></i> Reliable for small spaces</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div id="step4" class="step-container">
+                <p>Compare efficiency based on Star Ratings. <br>
+                the more higher the star the more expensive it is but has more cheaper bill</p>
+                <div class="option-grid" id="star-grid"></div>
+            </div>
+
+            <div id="step5" class="step-container">
+                <div style="background: #fff5f5; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #feb2b2; text-align: center;">
+                    <i class="fa fa-check-circle fa-3x" style="color: var(--primary);"></i>
+                    <h3>Match(s) Found!</h3>
+                </div>
+                <div id="product-details" style="text-align: center;">
+                    <img src="" id="res-img" class="product-preview" alt="Product">
+                    <h2 id="res-name">Loading...</h2>
+                    <p id="res-price" style="font-size: 1.5rem; font-weight: bold; color: var(--primary);"></p>
+                    <button class="btn-ftr btn-check" style="margin: 20px auto;" id="view-details-btn">View Full Details</button>
+                    <br>
+                    <button class="btn-ftr btn-back" style="margin: 0 auto; display: inline-flex;" onclick="window.changeStep(-1)">Edit Filters</button>
+                </div>
+            </div>
+
+            <div class="nav-controls" id="controls">
+                <button class="btn-ftr btn-back" onclick="window.changeStep(-1)"><i class="fa fa-arrow-left"></i> Back</button>
+                <button class="btn-ftr btn-reset" onclick="window.resetFTR()"><i class="fa fa-times"></i> Reset</button>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="footer"></div>
+    <script src="https://shop.lakhiairconditioners.com/js/rw/footer.js" defer></script>
+    
+
+    <script type="module">
+    import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
+    import { getFirestore, collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
+    
+    const firebaseConfig = {
+        apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+        authDomain: "lakhi-airconditioners.firebaseapp.com",
+        projectId: "lakhi-airconditioners",
+        storageBucket: "lakhi-airconditioners.firebasestorage.app",
+        messagingSenderId: "284430318185",
+        appId: "1:284430318185:web:ad09598be7a16ab46a00f8"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    let currentStep = 1;
+    let selections = { tonnage: '', brand: '', tech: '', stars: '' };
+    let allProducts = [];
+
+    // --- INTERNAL LOGIC FUNCTIONS ---
+
+    function highlight(el) {
+        const siblings = el.parentElement.querySelectorAll('.option-card');
+        siblings.forEach(s => s.classList.remove('selected'));
+        el.classList.add('selected');
+    }
+
+    function updateBrandList() {
+    const grid = document.getElementById('brand-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+    
+    // --- 1. ALWAYS ADD "ANY BRAND" FIRST ---
+    const anyCard = document.createElement('div');
+    anyCard.className = 'option-card';
+    anyCard.innerHTML = `
+        <i class="fa fa-layer-group fa-2x" style="color: #4a5568; margin-bottom: 10px;"></i>
+        <h4>Any Brand</h4>
+    `;
+    anyCard.onclick = () => { 
+        selections.brand = 'ANY'; 
+        highlight(anyCard); 
+        setTimeout(() => window.changeStep(1), 300); 
+    };
+    grid.appendChild(anyCard);
+
+    // --- 2. GET UNIQUE BRANDS FROM YOUR DATA ---
+    const availableBrands = [...new Set(allProducts
+        .filter(p => {
+            const tr = parseFloat(p.ac_tr || 0);
+            if (selections.tonnage === "1.0") return tr >= 1.0 && tr < 1.5;
+            if (selections.tonnage === "1.5") return tr >= 1.5 && tr < 2.0;
+            if (selections.tonnage === "2.0") return tr >= 2.0;
+            return false;
+        })
+        .map(p => p.brand))].filter(Boolean);
+
+    // --- 3. APPEND THE REST OF THE BRANDS ---
+    availableBrands.forEach(brandName => {
+        const card = document.createElement('div');
+        card.className = 'option-card';
+        const imgName = brandName.toLowerCase();
+        const logoUrl = `https://shop.lakhiairconditioners.com/img/OCOL/${imgName}.png`;
+        
+        card.innerHTML = `<img src="${logoUrl}" class="brand-logo" onerror="this.style.display='none'"><h4>${brandName}</h4>`;
+        card.onclick = () => { 
+            selections.brand = brandName; 
+            highlight(card); 
+            setTimeout(() => window.changeStep(1), 300); 
+        };
+        grid.appendChild(card);
+    });
+}
+
+    function updateTechList() {
+    // 1. Filter products based on the Tonnage selected in Step 1
+    const productsInTonnage = allProducts.filter(p => {
+        const tr = parseFloat(p.ac_tr || 0);
+        if (selections.tonnage === "1.0") return tr >= 1.0 && tr < 1.5;
+        if (selections.tonnage === "1.5") return tr >= 1.5 && tr < 2.0;
+        if (selections.tonnage === "2.0") return tr >= 2.0;
+        return false;
+    });
+
+    // 2. Further filter based on Brand (unless "ANY" is selected)
+    const filteredByStep = productsInTonnage.filter(p => {
+        if (selections.brand === 'ANY') return true;
+        return p.brand === selections.brand;
+    });
+
+    // 3. Check availability for both technologies
+    // Note: Use .toUpperCase() and .trim() to catch database inconsistencies
+    const hasInv = filteredByStep.some(p => {
+        const tech = String(p.ac_inv || '').toUpperCase().trim();
+        return tech === 'INV' || tech === 'INVERTER';
+    });
+
+    const hasNon = filteredByStep.some(p => {
+        const tech = String(p.ac_inv || '').toUpperCase().trim();
+        return tech === 'NON-INV' || tech === 'NON-INVERTER' || tech === 'FIXED SPEED';
+    });
+    
+    // 4. Update the UI classes
+    const invEl = document.getElementById('tech-inv');
+    const nonEl = document.getElementById('tech-non');
+
+    if (invEl) {
+        if (hasInv) {
+            invEl.classList.remove('greyed-out');
+        } else {
+            invEl.classList.add('greyed-out');
+            // Optional: if currently selected but now unavailable, clear selection
+            if (selections.tech === 'INV') selections.tech = ''; 
+        }
+    }
+
+    if (nonEl) {
+        if (hasNon) {
+            nonEl.classList.remove('greyed-out');
+        } else {
+            nonEl.classList.add('greyed-out');
+            if (selections.tech === 'NON-INV') selections.tech = '';
+        }
+    }
+}
+
+    function updateStarList() {
+    const grid = document.getElementById('star-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    const stars = [...new Set(allProducts
+        .filter(p => {
+            const tr = parseFloat(p.ac_tr || 0);
+            const matchesTon = (selections.tonnage === "1.0" && tr >= 1.0 && tr < 1.5) ||
+                               (selections.tonnage === "1.5" && tr >= 1.5 && tr < 2.0) ||
+                               (selections.tonnage === "2.0" && tr >= 2.0);
+            
+            const matchesBrand = (selections.brand === 'ANY') || (p.brand === selections.brand);
+            const matchesTech = String(p.ac_inv || '').toUpperCase() === selections.tech.toUpperCase();
+
+            return matchesTon && matchesBrand && matchesTech;
+        })
+        .map(p => p.ac_stars))].sort((a,b) => a-b);
+      
+    stars.forEach(s => {
+        const starNum = Number(s) || 2;
+        const baseBillForTwoStars = 5000; // baseline bill for 2-star
+        // Subtract 500 for every star above 2, add 500 for every star below 2
+        const bill = baseBillForTwoStars - ((starNum - 2) * 500);
+
+        const card = document.createElement('div');
+        card.className = 'option-card';
+        card.innerHTML = `
+            <h3>${starNum} Star</h3>
+            <p>Example: if bill at 2 stars is ₹${baseBillForTwoStars.toLocaleString('en-IN')}, then it will be ₹${bill.toLocaleString('en-IN')} in ${starNum} star <br>(of AC)</p>
+        `;
+        card.onclick = () => { 
+            selections.stars = starNum; 
+            highlight(card); 
+            setTimeout(() => window.changeStep(1), 300); 
+        };
+        grid.appendChild(card);
+    });
+}
+
+    function showFinalResult() {
+    const resultContainer = document.getElementById('product-details');
+    if (!resultContainer) return;
+    resultContainer.innerHTML = '';
+
+    const matches = allProducts.filter(p => {
+        const tr = parseFloat(p.ac_tr || 0);
+        const matchesTon = (selections.tonnage === "1.0" && tr >= 1.0 && tr < 1.5) ||
+                           (selections.tonnage === "1.5" && tr >= 1.5 && tr < 2.0) ||
+                           (selections.tonnage === "2.0" && tr >= 2.0);
+        
+        const matchesBrand = (selections.brand === 'ANY') || (p.brand === selections.brand);
+        const matchesTech = String(p.ac_inv || '').toUpperCase() === selections.tech.toUpperCase();
+        const matchesStars = String(p.ac_stars) === String(selections.stars);
+
+        return matchesTon && matchesBrand && matchesTech && matchesStars;
+    });
+
+    if (matches.length > 0) {
+        matches.forEach(match => {
+            const productDiv = document.createElement('div');
+            productDiv.style.cssText = "margin-bottom: 30px; padding: 20px; border: 1px solid #edf2f7; border-radius: 12px; text-align: center;";
+
+            productDiv.innerHTML = `
+                <img src="${match.image_url || match.img || 'https://shop.lakhiairconditioners.com/img/1x1-logo.png'}" class="product-preview">
+                <h2>${match.name}</h2>
+                <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">
+                    ${match.price ? `₹${match.price.toLocaleString('en-IN')}` : 'Price on Request'}
+                </p>
+                <button class="btn-ftr btn-check" style="margin: 10px auto;" 
+                    onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${match.serial_no || match.id}'">
+                    View Full Details
+                </button>
+            `;
+            resultContainer.appendChild(productDiv);
+        });
+
+        // Add Edit Button
+        const editBtn = document.createElement('button');
+        editBtn.className = "btn-ftr btn-back";
+        editBtn.style.margin = "20px auto";
+        editBtn.innerText = "Edit Filters";
+        editBtn.onclick = () => window.changeStep(-1);
+        resultContainer.appendChild(editBtn);
+
+    } else {
+        resultContainer.innerHTML = `<h2>No Match Found</h2><p>Try different filters.</p>
+        <button class="btn-ftr btn-back" style="margin: 20px auto;" onclick="window.changeStep(-1)">Edit Filters</button>`;
+    }
+}
+
+    // --- GLOBAL WINDOW EXPOSURE ---
+    
+    window.changeStep = function(dir) {
+        const nextStep = currentStep + dir;
+        if (nextStep < 1 || nextStep > 5) return;
+        
+        document.getElementById(`step${currentStep}`).classList.remove('step-active');
+        currentStep = nextStep;
+        
+        document.getElementById('step-title').innerText = ["Room Size", "Preferred Brand", "Technology", "Efficiency", "Perfect Match"][currentStep-1];
+        document.getElementById('progress-inner').style.width = (currentStep * 20) + "%";
+        document.getElementById(`step${currentStep}`).classList.add('step-active');
+        document.getElementById('controls').style.display = (currentStep === 5) ? 'none' : 'flex';
+
+        if (currentStep === 2) updateBrandList();
+        if (currentStep === 3) updateTechList();
+        if (currentStep === 4) updateStarList();
+        if (currentStep === 5) showFinalResult();
+    };
+
+    window.selectTonnage = (val, el) => { 
+        selections.tonnage = val; 
+        highlight(el); 
+        setTimeout(() => window.changeStep(1), 300); 
+    };
+
+    window.selectTech = (val, el) => { 
+        selections.tech = val; 
+        highlight(el); 
+        setTimeout(() => window.changeStep(1), 300); 
+    };
+
+    window.selectStars = (val, el) => { 
+        selections.stars = val; 
+        highlight(el); 
+        setTimeout(() => window.changeStep(1), 300); 
+    };
+
+    window.resetFTR = () => location.reload();
+
+    // --- DATA LOADING ---
+
+    async function loadProducts() {
+        const loader = document.getElementById('loading-overlay');
+        if (loader) loader.style.display = 'flex';
+        try {
+            const productsRef = collection(db, "artifacts", "lakhi-airconditioners", "products"); 
+            const q = query(productsRef, where("type", "==", "AC")); // Note: "AC" uppercase
+            const querySnapshot = await getDocs(q);
+            
+            allProducts = querySnapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+            console.log("Products Loaded successfully:", allProducts);
+        } catch (error) {
+            console.error("Database Error:", error);
+        } finally {
+            if (loader) loader.style.display = 'none';
+        }
+    }
+
+    loadProducts();
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@ const headerElement = document.getElementById('header');
 const headerContent = `
     <div class="container">
         <div class="banner">
-            <p>Customer system will be down for a few days for improvement of data safety.</p>
+            <p></p>
         </div>
         <div class="navbar">
             <div class="logo"><img src="https://shop.lakhiairconditioners.com/img/NABR/log.jpg" width="125px" alt="Company Logo"></div>
@@ -26,4 +26,16 @@ const headerContent = `
 
 if (headerElement) {
     headerElement.innerHTML = headerContent;
+}
+var Menuitems = document.getElementById('Menuitems');
+Menuitems.style.maxHeight ="0px";
+function menutoggle(){
+    if(Menuitems.style.maxHeight == "0px")
+       { 
+         Menuitems.style.maxHeight= "200px"
+        }
+    else
+        {
+        Menuitems.style.maxHeight ="0px";
+        }
 }

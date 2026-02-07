@@ -35,7 +35,7 @@ const footerContent = `
                 </ul>
                 <h3 style="margin-top: 20px">Contact info</h3>
                 <ul>
-                    <li><a href="tel:+919825513000">+91 99980 21446 <br> (11am - 7pm)</a></li>
+                    <li><a href="tel:+919998021446">+91 99980 21446 <br> (11am - 7pm)</a></li>
                     <li><a href="mailto:info@lakhiairconditioners?subject=Feedback&body=Hi%20there,%20I%20have%20some%20feedback%20for%20you.">info@lakhiairconditioners.com</a></li>
                     <li><a href="https://bc.lakhiairconditioners.com">Business-card</a></li>
                 </ul>

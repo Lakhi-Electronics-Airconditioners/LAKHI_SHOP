@@ -4,305 +4,289 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
         http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
-<url>
-    <loc>https://shop.lakhiairconditioners.com/</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>1.00</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/info/TAC</loc>
-    <lastmod>2025-09-1800:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/info/PP</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/change_password</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.60</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/del</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.60</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/email_verf</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.40</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/forgot-password</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/signin</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/signup</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls/su2</loc>
-    <lastmod>2025-10-10T00:00:00+00:00</lastmod>
-    <priority>0.40</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/about</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/AC-only</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.90</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/account</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.80</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/account/share-your-info</loc>
-    <lastmod>2025-10-10T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/bill</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.30</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/bu</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.00</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/cart</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.30</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/contact</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/HTMACPC</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/ls</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.90</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/products</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.90</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/all/samsung/fr</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.30</priority>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/all/hitachi/L1</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.30</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/video</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.50</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/account/share-your-info</loc>
-    <lastmod>2025-09-18T00:00:00+00:00</lastmod>
-    <priority>0.70</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/account/display</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/user-info</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/user-info/uid</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/email</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/email_verfiy</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/name</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/phoneno</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/code</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/name</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/HFN</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/HAF</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/ARA</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/CTY</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/STA</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/PIC</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/city</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/display/customer-info/pincode</loc>
-    <lastmod>2025-10-12T00:00:00+00:00</lastmod>
-    <priority>0.10</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/FTR/AC</loc>
-    <lastmod>2026-02-06T00:00:00+00:00</lastmod>
-    <priority>0.85</priority>
-</url>
-<url>
-
-<loc>https://shop.lakhiairconditioners.com/FTR/TV</loc>
- <lastmod>2026-02-06T00:00:00+00:00</lastmod>
-    <priority>0.85</priority>
-</url>
-
-
-
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=MTKL50U</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RAS.B312PCAIBA1</loc>
-    <lastmod>2025-08-24T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=FTKY35UV16W3</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RT34DG5A4DBXHL</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=GTL50UV16</loc>
-    <lastmod>2025-08-28T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=AR60F19D13WNNAL</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=D318PCCIBS</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RAS.B318PCAIBA1</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=US-H19BNXE</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=SRK25CSS-S6</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=ATKL60U</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=QA55QE1CAKLXL</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
-<url>
-    <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=QA55QEF1AULXL</loc>
-    <lastmod>2025-08-23T00:00:00+00:00</lastmod>
-    <priority>0.65</priority>
-</url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>1.00</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/info/TAC</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/info/PP</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/change_password</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.60</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/del</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.60</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/email_verf</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.40</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/forgot-password</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/signin</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/signup</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls/su2</loc>
+        <lastmod>2025-10-10T00:00:00+00:00</lastmod>
+        <priority>0.40</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/about</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/AC-only</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/account</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.80</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/account/share-your-info</loc>
+        <lastmod>2025-10-10T00:00:00+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/bill</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/bu</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.00</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/cart</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/contact</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.70</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/HTMACPC</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/ls</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/products</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.90</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/all/samsung/fr</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/all/hitachi/L1</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.30</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/video</loc>
+        <lastmod>2025-09-18T00:00:00+00:00</lastmod>
+        <priority>0.50</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/account/display</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/user-info</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/user-info/uid</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/email</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/email_verfiy</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/name</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/phoneno</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/code</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/HFN</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/HAF</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/ARA</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/CTY</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/STA</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/addr/PIC</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/city</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/display/customer-info/pincode</loc>
+        <lastmod>2025-10-12T00:00:00+00:00</lastmod>
+        <priority>0.10</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/FTR/AC</loc>
+        <lastmod>2026-02-06T00:00:00+00:00</lastmod>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/FTR/TV</loc>
+        <lastmod>2026-02-06T00:00:00+00:00</lastmod>
+        <priority>0.85</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=MTKL50U</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RAS.B312PCAIBA1</loc>
+        <lastmod>2025-08-24T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=FTKY35UV16W3</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RT34DG5A4DBXHL</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=GTL50UV16</loc>
+        <lastmod>2025-08-28T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=AR60F19D13WNNAL</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=D318PCCIBS</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=RAS.B318PCAIBA1</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=US-H19BNXE</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=SRK25CSS-S6</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=ATKL60U</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=QA55QE1CAKLXL</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
+    <url>
+        <loc>https://shop.lakhiairconditioners.com/product_detail?serial_no=QA55QEF1AULXL</loc>
+        <lastmod>2025-08-23T00:00:00+00:00</lastmod>
+        <priority>0.65</priority>
+    </url>
 </urlset>

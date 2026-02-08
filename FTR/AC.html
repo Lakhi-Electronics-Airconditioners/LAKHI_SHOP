@@ -34,7 +34,8 @@
         .greyed-out { opacity: 0.4; filter: grayscale(1); cursor: not-allowed; pointer-events: none; }
         .brand-logo { width: 80px; height: 50px; object-fit: contain; margin-bottom: 10px; pointer-events: none; }
         .nav-controls { display: flex; justify-content: space-between; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; }
-        .btn-ftr { padding: 10px 25px; border-radius: 8px; border: none; font-weight: 600; cursor: pointer; display: flex; align-items: center; gap: 8px; }
+       .btn-ftr { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-ftr:hover { background: #b71c1c; }
         .btn-back { background: #edf2f7; color: #4a5568; }
         .btn-reset { background: #fee2e2; color: #991b1b; }
         .btn-check { background: var(--primary); color: white; }
@@ -44,23 +45,14 @@
         .adv-list li { margin-bottom: 5px; display: flex; align-items: flex-start; gap: 6px; }
         .adv-list li i { color: #48bb78; font-size: 0.75rem; margin-top: 4px; }
         .recommendation { font-weight: 600; color: var(--primary); margin-top: 8px; font-size: 0.8rem; }
-
-        .product-preview { max-width: 300px; margin: 20px auto; border-radius: 10px; display: block; }
         
         #loading-overlay { position: fixed; top:0; left:0; width:100%; height:100%; background:rgba(255,255,255,0.9); display:none; justify-content:center; align-items:center; z-index:9999; flex-direction:column; }
         .spinner { border: 4px solid #f3f3f3; border-top: 4px solid var(--primary); border-radius: 50%; width: 40px; height: 40px; animation: spin 1s linear infinite; }
         @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
         /* Mobile Optimizations */
         @media (max-width: 600px) {
-            .ftr-card {
-                padding: 1rem; /* Less padding on small screens */
-            }
-    
-            .product-preview {
-                width: 100%; /* Image takes full width */
-                max-width: 250px;
-                height: auto;
-            }
+             .btn-ftr { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+             .btn-ftr:hover { background: #b71c1c; }
 
             .option-grid {
                 grid-template-columns: repeat(2, 1fr); /* 2 items per row instead of 1 */
@@ -72,20 +64,22 @@
                 text-align: center;
             }
         }
+
         
         /* Specific Card Styling for results */
-        .result-card {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: #fff;
-            border: 1px solid #edf2f7;
-            border-radius: 12px;
-            padding: 15px;
-            margin-bottom: 15px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.02);
-        }
+        .product-card { border: 1px solid #edf2f7; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 20px; background: white; }
+        @media (max-width: 600px) { .product-card { flex-direction: column; text-align: center; } }
+        .product-card img { width: 140px; height: auto; border-radius: 8px; }
+        .price { color: var(--primary); font-weight: 700; font-size: 1.4rem; }
+
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://shop.lakhiairconditioners.com/service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('❌ Service Worker error:', err));
+        }
+    </script>
 </head>
 <body>
     <div id="tacpp-el"></div>
@@ -176,10 +170,7 @@
             </div>
 
             <div id="step5" class="step-container">
-                <div style="background: #fff5f5; padding: 20px; border-radius: 12px; margin-bottom: 20px; border: 1px solid #feb2b2; text-align: center;">
-                    <i class="fa fa-check-circle fa-3x" style="color: var(--primary);"></i>
-                    <h3>Match(s) Found!</h3>
-                </div>
+                    <h3 style="text-align: center;">Match(s) Found!</h3>
                 <div id="product-details" style="text-align: center;">
                     <img src="" id="res-img" class="product-preview" alt="Product">
                     <h2 id="res-name">Loading...</h2>
@@ -391,15 +382,16 @@
             productDiv.style.cssText = "margin-bottom: 30px; padding: 20px; border: 1px solid #edf2f7; border-radius: 12px; text-align: center;";
 
             productDiv.innerHTML = `
-                <img src="${match.image_url || match.img || 'https://shop.lakhiairconditioners.com/img/1x1-logo.png'}" class="product-preview">
-                <h2>${match.name}</h2>
-                <p style="font-size: 1.5rem; font-weight: bold; color: var(--primary);">
-                    ${match.price ? `₹${match.price.toLocaleString('en-IN')}` : 'Price on Request'}
-                </p>
-                <button class="btn-ftr btn-check" style="margin: 10px auto;" 
-                    onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${match.serial_no || match.id}'">
-                    View Full Details
-                </button>
+                <div class="product-card">
+                    <img src="${match.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${match.name}">
+                    <div style="flex:1;">
+                        <h3 style="margin:0; font-size:1.1rem;">${match.name}</h3>
+                        <p style="color:#666; font-size:0.85rem; margin:5px 0;">${match.brand} | ${match.ac_tr} TON" | ${match.ac_stars} Stars | ${match.ac_inv}</p>
+                        <div class="price">₹${match.price?.toLocaleString('en-IN')}</div>
+                    </div>
+                     <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${match.serial_no}'">View</button>
+                </div>
+               
             `;
             resultContainer.appendChild(productDiv);
         });

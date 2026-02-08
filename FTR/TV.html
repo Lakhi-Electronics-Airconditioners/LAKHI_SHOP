@@ -7,118 +7,257 @@
     <link rel="icon" href="https://shop.lakhiairconditioners.com/img/1x1-logo.png">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/styles.css">
     <link rel="stylesheet" href="https://shop.lakhiairconditioners.com/DOWNLOADED CSS/fontawesome-free-6.7.2-web/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        :root { --primary: #004aad; --accent: #00c6ff; --bg: #f0f4f8; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); }
-        .ftr-card { background: white; border-radius: 20px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.1); margin: 40px auto; max-width: 600px; }
-        .step { display: none; }
-        .active { display: block; animation: slideIn 0.3s ease; }
-        .input-group { margin: 20px 0; }
-        input[type="number"] { width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 10px; font-size: 1rem; }
-        .tech-card { border: 2px solid #eee; border-radius: 15px; padding: 20px; cursor: pointer; margin: 10px 0; transition: 0.3s; }
-        .tech-card:hover { border-color: var(--primary); transform: translateX(5px); }
-        .tech-card.selected { border-color: var(--primary); background: #f0f7ff; }
-        .btn-main { background: var(--primary); color: white; border: none; padding: 15px 30px; border-radius: 10px; width: 100%; font-weight: bold; cursor: pointer; margin-top: 20px; }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
+        :root { --primary: #d32f2f; --accent: #ff5252; --bg: #f8fafc; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: #333; margin: 0; }
+        .ftr-card { background: white; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.08); padding: 2rem; margin: 20px auto; max-width: 850px; transition: all 0.3s ease; }
+        .step-container { display: none; animation: fadeIn 0.4s ease; }
+        .step-active { display: block; }
+        
+        .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; margin-top: 20px; }
+        @media (max-width: 768px) { .grid-2 { grid-template-columns: 1fr; } }
+        
+        .option-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-top: 20px; }
+        .option-card { border: 2px solid #edf2f7; border-radius: 12px; padding: 15px; text-align: center; cursor: pointer; transition: 0.2s; background: white; }
+        .option-card:hover { border-color: var(--primary); background: #fff5f5; }
+        .option-card.selected { border-color: var(--primary); background: #ffebee; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(211,47,47,0.1); }
+        
+        .finder-box { background: #fff5f5; padding: 20px; border-radius: 12px; border: 1px dashed var(--primary); text-align: center; }
+        .unit-toggle { display: flex; justify-content: center; gap: 10px; margin-bottom: 15px; }
+        .unit-btn { padding: 5px 15px; border-radius: 20px; border: 1px solid var(--primary); background: transparent; cursor: pointer; font-size: 0.75rem; font-weight: 600; color: var(--primary); }
+        .unit-btn.active { background: var(--primary); color: white; }
+        
+        .finder-tabs { display: flex; border-bottom: 2px solid #eee; margin-bottom: 15px; }
+        .tab { flex: 1; padding: 10px; cursor: pointer; font-size: 0.85rem; font-weight: 600; color: #666; }
+        .tab.active { color: var(--primary); border-bottom: 2px solid var(--primary); }
+        
+        .input-row { display: flex; gap: 10px; justify-content: center; margin-bottom: 10px; }
+        .input-row input { width: 45% !important; padding: 10px; border-radius: 8px; border: 1px solid #ddd; }
+
+        .btn-ftr { background: var(--primary); color: white; border: none; padding: 12px 25px; border-radius: 8px; font-weight: 600; cursor: pointer; transition: 0.3s; }
+        .btn-ftr:hover { background: #b71c1c; }
+
+        .product-card { border: 1px solid #edf2f7; border-radius: 12px; padding: 20px; margin-bottom: 15px; display: flex; align-items: center; gap: 20px; background: white; }
+        @media (max-width: 600px) { .product-card { flex-direction: column; text-align: center; } }
+        .product-card img { width: 140px; height: auto; border-radius: 8px; }
+        .price { color: var(--primary); font-weight: 700; font-size: 1.4rem; }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
+    <script>
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('https://shop.lakhiairconditioners.com/service-worker.js')
+                .then(() => console.log('✅ Service Worker registered'))
+                .catch(err => console.error('❌ Service Worker error:', err));
+        }
+    </script>
 </head>
 <body>
-    <div id="tacpp-el"></div>
+        <div id="tacpp-el"></div>
     <script src="https://shop.lakhiairconditioners.com/js/rw/tacpp.js" defer></script>
     <script src="https://shop.lakhiairconditioners.com/js/TACPP.js" defer></script>
-    
     <div class="header-NAV" id="header"></div>
     <script src="https://shop.lakhiairconditioners.com/js/rw/header.js" defer></script>
+    <div class="color-NAV"><br><br><a href="#" class="back-button" onclick="history.back(); return false;">&larr; Back</a></div>
     
-    <div class="container">
+
+    <div class="container" style="padding: 20px;">
         <div class="ftr-card">
-            <!-- STEP 1: DIMENSIONS -->
-            <div id="step1" class="step active">
-                <h2>1. Measuring your Space</h2>
-                <p>Enter your wall dimensions (inches) to calculate the best TV size.</p>
-                <div class="input-group">
-                    <label>Wall Length (Inches)</label>
-                    <input type="number" id="wall-l" placeholder="e.g. 50">
-                </div>
-                <div class="input-group">
-                    <label>Wall Breadth (Inches)</label>
-                    <input type="number" id="wall-b" placeholder="e.g. 30">
-                </div>
-                <button class="btn-main" onclick="calcSize()">Calculate Perfect Size</button>
+            <h2 id="step-title" style="color: var(--primary); margin: 0; text-align: center; min-height: 40px;">Choose Your TV Size</h2>
+            <div id="progress-bar" style="height: 4px; background: #eee; border-radius: 2px; margin: 20px 0;">
+                <div id="progress-inner" style="width: 20%; height: 100%; background: var(--primary); transition: 0.3s;"></div>
             </div>
 
-            <!-- STEP 2: TECH -->
-            <div id="step2" class="step">
-                <h2>2. Screen Technology</h2>
-                <div class="tech-card" onclick="setTech('LED', this)">
-                    <h3>LED</h3>
-                    <p>Bright rooms & Value for money.</p>
+            <div id="step1" class="step-container step-active">
+                <div class="grid-2">
+                    <div>
+                        <p style="font-weight: 600; margin-top:0;">Available Sizes</p>
+                        <div id="inch-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                            <div class="option-card" onclick="setInch('ANY', this)"><h4>Any Size</h4></div>
+                        </div>
+                    </div>
+                    <div class="finder-box">
+                        <p style="font-weight: 600; margin-top:0;">Not sure about the size?</p>
+                        <div class="unit-toggle">
+                            <div id="unit-ft" class="unit-btn active" onclick="setUnit('ft')">Feet (ft)</div>
+                            <div id="unit-cm" class="unit-btn" onclick="setUnit('cm')">Centimeters (cm)</div>
+                        </div>
+                        <div class="finder-tabs">
+                            <div id="tab-dist" class="tab active" onclick="setFinderMode('dist')">Distance</div>
+                            <div id="tab-wall" class="tab" onclick="setFinderMode('wall')">Wall Size</div>
+                        </div>
+                        <div id="mode-dist">
+                            <input type="number" id="val-dist" placeholder="Viewing Distance" style="width: 80%; padding: 10px; border-radius: 8px; border: 1px solid #ddd;">
+                        </div>
+                        <div id="mode-wall" style="display:none;">
+                            <div class="input-row"><input type="number" id="wall-w" placeholder="W"><input type="number" id="wall-h" placeholder="H"></div>
+                        </div>
+                        <button class="btn-ftr" style="margin-top:15px; width:100%;" onclick="calculateBestSize()">Calculate</button>
+                        <div id="calc-result" style="margin-top: 15px; font-weight: bold; color: var(--primary);"></div>
+                    </div>
                 </div>
-                <div class="tech-card" onclick="setTech('QLED', this)">
-                    <h3>QLED</h3>
-                    <p>Quantum Dots for vivid, punchy colors.</p>
-                </div>
-                <div class="tech-card" onclick="setTech('OLED', this)">
-                    <h3>OLED</h3>
-                    <p>Perfect blacks. Best for movies & dark rooms.</p>
-                </div>
-                <button class="btn-main" onclick="next(3)">Continue</button>
             </div>
 
-            <!-- STEP 3: RESULT -->
-            <div id="step3" class="step" style="text-align:center;">
-                <div id="tv-result-box">
-                    <i class="fa fa-tv fa-4x" style="color: var(--primary); margin-bottom: 20px;"></i>
-                    <h2 id="rec-size">43" Recommended</h2>
-                    <p id="rec-desc">Based on your wall size, a 43-inch TV will fit perfectly with adequate borders.</p>
-                    <button class="btn-main" onclick="findInStore()">Browse Matches in Store</button>
-                </div>
+            <div id="step2" class="step-container">
+                <p style="text-align:center;">Select your preferred brand.</p>
+                <div id="brand-grid" class="option-grid"></div>
+            </div>
+
+            <div id="step3" class="step-container">
+                <p style="text-align:center;">Select panel technology.</p>
+                <div id="tech-grid" class="option-grid"></div>
+            </div>
+
+            <div id="step4" class="step-container">
+                <p style="text-align:center;">Choose clarity level.</p>
+                <div id="res-grid" class="option-grid"></div>
+            </div>
+
+            <div id="step5" class="step-container">
+                <h3 style="text-align: center; color: var(--primary);">Recommended TVs</h3>
+                <div id="match-results"></div>
+            </div>
+
+            <div id="controls" style="display: flex; justify-content: space-between; margin-top: 30px; border-top: 1px solid #eee; padding-top: 20px;">
+                <button class="btn-ftr" style="background: #edf2f7; color: #4a5568; width: auto;" onclick="changeStep(-1)">Back</button>
+                <button id="next-btn" class="btn-ftr" style="width: auto; display: none;" onclick="changeStep(1)">Next Step</button>
             </div>
         </div>
     </div>
-
     <div id="footer" class="footer"></div>
     <script src="https://shop.lakhiairconditioners.com/js/rw/footer.js" defer></script>
 
-    <script>
-        let tvData = { size: 0, tech: '' };
+    <script type="module">
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
+        import { getFirestore, collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
 
-        function calcSize() {
-            const l = document.getElementById('wall-l').value;
-            const b = document.getElementById('wall-b').value;
-            if(!l || !b) return alert("Please enter dimensions");
+        const firebaseConfig = {
+            apiKey: "AIzaSyC-16u2n4IaGRmg88nsPmMYCGKp2jjL9Bg",
+            authDomain: "lakhi-airconditioners.firebaseapp.com",
+            projectId: "lakhi-airconditioners",
+            storageBucket: "lakhi-airconditioners.firebasestorage.app",
+            messagingSenderId: "284430318185",
+            appId: "1:284430318185:web:ad09598be7a16ab46a00f8"
+        };
 
-            // Pythagorean: c = sqrt(a^2 + b^2)
-            const diagonal = Math.sqrt(Math.pow(l, 2) + Math.pow(b, 2));
-            
-            // Suggest 80% of diagonal to leave room for wall borders
-            let suggested = diagonal * 0.8;
-            
-            if (suggested < 32) tvData.size = 32;
-            else if (suggested < 43) tvData.size = 43;
-            else if (suggested < 55) tvData.size = 55;
-            else tvData.size = 65;
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
 
-            document.getElementById('rec-size').innerText = tvData.size + '" Recommended';
-            next(2);
+        let currentStep = 1;
+        let allTVs = [];
+        let selections = { inch: '', brand: '', tech: '', res: '' };
+        let currentUnit = 'ft';
+        let finderMode = 'dist';
+
+        async function loadTVData() {
+            try {
+                const q = query(collection(db, "artifacts/lakhi-airconditioners/products"), where("type", "==", "TV"));
+                const snap = await getDocs(q);
+                allTVs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                console.table(allTVs);
+                populateInchGrid();
+            } catch (e) { console.error(e); }
         }
 
-        function setTech(val, el) {
-            tvData.tech = val;
-            const cards = document.querySelectorAll('.tech-card');
-            cards.forEach(c => c.classList.remove('selected'));
-            el.classList.add('selected');
+        function populateInchGrid() {
+            const grid = document.getElementById('inch-grid');
+            const sizes = [...new Set(allTVs.map(t => t.tv_inch))].sort((a,b) => a-b);
+            sizes.forEach(size => {
+                const div = document.createElement('div');
+                div.className = 'option-card';
+                div.innerHTML = `<h4>${size}"</h4>`;
+                div.onclick = () => { selections.inch = size; highlight(div, '#inch-grid'); document.getElementById('next-btn').style.display = 'block'; };
+                grid.appendChild(div);
+            });
         }
 
-        function next(step) {
-            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
-            document.getElementById('step' + step).classList.add('active');
+        function populateBrandGrid() {
+            const grid = document.getElementById('brand-grid');
+            grid.innerHTML = '<div class="option-card" onclick="setBrand(\'ANY\', this)"><h4>Any Brand</h4></div>';
+            const brands = [...new Set(allTVs.filter(t => selections.inch === 'ANY' || t.tv_inch == selections.inch).map(t => t.brand))].filter(Boolean);
+            brands.forEach(b => {
+                const div = document.createElement('div');
+                div.className = 'option-card';
+                div.innerHTML = `<h4>${b}</h4>`;
+                div.onclick = () => setBrand(b, div);
+                grid.appendChild(div);
+            });
         }
 
-        function findInStore() {
-            // Redirect to products filtered by size and tech
-            window.location.href = `../products.html?type=tv&size=${tvData.size}&tech=${tvData.tech}`;
+        window.setBrand = (b, el) => { selections.brand = b; highlight(el, '#brand-grid'); changeStep(1); };
+
+        function populateTechGrid() {
+            const grid = document.getElementById('tech-grid');
+            grid.innerHTML = '';
+            const techs = [...new Set(allTVs.filter(t => (selections.inch === 'ANY' || t.tv_inch == selections.inch) && (selections.brand === 'ANY' || t.brand === selections.brand)).map(t => t.tv_sq))].filter(Boolean);
+            techs.forEach(tech => {
+                const div = document.createElement('div');
+                div.className = 'option-card';
+                div.innerHTML = `<h4>${tech}</h4>`;
+                div.onclick = () => { selections.tech = tech; changeStep(1); };
+                grid.appendChild(div);
+            });
         }
+
+        function populateResGrid() {
+            const grid = document.getElementById('res-grid');
+            grid.innerHTML = '';
+            const resData = [...new Set(allTVs.filter(t => (selections.inch === 'ANY' || t.tv_inch == selections.inch) && (selections.brand === 'ANY' || t.brand === selections.brand) && t.tv_sq == selections.tech).map(t => t.tv_res))].filter(Boolean);
+            resData.forEach(res => {
+                const div = document.createElement('div');
+                div.className = 'option-card';
+                let label = res === 'HD' ? 'HD (1080p)' : res === '4K' ? '4K (FULL HD)' : res === '8K' ? '8K Ultra HD' : res;
+                div.innerHTML = `<h4>${label}</h4>`;
+                div.onclick = () => { selections.res = res; changeStep(1); };
+                grid.appendChild(div);
+            });
+        }
+
+        function showMatches() {
+            const results = document.getElementById('match-results');
+            const filtered = allTVs.filter(t => (selections.inch === 'ANY' || t.tv_inch == selections.inch) && (selections.brand === 'ANY' || t.brand === selections.brand) && t.tv_sq == selections.tech && t.tv_res == selections.res);
+            if(filtered.length === 0) { results.innerHTML = "<p style='text-align:center;'>No match found.</p>"; return; }
+            results.innerHTML = filtered.map(t => `
+                <div class="product-card">
+                    <img src="${t.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${t.name}">
+                    <div style="flex:1;"><h3 style="margin:0;">${t.name}</h3><p style="color:#666; font-size:0.85rem;">${t.brand} | ${t.tv_inch}" | ${t.tv_sq}</p><div class="price">₹${t.price?.toLocaleString('en-IN')}</div></div>
+                    <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='product_detail?serial_no=${t.serial_no}'">View</button>
+                </div>
+            `).join('');
+        }
+
+        window.setUnit = (u) => { currentUnit = u; document.getElementById('unit-ft').classList.toggle('active', u === 'ft'); document.getElementById('unit-cm').classList.toggle('active', u === 'cm'); };
+        window.setFinderMode = (m) => { finderMode = m; document.getElementById('tab-dist').classList.toggle('active', m === 'dist'); document.getElementById('tab-wall').classList.toggle('active', m === 'wall'); document.getElementById('mode-dist').style.display = (m === 'dist' ? 'block' : 'none'); document.getElementById('mode-wall').style.display = (m === 'wall' ? 'block' : 'none'); };
+        window.calculateBestSize = () => {
+            let suggested = 0;
+            if (finderMode === 'dist') {
+                let val = parseFloat(document.getElementById('val-dist').value); if (!val) return;
+                let distInches = (currentUnit === 'ft') ? val * 12 : val / 2.54; suggested = Math.round(distInches / 1.6);
+            } else {
+                let w = parseFloat(document.getElementById('wall-w').value), h = parseFloat(document.getElementById('wall-h').value); if (!w || !h) return;
+                let wallDiag = Math.sqrt(Math.pow(w, 2) + Math.pow(h, 2));
+                let wallDiagInches = (currentUnit === 'ft') ? wallDiag * 12 : wallDiag / 2.54; suggested = Math.round(wallDiagInches * 0.8);
+            }
+            document.getElementById('calc-result').innerText = `Recommended: ${suggested}"`;
+        };
+        window.setInch = (val, el) => { selections.inch = val; highlight(el, '#inch-grid'); document.getElementById('next-btn').style.display = 'block'; };
+        window.changeStep = (dir) => {
+            const nextStep = currentStep + dir; if(nextStep < 1 || nextStep > 5) return;
+            document.getElementById(`step${currentStep}`).classList.remove('step-active');
+            currentStep = nextStep;
+            document.getElementById(`step${currentStep}`).classList.add('step-active');
+            const titles = ["TV Size", "Preferred Brand", "Technology", "Resolution", "Best Matches"];
+            document.getElementById('step-title').innerText = titles[currentStep-1];
+            document.getElementById('progress-inner').style.width = (currentStep * 20) + "%";
+            document.getElementById('next-btn').style.display = (currentStep === 5) ? 'none' : (dir === 1 || selections.inch) ? 'block' : 'none';
+            if(currentStep === 2) populateBrandGrid();
+            if(currentStep === 3) populateTechGrid();
+            if(currentStep === 4) populateResGrid();
+            if(currentStep === 5) showMatches();
+        };
+        function highlight(el, gridId) { document.querySelectorAll(gridId + ' .option-card').forEach(c => c.classList.remove('selected')); el.classList.add('selected'); }
+        loadTVData();
     </script>
 </body>
 </html>

@@ -222,7 +222,7 @@
                 <div class="product-card">
                     <img src="${t.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${t.name}">
                     <div style="flex:1;"><h3 style="margin:0;">${t.name}</h3><p style="color:#666; font-size:0.85rem;">${t.brand} | ${t.tv_inch}" | ${t.tv_sq}</p><div class="price">₹${t.price?.toLocaleString('en-IN')}</div></div>
-                    <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='product_detail?serial_no=${t.serial_no}'">View</button>
+                    <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${t.serial_no}'">View</button>
                 </div>
             `).join('');
         }

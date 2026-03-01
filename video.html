@@ -120,7 +120,7 @@
     <div class="container main-content"> 
         <center>
             <h1 class="title2" id="video-collection-title"></h1>
-            <input type="number" id="year-input" placeholder="Enter Year (e.g., 2025)" value="2025" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 20px;">
+            <input type="number" id="year-input" placeholder="Enter Year (e.g., 2025)" style="padding: 10px; border: 1px solid #ccc; border-radius: 5px; margin-bottom: 20px;">
             <button onclick="changeYear()" style="padding: 10px 20px; background-color: #ff523b; color: white; border: none; border-radius: 5px; cursor: pointer;">Go</button>
             <br>
             <br>
@@ -134,7 +134,12 @@
     <div id="footer" class="footer"></div>
     <script src="/js/rw/footer.js" defer></script>
     <!-- Firebase SDKs -->
+    <script>
+        const currentYear = new Date().getFullYear();
 
+        // Set the value of the input field
+        document.getElementById("year-input").value = currentYear;
+    </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
         import { getFirestore, collection, getDocs, query, where, doc, getDoc } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-firestore.js";

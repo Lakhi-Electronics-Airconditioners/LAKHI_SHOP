@@ -189,6 +189,7 @@
         const filterAcinvSelect = document.getElementById('filterInv')
 
         let allProducts = [];
+        let ACproducts = [];
         let displayedProducts = [];
 
         // Function to render products
@@ -217,8 +218,9 @@
                         <img src="${product.image_url}" 
                              alt="${product.name}" 
                              onerror="handleImageError(this, '${product.serial_no}');"> 
-                        <h4>${product.name} (S/N: ${product.serial_no})</h4>
-                        <p>${formattedPrice}</p>
+                        <h4>${product.name} (S/N: ${product.serial_no})</h4><br>
+                        <h4>Brand Name: ${product.brand}</h4><br>
+                        <p>${formattedPrice}</p> 
                         <BR>
                         ${acTrDisplay}
                         ${acTypeDisplay}
@@ -339,7 +341,8 @@
                 const querySnapshot = await getDocs(productsCollectionRef);
                 querySnapshot.forEach((doc) => {
                     const productData = doc.data();
-                    if (productData.type === 'AC') {
+                    if (productData.type === 'AC' && productData.hidden !== 1) {
+                        ACproducts.push(productData);
                         allProducts.push(productData);
                     }
                 });

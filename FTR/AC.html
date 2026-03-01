@@ -241,6 +241,7 @@
     // --- 2. GET UNIQUE BRANDS FROM YOUR DATA ---
     const availableBrands = [...new Set(allProducts
         .filter(p => {
+            if (p.hidden == 1) return false;
             const tr = parseFloat(p.ac_tr || 0);
             if (selections.tonnage === "1.0") return tr >= 1.0 && tr < 1.5;
             if (selections.tonnage === "1.5") return tr >= 1.5 && tr < 2.0;
@@ -269,6 +270,7 @@
     function updateTechList() {
     // 1. Filter products based on the Tonnage selected in Step 1
     const productsInTonnage = allProducts.filter(p => {
+        if (p.hidden == 1) return false;
         const tr = parseFloat(p.ac_tr || 0);
         if (selections.tonnage === "1.0") return tr >= 1.0 && tr < 1.5;
         if (selections.tonnage === "1.5") return tr >= 1.5 && tr < 2.0;
@@ -325,6 +327,7 @@
 
     const stars = [...new Set(allProducts
         .filter(p => {
+            if (p.hidden == 1) return false;
             const tr = parseFloat(p.ac_tr || 0);
             const matchesTon = (selections.tonnage === "1.0" && tr >= 1.0 && tr < 1.5) ||
                                (selections.tonnage === "1.5" && tr >= 1.5 && tr < 2.0) ||
@@ -364,6 +367,7 @@
     resultContainer.innerHTML = '';
 
     const matches = allProducts.filter(p => {
+        if (p.hidden == 1) return false;
         const tr = parseFloat(p.ac_tr || 0);
         const matchesTon = (selections.tonnage === "1.0" && tr >= 1.0 && tr < 1.5) ||
                            (selections.tonnage === "1.5" && tr >= 1.5 && tr < 2.0) ||
@@ -376,8 +380,21 @@
         return matchesTon && matchesBrand && matchesTech && matchesStars;
     });
 
+    // Sort by rating/price ratio (higher is better)
+    matches.sort((a, b) => {
+        const ratingA = parseFloat(a.ac_stars || 0);
+        const priceA = parseFloat(a.price || Infinity);
+        const ratioA = priceA > 0 ? ratingA / priceA : 0;
+
+        const ratingB = parseFloat(b.ac_stars || 0);
+        const priceB = parseFloat(b.price || Infinity);
+        const ratioB = priceB > 0 ? ratingB / priceB : 0;
+
+        return ratioB - ratioA; // Higher ratio first
+    });
+
     if (matches.length > 0) {
-        matches.forEach(match => {
+        matches.forEach((match, index) => {
             const productDiv = document.createElement('div');
             productDiv.style.cssText = "margin-bottom: 30px; padding: 20px; border: 1px solid #edf2f7; border-radius: 12px; text-align: center;";
 

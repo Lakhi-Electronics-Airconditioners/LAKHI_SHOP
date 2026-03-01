@@ -442,6 +442,10 @@ select:focus{
     .bands .col-5 {
       width: 100%;
     }
+    .brand_img_logo {
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
 
 @media only screen and (max-width: 700px) {

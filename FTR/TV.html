@@ -154,7 +154,7 @@
             try {
                 const q = query(collection(db, "artifacts/lakhi-airconditioners/products"), where("type", "==", "TV"));
                 const snap = await getDocs(q);
-                allTVs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+                allTVs = snap.docs.map(doc => ({ id: doc.id, ...doc.data() })).filter(t => t.hidden !== 1);
                 console.table(allTVs);
                 populateInchGrid();
             } catch (e) { console.error(e); }
@@ -218,10 +218,15 @@
             const results = document.getElementById('match-results');
             const filtered = allTVs.filter(t => (selections.inch === 'ANY' || t.tv_inch == selections.inch) && (selections.brand === 'ANY' || t.brand === selections.brand) && t.tv_sq == selections.tech && t.tv_res == selections.res);
             if(filtered.length === 0) { results.innerHTML = "<p style='text-align:center;'>No match found.</p>"; return; }
-            results.innerHTML = filtered.map(t => `
+            const sorted = filtered.sort((a, b) => {
+                const ratioA = (a.rating || 0) / (a.price || 1);
+                const ratioB = (b.rating || 0) / (b.price || 1);
+                return ratioB - ratioA;
+            });
+            results.innerHTML = sorted.map((t, idx) => `
                 <div class="product-card">
                     <img src="${t.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${t.name}">
-                    <div style="flex:1;"><h3 style="margin:0;">${t.name}</h3><p style="color:#666; font-size:0.85rem;">${t.brand} | ${t.tv_inch}" | ${t.tv_sq}</p><div class="price">₹${t.price?.toLocaleString('en-IN')}</div></div>
+                    <div style="flex:1;"><h3 style="margin:0;">#${idx + 1} ${t.name}</h3><p style="color:#666; font-size:0.85rem;">${t.brand} | ${t.tv_inch}" | ${t.tv_sq}</p><div class="price">₹${t.price?.toLocaleString('en-IN')}</div></div>
                     <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${t.serial_no}'">View</button>
                 </div>
             `).join('');

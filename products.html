@@ -77,6 +77,12 @@
                 console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.gif`);
             }
         }
+        function handlebrandimgError(imgElement, brand_name) {
+            const pElement = document.createElement('p');
+            pElement.textContent = brand_name;
+            imgElement.replaceWith(pElement);
+            console.log(`Brand Img not found for ${brand_name}. using <p>${brand_name}</p>`)
+        }
     </script>
 
     <script type="module">
@@ -162,10 +168,27 @@
             productContainer.innerHTML = '<p style="text-align: center; width: 100%; margin-top: 20px;">No products found.</p>';
             return;
         }
-
+         
         productsToRender.forEach(product => {
+            // Skip hidden products
+            if (product.hidden === 1) {
+                console.log(`not showing ${product.serial_no} because set hidden`)
+                return;
+            }
+            const brand_logo_name = `${product.brand}`.toLowerCase();
+            const brand_img_url = `img/OCOL/${brand_logo_name}.png`;
+            let brand_iot;
+            if (product.brand === 'Daikin') {
+                brand_iot = `<img src="${brand_img_url}" alt="${product.brand}" style="max-width: 100%; height: 20px; width: 20px;" onerror="handlebrandimgError(this, '${product.brand}');">`;
+            } else if (product.brand === 'O General' ) {
+                brand_iot = `<img src="${brand_img_url}" alt="${product.brand}" style="max-width: 100%; height: auto; width: 70px;" onerror="handlebrandimgError(this, '${product.brand}');">`;
+            } else if (product.brand === 'Mitsubishi Heavy Duty' ) {
+                brand_iot = `<img src="${brand_img_url}" alt="${product.brand}" style="max-width: 100%; height: auto; width: 70px;" onerror="handlebrandimgError(this, '${product.brand}');">`;
+            } else {
+                brand_iot = `<img src="${brand_img_url}" alt="${product.brand}" style="max-width: 100%; height: auto; width: 40px;" onerror="handlebrandimgError(this, '${product.brand}');">`;
+            }
             const productCard = document.createElement('div');
-            productCard.classList.add('col-4');
+            productCard.classList.add('col-4'); 
             productCard.innerHTML = `
                 <a href="product_detail?serial_no=${product.serial_no}">
                     <img src="${product.image_url}"
@@ -175,6 +198,7 @@
                 <a href="product_detail?serial_no=${product.serial_no}"><h4>${product.name}</h4></a>
                <div class="rating">
                         ${generateStars(product['rating'] || 0)} </div>
+                <p>Brand: ${brand_iot}</p>
                 <p>₹${product.price ? product.price.toLocaleString('en-IN') : 'N/A'}</p>
                 <button class="btn-Cart add-to-cart-btn"
                         data-serial-no="${product.serial_no}"
@@ -274,11 +298,12 @@
 
                 function filterProductsBySearch(query) {
                     const lowerQuery = query.trim().toLowerCase();
+                    const visibleProducts = allProducts.filter(product => product.hidden !== 1);
                     if (!lowerQuery) {
-                        renderProducts(allProducts);
+                        renderProducts(visibleProducts);
                         return;
                     }
-                    const filtered = allProducts.filter(product => {
+                    const filtered = visibleProducts.filter(product => {
                         const name = (product.name || '').toLowerCase();
                         const serial = (product.serial_no || '').toLowerCase();
                         return name.includes(lowerQuery) || serial.includes(lowerQuery);

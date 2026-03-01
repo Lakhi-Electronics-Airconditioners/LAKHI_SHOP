@@ -108,6 +108,12 @@
             imgElement.replaceWith(pElement);
             console.log(`Brand Img not found for ${brand_name}. using <p>${brand_name}</p>`)
         }
+        // funtion to go to gadgets 360 product info
+        function gotogadgets360page(gana) {
+            const gadgets_360_url = `https://www.gadgets360.com/${gana}`
+            window.location.href = gadgets_360_url
+        }
+        // --- End of go.... funtion ---
         // Convert to a named function declaration so it can be called from other scripts
         function noSRgiven() {
             const productDetailContainer = document.getElementById('productDetailContainer');
@@ -258,7 +264,12 @@
             console.log('Current cartitems:', cartItems);
         }
         // --- End Cart Functions ---
-
+        // funtion to go to gadgets 360 product info
+        function gotogadgets360page(gana) {
+            const gadgets_360_url = `https://www.gadgets360.com/${gana}`
+            window.location.href = gadgets_360_url
+        }
+        // --- End of go.... funtion ---
         // Function to generate star ratings HTML based on a numeric rating
         function generateStars(rating) {
             let starsHTML = '';
@@ -338,6 +349,7 @@
                     <p><b>TV Panel Technology.</b> loading Tech Name</p>
                     <p><b>TV Resolution</b> loading Resolution</p>
                 </div>
+
             `;
 
             if (serialNo) {
@@ -429,6 +441,7 @@
                                     ${currentProduct['tv_sq'] ? `<p><b>Panel Technology:</b> ${currentProduct['tv_sq']}</p>` : ''}
                                     ${currentProduct['tv_res'] ? `<p><b>Resolution:</b> ${currentProduct['tv_res']}</p>` : ''}
                                     </div>
+                                    <button class="btn center" onclick="gotogadgets360page('${currentProduct.gana}')" id="gadgets360btn">View/Compare on Gadgets360</button>
                             `;
 
                             // Re-select elements after innerHTML update
@@ -450,6 +463,7 @@
                                 productSizeSelect.appendChild(option);
                                 productSizeSelect.disabled = true;
                             }
+
                             productUnitDisplay.textContent = currentProduct.unit || 'unit';
                             
                             const ac_info = document.getElementById('ac_info');
@@ -466,7 +480,13 @@
                             else {
                                 tv_info.style.display = "none"; // Hide the message
                             }
-
+                            const gadgets_360_btn = document.getElementById('gadgets360btn')
+                            if (currentProduct.gana !== null) {
+                                gadgets_360_btn.style.display = "block";
+                            }
+                            else {
+                                gadgets_360_btn.style.display = "none";
+                            }
                             // Re-attach event listener for the "Add To Cart" button
                             addToCartBtn.addEventListener('click', function(event) {
                                 event.preventDefault();

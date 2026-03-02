@@ -127,7 +127,19 @@
     </div>
     <div id="footer" class="footer"></div>
     <script src="https://shop.lakhiairconditioners.com/js/rw/footer.js" defer></script>
-
+    <script>function handleImageError(imgElement, serialNo) {
+                // Check if we've already tried the serial number fallback
+                if (!imgElement.dataset.serialFallbackAttempted) {
+                    imgElement.dataset.serialFallbackAttempted = 'true'; // Mark as attempted
+                    imgElement.src = `img/PROC/${serialNo}.png`; // Try serial number image
+                    console.log(`Image failed for ${serialNo}. Trying fallback: img/PROC/${serialNo}.png`);
+                } else {
+                    // If serial number fallback was already attempted and failed, use final default
+                    imgElement.onerror = null; // Prevent infinite loop for DP.png if it somehow fails
+                    imgElement.src = 'img/PROC/DP.gif';
+                    console.log(`Serial number fallback failed for ${serialNo}. Using final fallback: img/PROC/DP.png`);
+                }
+            }</script>
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js';
         import { getFirestore, collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/11.1.0/firebase-firestore.js';
@@ -225,7 +237,7 @@
             });
             results.innerHTML = sorted.map((t, idx) => `
                 <div class="product-card">
-                    <img src="${t.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${t.name}">
+                    <img src="${t.image_url || 'https://shop.lakhiairconditioners.com/img/PROC/DP.gif'}" alt="${t.name}" onerror=handleImageError>
                     <div style="flex:1;"><h3 style="margin:0;">#${idx + 1} ${t.name}</h3><p style="color:#666; font-size:0.85rem;">${t.brand} | ${t.tv_inch}" | ${t.tv_sq}</p><div class="price">₹${t.price?.toLocaleString('en-IN')}</div></div>
                     <button class="btn-ftr" style="width:auto; padding:8px 15px;" onclick="window.location.href='https://shop.lakhiairconditioners.com/product_detail?serial_no=${t.serial_no}'">View</button>
                 </div>

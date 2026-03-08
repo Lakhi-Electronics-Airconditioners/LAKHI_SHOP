@@ -46,7 +46,7 @@ const footerContent = `
             <div class="row">
                 <div class="col-2">
                     <div class="trustpilot-widget" data-locale="en-GB" data-template-id="56278e9abfbbba0bdcd568bc" data-businessunit-id="66d2011df3f7fe4eab3948e1" data-style-height="52px" data-style-width="50%" data-token="90f6214c-ff58-439e-8e8e-cd4fccd0223b">
-                        <button class="greview" onclick="window.open('https://uk.trustpilot.com/review/lakhiairconditioners.com', '_blank')" style="background: white; display: inline; color: rgb(35, 35, 35); border: 1px solid #18f268; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                        <button class="greview" onclick="window.open('https://uk.trustpilot.com/review/lakhiairconditioners.com', '_blank')" style="background: white; display: inline; color: rgb(35, 35, 35); border: 1px solid rgb(0, 255, 183); padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
                             review us on <br>
                             <span style="font-weight: bold;"><i class="fa-solid fa-star" style="color: rgb(0, 255, 183);"></i> Trustpilot</span>
                         </button>
@@ -54,9 +54,9 @@ const footerContent = `
                 </div>
                 <div class="col-2">
                     <div class="greview">
-                        <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white; display: inline; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
+                        <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white; display: inline; color: rgb(35, 35, 35); border: 1px solid #4285F4; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
                             review us on <br>
-                            <span style="font-weight: bold;"><i class="fab fa-google" style="color: #1877F2"></i> Google maps</span>
+                            <span style="font-weight: bold;"><i class="fab fa-google" style="color: #4285F4;"></i> Google maps</span>
                         </button>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-﻿©2025 lakhiairconditioners
+﻿©2026 lakhiairconditioners
 
 this is a website owned by lakhiairconditioners and any is public for release note reasons (we would rather use firebase for website hostig but using github because of release note freatued)
 

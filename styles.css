@@ -976,10 +976,6 @@ select:focus{
     .single-product .col-2 .large-size-selector {
         width: 100%;
     }
-    .cart-info p{
-        display: none;
-    }
-
     .cart-page table {
         display: block;
     }

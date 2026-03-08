@@ -114,5 +114,42 @@ export const events = [
                 </div>
             </div>`,
         bannerstyle: `background: radial-gradient(#ff1493, #ffd6d6) color: #8b008b;`
-    }
+    },
+    {
+        name: "Holi 2026",
+        slug: "holi-2026",
+        from: {
+            day: 2, month: 3, year: 2026
+        },
+        to: {
+            day: 4, month: 3, year: 2026       
+        },
+        state: 4,
+        link: "https://shop.lakhiairconditioners.com/event/event-display?event=holi-2026",
+        img: "",
+        bannerimg: "img/events/2026/holi/banner-img.png",
+        col2img: "",
+        maincolor: "#e91e63", // Vibrant Pink
+        secondarycolor: "#ffeb3b", // Bright Yellow
+        textcolor: "#000000",
+        buttoncolor: "#4caf50", // Festive Green
+        buttontextcolor: "#ffffff",
+        text1: "Happy Holi! Celebrate the Festival of Colors!",
+        text2: "Bring color to your home with cool deals. Enjoy splashing discounts on all air conditioners this Holi season!",
+        bannerhtml: `<div class="row">
+                    <div class="col-2" style="padding-right: 20px;">
+                        <h1>Happy Holi to all!</h1>
+                        <p>Wishing you a vibrant and colorful Holi! Celebrate the festival of colors with us. You may also receive a colorful gift from us!</p>
+                        <a href="https://shop.lakhiairconditioners.com/event/event-display?event=holi-2026" class="btn">View Holi Deals &#10132;</a>
+                    </div>
+                   <div class="col-2">
+                        <img src="" min-width="1000" min-height="1000" width="1000%" alt="Holi event col2 image" style="display: inline-block;margin-left:10px;item-align: center;">
+                    </div>
+                   <div class="col-1">
+                        <img src="" alt="Holi 2025 Celebration" style="max-width:300px; width:1000%"; height:1000%;  max-height: 300px; display:flex; ">
+                        <br><br>
+                    </div>
+                </div>`,
+        bannerstyle: `background: radial-gradient(#e91e63, #fff0f5); color: #000000;`
+}
 ];

@@ -56,7 +56,7 @@ const footerContent = `
                     <div class="greview">
                         <button class="greview" onclick="window.open('https://g-review.lakhiairconditioners.com', '_blank')" style="background: white; display: inline; color: rgb(35, 35, 35); border: 1px solid #1877F2; padding: 10px 20px; border-radius: 5px; cursor: pointer; font-size: 16px;">
                             review us on <br>
-                            <span style="font-weight: bold;"><i class="fab fa-google" style="color: rgb(35,35,35)"></i> Google maps</span>
+                            <span style="font-weight: bold;"><i class="fab fa-google" style="color: #1877F2"></i> Google maps</span>
                         </button>
                     </div>
                 </div>
